@@ -9,7 +9,10 @@ Data provided generally as a R package to be submitted to CRAN.
 
 ## Steps
 
+**Milestone 1**
 - Exploratory analysis of current tidied data
 - Follow brolgar paper parts https://arxiv.org/abs/2012.01619 (Will provide code files)
-- Maybe, create subset to number of individuals with reasonably complete records, and summarise these to get started.
+
+**Milestone 2**
+- Create subset of only high school drop outs
 
