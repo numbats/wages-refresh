@@ -1,0 +1,161 @@
+EMPLOYMENT VARIABLES:
+
+CASEID_1979 - individual's ID number
+
+year - the year the observation was taken
+
+total_hours - the number of hours the individual usually works per week
+
+number_of_jobs - how many different jobs' wages were combined to get the mean_hourly_wage
+
+mean_hourly_wage - the mean of the hourly wages the individual gets at each of their different jobs
+
+The variables taken for the hourly rate of pay were as follows, and there was a variable for each of jobs 1 - 5:
+	R00917.10    [HRP1]                                         Survey Year: 1979
+	  PRIMARY VARIABLE
+
+	             HOURLY RATE OF PAY JOB #01
+
+	ORIGINAL QUESTION NAME: *CREATED
+
+	ACTUAL DOLLARS AND CENTS
+
+	UNIVERSE: R has employer listed
+
+	     127           1 TO 99
+	     348         100 TO 199
+	    1545         200 TO 299
+	    1494         300 TO 399
+	     529         400 TO 499
+	     249         500 TO 599
+	     154         600 TO 699
+	      89         700 TO 799
+	      44         800 TO 899
+	      23         900 TO 999
+	      55        1000 TO 9999999: 1000+
+	  -------
+	    4657
+ 
+	Refusal(-1)            0
+	Don't Know(-2)         0
+	TOTAL =========>    4657   VALID SKIP(-4)    8029     NON-INTERVIEW(-5)       0
+ 
+	Min:              3        Max:        3333433        Mean:              1106.6
+
+For hours worked, variables like the following were used for 1979 - 1987: (again there was one for each of 1 - 5 jobs)
+	R00705.00    [QES-52A.01]                                   Survey Year: 1979
+	  PRIMARY VARIABLE
+
+	             HOURS PER WEEK WORKED JOB #01
+
+	ORIGINAL QUESTION NAME: S10Q03A
+
+	HOW MANY HOURS PER WEEK (DO/DID) YOU USUALLY WORK AT THIS JOB?
+
+	ACTUAL HOURS
+
+	UNIVERSE: R has employer
+
+	     619           1 TO 9
+	     921          10 TO 19
+	     863          20 TO 29
+	     626          30 TO 39
+	    1715          40 TO 49
+	     157          50 TO 59
+	      54          60 TO 69
+	      18          70 TO 79
+	      12          80 TO 89
+	       5          90 TO 99
+	  -------
+ 	   4990
+ 
+	Refusal(-1)            0
+	Don't Know(-2)         6
+	Invalid Skip(-3)     235
+	TOTAL =========>    5231   VALID SKIP(-4)    7455     NON-INTERVIEW(-5)       0
+ 
+	Min:              1        Max:             96        Mean:               28.31
+
+From 1988 onwards the following variable was used for hours for each job, with two exceptions - 2008 only had four
+jobs corresponding to this variable (instead of five), so only four jobs were included for these years (see below for the
+other exception):
+	R27712.00    [QES-52D.01]                                   Survey Year: 1988
+	  PRIMARY VARIABLE
+
+	             HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB 
+        	     #01
+
+	ORIGINAL QUESTION NAME: ESB.15C
+
+	THINKING OF THE NUMBER OF HOURS PER WEEK THAT YOU USUALLY (WORK/
+	WORKED) AT HOME AND THE NUMBER OF HOURS PER WEEK THAT YOU USUALLY
+	(WORK/WORKED) AT YOUR PLACE OF EMPLOYMENT, ALTOGETHER HOW MANY HOURS
+	PER WEEK (DO/DID) YOU USUALLY WORK AT THIS JOB?
+
+	ACTUAL HOURS
+
+	UNIVERSE: R has employer not same as current job; hours per week did not include
+	hours worked at home
+
+	       0           0
+	       0           1 TO 4
+	       1           5 TO 9
+	       0          10 TO 14
+	       3          15 TO 19
+	       0          20 TO 24
+	       0          25 TO 29
+	       1          30 TO 34
+	       1          35 TO 39
+	       3          40 TO 44
+	       5          45 TO 49
+	       8          50 TO 9999999: 50+
+	  -------
+	      22
+ 
+	Refusal(-1)            0
+	Don't Know(-2)         0
+	Invalid Skip(-3)       8
+	TOTAL =========>      30   VALID SKIP(-4)   10435     NON-INTERVIEW(-5)    2221
+ 
+	Min:              5        Max:             80        Mean:               45.14
+
+1993 was missing the D variable for job 1 and job 5, so the following variable was used instead:
+	R27712.00    [QES-52D.01]                                   Survey Year: 1988
+	  PRIMARY VARIABLE
+
+	             HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB 
+	             #01
+
+	ORIGINAL QUESTION NAME: ESB.15C
+
+	THINKING OF THE NUMBER OF HOURS PER WEEK THAT YOU USUALLY (WORK/
+	WORKED) AT HOME AND THE NUMBER OF HOURS PER WEEK THAT YOU USUALLY
+	(WORK/WORKED) AT YOUR PLACE OF EMPLOYMENT, ALTOGETHER HOW MANY HOURS
+	PER WEEK (DO/DID) YOU USUALLY WORK AT THIS JOB?
+
+	ACTUAL HOURS
+
+	UNIVERSE: R has employer not same as current job; hours per week did not include
+	hours worked at home
+
+	       0           0
+	       0           1 TO 4
+	       1           5 TO 9
+	       0          10 TO 14
+	       3          15 TO 19
+	       0          20 TO 24
+	       0          25 TO 29
+	       1          30 TO 34
+	       1          35 TO 39
+	       3          40 TO 44
+	       5          45 TO 49
+	       8          50 TO 9999999: 50+
+	  -------
+	      22
+ 
+	Refusal(-1)            0
+	Don't Know(-2)         0
+	Invalid Skip(-3)       8
+	TOTAL =========>      30   VALID SKIP(-4)   10435     NON-INTERVIEW(-5)    2221
+ 
+	Min:              5        Max:             80        Mean:               45.14

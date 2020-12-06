@@ -1,0 +1,1622 @@
+R00001.00    [CASEID]                                       Survey Year: 1979
+  PRIMARY VARIABLE
+
+ 
+             IDENTIFICATION CODE
+ 
+ORIGINAL QUESTION NAME: CASEID
+ 
+NOTE: THIS NUMBER WAS ASSIGNED ACCORDING TO THE RECORD NUMBER OF EACH RESPONDENT
+ON THE TAPE. THE FIRST RESPONDENT WAS ASSIGNED ID#1, THE SECOND WAS ASSIGNED 
+ID#2, ETC.
+ 
+ACTUAL NUMBER
+ 
+UNIVERSE: All
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>   12686   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:          12686        Mean:              6343.5
+ 
+Lead In: None.
+Default Next Question: R00001.49
+--------------------------------------------------------------------------------
+W00557.00    [MIL_START1_1979]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1979 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+     928           0: Week Prior to 1/1/1978
+     398           1 TO 53: Week Number in 1978
+      12          54 TO 105: Week Number in 1979
+  -------
+    1338
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    1338   VALID SKIP(-4)   11348     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:             68        Mean:                7.31
+ 
+Lead In: W00555.00[Default]
+Default Next Question: W00558.00
+--------------------------------------------------------------------------------
+W00558.00    [MIL_START2_1979]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 2, 1979 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1           0: Week Prior to 1/1/1978
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)   12685     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:              0        Mean:                   0
+ 
+Lead In: W00557.00[Default]
+Default Next Question: W00559.00
+--------------------------------------------------------------------------------
+W00559.00    [MIL_STOP1_1979]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1979 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+      72           1 TO 53: Week Number in 1978
+    1265          54 TO 105: Week Number in 1979
+  -------
+    1337
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    1337   VALID SKIP(-4)   11349     NON-INTERVIEW(-5)       0
+ 
+Min:              6        Max:             85        Mean:               69.96
+ 
+Lead In: W00558.00[Default]
+Default Next Question: W00560.00
+--------------------------------------------------------------------------------
+W00560.00    [MIL_STOP2_1979]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 2, 1979 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1           1 TO 53: Week Number in 1978
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)   12685     NON-INTERVIEW(-5)       0
+ 
+Min:             26        Max:             26        Mean:                  26
+ 
+Lead In: W00559.00[Default]
+Default Next Question: W00561.00
+--------------------------------------------------------------------------------
+W01011.00    [MIL_START1_1980]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1980 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+    1129          54 TO 105: Week Number in 1979
+  -------
+    1129
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    1129   VALID SKIP(-4)   11557     NON-INTERVIEW(-5)       0
+ 
+Min:             59        Max:             86        Mean:               73.14
+ 
+Lead In: W01009.00[Default]
+Default Next Question: W01013.00
+--------------------------------------------------------------------------------
+W01013.00    [MIL_STOP1_1980]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1980 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+     169          54 TO 105: Week Number in 1979
+     960         106 TO 157: Week Number in 1980
+  -------
+    1129
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    1129   VALID SKIP(-4)   11557     NON-INTERVIEW(-5)       0
+ 
+Min:             63        Max:            136        Mean:              115.51
+ 
+Lead In: W01011.00[Default]
+Default Next Question: W01015.00
+--------------------------------------------------------------------------------
+W01410.00    [MIL_START1_1981]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1981 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+      68          54 TO 105: Week Number in 1979
+     932         106 TO 157: Week Number in 1980
+  -------
+    1000
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    1000   VALID SKIP(-4)   11686     NON-INTERVIEW(-5)       0
+ 
+Min:             59        Max:            138        Mean:              118.51
+ 
+Lead In: W01408.00[Default]
+Default Next Question: W01412.00
+--------------------------------------------------------------------------------
+W01412.00    [MIL_STOP1_1981]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1981 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       9          54 TO 105: Week Number in 1979
+     216         106 TO 157: Week Number in 1980
+     775         158 TO 209: Week Number in 1981
+  -------
+    1000
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    1000   VALID SKIP(-4)   11686     NON-INTERVIEW(-5)       0
+ 
+Min:             76        Max:            182        Mean:              160.34
+ 
+Lead In: W01410.00[Default]
+Default Next Question: W01414.00
+--------------------------------------------------------------------------------
+W01809.00    [MIL_START1_1982]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1982 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+      13          54 TO 105: Week Number in 1979
+      45         106 TO 157: Week Number in 1980
+     827         158 TO 209: Week Number in 1981
+  -------
+     885
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     885   VALID SKIP(-4)   11801     NON-INTERVIEW(-5)       0
+ 
+Min:             68        Max:            183        Mean:              165.18
+ 
+Lead In: W01807.00[Default]
+Default Next Question: W01810.00
+--------------------------------------------------------------------------------
+W01810.00    [MIL_START2_1982]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 2, 1982 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         210 TO 261: Week Number in 1982
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)   12685     NON-INTERVIEW(-5)       0
+ 
+Min:            211        Max:            211        Mean:                 211
+ 
+Lead In: W01809.00[Default]
+Default Next Question: W01811.00
+--------------------------------------------------------------------------------
+W01811.00    [MIL_STOP1_1982]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1982 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       2         106 TO 157: Week Number in 1980
+     176         158 TO 209: Week Number in 1981
+     707         210 TO 261: Week Number in 1982
+  -------
+     885
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     885   VALID SKIP(-4)   11801     NON-INTERVIEW(-5)       0
+ 
+Min:            116        Max:            238        Mean:              212.12
+ 
+Lead In: W01810.00[Default]
+Default Next Question: W01812.00
+--------------------------------------------------------------------------------
+W01812.00    [MIL_STOP2_1982]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 2, 1982 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         210 TO 261: Week Number in 1982
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)   12685     NON-INTERVIEW(-5)       0
+ 
+Min:            218        Max:            218        Mean:                 218
+ 
+Lead In: W01811.00[Default]
+Default Next Question: W01813.00
+--------------------------------------------------------------------------------
+W02208.00    [MIL_START1_1983]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1983 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       4          54 TO 105: Week Number in 1979
+      12         106 TO 157: Week Number in 1980
+      27         158 TO 209: Week Number in 1981
+     801         210 TO 261: Week Number in 1982
+  -------
+     844
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     844   VALID SKIP(-4)   11842     NON-INTERVIEW(-5)       0
+ 
+Min:             60        Max:            239        Mean:               216.5
+ 
+Lead In: W02206.00[Default]
+Default Next Question: W02209.00
+--------------------------------------------------------------------------------
+W02209.00    [MIL_START2_1983]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 2, 1983 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         210 TO 261: Week Number in 1982
+       1         262 TO 313: Week Number in 1983
+  -------
+       2
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       2   VALID SKIP(-4)   12684     NON-INTERVIEW(-5)       0
+ 
+Min:            250        Max:            264        Mean:                 257
+ 
+Lead In: W02208.00[Default]
+Default Next Question: W02210.00
+--------------------------------------------------------------------------------
+W02210.00    [MIL_STOP1_1983]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1983 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       4         106 TO 157: Week Number in 1980
+       9         158 TO 209: Week Number in 1981
+     152         210 TO 261: Week Number in 1982
+     679         262 TO 313: Week Number in 1983
+  -------
+     844
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     844   VALID SKIP(-4)   11842     NON-INTERVIEW(-5)       0
+ 
+Min:            126        Max:            284        Mean:               263.4
+ 
+Lead In: W02209.00[Default]
+Default Next Question: W02211.00
+--------------------------------------------------------------------------------
+W02211.00    [MIL_STOP2_1983]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 2, 1983 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       2         262 TO 313: Week Number in 1983
+  -------
+       2
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       2   VALID SKIP(-4)   12684     NON-INTERVIEW(-5)       0
+ 
+Min:            268        Max:            277        Mean:               272.5
+ 
+Lead In: W02210.00[Default]
+Default Next Question: W02212.00
+--------------------------------------------------------------------------------
+W02612.00    [MIL_START1_1984]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1984 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1          54 TO 105: Week Number in 1979
+       2         106 TO 157: Week Number in 1980
+       2         158 TO 209: Week Number in 1981
+      15         210 TO 261: Week Number in 1982
+     749         262 TO 313: Week Number in 1983
+  -------
+     769
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     769   VALID SKIP(-4)   11917     NON-INTERVIEW(-5)       0
+ 
+Min:             76        Max:            286        Mean:               270.1
+ 
+Lead In: W02610.00[Default]
+Default Next Question: W02614.00
+--------------------------------------------------------------------------------
+W02614.00    [MIL_STOP1_1984]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1984 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1          54 TO 105: Week Number in 1979
+       1         158 TO 209: Week Number in 1981
+       4         210 TO 261: Week Number in 1982
+     126         262 TO 313: Week Number in 1983
+     637         314 TO 366: Week Number in 1984
+  -------
+     769
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     769   VALID SKIP(-4)   11917     NON-INTERVIEW(-5)       0
+ 
+Min:             92        Max:            337        Mean:              316.34
+ 
+Lead In: W02612.00[Default]
+Default Next Question: W02616.00
+--------------------------------------------------------------------------------
+W03012.00    [MIL_START1_1985]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1985 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         158 TO 209: Week Number in 1981
+       2         210 TO 261: Week Number in 1982
+      13         262 TO 313: Week Number in 1983
+     394         314 TO 366: Week Number in 1984
+  -------
+     410
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     410   VALID SKIP(-4)   12276     NON-INTERVIEW(-5)       0
+ 
+Min:            181        Max:            338        Mean:              321.79
+ 
+Lead In: W03010.00[Default]
+Default Next Question: W03014.00
+--------------------------------------------------------------------------------
+W03014.00    [MIL_STOP1_1985]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1985 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       2         210 TO 261: Week Number in 1982
+       1         262 TO 313: Week Number in 1983
+      53         314 TO 366: Week Number in 1984
+     354         367 TO 418: Week Number in 1985
+  -------
+     410
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     410   VALID SKIP(-4)   12276     NON-INTERVIEW(-5)       0
+ 
+Min:            226        Max:            390        Mean:               371.5
+ 
+Lead In: W03012.00[Default]
+Default Next Question: W03016.00
+--------------------------------------------------------------------------------
+W03411.00    [MIL_START1_1986]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1986 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       2         262 TO 313: Week Number in 1983
+       7         314 TO 366: Week Number in 1984
+     361         367 TO 418: Week Number in 1985
+  -------
+     370
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     370   VALID SKIP(-4)   12316     NON-INTERVIEW(-5)       0
+ 
+Min:            268        Max:            391        Mean:              375.97
+ 
+Lead In: W03409.00[Default]
+Default Next Question: W03413.00
+--------------------------------------------------------------------------------
+W03413.00    [MIL_STOP1_1986]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1986 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       2         314 TO 366: Week Number in 1984
+      59         367 TO 418: Week Number in 1985
+     309         419 TO 470: Week Number in 1986
+  -------
+     370
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     370   VALID SKIP(-4)   12316     NON-INTERVIEW(-5)       0
+ 
+Min:            322        Max:            446        Mean:              425.29
+ 
+Lead In: W03411.00[Default]
+Default Next Question: W03415.00
+--------------------------------------------------------------------------------
+W03810.00    [MIL_START1_1987]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1987 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       3         314 TO 366: Week Number in 1984
+      17         367 TO 418: Week Number in 1985
+     339         419 TO 470: Week Number in 1986
+  -------
+     359
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     359   VALID SKIP(-4)   12327     NON-INTERVIEW(-5)       0
+ 
+Min:            318        Max:            447        Mean:              429.34
+ 
+Lead In: W03808.00[Default]
+Default Next Question: W03812.00
+--------------------------------------------------------------------------------
+W03812.00    [MIL_STOP1_1987]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1987 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       4         367 TO 418: Week Number in 1985
+      43         419 TO 470: Week Number in 1986
+     308         471 TO 522: Week Number in 1987
+  -------
+     355
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       4
+TOTAL =========>     359   VALID SKIP(-4)   12327     NON-INTERVIEW(-5)       0
+ 
+Min:            392        Max:            508        Mean:              484.34
+ 
+Lead In: W03810.00[Default]
+Default Next Question: W03814.00
+--------------------------------------------------------------------------------
+W04209.00    [MIL_START1_1988]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1988 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         158 TO 209: Week Number in 1981
+       4         367 TO 418: Week Number in 1985
+       9         419 TO 470: Week Number in 1986
+     278         471 TO 522: Week Number in 1987
+  -------
+     292
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     292   VALID SKIP(-4)   12394     NON-INTERVIEW(-5)       0
+ 
+Min:            175        Max:            509        Mean:              488.63
+ 
+Lead In: W04207.00[Default]
+Default Next Question: W04211.00
+--------------------------------------------------------------------------------
+W04211.00    [MIL_STOP1_1988]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1988 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         262 TO 313: Week Number in 1983
+       2         367 TO 418: Week Number in 1985
+       2         419 TO 470: Week Number in 1986
+      31         471 TO 522: Week Number in 1987
+     255         523 TO 574: Week Number in 1988
+  -------
+     291
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       1
+TOTAL =========>     292   VALID SKIP(-4)   12394     NON-INTERVIEW(-5)       0
+ 
+Min:            311        Max:            571        Mean:              546.48
+ 
+Lead In: W04209.00[Default]
+Default Next Question: W04213.00
+--------------------------------------------------------------------------------
+W04613.00    [MIL_START1_1989]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1989 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       2         367 TO 418: Week Number in 1985
+       1         419 TO 470: Week Number in 1986
+      24         471 TO 522: Week Number in 1987
+     238         523 TO 574: Week Number in 1988
+  -------
+     265
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     265   VALID SKIP(-4)   12421     NON-INTERVIEW(-5)       0
+ 
+Min:            374        Max:            572        Mean:              550.28
+ 
+Lead In: W04611.00[Default]
+Default Next Question: W04615.00
+--------------------------------------------------------------------------------
+W04615.00    [MIL_STOP1_1989]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1989 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         367 TO 418: Week Number in 1985
+      12         523 TO 574: Week Number in 1988
+     252         575 TO 627: Week Number in 1989
+  -------
+     265
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     265   VALID SKIP(-4)   12421     NON-INTERVIEW(-5)       0
+ 
+Min:            402        Max:            623        Mean:              600.79
+ 
+Lead In: W04613.00[Default]
+Default Next Question: W04617.00
+--------------------------------------------------------------------------------
+W05013.00    [MIL_START1_1990]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1990 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       2         262 TO 313: Week Number in 1983
+       1         471 TO 522: Week Number in 1987
+       9         523 TO 574: Week Number in 1988
+     222         575 TO 627: Week Number in 1989
+  -------
+     234
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     234   VALID SKIP(-4)   12452     NON-INTERVIEW(-5)       0
+ 
+Min:            269        Max:            624        Mean:              600.26
+ 
+Lead In: W05011.00[Default]
+Default Next Question: W05015.00
+--------------------------------------------------------------------------------
+W05015.00    [MIL_STOP1_1990]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1990 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         262 TO 313: Week Number in 1983
+       9         575 TO 627: Week Number in 1989
+     224         628 TO 679: Week Number in 1990
+  -------
+     234
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     234   VALID SKIP(-4)   12452     NON-INTERVIEW(-5)       0
+ 
+Min:            292        Max:            675        Mean:              656.83
+ 
+Lead In: W05013.00[Default]
+Default Next Question: W05017.00
+--------------------------------------------------------------------------------
+W05412.00    [MIL_START1_1991]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1991 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       2         419 TO 470: Week Number in 1986
+       1         471 TO 522: Week Number in 1987
+       1         523 TO 574: Week Number in 1988
+      14         575 TO 627: Week Number in 1989
+     181         628 TO 679: Week Number in 1990
+  -------
+     199
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     199   VALID SKIP(-4)   12487     NON-INTERVIEW(-5)       0
+ 
+Min:            435        Max:            676        Mean:               656.4
+ 
+Lead In: W05410.00[Default]
+Default Next Question: W05414.00
+--------------------------------------------------------------------------------
+W05414.00    [MIL_STOP1_1991]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1991 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         575 TO 627: Week Number in 1989
+       6         628 TO 679: Week Number in 1990
+     192         680 TO 731: Week Number in 1991
+  -------
+     199
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     199   VALID SKIP(-4)   12487     NON-INTERVIEW(-5)       0
+ 
+Min:            606        Max:            723        Mean:              706.88
+ 
+Lead In: W05412.00[Default]
+Default Next Question: W05416.00
+--------------------------------------------------------------------------------
+W05811.00    [MIL_START1_1992]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1992 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         367 TO 418: Week Number in 1985
+       1         575 TO 627: Week Number in 1989
+       7         628 TO 679: Week Number in 1990
+     169         680 TO 731: Week Number in 1991
+  -------
+     178
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     178   VALID SKIP(-4)   12508     NON-INTERVIEW(-5)       0
+ 
+Min:            376        Max:            724        Mean:              705.96
+ 
+Lead In: W05809.00[Default]
+Default Next Question: W05813.00
+--------------------------------------------------------------------------------
+W05813.00    [MIL_STOP1_1992]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1992 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         523 TO 574: Week Number in 1988
+      11         680 TO 731: Week Number in 1991
+     166         732 TO 783: Week Number in 1992
+  -------
+     178
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     178   VALID SKIP(-4)   12508     NON-INTERVIEW(-5)       0
+ 
+Min:            539        Max:            775        Mean:              756.31
+ 
+Lead In: W05811.00[Default]
+Default Next Question: W05815.00
+--------------------------------------------------------------------------------
+W06210.00    [MIL_START1_1993]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1993 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         419 TO 470: Week Number in 1986
+       1         471 TO 522: Week Number in 1987
+       2         575 TO 627: Week Number in 1989
+       8         680 TO 731: Week Number in 1991
+     186         732 TO 783: Week Number in 1992
+  -------
+     198
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     198   VALID SKIP(-4)   12488     NON-INTERVIEW(-5)       0
+ 
+Min:            439        Max:            778        Mean:              755.65
+ 
+Lead In: W06208.00[Default]
+Default Next Question: W06212.00
+--------------------------------------------------------------------------------
+W06212.00    [MIL_STOP1_1993]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1993 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         680 TO 731: Week Number in 1991
+      21         732 TO 783: Week Number in 1992
+     149         784 TO 835: Week Number in 1993
+  -------
+     171
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      27
+TOTAL =========>     198   VALID SKIP(-4)   12488     NON-INTERVIEW(-5)       0
+ 
+Min:            714        Max:            825        Mean:              807.21
+ 
+Lead In: W06210.00[Default]
+Default Next Question: W06214.00
+--------------------------------------------------------------------------------
+W06609.00    [MIL_START1_1994]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1994 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         523 TO 574: Week Number in 1988
+       1         680 TO 731: Week Number in 1991
+       3         732 TO 783: Week Number in 1992
+     137         784 TO 835: Week Number in 1993
+  -------
+     142
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       2
+TOTAL =========>     144   VALID SKIP(-4)   12542     NON-INTERVIEW(-5)       0
+ 
+Min:            559        Max:            826        Mean:              809.77
+ 
+Lead In: W06607.00[Default]
+Default Next Question: W06610.00
+--------------------------------------------------------------------------------
+W06610.00    [MIL_START2_1994]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 2, 1994 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+  -------
+       0
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       2
+TOTAL =========>       2   VALID SKIP(-4)   12684     NON-INTERVIEW(-5)       0
+ 
+Min:        Max:        Mean:                   0
+ 
+Lead In: W06609.00[Default]
+Default Next Question: W06611.00
+--------------------------------------------------------------------------------
+W06611.00    [MIL_STOP1_1994]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1994 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         732 TO 783: Week Number in 1992
+       4         784 TO 835: Week Number in 1993
+     115         836 TO 887: Week Number in 1994
+  -------
+     120
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      24
+TOTAL =========>     144   VALID SKIP(-4)   12542     NON-INTERVIEW(-5)       0
+ 
+Min:            781        Max:            884        Mean:              864.49
+ 
+Lead In: W06610.00[Default]
+Default Next Question: W06612.00
+--------------------------------------------------------------------------------
+W06612.00    [MIL_STOP2_1994]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 2, 1994 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+  -------
+       0
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       2
+TOTAL =========>       2   VALID SKIP(-4)   12684     NON-INTERVIEW(-5)       0
+ 
+Min:        Max:        Mean:                   0
+ 
+Lead In: W06611.00[Default]
+Default Next Question: W06613.00
+--------------------------------------------------------------------------------
+W07273.00    [MIL_START1_1996]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1996 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         314 TO 366: Week Number in 1984
+       1         575 TO 627: Week Number in 1989
+       1         784 TO 835: Week Number in 1993
+     127         836 TO 887: Week Number in 1994
+  -------
+     130
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     130   VALID SKIP(-4)   12556     NON-INTERVIEW(-5)       0
+ 
+Min:            326        Max:            885        Mean:              861.72
+ 
+Lead In: W07271.00[Default]
+Default Next Question: W07275.00
+--------------------------------------------------------------------------------
+W07275.00    [MIL_STOP1_1996]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1996 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         367 TO 418: Week Number in 1985
+       1         784 TO 835: Week Number in 1993
+      11         836 TO 887: Week Number in 1994
+       7         888 TO 940: Week Number in 1995
+     110         941 TO 992: Week Number in 1996
+  -------
+     130
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     130   VALID SKIP(-4)   12556     NON-INTERVIEW(-5)       0
+ 
+Min:            395        Max:            979        Mean:               949.9
+ 
+Lead In: W07273.00[Default]
+Default Next Question: W07277.00
+--------------------------------------------------------------------------------
+W07985.00    [MIL_START1_1998]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 1998 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         732 TO 783: Week Number in 1992
+       2         784 TO 835: Week Number in 1993
+       4         836 TO 887: Week Number in 1994
+     105         941 TO 992: Week Number in 1996
+  -------
+     112
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     112   VALID SKIP(-4)   12574     NON-INTERVIEW(-5)       0
+ 
+Min:            767        Max:            980        Mean:              959.26
+ 
+Lead In: W07983.00[Default]
+Default Next Question: W07986.00
+--------------------------------------------------------------------------------
+W07986.00    [MIL_START2_1998]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 2, 1998 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         941 TO 992: Week Number in 1996
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)   12685     NON-INTERVIEW(-5)       0
+ 
+Min:            992        Max:            992        Mean:                 992
+ 
+Lead In: W07985.00[Default]
+Default Next Question: W07987.00
+--------------------------------------------------------------------------------
+W07987.00    [MIL_STOP1_1998]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 1998 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         732 TO 783: Week Number in 1992
+       1         836 TO 887: Week Number in 1994
+       2         888 TO 940: Week Number in 1995
+       3         941 TO 992: Week Number in 1996
+       8         993 TO 1044: Week Number in 1997
+      97        1045 TO 1096: Week Number in 1998
+  -------
+     112
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     112   VALID SKIP(-4)   12574     NON-INTERVIEW(-5)       0
+ 
+Min:            767        Max:           1079        Mean:             1052.56
+ 
+Lead In: W07986.00[Default]
+Default Next Question: W07988.00
+--------------------------------------------------------------------------------
+W07988.00    [MIL_STOP2_1998]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 2, 1998 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1        1045 TO 1096: Week Number in 1998
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)   12685     NON-INTERVIEW(-5)       0
+ 
+Min:           1064        Max:           1064        Mean:                1064
+ 
+Lead In: W07987.00[Default]
+Default Next Question: W07989.00
+--------------------------------------------------------------------------------
+W08696.00    [MIL_START1_2000]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 2000 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         628 TO 679: Week Number in 1990
+       1         784 TO 835: Week Number in 1993
+       3         941 TO 992: Week Number in 1996
+      81        1045 TO 1096: Week Number in 1998
+  -------
+      86
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      86   VALID SKIP(-4)   12600     NON-INTERVIEW(-5)       0
+ 
+Min:            673        Max:           1080        Mean:             1056.23
+ 
+Lead In: W08694.00[Default]
+Default Next Question: W08698.00
+--------------------------------------------------------------------------------
+W08698.00    [MIL_STOP1_2000]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 2000 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         993 TO 1044: Week Number in 1997
+       6        1045 TO 1096: Week Number in 1998
+      11        1097 TO 1148: Week Number in 1999
+      64        1149 TO 1201: Week Number in 2000
+  -------
+      82
+ 
+Refusal(-1)            0
+Don't Know(-2)         4
+TOTAL =========>      86   VALID SKIP(-4)   12600     NON-INTERVIEW(-5)       0
+ 
+Min:           1035        Max:           1200        Mean:              1162.8
+ 
+Lead In: W08696.00[Default]
+Default Next Question: W08700.00
+--------------------------------------------------------------------------------
+W09275.00    [MIL_START1_2002]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 2002 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         367 TO 418: Week Number in 1985
+       1         941 TO 992: Week Number in 1996
+       1        1045 TO 1096: Week Number in 1998
+      72        1149 TO 1201: Week Number in 2000
+  -------
+      75
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      75   VALID SKIP(-4)   12611     NON-INTERVIEW(-5)       0
+ 
+Min:            385        Max:           1195        Mean:             1166.23
+ 
+Lead In: W09273.00[Default]
+Default Next Question: W09276.00
+--------------------------------------------------------------------------------
+W09276.00    [MIL_STOP1_2002]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 2002 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         367 TO 418: Week Number in 1985
+       7        1149 TO 1201: Week Number in 2000
+      11        1202 TO 1253: Week Number in 2001
+      50        1254 TO 1305: Week Number in 2002
+  -------
+      69
+ 
+Refusal(-1)            1
+Don't Know(-2)         5
+TOTAL =========>      75   VALID SKIP(-4)   12611     NON-INTERVIEW(-5)       0
+ 
+Min:            413        Max:           1297        Mean:              1248.8
+ 
+Lead In: W09275.00[Default]
+Default Next Question: W09277.00
+--------------------------------------------------------------------------------
+W09938.00    [MIL_START1_2004]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 2004 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       4        1045 TO 1096: Week Number in 1998
+       2        1149 TO 1201: Week Number in 2000
+      51        1254 TO 1305: Week Number in 2002
+  -------
+      57
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      57   VALID SKIP(-4)   12629     NON-INTERVIEW(-5)       0
+ 
+Min:           1062        Max:           1298        Mean:             1262.21
+ 
+Lead In: W09936.00[Default]
+Default Next Question: W09939.00
+--------------------------------------------------------------------------------
+W09939.00    [MIL_STOP1_2004]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 2004 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1        1045 TO 1096: Week Number in 1998
+       1        1149 TO 1201: Week Number in 2000
+       1        1202 TO 1253: Week Number in 2001
+      10        1254 TO 1305: Week Number in 2002
+       7        1306 TO 1357: Week number in 2003
+      35        1358 TO 1409: Week number in 2004
+  -------
+      55
+ 
+Refusal(-1)            1
+Don't Know(-2)         1
+TOTAL =========>      57   VALID SKIP(-4)   12629     NON-INTERVIEW(-5)       0
+ 
+Min:           1078        Max:           1404        Mean:             1345.69
+ 
+Lead In: W09938.00[Default]
+Default Next Question: W09940.00
+--------------------------------------------------------------------------------
+W10550.00    [MIL_START1_2006]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 2006 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       5        1045 TO 1096: Week Number in 1998
+       2        1149 TO 1201: Week Number in 2000
+       5        1254 TO 1305: Week Number in 2002
+      41        1358 TO 1409: Week number in 2004
+  -------
+      53
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      53   VALID SKIP(-4)   12633     NON-INTERVIEW(-5)       0
+ 
+Min:           1059        Max:           1400        Mean:             1333.51
+ 
+Lead In: W10548.00[Default]
+Default Next Question: W10551.00
+--------------------------------------------------------------------------------
+W10551.00    [MIL_START2_2006]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 2, 2006 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1        1410 TO 1461: Week number in 2005
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)   12685     NON-INTERVIEW(-5)       0
+ 
+Min:           1429        Max:           1429        Mean:                1429
+ 
+Lead In: W10550.00[Default]
+Default Next Question: W10552.00
+--------------------------------------------------------------------------------
+W10552.00    [MIL_STOP1_2006]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 2006 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       2        1097 TO 1148: Week Number in 1999
+       2        1254 TO 1305: Week Number in 2002
+      10        1358 TO 1409: Week number in 2004
+      11        1410 TO 1461: Week number in 2005
+      24        1462 TO 1514: Week number in 2006
+  -------
+      49
+ 
+Refusal(-1)            0
+Don't Know(-2)         4
+TOTAL =========>      53   VALID SKIP(-4)   12633     NON-INTERVIEW(-5)       0
+ 
+Min:           1118        Max:           1509        Mean:             1429.31
+ 
+Lead In: W10551.00[Default]
+Default Next Question: W10553.00
+--------------------------------------------------------------------------------
+W10553.00    [MIL_STOP2_2006]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 2, 2006 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1        1462 TO 1514: Week number in 2006
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)   12685     NON-INTERVIEW(-5)       0
+ 
+Min:           1472        Max:           1472        Mean:                1472
+ 
+Lead In: W10552.00[Default]
+Default Next Question: W10554.00
+--------------------------------------------------------------------------------
+W11127.00    [MIL_START1_2008]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 2008 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1        1149 TO 1201: Week Number in 2000
+      27        1462 TO 1514: Week number in 2006
+       1        1515 TO 1566: Week number in 2007
+  -------
+      29
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      29   VALID SKIP(-4)   12657     NON-INTERVIEW(-5)       0
+ 
+Min:           1194        Max:           1521        Mean:             1471.69
+ 
+Lead In: W11125.00[Default]
+Default Next Question: W11128.00
+--------------------------------------------------------------------------------
+W11128.00    [MIL_STOP1_2008]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 2008 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1        1202 TO 1253: Week Number in 2001
+       9        1462 TO 1514: Week number in 2006
+       5        1515 TO 1566: Week number in 2007
+      14        1567 TO 1618: Week number in 2008
+  -------
+      29
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      29   VALID SKIP(-4)   12657     NON-INTERVIEW(-5)       0
+ 
+Min:           1207        Max:           1606        Mean:             1530.79
+ 
+Lead In: W11127.00[Default]
+Default Next Question: W11129.00
+--------------------------------------------------------------------------------
+W11692.00    [MIL_START1_2010]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 2010 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         784 TO 835: Week Number in 1993
+      16        1567 TO 1618: Week number in 2008
+       1        1671 TO 1722: Week number in 2010
+  -------
+      18
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      18   VALID SKIP(-4)   12668     NON-INTERVIEW(-5)       0
+ 
+Min:            815        Max:           1674        Mean:             1543.61
+ 
+Lead In: W11690.00[Default]
+Default Next Question: W11693.00
+--------------------------------------------------------------------------------
+W11693.00    [MIL_STOP1_2010]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 2010 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1         941 TO 992: Week Number in 1996
+       6        1567 TO 1618: Week number in 2008
+       2        1619 TO 1670: Week number in 2009
+       8        1671 TO 1722: Week number in 2010
+  -------
+      17
+ 
+Refusal(-1)            0
+Don't Know(-2)         1
+TOTAL =========>      18   VALID SKIP(-4)   12668     NON-INTERVIEW(-5)       0
+ 
+Min:            977        Max:           1719        Mean:             1605.59
+ 
+Lead In: W11692.00[Default]
+Default Next Question: W11694.00
+--------------------------------------------------------------------------------
+W12459.00    [MIL_START1_2012]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 2012 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1        1045 TO 1096: Week Number in 1998
+       2        1619 TO 1670: Week number in 2009
+       9        1671 TO 1722: Week number in 2010
+  -------
+      12
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      12   VALID SKIP(-4)   12674     NON-INTERVIEW(-5)       0
+ 
+Min:           1061        Max:           1720        Mean:             1634.92
+ 
+Lead In: W12457.00[Default]
+Default Next Question: W12460.00
+--------------------------------------------------------------------------------
+W12460.00    [MIL_STOP1_2012]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 2012 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1        1410 TO 1461: Week number in 2005
+       4        1671 TO 1722: Week number in 2010
+       2        1723 TO 1775: Week number in 2011
+       3        1776 TO 1827: Week number in 2012
+  -------
+      10
+ 
+Refusal(-1)            0
+Don't Know(-2)         2
+TOTAL =========>      12   VALID SKIP(-4)   12674     NON-INTERVIEW(-5)       0
+ 
+Min:           1435        Max:           1813        Mean:              1721.1
+ 
+Lead In: W12459.00[Default]
+Default Next Question: W12461.00
+--------------------------------------------------------------------------------
+W13210.00    [MIL_START1_2014]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 2014 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       8        1776 TO 1827: Week number in 2012
+       1        1828 TO 1879: Week number in 2013
+  -------
+       9
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       9   VALID SKIP(-4)   12677     NON-INTERVIEW(-5)       0
+ 
+Min:           1814        Max:           1838        Mean:             1822.11
+ 
+Lead In: W13208.00[Default]
+Default Next Question: W13211.00
+--------------------------------------------------------------------------------
+W13211.00    [MIL_STOP1_2014]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 2014 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       4        1776 TO 1827: Week number in 2012
+       4        1828 TO 1879: Week number in 2013
+  -------
+       8
+ 
+Refusal(-1)            0
+Don't Know(-2)         1
+TOTAL =========>       9   VALID SKIP(-4)   12677     NON-INTERVIEW(-5)       0
+ 
+Min:           1819        Max:           1867        Mean:             1839.75
+ 
+Lead In: W13210.00[Default]
+Default Next Question: W13212.00
+--------------------------------------------------------------------------------
+W13519.00    [MIL_START1_2016]                              Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             START WEEK SERVICE SPELL 1, 2016 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1        1358 TO 1409: Week number in 2004
+       1        1462 TO 1514: Week number in 2006
+       2        1932 TO 1983: Week number in 2015
+  -------
+       4
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       4   VALID SKIP(-4)   12682     NON-INTERVIEW(-5)       0
+ 
+Min:           1405        Max:           1938        Mean:              1693.5
+ 
+Lead In: W13517.00[Default]
+Default Next Question: W13520.00
+--------------------------------------------------------------------------------
+W13520.00    [MIL_STOP1_2016]                               Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             STOP WEEK SERVICE SPELL 1, 2016 INT
+ 
+ 
+SEE APPENDIX 18: WORK HISTORY DATA
+ 
+       1        1410 TO 1461: Week number in 2005
+       1        1567 TO 1618: Week number in 2008
+       1        1932 TO 1983: Week number in 2015
+  -------
+       3
+ 
+Refusal(-1)            0
+Don't Know(-2)         1
+TOTAL =========>       4   VALID SKIP(-4)   12682     NON-INTERVIEW(-5)       0
+ 
+Min:           1431        Max:           1961        Mean:             1665.67
+ 
+Lead In: W13519.00[Default]
+Default Next Question: W13521.00

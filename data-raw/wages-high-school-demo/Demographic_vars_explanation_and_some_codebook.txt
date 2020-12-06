@@ -1,0 +1,161 @@
+DEMOGRAPHICS VARIABLES:
+
+CASEID_1979 - individual's ID number
+
+dob_month - date of birth month, 1- 12, from data from 1979 and 1981
+
+dob_year - date of birth year, from data from 1979 and 1981
+
+dob_conflict - TRUE or FALSE - TRUE indicates there was a conflict between the data from 1979 and 1981. In this case, the 
+		1979 data was selected as it was complete and was therefore deemed to be more likely to be accurate
+
+race - taken from the following variable:
+
+	 R'S RACIAL/ETHNIC COHORT FROM SCREENER
+
+	UNIVERSE: Entire Sample
+	
+	    2002       1 HISPANIC
+	    3174       2 BLACK
+	    7510       3 NON-BLACK, NON-HISPANIC
+	  -------
+	   12686
+ 
+	Refusal(-1)            0
+	Don't Know(-2)         0
+	TOTAL =========>   12686   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+	Min:              1        Max:              3        Mean:                2.43
+
+gender - taken from the following variable:
+
+	SEX OF R
+
+	UNIVERSE: Entire sample
+
+	    6403       1 MALE
+	    6283       2 FEMALE
+	  -------
+	   12686
+ 
+	Refusal(-1)            0
+	Don't Know(-2)         0
+	TOTAL =========>   12686   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+	Min:              1        Max:              2        Mean:                 1.5
+
+year_completed_highest_grade - the year they completed their highest level of education
+
+highest-grade-int - an integer representing the highest level of education they completed with the following key:
+
+       0 NONE
+       1 1ST GRADE
+       2 2ND GRADE
+       3 3RD GRADE
+       4 4TH GRADE
+       5 5TH GRADE
+       6 6TH GRADE
+       7 7TH GRADE
+       8 8TH GRADE
+       9 9TH GRADE
+      10 10TH GRADE
+      11 11TH GRADE
+      12 12TH GRADE
+      13 1ST YR COL
+      14 2ND YR COL
+      15 3RD YR COL
+      16 4TH YR COL
+      17 5TH YR COL
+      18 6TH YR COL
+      19 7TH YR COL
+      20 8TH YR COL OR MORE
+      95 UNGRADED
+
+highest-grade - the string corresponding to the highest level of education they completed
+
+The data from the revised May 1 survey was used for most of the highest grade data: [see the 1979 variable below]
+
+	R02167.01    [HGCREV79]                                     Survey Year: 1979
+	  PRIMARY VARIABLE
+
+	             HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)
+
+	ORIGINAL QUESTION NAME: HGCREV79
+
+	UNIVERSE: Entire Sample
+
+	COMMENT: Highest Grade Completed
+	
+	      11       0 NONE
+	       3       1 1ST GRADE
+	       1       2 2ND GRADE
+	      18       3 3RD GRADE
+	      21       4 4TH GRADE
+	      31       5 5TH GRADE
+	     123       6 6TH GRADE
+	     514       7 7TH GRADE
+	    1694       8 8TH GRADE
+	    1850       9 9TH GRADE
+	    1853      10 10TH GRADE
+	    1493      11 11TH GRADE
+	    3598      12 12TH GRADE
+	     720      13 1ST YR COL
+	     463      14 2ND YR COL
+	     257      15 3RD YR COL
+	      28      16 4TH YR COL
+	       1      17 5TH YR COL
+	       1      18 6TH YR COL
+	       0      19 7TH YR COL
+	       0      20 8TH YR COL OR MORE
+	       0	      95 UNGRADED
+	  -------
+ 	  12680
+ 
+	Refusal(-1)            0
+	Don't Know(-2)         0
+	Invalid Skip(-3)       6
+	TOTAL =========>   12686   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+	Min:              0        Max:             18        Mean:                10.5
+
+For years when this was not available, the following variable was used: [see the 1979 variable below]
+	R02167.00    [HGC]                                          Survey Year: 1979
+	  PRIMARY VARIABLE
+
+	             HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR
+
+	UNIVERSE: Entire sample
+
+	      11       0 NONE
+	       3       1 1ST GRADE
+	       1       2 2ND GRADE
+	      17       3 3RD GRADE
+	      21       4 4TH GRADE
+	      31       5 5TH GRADE
+	     123       6 6TH GRADE
+	     515       7 7TH GRADE
+	    1690       8 8TH GRADE
+	    1850       9 9TH GRADE
+	    1851      10 10TH GRADE
+	    1496      11 11TH GRADE
+	    3596      12 12TH GRADE
+	     723      13 1ST YR COL
+	     462      14 2ND YR COL
+	     258      15 3RD YR COL
+	      29      16 4TH YR COL
+	       1      17 5TH YR COL
+	       1      18 6TH YR COL
+	       0      19 7TH YR COL
+	       0      20 8TH YR COL OR MORE
+	       0      95 UNGRADED
+	  -------
+	   12679
+ 
+	Refusal(-1)            0
+	Don't Know(-2)         0
+	Invalid Skip(-3)       7
+	TOTAL =========>   12686   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+	Min:              0        Max:             18        Mean:                10.5
+
+
