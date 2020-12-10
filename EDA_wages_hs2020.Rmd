@@ -1,0 +1,222 @@
+---
+title: "EDA of Wages Tidied Data"
+author: "Di Cook, Emi Tanaka, Dewi Lestari Amaliah"
+date: "`r Sys.Date()`"
+output: 
+  bookdown::html_document2:
+      keep_tex: yes
+      number_sections: yes
+      citation_package: biblatex
+      toc: true
+      toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+library(tidyverse)
+library(brolgar)
+library(visdat)
+library(naniar)
+library(skimr)
+library(kableExtra)
+library(patchwork)
+library(gghighlight)
+library(stickylabeller)
+```
+
+# Background
+
+# Data Description
+
+```{r data-load}
+load("wages_hs2020.rda")
+```
+
+## Data Structures
+
+```{r dat-structure, fig.cap = "Data structures of wages data"}
+visdat::vis_dat(wages_hs2020, 
+                warn_large_data = FALSE)
+```
+
+
+## Skim the data
+
+```{r skim}
+
+skim(wages_hs2020) %>%
+  as_tibble() %>%
+  kable(caption = "The summary of wages data") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+There are 5274 missing values observations in the mean of hourly wage variable or more than 5 percent from the total observations in the data set. This NA is not because of the subject is joining the survey late or out from the survey, but it is the missing value in the series. 
+
+
+# Calculating Features of Data
+
+## Number of Observation per ID
+
+```{r wages_tsibble}
+wages <- as_tsibble(x = wages_hs2020,
+                    key = id,
+                    index = year,
+                    regular = FALSE)
+```
+
+
+```{r}
+
+wages_obs <- wages %>%
+  features(mean_hourly_wage, n_obs) %>%
+  arrange(n_obs)
+  
+ggplot(wages_obs, aes(x = n_obs)) +
+  geom_bar() +
+  xlab("Number of observations")
+
+```
+
+Learn: 
+Different years of observations. The minimum years of observation is 5 years, while the maximum years of observation is 27 years. 
+
+```{r}
+wages %>%
+  features(year, list(min = min)) %>%
+  ggplot(aes(x = min)) +
+  geom_histogram(binwidth = 1) +
+  xlab("First time in study")
+```
+
+Learn: Subject starts in the study at different year, most of them start in 1979. 
+
+```{r}
+wages %>%
+  features(year, list(max = max))%>%
+  ggplot(aes(x = max)) +
+  geom_histogram(binwidth = 1) +
+  xlab("Last time in study")
+```
+
+
+Learn: Subject out from the study in the study at different year, most of them are still in the study till the study ends in 2016. 
+
+```{r}
+wages_year_range <- wages %>%
+  features(year, feat_ranges)
+
+ggplot(wages_year_range,
+       aes(x = range_diff)) +
+  geom_histogram() +
+  xlab("Range of year")
+```
+
+```{r}
+index_regular(wages)
+```
+
+Note: the number of observation did not match with the range of year because the year is actually not sequential annually (not regular). 
+
+
+
+
+## Minimum, Median, and Maximum of each ID
+
+
+```{r features}
+wages_feature<- wages %>%
+  features(mean_hourly_wage, 
+           feat_three_num
+           )
+```
+
+```{r p1}
+p1 <- ggplot(wages_feature) +
+  geom_density(aes(x = min), fill = "magenta", alpha = 0.5)
+```
+
+
+```{r p2}
+
+wages_feature_long <- wages_feature %>%
+  pivot_longer(c(min, med, max), names_to = "feature", values_to = "value")
+  
+p2 <- ggplot(wages_feature_long) +
+  geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
+  theme(legend.position = "None")
+```
+
+
+```{r p3}
+p3 <- ggplot(transform(wages_feature_long,
+                 feature = factor(feature, level = 
+                                 c("min",
+                                   "med", 
+                                   "max")))) +
+  geom_line(aes(x = feature,
+                y = value, 
+                group = id), alpha = 0.5)
+```
+
+```{r feature-charts}
+
+p1+p2+p3
+
+```
+
+Learn: 
+
+The distribution of min, median, and max of wages is right-skewed, mean that some subjects have an extremely high hourly wages. Further, Some subjects have a minimum wages that is higher than others' maximum wages. 
+
+## Is their wage always increase?
+
+```{r}
+wages_feat_monotonic <- wages %>%
+  features(mean_hourly_wage, 
+           feat_monotonic
+           )
+
+wages_feat_inc <- wages_feat_monotonic %>%
+  filter(increase == TRUE)
+```
+
+Learn: Only `r nrow(wages_feat_inc)` subjects out of `r nrow(wages_feat_monotonic)` or `r round(nrow(wages_feat_inc)/nrow(wages_feat_monotonic)*100, 2)` whose mean hourly wage always increase in the period of the study. 
+
+
+## Fit a linear model for each key using `key_slope()`
+
+```{r}
+wages_slope <- key_slope(wages, 
+                         mean_hourly_wage ~ year) %>%
+  left_join(wages, by = "id")
+
+wages_slope
+```
+
+
+```{r decrease-slope, fig.cap= "Subject with negative wages slope"}
+ggplot(wages_slope) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id)) +
+  gghighlight(.slope_year < 0)
+```
+
+Learn: Some subjects had a negative slope, means that their wages tend to decrease over time. 
+
+
+## Find keys near some summary statistics
+
+```{r}
+wages_near <- wages %>%
+  key_slope(mean_hourly_wage ~ year) %>%
+  keys_near(key = id,
+            var = .slope_year)
+
+wages_near
+```
+
+
+
+
