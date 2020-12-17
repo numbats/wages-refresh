@@ -27,11 +27,42 @@ library(stickylabeller)
 
 # Background
 
-# Data Description
 
 ```{r data-load}
 load("wages_hs2020.rda")
 ```
+
+## The original Spaghetty Plot
+
+```{r org_spag, fig.cap = "Wages longitudinal data set"}
+fig_all <- ggplot(wages_hs2020) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id))
+
+fig_all_transp <- ggplot(wages_hs2020) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id),
+            alpha = 0.1)
+
+fig_all_lm <- ggplot(wages_hs2020) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id),
+            alpha = 0.1) +
+  geom_smooth(aes(x = year,
+                  y = mean_hourly_wage),
+              method = lm,
+              se = FALSE)
+
+fig_all + fig_all_transp + fig_all_lm
+```
+Learn: It is really hard to see individual features since there are a lot observations over time, even if we  change the transparency of the plot. 
+
+
+# Data Description
+
 
 ## Data Structures
 
@@ -81,7 +112,7 @@ ggplot(wages_obs, aes(x = n_obs)) +
 Learn: 
 Different years of observations. The minimum years of observation is 5 years, while the maximum years of observation is 27 years. 
 
-```{r}
+```{r first-time, fig.cap="The distribution of sample based on the year to be the first time in the study"}
 wages %>%
   features(year, list(min = min)) %>%
   ggplot(aes(x = min)) +
@@ -216,6 +247,55 @@ wages_near <- wages %>%
 
 wages_near
 ```
+
+# Breaking up the spaghetti
+
+Figure \@ref(fig:org-spag) shows that when the data is presented as a whole spaghetti plot, we can only gain a high level understanding of the data. Hence, we have to break up the spaghetti to see a detailed figure of the individual. We can do this by sampling, stratifying, featuring that strata. 
+
+## Sampling
+
+By using `brolgar's` `facet_sample()` function, we can randomly sample the data into a faceted plots. 
+
+```{r facet-sample, fig.cap="Mean of hourly wage by sampling the individual"}
+ggplot(wages) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id)) +
+  facet_sample()
+```
+Learn: By default, `facet_sample()` function created 12 facets and 3 sample in each facet. However, as we can see in Figure \@ref(fig:facet-sample), in panel 4 and 10, there are four lines instead of 3. This is due to the missing value in the individual. We can also learn that the subject generally have a positive trend. 
+
+
+## Stratifying 
+
+`facet_sample()` only shows part of the data, we can use `facet_strata` to show all the id in different facet. 
+
+```{r facet-strata, fig.cap= "Faceted mean hourly wages"}
+
+ggplot(wages) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id)) +
+  facet_strata(n_strata = 100)
+
+```
+
+As we have many ids, it is still hard to see individual data even if it is faceted in to 100 facets. However, we can see that they generally have the same pattern. 
+
+
+## Featuring
+
+We can add the feature in Figure \@ref(fig:facet-strata) by arranging it by year. Here, the data is not randomly allocated into each facet, but they are displayed a specified range of year values. 
+
+```{r}
+ggplot(wages) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id),
+            alpha = 0.1) +
+  facet_strata(along = -year)
+```
+Learn: Most of the samples participated in the study in 1979, this is also inline with the finding in Figure \@ref(fig:first-time). We can see that generally the subjects of the study have the same starting wages but it became vary in the end of the study. 
 
 
 
