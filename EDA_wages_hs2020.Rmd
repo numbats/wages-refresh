@@ -23,6 +23,9 @@ library(kableExtra)
 library(patchwork)
 library(gghighlight)
 library(stickylabeller)
+library(mgcv)
+library(modelr)
+library(tsibble)
 ```
 
 # Background
@@ -272,6 +275,7 @@ Learn: By default, `facet_sample()` function created 12 facets and 3 sample in e
 
 ```{r facet-strata, fig.cap= "Faceted mean hourly wages"}
 
+set.seed(2020)
 ggplot(wages) +
   geom_line(aes(x = year,
                 y = mean_hourly_wage,
@@ -288,6 +292,7 @@ As we have many ids, it is still hard to see individual data even if it is facet
 We can add the feature in Figure \@ref(fig:facet-strata) by arranging it by year. Here, the data is not randomly allocated into each facet, but they are displayed a specified range of year values. 
 
 ```{r}
+set.seed(2020)
 ggplot(wages) +
   geom_line(aes(x = year,
                 y = mean_hourly_wage,
@@ -298,5 +303,60 @@ ggplot(wages) +
 Learn: Most of the samples participated in the study in 1979, this is also inline with the finding in Figure \@ref(fig:first-time). We can see that generally the subjects of the study have the same starting wages but it became vary in the end of the study. 
 
 
+## Build GAM model
+
+```{r id-fct}
+wages <- wages %>%
+  mutate(id_fct = as.factor(id),
+         year0 = year - 1979)
+```
+
+```{r eval = FALSE}
+# wages_gam <- gam(
+#   mean_hourly_wage ~ s(year0, by = id_fct) + id_fct,
+#   data = wages,
+#   method = "REML"
+# )
+```
+
+Since we have a quite large data set, we have to subset it first to model the data. Here, we would like to build a Generalized Additive Model (GAM) model, by randomly subset the daya the data using brolgar's` `sample_frac_keys` function. 
+
+
+```{r}
+set.seed(2020)
+wages_sample <- sample_frac_keys(wages, size = 0.01)
+
+```
+
+
+```{r}
+wages_gam <- gam(
+  mean_hourly_wage ~ s(year0, by = id_fct) + id_fct,
+  data = wages_sample,
+  method = "REML"
+)
+```
+
+
+```{r}
+wages_aug <- wages_sample %>%
+  add_predictions(wages_gam, var = "pred") %>%
+  add_residuals(wages_gam, var = "res") %>%
+  group_by_key() %>%
+  mutate(rss = sum(res^2)) %>%
+  ungroup()
+```
+
+```{r}
+set.seed(2020)
+wages_aug %>%
+  sample_n_keys(12) %>%
+  ggplot(aes(x = year,
+             y = pred,
+             group = id)) +
+  geom_line(color = "steelblue") +
+  geom_point(aes(y = mean_hourly_wage)) +
+  facet_wrap(~id)
+```
 
 
