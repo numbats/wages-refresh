@@ -303,7 +303,7 @@ ggplot(wages) +
 Learn: Most of the samples participated in the study in 1979, this is also inline with the finding in Figure \@ref(fig:first-time). We can see that generally the subjects of the study have the same starting wages but it became vary in the end of the study. 
 
 
-## Build GAM model
+## Build a GAM model
 
 ```{r id-fct}
 wages <- wages %>%
@@ -319,8 +319,9 @@ wages <- wages %>%
 # )
 ```
 
-Since we have a quite large data set, we have to subset it first to model the data. Here, we would like to build a Generalized Additive Model (GAM) model, by randomly subset the daya the data using brolgar's` `sample_frac_keys` function. 
+Since we have a quite large data set, we have to subset it first to model the data. Here, we would like to build a Generalized Additive Model (GAM) model, by randomly subset the data using brolgar's` `sample_frac_keys` function. 
 
+Here, we sampled 1 percent portion of the data. 
 
 ```{r}
 set.seed(2020)
@@ -348,7 +349,7 @@ wages_aug <- wages_sample %>%
 ```
 
 ```{r}
-set.seed(2020)
+set.seed(2021)
 wages_aug %>%
   sample_n_keys(12) %>%
   ggplot(aes(x = year,
@@ -359,4 +360,40 @@ wages_aug %>%
   facet_wrap(~id)
 ```
 
+## Relationship with Age, Gender, and Education
 
+**Age**
+
+```{r}
+fig_wages_all <- 
+  ggplot(wages, 
+         aes(x = year,
+             y = mean_hourly_wage,
+             group = id)) +
+  geom_line(alpha = 0.1)
+```
+
+```{r facet-age}
+
+fig_wages_all +
+  facet_wrap(~age_1979)
+```
+
+Learn: There is no specific pattern of age in 1979 to the wages. Most of the subjects have the same starting wages. Moreover, the wages at the end of the study period varied between the subjects. 
+
+**Gender**
+
+```{r facet-gender}
+fig_wages_all +
+  facet_wrap(~gender)
+```
+Learn: Males tend to earn more wages than females. 
+
+
+**Education**
+
+```{r facet-edu}
+fig_wages_all +
+  facet_wrap(~hgc)
+```
+Learn: Most of subject has finished their 12th grade. Subjects with lower education tend to have lower wages. 
