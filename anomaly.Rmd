@@ -1,0 +1,56 @@
+---
+title: "Anomaly_inspection"
+author: "Dewi Lestari Amaliah"
+date: "09/01/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(brolgar)
+```
+
+```{r data}
+load("wages_hs2020.rda")
+```
+
+
+```{r wages}
+wages <- as_tsibble(x = wages_hs2020,
+                    key = id,
+                    index = year,
+                    regular = FALSE)
+```
+
+```{r lm}
+wages_lm <- key_slope(wages, 
+                         mean_hourly_wage ~ year) %>%
+  left_join(wages, by = "id")
+```
+
+```{r}
+wages_lm <- wages_lm %>%
+  mutate(pred = .intercept + (.slope_year*year))
+```
+
+```{r}
+wages_res <- wages_lm %>%
+  mutate(resid = mean_hourly_wage - pred)
+```
+
+```{r}
+wages_lm_var <- wages_res %>%
+  group_by(id) %>%
+  summarise(var = var(mean_hourly_wage,
+                      na.rm = TRUE)) %>%
+  arrange(desc(var))
+```
+
+```{r}
+ggplot(filter(wages, id == 8360)) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage))
+```
+
