@@ -24,6 +24,8 @@ wages <- as_tsibble(x = wages_hs2020,
                     regular = FALSE)
 ```
 
+
+# build a linear model
 ```{r lm}
 wages_lm <- key_slope(wages, 
                          mean_hourly_wage ~ year) %>%
@@ -31,26 +33,127 @@ wages_lm <- key_slope(wages,
 ```
 
 ```{r}
+
+#calculate the prediction value
 wages_lm <- wages_lm %>%
   mutate(pred = .intercept + (.slope_year*year))
 ```
 
 ```{r}
+#calculate the residual
 wages_res <- wages_lm %>%
   mutate(resid = mean_hourly_wage - pred)
 ```
 
 ```{r}
+
+#calculate the variance of the lm model's residual 
+#sort it from the highest to the lowest
 wages_lm_var <- wages_res %>%
   group_by(id) %>%
   summarise(var = var(mean_hourly_wage,
                       na.rm = TRUE)) %>%
+  arrange(desc(var)) 
+```
+
+
+```{r}
+wages_lm_var <- wages_lm_var %>%
+  mutate(rank = seq(1 : nrow(wages_lm_var)))
+```
+
+
+### Plot the wages with high variance in their lm-residuals
+
+```{r}
+top12 <- wages_lm_var %>%
+  filter(rank <=25) %>%
+  left_join(wages, by = "id")
+
+ggplot(top12) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage)) +
+  facet_wrap(~id)
+```
+
+### Plot the wages with low variance in their lm-residuals
+```{r}
+bottom12 <- wages_lm_var %>%
+  filter(rank >= 5995) %>%
+  left_join(wages, by = "id")
+
+ggplot(bottom12) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage)) +
+  facet_wrap(~id)
+```
+
+# take 12 random ids 
+```{r}
+set.seed(2021)
+
+#take a random sample
+
+random <- as.data.frame(sample(wages_lm_var$id, size = 30, replace = FALSE)) %>%
+  rename("id" = "sample(wages_lm_var$id, size = 30, replace = FALSE)") %>%
+  left_join(wages, by = "id")
+
+ggplot(random) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage)) +
+  facet_wrap(~id)
+
+```
+
+Learn: The observations with high and low variability were mostly the observations with the incomplete years of observations. Hence, we are going to try to only look the variance on the observations with the complete years. 
+
+
+```{r}
+wages_obs <- wages %>%
+  features(mean_hourly_wage, n_obs) %>%
+  arrange(n_obs)
+
+
+complete_year_obs <- wages_obs %>%
+  filter(n_obs == 27) %>%
+  left_join(wages_lm_var, by = "id") %>%
   arrange(desc(var))
 ```
 
 ```{r}
-ggplot(filter(wages, id == 8360)) +
+
+top20_comp <- complete_year_obs %>%
+  slice_head(n =20) %>%
+  left_join(wages, by = "id")
+
+ggplot(top20_comp) +
   geom_line(aes(x = year,
-                y = mean_hourly_wage))
+                y = mean_hourly_wage)) +
+  facet_wrap(~id)
+
+```
+```{r}
+bottom20_comp <- complete_year_obs %>%
+  slice_tail(n =20) %>%
+  left_join(wages, by = "id")
+
+ggplot(bottom20_comp) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage)) +
+  facet_wrap(~id)
 ```
 
+```{r}
+set.seed(2021)
+
+random2 <- as.data.frame(sample(complete_year_obs$id, size = 30, replace = FALSE)) %>%
+  rename("id" = "sample(complete_year_obs$id, size = 30, replace = FALSE)") %>%
+  left_join(wages, by = "id")
+
+ggplot(random2) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage)) +
+  facet_wrap(~id)
+```
+
+The volatility in wages, could be seen in the id with high and low variance. For example, in id 951 (high variance) and 7611 (small variance). 
