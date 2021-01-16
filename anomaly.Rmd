@@ -51,7 +51,7 @@ wages_res <- wages_lm %>%
 #sort it from the highest to the lowest
 wages_lm_var <- wages_res %>%
   group_by(id) %>%
-  summarise(var = var(mean_hourly_wage,
+  summarise(var = var(resid,
                       na.rm = TRUE)) %>%
   arrange(desc(var)) 
 ```
@@ -75,6 +75,14 @@ ggplot(top12) +
                 y = mean_hourly_wage)) +
   facet_wrap(~id)
 ```
+
+```{r}
+wages %>%
+  filter(id == 11974)
+```
+
+
+
 
 ### Plot the wages with low variance in their lm-residuals
 ```{r}
@@ -156,4 +164,14 @@ ggplot(random2) +
   facet_wrap(~id)
 ```
 
-The volatility in wages, could be seen in the id with high and low variance. For example, in id 951 (high variance) and 7611 (small variance). 
+```{r}
+wages %>%
+  filter(year == 1984)
+```
+
+```{r}
+ggplot(wages) +
+  geom_boxplot(aes(x = mean_hourly_wage)) +
+  facet_wrap(~year)
+```
+
