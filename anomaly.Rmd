@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(brolgar)
+library(naniar)
 ```
 
 ```{r data}
@@ -70,9 +71,11 @@ top12 <- wages_lm_var %>%
   filter(rank <=25) %>%
   left_join(wages, by = "id")
 
-ggplot(top12) +
-  geom_line(aes(x = year,
-                y = mean_hourly_wage)) +
+ggplot(top12, 
+       aes(x = year,
+           y = mean_hourly_wage)) +
+  geom_miss_point() +
+  geom_line() +
   facet_wrap(~id)
 ```
 
@@ -90,9 +93,11 @@ bottom12 <- wages_lm_var %>%
   filter(rank >= 5995) %>%
   left_join(wages, by = "id")
 
-ggplot(bottom12) +
-  geom_line(aes(x = year,
-                y = mean_hourly_wage)) +
+ggplot(bottom12,
+       aes(x = year,
+           y = mean_hourly_wage)) +
+  geom_miss_point() +
+  geom_line() +
   facet_wrap(~id)
 ```
 
@@ -106,9 +111,11 @@ random <- as.data.frame(sample(wages_lm_var$id, size = 30, replace = FALSE)) %>%
   rename("id" = "sample(wages_lm_var$id, size = 30, replace = FALSE)") %>%
   left_join(wages, by = "id")
 
-ggplot(random) +
-  geom_line(aes(x = year,
+ggplot(random, 
+       aes(x = year,
                 y = mean_hourly_wage)) +
+  geom_miss_point() +
+  geom_line() +
   facet_wrap(~id)
 
 ```
@@ -134,9 +141,11 @@ top20_comp <- complete_year_obs %>%
   slice_head(n =20) %>%
   left_join(wages, by = "id")
 
-ggplot(top20_comp) +
-  geom_line(aes(x = year,
+ggplot(top20_comp,
+       aes(x = year,
                 y = mean_hourly_wage)) +
+  geom_miss_point() +
+  geom_line()+
   facet_wrap(~id)
 
 ```
@@ -145,9 +154,11 @@ bottom20_comp <- complete_year_obs %>%
   slice_tail(n =20) %>%
   left_join(wages, by = "id")
 
-ggplot(bottom20_comp) +
-  geom_line(aes(x = year,
+ggplot(bottom20_comp,
+       aes(x = year,
                 y = mean_hourly_wage)) +
+  geom_miss_point() +
+  geom_line() +
   facet_wrap(~id)
 ```
 
@@ -158,9 +169,11 @@ random2 <- as.data.frame(sample(complete_year_obs$id, size = 30, replace = FALSE
   rename("id" = "sample(complete_year_obs$id, size = 30, replace = FALSE)") %>%
   left_join(wages, by = "id")
 
-ggplot(random2) +
-  geom_line(aes(x = year,
+ggplot(random2,
+       aes(x = year,
                 y = mean_hourly_wage)) +
+  geom_miss_point() +
+  geom_line() +
   facet_wrap(~id)
 ```
 
