@@ -1,0 +1,197 @@
+---
+title: "School_drop_out"
+author: "Dewi Lestari Amaliah"
+date: "13/01/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(brolgar)
+library(patchwork)
+library(gghighlight)
+```
+
+## filter the observations who are the high school drop out
+
+```{r data}
+load("wages_hs2020.rda")
+
+wages <- as_tsibble(x = wages_hs2020,
+                    key = id,
+                    index = year,
+                    regular = FALSE)
+
+wages_do <- wages %>%
+  filter(hgc %in% c("9TH GRADE", 
+                    "10TH GRADE",
+                    "11TH GRADE"))
+```
+
+```{r}
+
+wages_do_fig <- ggplot(wages_do, 
+                       aes(x = year,
+                           y = mean_hourly_wage,
+                           group = id)) +
+  geom_line(alpha = 0.1)
+
+wages_do_fig
+
+```
+
+
+
+```{r}
+wages_do_feature<- wages_do %>%
+  features(mean_hourly_wage, 
+           feat_three_num
+           )
+```
+
+```{r}
+min <- ggplot(wages_do_feature) +
+  geom_density(aes(x = min), fill = "magenta", alpha = 0.5)
+```
+
+```{r}
+wages_do_feature_long <- wages_do_feature %>%
+  pivot_longer(c(min, med, max), names_to = "feature", values_to = "value")
+  
+feature_fig <- ggplot(wages_do_feature_long) +
+  geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
+  theme(legend.position = "None")
+```
+
+```{r}
+feature_spaghetty <- ggplot(transform(wages_do_feature_long,
+                 feature = factor(feature, level = 
+                                 c("min",
+                                   "med", 
+                                   "max")))) +
+  geom_line(aes(x = feature,
+                y = value, 
+                group = id), alpha = 0.5)
+```
+
+```{r}
+min+feature_fig+feature_spaghetty
+```
+
+Compared to overall cohort the range of the minimum wages of high school dropouts is smaller. The median of maximum wages in high school dropouts is smaller compared to the rest of the cohort. It is also more positively skewed. These mean that the high school dropouts generally received smaller wages then the rest of the cohort, which from the previous EDA, we found that most of the observations completed high school. Hence, the reason why the rest of the cohort has bigger wages is because most of the observation has higher education. 
+
+
+```{r}
+ggplot(wages_do, 
+       aes(x = mean_hourly_wage)) +
+  geom_boxplot() +
+  facet_wrap(~year)
+```
+
+```{r}
+wages_do_slope <- key_slope(wages_do, 
+                         mean_hourly_wage ~ year) %>%
+  left_join(wages_do, by = "id")
+
+wages_do_slope
+```
+
+```{r}
+ggplot(wages_do_slope) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id)) +
+  gghighlight(.slope_year < 0)
+```
+
+## filter the observations who completed high school
+
+```{r}
+wages_hs <- wages %>%
+  filter(hgc == "12TH GRADE")
+```
+
+
+```{r}
+wages_hs_fig <- ggplot(wages_hs, 
+                       aes(x = year,
+                           y = mean_hourly_wage,
+                           group = id)) +
+  geom_line(alpha = 0.1)
+
+wages_hs_fig
+```
+
+```{r}
+wages_hs_feature<- wages_hs %>%
+  features(mean_hourly_wage, 
+           feat_three_num
+           )
+```
+
+```{r}
+min_hs <- ggplot(wages_hs_feature) +
+  geom_density(aes(x = min), fill = "magenta", alpha = 0.5)
+```
+
+
+```{r}
+wages_hs_feature_long <- wages_hs_feature %>%
+  pivot_longer(c(min, med, max), names_to = "feature", values_to = "value")
+  
+feature_fig_hs <- ggplot(wages_hs_feature_long) +
+  geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
+  theme(legend.position = "None")
+```
+
+```{r}
+feature_spaghetty_hs <- ggplot(transform(wages_hs_feature_long,
+                 feature = factor(feature, level = 
+                                 c("min",
+                                   "med", 
+                                   "max")))) +
+  geom_line(aes(x = feature,
+                y = value, 
+                group = id), alpha = 0.5)
+```
+
+```{r}
+min_hs + feature_fig_hs + feature_spaghetty_hs
+```
+
+
+```{r}
+ggplot(wages_hs, 
+       aes(x = mean_hourly_wage)) +
+  geom_boxplot() +
+  facet_wrap(~year)
+```
+
+## Middle School
+
+```{r}
+
+wages_ms <- wages %>%
+  filter(hgc %in% c("6TH GRADE", 
+                    "7TH GRADE",
+                    "8TH GRADE"))
+
+```
+
+```{r}
+wages_ms_fig <- ggplot(wages_ms, 
+                       aes(x = year,
+                           y = mean_hourly_wage,
+                           group = id)) +
+  geom_line(alpha = 0.1)
+
+wages_ms_fig
+```
+
+
+```{r}
+wages_do_fig + wages_hs_fig + wages_ms_fig
+```
+
+
