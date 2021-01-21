@@ -1,0 +1,118 @@
+---
+title: "code_revisit_2"
+author: "Dewi Lestari Amaliah"
+date: "21/01/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(here)
+library(readr)
+library(tidyr)
+library(tidyverse)
+library(brolgar)
+```
+
+```{r}
+
+# load the downloaded data 
+new_data_qnames <- read_rds(here::here("data-raw/wages-high-school-demo/data-frames/wages-high-school-demo-new_data_qnames.rds"))
+categories_qnames <- read_rds(here::here("data-raw/wages-high-school-demo/data-frames/wages-high-school-demo-categories_qnames.rds"))
+
+```
+
+
+## get hours of work
+
+```{r}
+
+year_A <- c(1979:1987, 1993)
+get_hour <- function(year){
+  if(year %in% year_A){
+   new_data_qnames %>%
+    select(CASEID_1979,
+            starts_with("QES-52A") &
+              ends_with(as.character(year))) %>%
+    pivot_longer(!CASEID_1979,
+                 names_to = "job",
+                 values_to = "hours_work") %>%
+    separate("job", c("job", "year"), sep = -4) %>%
+    mutate(job = paste0("job_", substr(job, 9, 10))) %>%
+    rename(id = CASEID_1979)}
+  else{
+    new_data_qnames %>%
+    select(CASEID_1979,
+            starts_with("QES-52D") &
+              ends_with(as.character(year))) %>%
+    pivot_longer(!CASEID_1979,
+                 names_to = "job",
+                 values_to = "hours_work") %>%
+    separate("job", c("job", "year"), sep = -4) %>%
+    mutate(job = paste0("job_", substr(job, 9, 10))) %>%
+    rename(id = CASEID_1979)
+  }
+ }
+```
+
+```{r}
+
+
+hours <- list()
+
+for(ayear in c(1979:1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 
+               2012, 2014, 2016)) {
+   hours[[ayear]] <- get_hour(ayear)
+}
+
+hours_all <- bind_rows(!!!hours)
+
+```
+
+
+## get rates
+
+```{r}
+get_rate <- function(year) {
+  new_data_qnames %>%
+     select(CASEID_1979,
+            starts_with("HRP") &
+              ends_with(as.character(year))) %>%
+    pivot_longer(!CASEID_1979, names_to = "job", values_to = "rate_per_hour") %>%
+    separate("job", c("job", "year"), sep = -4) %>%
+    mutate(job = paste0("job_0", substr(job, 4, 4))) %>%
+    rename(id = CASEID_1979)
+}
+```
+
+```{r}
+rates <- list()
+
+for(ayear in c(1979:1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 
+               2012, 2014, 2016)) {
+   rates[[ayear]] <- get_rate(ayear)
+}
+
+rates_all <- bind_rows(!!!rates)
+```
+
+## join hours and rates
+
+```{r}
+
+hours_wages <- left_join(rates_all, 
+                         hours_all, 
+                         by = c("id", "year", "job"))
+
+```
+
+## filter how many observations that having rates but "NA" in hours worked
+
+```{r}
+na_hours <- hours_wages %>%
+  filter(!is.na(rate_per_hour) & is.na(hours_work))
+
+percentage_na_hours <- nrow(na_hours)/ nrow(hours_wages) * 100
+```
+
