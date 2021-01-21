@@ -13,6 +13,8 @@ library(readr)
 library(tidyr)
 library(tidyverse)
 library(brolgar)
+library(patchwork)
+library(naniar)
 ```
 
 ```{r}
@@ -104,7 +106,6 @@ rates_all <- bind_rows(!!!rates)
 hours_wages <- left_join(rates_all, 
                          hours_all, 
                          by = c("id", "year", "job"))
-
 ```
 
 ## filter how many observations that having rates but "NA" in hours worked
@@ -114,5 +115,221 @@ na_hours <- hours_wages %>%
   filter(!is.na(rate_per_hour) & is.na(hours_work))
 
 percentage_na_hours <- nrow(na_hours)/ nrow(hours_wages) * 100
+percentage_na_hours
+```
+
+There are `r round(percentage_na_hours, 2)` percent of data that missing in hours worked, but not missing in wages.
+
+## filter how many observations that "having"NA" in rates, but present in hours worked
+
+```{r}
+na_rates <- hours_wages %>%
+  filter(is.na(rate_per_hour) & !is.na(hours_work))
+
+percentage_na_rates <- nrow(na_rates)/ nrow(hours_wages) * 100
+percentage_na_rates
+
+```
+
+
+# calculate the wages (weighted mean approach)
+
+
+## Scenario 1 
+- For the obs with more than one jobs, and one of the job has na in hours_work, we can not calculate the weighted average.
+- For the obs with only one job and the hours_work is na, we only will use the rates directly.
+- Calculate the weighted hours normally
+
+```{r}
+no_job <- hours_wages %>%
+  filter(!is.na(rate_per_hour)) %>%
+  group_by(id, year) %>%
+  summarise(no_jobs = n_distinct(rate_per_hour))
+
+eligible_wages <- hours_wages %>%
+  filter(!is.na(rate_per_hour)) %>%
+  left_join(no_job, by = c("id", "year"))
+```
+
+
+```{r}
+wages_weighted_sc1 <- 
+  eligible_wages %>%
+  group_by(id, year) %>%
+  mutate(wages = ifelse(no_jobs == 1, rate_per_hour/100,
+                        weighted.mean(rate_per_hour, hours_work, na.rm = TRUE)/100))
+
+visdat::vis_dat(wages_weighted_sc1, warn_large_data = FALSE)
+
+```
+
+Note: We lose the information in many observations with half complete of hours_work. Example:
+observation 506.
+
+```{r}
+wages_weighted %>% filter(id == 506)
+```
+```{r}
+wages_tidy_sc1 <- wages_weighted_sc1 %>%
+  filter(!is.na(wages)) %>%
+  group_by(id, year) %>%
+  summarise(wages = mean(wages)) %>%
+  mutate(year = as.numeric(year)) %>%
+  ungroup() %>%
+  mutate(wages = ifelse(wages > 300,
+                        NA, wages))
+```
+
+```{r}
+wages_sc1 <- as_tsibble(x = wages_tidy_sc1,
+                    key = id,
+                    index = year,
+                    regular = FALSE)
+
+ggplot(wages_sc1) +
+  geom_line(aes(x = year,
+                y = wages, 
+                group = id), 
+            alpha = 0.1) 
+
+```
+
+```{r}
+set.seed(2020)
+ggplot(wages_sc1) +
+  geom_line(aes(x = year,
+                y = wages,
+                group = id)) +
+  facet_sample()
+```
+```{r features}
+wages_feature_sc1 <- wages_sc1 %>%
+  features(wages, 
+           feat_three_num
+           )
+```
+
+```{r p1}
+p1 <- ggplot(wages_feature_sc1) +
+  geom_density(aes(x = min), fill = "magenta", alpha = 0.5)
+```
+
+
+```{r p2}
+
+wages_feature_long_sc1 <- wages_feature_sc1 %>%
+  pivot_longer(c(min, med, max), names_to = "feature", values_to = "value")
+  
+p2 <- ggplot(wages_feature_long_sc1) +
+  geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
+  theme(legend.position = "None")
+```
+
+
+```{r p3}
+p3 <- ggplot(transform(wages_feature_long_sc1,
+                 feature = factor(feature, level = 
+                                 c("min",
+                                   "med", 
+                                   "max")))) +
+  geom_line(aes(x = feature,
+                y = value, 
+                group = id), alpha = 0.5)
+```
+
+```{r feature-charts}
+
+p1+p2+p3
+
+```
+
+
+## SCENARIO 2
+So, let us try scenario 2, by exclude the observation with more than one job with NA in hours_work.
+
+```{r}
+wages_weighted_sc2 <- eligible_wages %>%
+  filter(no_jobs == 1 |
+           (no_jobs > 1 & !is.na(hours_work))) %>%
+  group_by(id, year) %>%
+  mutate(wages = ifelse(no_jobs == 1, rate_per_hour/100,
+                        weighted.mean(rate_per_hour, hours_work, na.rm = TRUE)/100))
+
+visdat::vis_dat(wages_weighted_sc2, warn_large_data = FALSE)
+  
+```
+```{r}
+wages_tidy_sc2 <- wages_weighted_sc2 %>%
+  group_by(id, year) %>%
+  summarise(wages = mean(wages)) %>%
+  mutate(year = as.numeric(year)) %>%
+  ungroup() %>%
+  mutate(wages = ifelse(wages > 300,
+                        NA, wages))
+```
+
+```{r}
+wages <- as_tsibble(x = wages_tidy_sc2,
+                    key = id,
+                    index = year,
+                    regular = FALSE)
+```
+
+```{r}
+ggplot(wages) +
+  geom_line(aes(x = year,
+                y = wages,
+                group = id), 
+            alpha = 0.1)
+```
+
+```{r}
+set.seed(2021)
+ggplot(wages, aes(x = year,
+                y = wages,
+                group = id)) +
+  geom_line() +
+  facet_sample()
+```
+
+```{r features}
+wages_feature<- wages %>%
+  features(wages, 
+           feat_three_num
+           )
+```
+
+```{r p1}
+p4 <- ggplot(wages_feature) +
+  geom_density(aes(x = min), fill = "magenta", alpha = 0.5)
+```
+
+
+```{r p2}
+
+wages_feature_long <- wages_feature %>%
+  pivot_longer(c(min, med, max), names_to = "feature", values_to = "value")
+  
+p5 <- ggplot(wages_feature_long) +
+  geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
+  theme(legend.position = "None")
+```
+
+
+```{r p3}
+p6 <- ggplot(transform(wages_feature_long,
+                 feature = factor(feature, level = 
+                                 c("min",
+                                   "med", 
+                                   "max")))) +
+  geom_line(aes(x = feature,
+                y = value, 
+                group = id), alpha = 0.5)
+```
+
+```{r feature-charts}
+
+p4+p5+p6
+
 ```
 
