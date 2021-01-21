@@ -1,0 +1,429 @@
+---
+title: "code_revisit"
+author: "Dewi Lestari Amaliah"
+date: "16/01/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(here)
+library(readr)
+library(tidyr)
+library(tidyverse)
+library(brolgar)
+```
+
+```{r}
+
+# load the downloaded data 
+
+new_data_qnames <- read_rds(here::here("data-raw/wages-high-school-demo/data-frames/wages-high-school-demo-new_data_qnames.rds"))
+categories_qnames <- read_rds(here::here("data-raw/wages-high-school-demo/data-frames/wages-high-school-demo-categories_qnames.rds"))
+```
+
+# revisit the code in an observation with large variance of lm's residual (case 11974)
+
+```{r}
+get_wage_id2 <- function(year, id){
+  new_data_qnames %>%
+    select(CASEID_1979,
+           starts_with("HRP") &
+             ends_with(as.character(year))) %>%
+    filter(CASEID_1979 == id) %>%
+    rename_with(~str_replace(.x, paste0("_", year), ""),
+                starts_with("HRP"))
+}
+
+
+get_wage_id <- function(year, id){
+  new_data_qnames %>%
+    select(CASEID_1979,
+           paste0("HRP1_", year),
+           paste0("HRP2_", year),
+           paste0("HRP3_", year),
+           paste0("HRP4_", year),
+           paste0("HRP5_", year)
+           ) %>%
+    filter(CASEID_1979 == id) %>%
+    rename(HRP1 = paste0("HRP1_", year),
+           HRP2 = paste0("HRP2_", year),
+           HRP3 = paste0("HRP3_", year),
+           HRP4 = paste0("HRP4_", year),
+           HRP5 = paste0("HRP5_", year))
+}
+```
+
+```{r}
+wages <- list()
+missing_years <- c(1995, 1997, 1999, 2001, 2003,
+                   2005, 2007, 2009, 2011, 2013,
+                   2015)
+for(ayear in setdiff(1979:2016, missing_years)) {
+  wages[[ayear]] <- get_wage_id(ayear, 11974)
+}
+
+wage_79 <- get_wage_id(1979, 11974) 
+wage_80 <- get_wage_id(1980, 11974)
+wage_81 <- get_wage_id(1981, 11974)
+wage_82 <- get_wage_id(1982, 11974)
+wage_83 <- get_wage_id(1983, 11974)
+wage_84 <- get_wage_id(1984, 11974)
+wage_85 <- get_wage_id(1985, 11974)
+wage_86 <- get_wage_id(1986, 11974)
+wage_87 <- get_wage_id(1987, 11974)
+wage_88 <- get_wage_id(1988, 11974)
+wage_89 <- get_wage_id(1989, 11974)
+wage_90 <- get_wage_id(1990, 11974)
+wage_91 <- get_wage_id(1991, 11974)
+wage_92 <- get_wage_id(1992, 11974)
+wage_93 <- get_wage_id(1993, 11974)
+wage_94 <- get_wage_id(1994, 11974)
+wage_96 <- get_wage_id(1996, 11974)
+wage_98 <- get_wage_id(1998, 11974)
+wage_00 <- get_wage_id(2000, 11974)
+wage_02 <- get_wage_id(2002, 11974)
+wage_04 <- get_wage_id(2004, 11974)
+wage_06 <- get_wage_id(2006, 11974)
+wage_08 <- get_wage_id(2008, 11974)
+wage_10 <- get_wage_id(2010, 11974)
+wage_12 <- get_wage_id(2012, 11974)
+wage_14 <- get_wage_id(2014, 11974)
+wage_16 <- get_wage_id(2016, 11974)
+```
+
+```{r}
+
+year <- c(1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 
+          1991, 1992, 1993, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010,
+          2012, 2014, 2016)
+wage_11974 <- bind_rows(!!!wages) %>%
+  cbind(year) %>%
+  gather("raw-var", "hourly-rate", "HRP1":"HRP5", na.rm = TRUE) %>%
+  arrange(year)
+```
+
+```{r}
+ggplot(wage_11974) +
+  geom_point(aes(x = year,
+                 y = `hourly-rate`))
+```
+
+Learn: There are only 10 observations in that id and one exceptionally high wage in 1985. 
+
+
+## Now, let's try for id = 11830 
+
+
+```{r}
+
+wage_79 <- get_wage_id(1979, 11830) 
+wage_80 <- get_wage_id(1980, 11830)
+wage_81 <- get_wage_id(1981, 11830)
+wage_82 <- get_wage_id(1982, 11830)
+wage_83 <- get_wage_id(1983, 11830)
+wage_84 <- get_wage_id(1984, 11830)
+wage_85 <- get_wage_id(1985, 11830)
+wage_86 <- get_wage_id(1986, 11830)
+wage_87 <- get_wage_id(1987, 11830)
+wage_88 <- get_wage_id(1988, 11830)
+wage_89 <- get_wage_id(1989, 11830)
+wage_90 <- get_wage_id(1990, 11830)
+wage_91 <- get_wage_id(1991, 11830)
+wage_92 <- get_wage_id(1992, 11830)
+wage_93 <- get_wage_id(1993, 11830)
+wage_94 <- get_wage_id(1994, 11830)
+wage_96 <- get_wage_id(1996, 11830)
+wage_98 <- get_wage_id(1998, 11830)
+wage_00 <- get_wage_id(2000, 11830)
+wage_02 <- get_wage_id(2002, 11830)
+wage_04 <- get_wage_id(2004, 11830)
+wage_06 <- get_wage_id(2006, 11830)
+wage_08 <- get_wage_id(2008, 11830)
+wage_10 <- get_wage_id(2010, 11830)
+wage_12 <- get_wage_id(2012, 11830)
+wage_14 <- get_wage_id(2014, 11830)
+wage_16 <- get_wage_id(2016, 11830)
+
+
+```
+
+```{r}
+wage_11830 <- bind_rows(wage_79,
+                  wage_80,
+                  wage_81,
+                  wage_82,
+                  wage_83,
+                  wage_84,
+                  wage_85, 
+                  wage_86,
+                  wage_87,
+                  wage_88,
+                  wage_89,
+                  wage_90,
+                  wage_91,
+                  wage_92,
+                  wage_93,
+                  wage_94,
+                  wage_96,
+                  wage_98,
+                  wage_00,
+                  wage_02,
+                  wage_04,
+                  wage_06,
+                  wage_08,
+                  wage_10,
+                  wage_12,
+                  wage_14,
+                  wage_16) %>%
+  cbind(year)
+```
+
+```{r}
+wage_11830
+```
+Learn: In 1996, if we only take the mean hourly wage by the number of jobs, it means that the hourly wage for this person in 1996, would only be 2750, since the gap of wage between the first and the second job is big. Hence, should we consider to use weighted average with the number of hours work as the weight? Or looking at the history of the wage, would the 5000 wage a typo? 
+
+However, indeed there are many extreme values of wages in that year. We can see that, in this box plot.
+
+```{r}
+load("wages_hs2020.rda")
+
+wages_tidy <- as_tsibble(x = wages_hs2020,
+                    key = id,
+                    index = year,
+                    regular = FALSE)
+ggplot(wages_tidy) +
+  geom_boxplot(aes(x = mean_hourly_wage)) +
+  facet_wrap(~year)
+```
+
+
+# Matching the number of job in hours of work and in wage 
+
+```{r}
+
+get_hours_A <- function(year){
+  new_data_qnames %>%
+  select(CASEID_1979,
+         paste0("QES-52A.01_", year),
+         paste0("QES-52A.02_", year),
+         paste0("QES-52A.03_", year),
+         paste0("QES-52A.04_", year),
+         paste0("QES-52A.05_", year)) %>%
+  gather("raw-var", "hours", paste0("QES-52A.01_", year): 
+           paste0("QES-52A.05_", year), 
+         na.rm = TRUE) %>%
+  separate("raw-var", c("mod-var", "year"), sep = -4) %>%
+  separate("mod-var", c("mod-var", NA), sep = -1) %>%
+  separate("mod-var", c(NA, "job-no"), sep = -1) %>%
+  group_by(CASEID_1979) %>%
+  summarise(total_hours = sum(hours),
+         number_of_jobs = n_distinct(`job-no`)) %>%
+  mutate(year = year)
+}
+
+
+get_hours_D <- function(year){
+  new_data_qnames %>%
+  select(CASEID_1979,
+         paste0("QES-52D.01_", year),
+         paste0("QES-52D.02_", year),
+         paste0("QES-52D.03_", year),
+         paste0("QES-52D.04_", year),
+         paste0("QES-52D.05_", year)) %>%
+  gather("raw-var", "hours", paste0("QES-52D.01_", year): 
+           paste0("QES-52D.05_", year), 
+         na.rm = TRUE) %>%
+  separate("raw-var", c("mod-var", "year"), sep = -4) %>%
+  separate("mod-var", c("mod-var", NA), sep = -1) %>%
+  separate("mod-var", c(NA, "job-no"), sep = -1) %>%
+  group_by(CASEID_1979) %>%
+  summarise(total_hours = sum(hours),
+         number_of_jobs = n_distinct(`job-no`)) %>%
+  mutate(year = year)
+}
+```
+
+```{r}
+hours_79 <- get_hours_A(1979)
+hours_80 <- get_hours_A(1980)
+hours_81 <- get_hours_A(1981)
+hours_82 <- get_hours_A(1982)
+hours_83 <- get_hours_A(1983)
+hours_84 <- get_hours_A(1984)
+hours_85 <- get_hours_A(1985)
+hours_86 <- get_hours_A(1986)
+hours_87 <- get_hours_A(1987)
+hours_88 <- get_hours_D(1988)
+hours_89 <- get_hours_D(1989)
+hours_90 <- get_hours_D(1990)
+hours_91 <- get_hours_D(1991)
+hours_92 <- get_hours_D(1992)
+hours_93 <- get_hours_A(1993)
+hours_94 <- get_hours_D(1994)
+hours_96 <- get_hours_D(1996)
+hours_98 <- get_hours_D(1998)
+hours_00 <- get_hours_D(2000)
+hours_02 <- get_hours_D(2002)
+hours_04 <- get_hours_D(2004)
+hours_06 <- get_hours_D(2006)
+hours_10 <- get_hours_D(2010)
+hours_12 <- get_hours_D(2012)
+hours_14 <- get_hours_D(2014)
+hours_16 <- get_hours_D(2016)
+hours_08 <- new_data_qnames %>%
+  select(CASEID_1979,
+         "QES-52D.01_2008",
+         "QES-52D.02_2008",
+         "QES-52D.03_2008",
+         "QES-52D.04_2008") %>%
+  gather("raw-var", "hours", "QES-52D.01_2008":"QES-52D.04_2008", na.rm = TRUE) %>%
+  separate("raw-var", c("mod-var", "year"), sep = -4) %>%
+  separate("mod-var", c("mod-var", NA), sep = -1) %>%
+  separate("mod-var", c(NA, "job-no"), sep = -1) %>%
+  group_by(CASEID_1979) %>%
+  summarise(total_hours = sum(hours),
+         number_of_jobs = n_distinct(`job-no`)) %>%
+  mutate(year = 2008)
+
+
+hours_all_year <- bind_rows(hours_79,
+                            hours_80,
+                            hours_81,
+                            hours_82,
+                            hours_83,
+                            hours_84,
+                            hours_85,
+                            hours_86,
+                            hours_87,
+                            hours_88,
+                            hours_89,
+                            hours_90,
+                            hours_91,
+                            hours_92,
+                            hours_93,
+                            hours_94,
+                            hours_96,
+                            hours_98,
+                            hours_00,
+                            hours_02,
+                            hours_04,
+                            hours_06,
+                            hours_08,
+                            hours_10,
+                            hours_12,
+                            hours_14,
+                            hours_16)
+
+```
+
+```{r}
+
+get_wage <- function(year){new_data_qnames %>%
+  select(CASEID_1979,
+           paste0("HRP1_", year),
+           paste0("HRP2_", year),
+           paste0("HRP3_", year),
+           paste0("HRP4_", year),
+           paste0("HRP5_", year)
+           ) %>%
+  gather("raw-var", "hourly-rate", paste0("HRP1_", year): paste0("HRP5_", year), 
+         na.rm = TRUE) %>%
+  separate("raw-var", c("mod-var", "year"), sep = -4) %>%
+  separate("mod-var", c("mod-var", NA), sep = -1) %>%
+  separate("mod-var", c(NA, "job-no"), sep = -1) %>%
+  group_by(CASEID_1979) %>%
+  mutate(number_of_jobs = n_distinct(`job-no`),
+         mean_hourly_wage = mean(`hourly-rate`)/100) %>%    # divided by 100 to get into dollars
+  filter(`job-no` == first(`job-no`)) %>%
+  select(-`job-no`, -`hourly-rate`)
+}
+
+```
+
+
+```{r}
+wages_79 <- get_wage(1979)
+wages_80 <- get_wage(1980)
+wages_81 <- get_wage(1981)
+wages_82 <- get_wage(1982)
+wages_83 <- get_wage(1983)
+wages_84 <- get_wage(1984)
+wages_85 <- get_wage(1985)
+wages_86 <- get_wage(1986)
+wages_87 <- get_wage(1987)
+wages_88 <- get_wage(1988)
+wages_89 <- get_wage(1989)
+wages_90 <- get_wage(1990)
+wages_91 <- get_wage(1991)
+wages_92 <- get_wage(1992)
+wages_93 <- get_wage(1993)
+wages_94 <- get_wage(1994)
+wages_96 <- get_wage(1996)
+wages_98 <- get_wage(1998)
+wages_00 <- get_wage(2000)
+wages_02 <- get_wage(2002)
+wages_04 <- get_wage(2004)
+wages_06 <- get_wage(2006)
+wages_08 <- get_wage(2008)
+wages_10 <- get_wage(2010)
+wages_12 <- get_wage(2012)
+wages_14 <- get_wage(2014)
+wages_16 <- get_wage(2016)
+```
+
+```{r}
+wages_all_year <- bind_rows(wages_79,
+                  wages_80,
+                  wages_81,
+                  wages_82,
+                  wages_83,
+                  wages_84,
+                  wages_85, 
+                  wages_86,
+                  wages_87,
+                  wages_88,
+                  wages_89,
+                  wages_90,
+                  wages_91,
+                  wages_92,
+                  wages_93,
+                  wages_94,
+                  wages_96,
+                  wages_98,
+                  wages_00,
+                  wages_02,
+                  wages_04,
+                  wages_06,
+                  wages_08,
+                  wages_10,
+                  wages_12,
+                  wages_14,
+                  wages_16) %>%
+  rename(no_jobs = number_of_jobs) %>%
+  mutate(year = as.numeric(year))
+```
+
+```{r}
+# join hours and wages
+
+hours_wages <- left_join(wages_all_year, 
+                         hours_all_year, 
+                         by = c("CASEID_1979", "year")) %>%
+  mutate(note = ifelse(is.na(number_of_jobs) == FALSE & 
+                         number_of_jobs != no_jobs, "unmatched", 
+                       "matched"))
+
+unmatched <- hours_wages %>%
+  filter(note == "unmatched")
+```
+
+
+NOTE: when we use the weighted average of wages, there are two problems:
+
+1. the unmatched number of jobs
+2. the data of number of jobs with corresponding ID is NA
+
+
+
+
