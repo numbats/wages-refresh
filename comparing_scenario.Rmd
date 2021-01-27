@@ -1,0 +1,118 @@
+---
+title: "comparing_scenario"
+author: "Dewi Lestari Amaliah"
+date: "27/01/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(brolgar)
+library(patchwork)
+```
+
+```{r}
+load("wages_hs2020.rda")
+load("wages_hs2020_sc1.rda")
+load("wages_hs2020_sc2.rda")
+```
+
+```{r}
+bp_ori<- ggplot(wages_hs2020) +
+  geom_boxplot(aes(x = mean_hourly_wage)) +
+  facet_wrap(~year) +
+  ggtitle("Original")
+
+bp_sc1 <- ggplot(wages_hs2020_sc1) +
+  geom_boxplot(aes(x = mean_hourly_wage)) +
+  facet_wrap(~year) +
+  ggtitle("Scenario 1")
+
+bp_sc2 <- ggplot(wages_hs2020_sc2) +
+  geom_boxplot(aes(x = mean_hourly_wage)) +
+  facet_wrap(~year) +
+  ggtitle("Scenario 2")
+
+bp_ori
+bp_sc1
+bp_sc2
+
+```
+
+```{r}
+wages_ori <- as_tsibble(x = wages_hs2020,
+                    key = id,
+                    index = year,
+                    regular = FALSE)
+
+wages_sc1 <- as_tsibble(x = wages_hs2020_sc1,
+                    key = id,
+                    index = year,
+                    regular = FALSE)
+
+wages_sc2 <- as_tsibble(x = wages_hs2020_sc2,
+                    key = id,
+                    index = year,
+                    regular = FALSE)
+```
+
+
+```{r}
+lp_ori <- ggplot(wages_ori) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id),
+            alpha = 0.1) +
+  ggtitle("Original")
+
+lp_sc1 <- ggplot(wages_sc1) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id),
+            alpha = 0.1) +
+  ggtitle("Scenario 1")
+
+lp_sc2 <- ggplot(wages_sc2) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id),
+            alpha = 0.1) +
+  ggtitle("Scenario 2")
+
+
+lp_ori + lp_sc1 + lp_sc2
+
+```
+```{r}
+
+
+get_obs <- function(data){
+  data %>%
+  features(mean_hourly_wage, n_obs) %>%
+  arrange(n_obs)
+  }
+
+wages_obs_ori <- get_obs(wages_ori)
+wages_obs_sc1 <- get_obs(wages_sc1)
+wages_obs_sc2 <- get_obs(wages_sc2)
+
+nrow(wages_obs_ori)
+nrow(wages_obs_sc1)
+nrow(wages_obs_sc2)
+```
+
+
+```{r}
+summary(wages_ori$mean_hourly_wage)
+```
+
+```{r}
+summary(wages_sc1$mean_hourly_wage)
+```
+
+```{r}
+summary(wages_sc2$mean_hourly_wage)
+```
+
