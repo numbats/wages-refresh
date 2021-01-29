@@ -15,8 +15,7 @@ library(patchwork)
 
 ```{r}
 load("wages_hs2020.rda")
-load("wages_hs2020_sc1.rda")
-load("wages_hs2020_sc2.rda")
+load("wages_hs2020_weighted.rda")
 ```
 
 ```{r}
@@ -25,19 +24,13 @@ bp_ori<- ggplot(wages_hs2020) +
   facet_wrap(~year) +
   ggtitle("Original")
 
-bp_sc1 <- ggplot(wages_hs2020_sc1) +
+bp_wei <- ggplot(wages_hs2020_weighted) +
   geom_boxplot(aes(x = mean_hourly_wage)) +
   facet_wrap(~year) +
-  ggtitle("Scenario 1")
-
-bp_sc2 <- ggplot(wages_hs2020_sc2) +
-  geom_boxplot(aes(x = mean_hourly_wage)) +
-  facet_wrap(~year) +
-  ggtitle("Scenario 2")
+  ggtitle("Weighted")
 
 bp_ori
-bp_sc1
-bp_sc2
+bp_wei
 
 ```
 
@@ -53,6 +46,12 @@ wages_sc1 <- as_tsibble(x = wages_hs2020_sc1,
                     regular = FALSE)
 
 wages_sc2 <- as_tsibble(x = wages_hs2020_sc2,
+                    key = id,
+                    index = year,
+                    regular = FALSE)
+
+
+wages_weighted <- as_tsibble(x = wages_hs2020_weighted,
                     key = id,
                     index = year,
                     regular = FALSE)
@@ -97,10 +96,12 @@ get_obs <- function(data){
 wages_obs_ori <- get_obs(wages_ori)
 wages_obs_sc1 <- get_obs(wages_sc1)
 wages_obs_sc2 <- get_obs(wages_sc2)
+wages_obs_weig <- get_obs(wages_weighted)
 
 nrow(wages_obs_ori)
 nrow(wages_obs_sc1)
 nrow(wages_obs_sc2)
+nrow(wages_obs_weig)
 ```
 
 
@@ -109,10 +110,9 @@ summary(wages_ori$mean_hourly_wage)
 ```
 
 ```{r}
-summary(wages_sc1$mean_hourly_wage)
+summary(wages_weighted$mean_hourly_wage)
 ```
 
-```{r}
-summary(wages_sc2$mean_hourly_wage)
-```
+
+
 
