@@ -1,0 +1,177 @@
+---
+title: "New_Wages"
+author: "Dewi Lestari Amaliah"
+date: "29/01/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(here)
+library(readr)
+library(tidyr)
+library(tidyverse)
+library(brolgar)
+library(patchwork)
+library(naniar)
+```
+
+
+```{r}
+
+# load the downloaded data 
+new_data_qnames <- read_rds(here::here("data-raw/wages-high-school-demo/data-frames/wages-high-school-demo-new_data_qnames.rds"))
+categories_qnames <- read_rds(here::here("data-raw/wages-high-school-demo/data-frames/wages-high-school-demo-categories_qnames.rds"))
+
+```
+
+
+```{r}
+
+year_A <- c(1979:1987, 1993)
+
+get_hour <- function(year){
+  if(year %in% year_A){
+   new_data_qnames %>%
+    select(CASEID_1979,
+            starts_with("QES-52A") &
+              ends_with(as.character(year))) %>%
+    pivot_longer(!CASEID_1979,
+                 names_to = "job",
+                 values_to = "hours_work") %>%
+    separate("job", c("job", "year"), sep = -4) %>%
+    mutate(job = paste0("job_", substr(job, 9, 10))) %>%
+    rename(id = CASEID_1979)}
+  else{
+    new_data_qnames %>%
+    select(CASEID_1979,
+            starts_with("QES-52D") &
+              ends_with(as.character(year))) %>%
+    pivot_longer(!CASEID_1979,
+                 names_to = "job",
+                 values_to = "hours_work") %>%
+    separate("job", c("job", "year"), sep = -4) %>%
+    mutate(job = paste0("job_", substr(job, 9, 10))) %>%
+    rename(id = CASEID_1979)
+  }
+ }
+```
+
+
+```{r}
+
+
+hours <- list()
+
+for(ayear in c(1979:1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 
+               2012, 2014, 2016)) {
+   hours[[ayear]] <- get_hour(ayear)
+}
+
+hours_all <- bind_rows(!!!hours)
+
+```
+
+
+## get rates
+
+```{r}
+get_rate <- function(year) {
+  new_data_qnames %>%
+     select(CASEID_1979,
+            starts_with("HRP") &
+              ends_with(as.character(year))) %>%
+    pivot_longer(!CASEID_1979, names_to = "job", values_to = "rate_per_hour") %>%
+    separate("job", c("job", "year"), sep = -4) %>%
+    mutate(job = paste0("job_0", substr(job, 4, 4))) %>%
+    rename(id = CASEID_1979)
+}
+```
+
+```{r}
+rates <- list()
+
+for(ayear in c(1979:1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 
+               2012, 2014, 2016)) {
+   rates[[ayear]] <- get_rate(ayear)
+}
+
+rates_all <- bind_rows(!!!rates)
+```
+
+## join hours and rates
+
+```{r}
+
+hours_wages <- left_join(rates_all, 
+                         hours_all, 
+                         by = c("id", "year", "job"))
+```
+
+
+```{r}
+
+# calculate number of jobs that a person has in one year
+no_job <- hours_wages %>%
+  filter(!is.na(rate_per_hour)) %>%
+  group_by(id, year) %>%
+  summarise(no_jobs = length(rate_per_hour))
+
+# filter the observations with available rate per hour
+eligible_wages <- hours_wages %>%
+  filter(!is.na(rate_per_hour)) %>%
+  left_join(no_job, by = c("id", "year")) 
+
+# calcultae the mean_hourly_wage
+
+# flag1 = code 1 for weighted mean
+# code 0 for arithmatic mean
+
+mean_hourly_wage <- 
+  eligible_wages %>%
+  group_by(id, year) %>%
+  mutate(wages = ifelse(no_jobs == 1, rate_per_hour/100,
+                        weighted.mean(rate_per_hour, hours_work, na.rm = TRUE)/100)) %>%
+  mutate(flag1 = ifelse(!is.na(wages) & no_jobs != 1, 1,
+                        0)) %>%
+  mutate(wages = ifelse(is.na(wages), mean(rate_per_hour)/100,
+                        wages))
+  
+
+
+mean_hourly_wage %>% filter(id == 506)
+
+```
+```{r}
+visdat::vis_dat(mean_hourly_wage, warn_large_data = FALSE)
+```
+```{r}
+mhw_to_write <- mean_hourly_wage %>%
+  group_by(id, year) %>%
+  summarise(wages = mean(wages),
+            total_hours = sum(hours_work),
+            number_of_jobs = mean(no_jobs),
+            flag1 = mean(flag1)) %>%
+  mutate(year = as.numeric(year)) %>%
+  ungroup() %>%
+  rename(mean_hourly_wage = wages,
+         CASEID_1979 = id) %>%
+  mutate(flag1 = ifelse(flag1 == 1, "wm",
+                        "am"))
+```
+
+
+```{r}
+summary(mhw_to_write$mean_hourly_wage)
+```
+
+```{r}
+ggplot(mhw_to_write) +
+  geom_boxplot(aes(x = mean_hourly_wage)) +
+  facet_wrap(~year)
+```
+```{r}
+#write.csv(mhw_to_write, here::here("data-raw/wages-high-school-demo/data-frames/tidy_employment_weighted.csv"))
+```
+
