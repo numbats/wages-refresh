@@ -1,12 +1,16 @@
 library(tidyverse)
 
+
+# open the tidy raw data set
 wages <- read_csv("data-raw/wages-high-school-demo/data-frames/tidy_employment_weighted.csv")
 demog <- read_csv("data-raw/wages-high-school-demo/data-frames/tidy_demographics.csv")
 
-d <- read_csv("data-raw/wages-high-school-demo/data-frames/tidy_employment.csv")
 
+# join the wages information and the demographic information by case id.
 wages_demog <- left_join(wages, demog, by="CASEID_1979")
 
+
+# calculate the years in work force and the age of the subjects in 1979
 wages_demog <- wages_demog %>%
   mutate(year_completed_highest_grade = as.numeric(year_completed_highest_grade)) %>%
   mutate(years_in_workforce = year - year_completed_highest_grade) %>%
@@ -15,9 +19,15 @@ wages_demog <- wages_demog %>%
 # filter only the id with high school education
 wages_demog_hs <- wages_demog  %>% filter(grepl("GRADE", `highest-grade`))
 
-# replace the obs with mean_hourly_wage > 30 to be NA
+ggplot(wages_demog_hs, aes(x = mean_hourly_wage)) +
+  geom_boxplot()
+
+# replace the obs with mean_hourly_wage > 100 or mean_hourly_wage < 2 to be NA
 wages_demog_hs <- wages_demog_hs %>%
-  mutate(mean_hourly_wage = ifelse(mean_hourly_wage > 30, NA, mean_hourly_wage))
+  mutate(mean_hourly_wage = ifelse(mean_hourly_wage > 100 |
+                                     mean_hourly_wage < 2, NA, mean_hourly_wage))
+
+
 
 # calculate the number of observation
 keep_me <- wages_demog_hs %>% count(CASEID_1979)
@@ -30,10 +40,31 @@ wages_demog_hs <- wages_demog_hs %>%
   filter(CASEID_1979 %in% keep_me$CASEID_1979)
 
 
+# calculate the IQR to create the extreme value flag
+
+IQR_cut_off <- IQR(wages_demog_hs$mean_hourly_wage, na.rm = TRUE)*1.5
+q1 <- quantile(wages_demog_hs$mean_hourly_wage, 0.25, na.rm = TRUE)
+q3 <- quantile(wages_demog_hs$mean_hourly_wage, 0.75, na.rm = TRUE)
+
+lower_limit <- q1 - IQR_cut_off
+upper_limit <- q3 + IQR_cut_off
+
+wages_demog_hs <- wages_demog_hs %>%
+  mutate(flag2 = ifelse(mean_hourly_wage < lower_limit |
+                          mean_hourly_wage > upper_limit, "ext_val",
+                        "non_ext_val"))
+
+filtered <- filter(wages_demog_hs, flag2 == "non_ext_val")
+summary(filtered$mean_hourly_wage)
+
+
+
+
+# rename and select the wages in tidy
 wages_hs2020_weighted <- wages_demog_hs %>%
   rename(id=CASEID_1979, hgc=`highest-grade`,
          hgc_i=`highest-grade-int`, yr_hgc=year_completed_highest_grade) %>%
-  select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc, number_of_jobs, total_hours, flag1)
+  select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc, number_of_jobs, total_hours, flag1, flag2)
 
 
 save(wages_hs2020_weighted, file="wages_hs2020_weighted.rda")
