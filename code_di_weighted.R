@@ -23,6 +23,9 @@ ggplot(wages_demog_hs, aes(x = mean_hourly_wage)) +
   geom_boxplot()
 
 # replace the obs with mean_hourly_wage > 100 or mean_hourly_wage < 2 to be NA
+# the decision to also exclude the wages < 2 is because the minimum wages in old data is 2.030,
+# and in fact, there are 4 observations having 0 in wages.
+
 wages_demog_hs <- wages_demog_hs %>%
   mutate(mean_hourly_wage = ifelse(mean_hourly_wage > 100 |
                                      mean_hourly_wage < 2, NA, mean_hourly_wage))
