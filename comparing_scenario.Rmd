@@ -16,36 +16,15 @@ library(patchwork)
 ```{r}
 load("wages_hs2020.rda")
 load("wages_hs2020_weighted.rda")
+wages_old <- brolgar::wages %>%
+  mutate(mean_hourly_wage = exp(ln_wages))
 ```
 
-```{r}
-bp_ori<- ggplot(wages_hs2020) +
-  geom_boxplot(aes(x = mean_hourly_wage)) +
-  facet_wrap(~year) +
-  ggtitle("Original")
-
-bp_wei <- ggplot(wages_hs2020_weighted) +
-  geom_boxplot(aes(x = mean_hourly_wage)) +
-  facet_wrap(~year) +
-  ggtitle("Weighted")
-
-bp_ori
-bp_wei
-
-```
 
 ```{r}
+
+# putting into tsibble
 wages_ori <- as_tsibble(x = wages_hs2020,
-                    key = id,
-                    index = year,
-                    regular = FALSE)
-
-wages_sc1 <- as_tsibble(x = wages_hs2020_sc1,
-                    key = id,
-                    index = year,
-                    regular = FALSE)
-
-wages_sc2 <- as_tsibble(x = wages_hs2020_sc2,
                     key = id,
                     index = year,
                     regular = FALSE)
@@ -55,64 +34,159 @@ wages_weighted <- as_tsibble(x = wages_hs2020_weighted,
                     key = id,
                     index = year,
                     regular = FALSE)
+
+wages_old <- as_tsibble(x = wages_old,
+                    key = id,
+                    index = xp,
+                    regular = FALSE)
 ```
 
 
+## The summary statistics
+
 ```{r}
-lp_ori <- ggplot(wages_ori) +
-  geom_line(aes(x = year,
-                y = mean_hourly_wage,
-                group = id),
-            alpha = 0.1) +
-  ggtitle("Original")
+get_summary <- function(data){
+  summary(data$mean_hourly_wage)
+}
 
-lp_sc1 <- ggplot(wages_sc1) +
-  geom_line(aes(x = year,
-                y = mean_hourly_wage,
-                group = id),
-            alpha = 0.1) +
-  ggtitle("Scenario 1")
+print("Original data")
+get_summary(wages_ori)
 
-lp_sc2 <- ggplot(wages_sc2) +
-  geom_line(aes(x = year,
-                y = mean_hourly_wage,
-                group = id),
-            alpha = 0.1) +
-  ggtitle("Scenario 2")
+print("Weighted data")
+get_summary(wages_weighted)
 
+print("Old data")
+get_summary(wages_old)
 
-lp_ori + lp_sc1 + lp_sc2
-
+print("Weighted data, extreme value excluded")
+get_summary(filter(wages_weighted, flag2 == "non_ext_val"))
 ```
+
+
+## Number of ids in each data and number of observations per id 
+
 ```{r}
-
-
 get_obs <- function(data){
   data %>%
   features(mean_hourly_wage, n_obs) %>%
   arrange(n_obs)
-  }
+}
 
 wages_obs_ori <- get_obs(wages_ori)
-wages_obs_sc1 <- get_obs(wages_sc1)
-wages_obs_sc2 <- get_obs(wages_sc2)
 wages_obs_weig <- get_obs(wages_weighted)
+wages_obs_old <- get_obs(wages_old)
+
 
 nrow(wages_obs_ori)
-nrow(wages_obs_sc1)
-nrow(wages_obs_sc2)
 nrow(wages_obs_weig)
+nrow(wages_obs_old)
 ```
 
 
 ```{r}
-summary(wages_ori$mean_hourly_wage)
+
+get_obs_plot <- function(df, plot_title){
+  ggplot(df, aes(x = n_obs)) +
+  geom_bar() +
+  xlab("Number of observations") +
+  ggtitle(plot_title)
+}
+
+get_obs_plot(wages_obs_ori, "Original data")
+get_obs_plot(wages_obs_weig, "Weighted data")
+get_obs_plot(wages_obs_old, "Old data")
+```
+
+
+## First time and last time participated in study (Original vs Weighted data)
+
+```{r}
+get_1st_time <- function(df, plot_title){
+  df %>%
+    features(year, list(min = min)) %>%
+    ggplot(aes(x = min)) +
+    geom_histogram(binwidth = 1) +
+    xlab("First time in study") +
+    ggtitle(plot_title)
+}
+
+get_1st_time(wages_ori, "Original data")
+get_1st_time(wages_weighted, "Weighted data")
 ```
 
 ```{r}
-summary(wages_weighted$mean_hourly_wage)
+get_last_time <- function(df, plot_title){
+  df %>%
+    features(year, list(max = max)) %>%
+    ggplot(aes(x = max)) +
+    geom_histogram(binwidth = 1) +
+    xlab("First time in study") +
+    ggtitle(plot_title)
+}
+
+get_last_time(wages_ori, "Original data")
+get_last_time(wages_weighted, "Weighted data")
 ```
 
 
+## The spaghetty plot 
 
+
+```{r}
+
+get_sp <- function(df, plot_title, x){
+  ggplot(df) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id),
+            alpha = 0.1) +
+  ggtitle(plot_title)
+}
+
+
+get_sp(wages_ori, "Original data", year)
+get_sp(wages_weighted, "Weighted data", year)
+
+ggplot(wages_old) +
+  geom_line(aes(x = xp,
+                y = mean_hourly_wage,
+                group = id),
+            alpha = 0.1) +
+  ggtitle("Old data")
+
+
+```
+
+```{r}
+get_sp(filter(wages_weighted, flag2 == "non_ext_val"), "Weighted data - extreme value excluded")
+```
+
+## Take a small spoon of those spaghetty
+
+```{r}
+
+set.seed(202102)
+
+plot_sample <- function(df, plot_title){
+  ggplot(df) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage,
+                group = id)) +
+  facet_sample() +
+  ggtitle(plot_title)
+}
+
+plot_sample(wages_ori, "Original data")
+plot_sample(wages_weighted, "Weighted data")
+
+
+ggplot(wages_old) +
+  geom_line(aes(x = xp,
+                y = mean_hourly_wage,
+                group = id)) +
+  facet_sample() +
+  ggtitle("Old data")
+
+
+```
 
