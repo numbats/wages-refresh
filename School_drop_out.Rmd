@@ -22,14 +22,16 @@ load("wages_hs2020.rda")
 wages <- as_tsibble(x = wages_hs2020,
                     key = id,
                     index = year,
-                    regular = FALSE)
+                    regular = FALSE) %>%
+  mutate(dob = 1979 - age_1979, 
+         age_hgc = yr_hgc - dob)
 
 wages_do <- wages %>%
   filter((hgc %in% c("9TH GRADE", 
                     "10TH GRADE",
                     "11TH GRADE")) |
         (hgc == "12TH GRADE" & 
-        age_1979 >= 19))
+        age_hgc >= 19))
 ```
 
 
@@ -38,7 +40,7 @@ wages_do <- wages %>%
 ```{r}
 wages_hs_completed <- wages %>%
   filter(hgc == "12TH GRADE" &
-           age_1979 < 19)
+           age_hgc < 19)
 ```
 
 
@@ -74,14 +76,17 @@ load("wages_hs2020_weighted.rda")
 wages_w <- as_tsibble(x = wages_hs2020_weighted,
                     key = id,
                     index = year,
-                    regular = FALSE)
+                    regular = FALSE) %>%
+  mutate(dob = 1979 - age_1979, 
+         age_hgc = yr_hgc - dob)
+  
 
 wages_do_w <- wages_w %>%
   filter((hgc %in% c("9TH GRADE", 
                     "10TH GRADE",
                     "11TH GRADE")) |
         (hgc == "12TH GRADE" & 
-        age_1979 >= 19))
+        age_hgc >= 19))
 ```
 
 
@@ -90,7 +95,7 @@ wages_do_w <- wages_w %>%
 ```{r}
 wages_hs_completed_w <- wages_w %>%
   filter(hgc == "12TH GRADE" &
-           age_1979 < 19)
+           age_hgc < 19)
 ```
 
 
