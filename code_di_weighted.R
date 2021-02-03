@@ -53,19 +53,22 @@ lower_limit <- q1 - IQR_cut_off
 upper_limit <- q3 + IQR_cut_off
 
 wages_demog_hs <- wages_demog_hs %>%
-  mutate(flag2 = ifelse(mean_hourly_wage < lower_limit |
-                          mean_hourly_wage > upper_limit, "ext_val",
-                        "non_ext_val")) %>%
-  mutate(flag = paste(flag1, flag2, sep = "-"))
+  mutate(is_extreme_val = ifelse(mean_hourly_wage < lower_limit |
+                          mean_hourly_wage > upper_limit, TRUE,
+                        FALSE)) %>%
+  mutate(flag = case_when(is_wm == TRUE & is_extreme_val == FALSE ~ 1,
+                          is_wm == TRUE & is_extreme_val == TRUE ~ 2,
+                          is_wm == FALSE & is_extreme_val == FALSE ~ 3,
+                          is_wm == FALSE & is_extreme_val == TRUE ~ 4))
 
-filtered <- filter(wages_demog_hs, flag2 == "non_ext_val")
+filtered <- filter(wages_demog_hs, is_extreme_val == FALSE)
 summary(filtered$mean_hourly_wage)
 
 
 
 # rename and select the wages in tidy
 wages_hs2020_weighted <- wages_demog_hs %>%
-  select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc, number_of_jobs, total_hours, flag1, flag2, flag)
+  select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc, number_of_jobs, total_hours, is_wm, is_extreme_val, flag)
 
 save(wages_hs2020_weighted, file="wages_hs2020_weighted.rda")
 
