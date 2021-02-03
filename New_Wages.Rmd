@@ -135,28 +135,23 @@ year_A <- c(1979:1987, 1993)
 
 get_hour <- function(year){
   if(year %in% year_A){
-   new_data_qnames %>%
+   temp <- new_data_qnames %>%
     select(CASEID_1979,
             starts_with("QES-52A") &
-              ends_with(as.character(year))) %>%
-    pivot_longer(!CASEID_1979,
-                 names_to = "job",
-                 values_to = "hours_work") %>%
-    separate("job", c("job", "year"), sep = -4) %>%
-    mutate(job = paste0("job_", substr(job, 9, 10))) %>%
-    rename(id = CASEID_1979)}
+              ends_with(as.character(year)))} 
   else{
-    new_data_qnames %>%
+    temp <- new_data_qnames %>%
     select(CASEID_1979,
             starts_with("QES-52D") &
-              ends_with(as.character(year))) %>%
-    pivot_longer(!CASEID_1979,
+              ends_with(as.character(year)))} 
+    temp %>% 
+      pivot_longer(!CASEID_1979,
                  names_to = "job",
                  values_to = "hours_work") %>%
-    separate("job", c("job", "year"), sep = -4) %>%
-    mutate(job = paste0("job_", substr(job, 9, 10))) %>%
-    rename(id = CASEID_1979)
-  }
+      separate("job", c("job", "year"), sep = -4) %>%
+      mutate(job = paste0("job_", substr(job, 9, 10))) %>%
+      rename(id = CASEID_1979)
+  
  }
 ```
 
@@ -231,10 +226,13 @@ eligible_wages <- hours_wages %>%
 mean_hourly_wage <- 
   eligible_wages %>%
   group_by(id, year) %>%
+  #calculate the weighted mean if the number of jobs > 1
   mutate(wages = ifelse(no_jobs == 1, rate_per_hour/100,
                         weighted.mean(rate_per_hour, hours_work, na.rm = TRUE)/100)) %>%
+  #give the flag if it the weighted mean
   mutate(flag1 = ifelse(!is.na(wages) & no_jobs != 1, 1,
                         0)) %>%
+  #calculate the arithmetic mean for the na
   mutate(wages = ifelse(is.na(wages), mean(rate_per_hour)/100,
                         wages))
   
@@ -256,8 +254,9 @@ mhw_to_write <- mean_hourly_wage %>%
   mutate(year = as.numeric(year)) %>%
   ungroup() %>%
   rename(mean_hourly_wage = wages) %>%
-  mutate(flag1 = ifelse(flag1 == 1, "wm",
-                        "am"))
+  mutate(is_wm = ifelse(flag1 == 1, TRUE,
+                        FALSE)) %>%
+  select(-flag1)
 ```
 
 
