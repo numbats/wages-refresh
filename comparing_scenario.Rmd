@@ -59,7 +59,7 @@ print("Old data")
 get_summary(wages_old)
 
 print("Weighted data, extreme value excluded")
-get_summary(filter(wages_weighted, flag2 == "non_ext_val"))
+get_summary(filter(wages_weighted, is_extreme_val == FALSE))
 ```
 
 
