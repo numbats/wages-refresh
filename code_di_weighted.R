@@ -1,4 +1,5 @@
 library(tidyverse)
+library(zoo)
 
 
 # open the tidy raw data set
@@ -22,14 +23,27 @@ wages_demog_hs <- wages_demog  %>% filter(grepl("GRADE", hgc))
 ggplot(wages_demog_hs, aes(x = mean_hourly_wage)) +
   geom_boxplot()
 
-# replace the obs with mean_hourly_wage > 100 or mean_hourly_wage < 2 to be NA
-# the decision to also exclude the wages < 2 is because the minimum wages in old data is 2.030,
-# and in fact, there are 4 observations having 0 in wages.
+# replace the obs with mean_hourly_wage > 100 to be NA
+# since we will impute the missing values with the last observation carried forward (locf) for each id
+# we give the flag for that locf observation
 
 wages_demog_hs <- wages_demog_hs %>%
-  mutate(mean_hourly_wage = ifelse(mean_hourly_wage > 100 |
-                                     mean_hourly_wage < 2, NA, mean_hourly_wage))
+  mutate(mean_hourly_wage = ifelse(mean_hourly_wage > 100, NA, mean_hourly_wage),
+         is_locf = ifelse(is.na(mean_hourly_wage), TRUE, FALSE))
 
+# doing locf
+
+for_locf <- wages_demog_hs %>%
+  select(id, year, mean_hourly_wage) %>%
+  group_by(id) %>%
+  na.locf()
+
+
+# join back
+
+wages_demog_hs <- left_join(wages_demog_hs, for_locf, by = c("id", "year")) %>%
+  select(-mean_hourly_wage.x) %>%
+  rename(mean_hourly_wage = mean_hourly_wage.y)
 
 
 # calculate the number of observation
@@ -68,7 +82,10 @@ summary(filtered$mean_hourly_wage)
 
 # rename and select the wages in tidy
 wages_hs2020_weighted <- wages_demog_hs %>%
-  select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc, number_of_jobs, total_hours, is_wm, is_extreme_val, flag)
+  select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc, number_of_jobs, total_hours, is_wm, is_extreme_val, is_locf, flag)
 
 save(wages_hs2020_weighted, file="wages_hs2020_weighted.rda")
+
+summary(wages_hs2020_weighted$mean_hourly_wage)
+
 
