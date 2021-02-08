@@ -197,12 +197,18 @@ rates_all <- bind_rows(!!!rates)
 
 ## join hours and rates
 
+
 ```{r}
 
 hours_wages <- left_join(rates_all, 
                          hours_all, 
-                         by = c("id", "year", "job"))
+                         by = c("id", "year", "job")) %>%
+  
+# set the 0 value in rate_per_hour as NA 
+  mutate(rate_per_hour = ifelse(rate_per_hour == 0, NA,
+                                rate_per_hour))
 ```
+
 
 
 ```{r}
@@ -258,7 +264,6 @@ mhw_to_write <- mean_hourly_wage %>%
                         FALSE)) %>%
   select(-flag1)
 ```
-
 
 ```{r}
 summary(mhw_to_write$mean_hourly_wage)
