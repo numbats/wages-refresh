@@ -34,14 +34,8 @@ wages_demog_ext <- wages_demog_hs %>%
   filter(is.extreme == TRUE) %>%
   select(year, id, is.extreme)
 
-# ggplot(wages_demog_ext) +
-#   geom_histogram(aes(x = mean_hourly_wage))
-
-#summary(wages_demog_ext$mean_hourly_wage)
 
 
-# filter(wages_demog_ext, id == 3)
-# filter(wages_demog_hs, id == 6885)
 
 wages_demog_hs <- left_join(wages_demog_hs, wages_demog_ext, by = c("id", "year"))
 
@@ -105,9 +99,9 @@ wages_demog_hs <- wages_demog_hs %>%
 
 # rename and select the wages in tidy
 wages_hs2020_weighted <- wages_demog_hs %>%
-  select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc, number_of_jobs, total_hours, is_wm, is.extreme, is_locf)
+  select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc, number_of_jobs, total_hours, is_wm, is_locf)
 
-#save(wages_hs2020_weighted, file="wages_hs2020_weighted.rda")
+#save(wages_hs2020_weighted, file="wages_hs2020_weighted_updated2018.rda")
 
 summary(wages_hs2020_weighted$mean_hourly_wage)
 

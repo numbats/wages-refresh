@@ -19,11 +19,38 @@ library(naniar)
 
 ## LOAD THE RAW DATA OF DEMOGRAPHIC AND WAGES INFORMATION
 
+
+```{r}
+#source(here::here("data-raw/NLSY79/NLSY79.R"))
+```
+
+
+Creates four files: new_data, has the variables using RNUM;
+new_data_qnames, has the data with qnames
+categories_vallabels, has RNUM and coding of each variable;
+categories_qnames, has qname and coding of each variable;
+(qname must be Question name?)
+
+
+```{r}
+
+# write_rds(as_tibble(new_data_qnames), 
+#    here::here("data-raw/NLSY79/NLSY79-new_data_qnames.rds"),       
+#       compress = "xz") 
+
+# write_rds(as_tibble(categories_qnames), 
+#          here::here("data-raw/NLSY79/NLSY79-categories_qnames.rds"), 
+#        compress = "xz") 
+
+```
+
+
+
 ```{r}
 
 # load the downloaded data 
-new_data_qnames <- read_rds(here::here("data-raw/wages-high-school-demo/data-frames/wages-high-school-demo-new_data_qnames.rds"))
-categories_qnames <- read_rds(here::here("data-raw/wages-high-school-demo/data-frames/wages-high-school-demo-categories_qnames.rds"))
+new_data_qnames <- read_rds(here::here("data-raw/NLSY79/NLSY79-new_data_qnames.rds"))
+categories_qnames <- read_rds(here::here("data-raw/NLSY79/NLSY79-categories_qnames.rds"))
 
 ```
 
@@ -80,11 +107,13 @@ demog_tidy <- categories_qnames %>%
 # tidy the grade 
 demog_education <- new_data_qnames %>%
   as_tibble() %>%
+  rename(HGC_2018 = `Q3-4_2018`) %>%
   select(CASEID_1979,
          starts_with("HGCREV"),
          "HGC_2012",
          "HGC_2014",
-         "HGC_2016") %>%
+         "HGC_2016",
+         "HGC_2018") %>%
   pivot_longer(!CASEID_1979,
                names_to = "var",
                values_to = "grade") %>%
@@ -115,6 +144,8 @@ highest_year <- demog_education %>%
                                                                      ifelse(hgc_i == 14, "2ND YEAR COL",
                                                                             ifelse(hgc_i == 15, "3RD YEAR COL",
                                                                                    ifelse(hgc_i == 95, "UNGRADED", paste0((hgc_i - 12), "TH YEAR COL")))))))))))
+
+
 ```
 
 ## Join all of the demographic information
@@ -160,7 +191,7 @@ get_hour <- function(year){
 hours <- list()
 
 for(ayear in c(1979:1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 
-               2012, 2014, 2016)) {
+               2012, 2014, 2016, 2018)) {
    hours[[ayear]] <- get_hour(ayear)
 }
 
@@ -188,7 +219,7 @@ get_rate <- function(year) {
 rates <- list()
 
 for(ayear in c(1979:1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 
-               2012, 2014, 2016)) {
+               2012, 2014, 2016, 2018)) {
    rates[[ayear]] <- get_rate(ayear)
 }
 

@@ -35,6 +35,12 @@ wages_lm <- key_slope(wages,
 
 ```{r}
 
+```
+
+
+
+```{r}
+
 #calculate the prediction value
 wages_lm <- wages_lm %>%
   mutate(pred = .intercept + (.slope_year*year))
@@ -77,11 +83,6 @@ ggplot(top12,
   geom_miss_point() +
   geom_line() +
   facet_wrap(~id)
-```
-
-```{r}
-wages %>%
-  filter(id == 11974)
 ```
 
 
@@ -177,10 +178,8 @@ ggplot(random2,
   facet_wrap(~id)
 ```
 
-```{r}
-wages %>%
-  filter(year == 1984)
-```
+
+
 
 ```{r}
 ggplot(wages) +

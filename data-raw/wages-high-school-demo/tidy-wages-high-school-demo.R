@@ -114,14 +114,14 @@ full_demographics <- full_join(dob_tidy, demog_tidy, by = "CASEID_1979") %>%
   full_join(highest_year, by = "CASEID_1979")
 
 # saving data frames as csv and rds
-write.csv(full_demographics, here::here("data-raw/wages-high-school-demo/data-frames/tidy_demographics.csv"))
-write_rds(as_tibble(full_demographics),
-          here::here("data-raw/wages-high-school-demo/data-frames/tidy_demographics.rds"),
-          compress = "xz")
-write.csv(demog_education, here::here("data-raw/wages-high-school-demo/data-frames/demog-education.csv"))
-write_rds(as_tibble(demog_education),
-          here::here("data-raw/wages-high-school-demo/data-frames/demog-education.rds"),
-          compress = "xz")
+#write.csv(full_demographics, here::here("data-raw/wages-high-school-demo/data-frames/tidy_demographics.csv"))
+#write_rds(as_tibble(full_demographics),
+          #here::here("data-raw/wages-high-school-demo/data-frames/tidy_demographics.rds"),
+          #compress = "xz")
+#write.csv(demog_education, here::here("data-raw/wages-high-school-demo/data-frames/demog-education.csv"))
+#write_rds(as_tibble(demog_education),
+          #here::here("data-raw/wages-high-school-demo/data-frames/demog-education.rds"),
+          #compress = "xz")
 
 
 # tidying employment data
@@ -1104,8 +1104,12 @@ tidy_employment <- bind_rows(tidy_employment_79,
                              tidy_employment_14,
                              tidy_employment_16)
 
-write.csv(tidy_employment, here::here("data-raw/wages-high-school-demo/data-frames/tidy_employment.csv"))
-write_rds(as_tibble(tidy_employment),
-          here::here("data-raw/wages-high-school-demo/data-frames/tidy_employment.rds"),
-          compress = "xz")
+#write.csv(tidy_employment, here::here("data-raw/wages-high-school-demo/data-frames/tidy_employment.csv"))
+#write_rds(as_tibble(tidy_employment),
+          #here::here("data-raw/wages-high-school-demo/data-frames/tidy_employment.rds"),
+          #compress = "xz")
 
+
+visdat::vis_dat(tidy_employment, warn_large_data = FALSE)
+
+filter(tidy_employment, !is.na(mean_hourly_wage))

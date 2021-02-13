@@ -1,0 +1,691 @@
+
+
+Reference
+Number     Year    Variable Description                                                    Question Name             
+-----------------------------------------------------------------------------------------------------------------------
+R00001.00  1979    IDENTIFICATION CODE                                                     CASEID                    
+R00003.00  1979    DATE OF BIRTH - MONTH                                                   Q1-3_A~M                  
+R00005.00  1979    DATE OF BIRTH - YEAR                                                    Q1-3_A~Y                  
+R00173.00  1979    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R00470.10  1979    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R00705.00  1979    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R00706.00  1979    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R00707.00  1979    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R00708.00  1979    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R00709.00  1979    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R00917.10  1979    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R00919.10  1979    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R00921.10  1979    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R00923.10  1979    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R00925.10  1979    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R01736.00  1979    SAMPLE IDENTIFICATION CODE                                              SAMPLE_ID                 
+R02147.00  78SCRN  R'S RACIAL/ETHNIC COHORT FROM SCREENER                                  SAMPLE_RACE               
+R02148.00  1979    SEX OF R                                                                SAMPLE_SEX                
+R02167.00  1979    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R02167.01  1979    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV79                  
+R02292.00  1980    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R02637.10  1980    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R03378.00  1980    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R03389.10  1980    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R03493.00  1980    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R03504.10  1980    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R03608.00  1980    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R03619.10  1980    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R03723.00  1980    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R03734.10  1980    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R03838.00  1980    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R03849.10  1980    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R04064.00  1980    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R04064.01  1980    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV80                  
+R04101.00  1981    DATE OF BIRTH - MONTH                                                   Q1-3_A~M                  
+R04103.00  1981    DATE OF BIRTH - YEAR                                                    Q1-3_A~Y                  
+R04174.00  1981    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R04468.10  1981    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R05456.00  1981    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R05466.10  1981    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R05587.00  1981    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R05597.10  1981    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R05718.00  1981    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R05728.10  1981    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R05849.00  1981    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R05859.10  1981    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R05980.00  1981    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R05990.10  1981    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R06189.00  1981    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R06189.01  1981    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV81                  
+R06645.00  1982    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R07025.10  1982    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R08399.00  1982    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R08410.10  1982    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R08530.00  1982    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R08541.10  1982    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R08661.00  1982    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R08672.10  1982    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R08792.00  1982    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R08803.10  1982    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R08923.00  1982    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R08934.10  1982    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R08982.00  1982    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R08982.01  1982    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV82                  
+R09059.00  1983    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R09456.10  1983    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R10873.00  1983    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R10882.10  1983    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R11005.00  1983    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R11014.10  1983    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R11137.00  1983    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R11146.10  1983    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R11269.00  1983    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R11278.10  1983    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R11401.00  1983    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R11410.10  1983    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R11450.00  1983    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R11450.01  1983    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV83                  
+R12058.00  1984    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R12560.10  1984    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R14630.00  1984    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R14639.10  1984    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R14761.00  1984    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R14770.10  1984    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R14892.00  1984    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R14901.10  1984    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R15023.00  1984    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R15032.10  1984    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R15154.00  1984    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R15163.10  1984    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R15202.00  1984    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R15202.01  1984    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV84                  
+R16051.00  1985    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R16508.10  1985    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R18098.00  1985    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R18107.10  1985    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R18225.00  1985    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R18234.10  1985    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R18352.00  1985    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R18361.10  1985    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R18479.00  1985    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R18488.10  1985    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R18606.00  1985    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R18615.10  1985    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R18909.00  1985    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R18909.01  1985    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV85                  
+R19056.00  1986    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R19234.10  1986    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R21715.00  1986    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R21724.10  1986    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R21851.00  1986    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R21860.10  1986    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R21987.00  1986    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R21996.10  1986    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R22123.00  1986    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R22132.10  1986    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R22259.00  1986    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R22268.10  1986    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R22580.00  1986    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R22580.01  1986    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV86                  
+R23065.00  1987    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R23182.10  1987    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R23763.00  1987    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R23772.10  1987    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R23876.00  1987    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R23885.10  1987    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R23989.00  1987    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R23998.10  1987    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R24102.00  1987    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R24111.10  1987    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R24215.00  1987    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R24224.10  1987    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R24454.00  1987    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R24454.01  1987    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV87                  
+R25090.00  1988    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R25260.10  1988    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R27709.00  1988    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R27710.00  1988    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R27711.00  1988    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+R27712.00  1988    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #01   QES-52D.01                
+R27722.10  1988    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R27838.00  1988    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R27839.00  1988    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R27840.00  1988    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+R27841.00  1988    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #02   QES-52D.02                
+R27851.10  1988    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R27967.00  1988    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R27968.00  1988    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R27969.00  1988    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+R27970.00  1988    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #03   QES-52D.03                
+R27980.10  1988    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R28096.00  1988    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R28097.00  1988    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R28098.00  1988    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+R28099.00  1988    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #04   QES-52D.04                
+R28109.10  1988    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R28225.00  1988    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R28226.00  1988    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R28227.00  1988    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+R28228.00  1988    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #05   QES-52D.05                
+R28238.10  1988    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R28711.00  1988    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R28711.01  1988    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV88                  
+R29081.00  1989    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R29250.10  1989    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R30127.00  1989    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R30128.00  1989    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R30129.00  1989    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+R30130.00  1989    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #01   QES-52D.01                
+R30140.10  1989    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R30258.00  1989    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R30259.00  1989    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R30260.00  1989    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+R30261.00  1989    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #02   QES-52D.02                
+R30271.10  1989    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R30389.00  1989    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R30390.00  1989    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R30391.00  1989    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+R30392.00  1989    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #03   QES-52D.03                
+R30402.10  1989    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R30520.00  1989    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R30521.00  1989    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R30522.00  1989    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+R30523.00  1989    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #04   QES-52D.04                
+R30533.10  1989    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R30651.00  1989    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R30652.00  1989    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R30653.00  1989    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+R30654.00  1989    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #05   QES-52D.05                
+R30664.10  1989    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R30748.00  1989    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R30748.01  1989    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV89                  
+R31102.00  1990    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R31278.00  1990    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R33401.00  1990    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R33402.00  1990    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R33403.00  1990    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+R33404.00  1990    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #01   QES-52D.01                
+R33415.00  1990    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R33541.00  1990    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R33542.00  1990    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R33543.00  1990    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+R33544.00  1990    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #02   QES-52D.02                
+R33555.00  1990    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R33681.00  1990    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R33682.00  1990    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R33683.00  1990    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+R33684.00  1990    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #03   QES-52D.03                
+R33695.00  1990    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R33821.00  1990    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R33822.00  1990    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R33823.00  1990    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+R33824.00  1990    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #04   QES-52D.04                
+R33835.00  1990    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R33961.00  1990    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R33962.00  1990    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R33963.00  1990    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+R33964.00  1990    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #05   QES-52D.05                
+R33975.00  1990    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R34015.00  1990    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R34015.01  1990    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV90                  
+R35102.00  1991    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R35235.00  1991    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R36044.00  1991    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R36045.00  1991    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R36046.00  1991    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+R36047.00  1991    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #01   QES-52D.01                
+R36058.00  1991    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R36165.00  1991    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R36166.00  1991    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R36167.00  1991    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+R36168.00  1991    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #02   QES-52D.02                
+R36179.00  1991    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R36286.00  1991    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R36287.00  1991    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R36288.00  1991    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+R36289.00  1991    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #03   QES-52D.03                
+R36300.00  1991    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R36407.00  1991    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R36408.00  1991    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R36409.00  1991    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+R36410.00  1991    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #04   QES-52D.04                
+R36421.00  1991    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R36528.00  1991    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R36529.00  1991    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R36530.00  1991    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+R36531.00  1991    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #05   QES-52D.05                
+R36542.00  1991    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R36569.00  1991    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R36569.01  1991    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV91                  
+R37102.00  1992    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R37285.00  1992    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R39546.00  1992    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R39547.00  1992    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R39548.00  1992    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+R39549.00  1992    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #01   QES-52D.01                
+R39560.00  1992    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R39668.00  1992    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R39669.00  1992    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R39670.00  1992    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+R39671.00  1992    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #02   QES-52D.02                
+R39682.00  1992    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R39790.00  1992    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R39791.00  1992    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R39792.00  1992    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+R39793.00  1992    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #03   QES-52D.03                
+R39804.00  1992    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R39912.00  1992    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R39913.00  1992    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R39914.00  1992    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+R39915.00  1992    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #04   QES-52D.04                
+R39926.00  1992    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R40034.00  1992    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R40035.00  1992    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R40036.00  1992    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+R40037.00  1992    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #05   QES-52D.05                
+R40048.00  1992    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R40074.00  1992    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R40074.01  1992    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV92                  
+R41379.00  1993    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R41932.00  1993    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R41933.00  1993    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R41934.00  1993    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+R42055.00  1993    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R42056.00  1993    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R42057.00  1993    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+R42058.00  1993    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #02   QES-52D.02                
+R42127.00  1993    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R42128.00  1993    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R42129.00  1993    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+R42130.00  1993    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #03   QES-52D.03                
+R42203.00  1993    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R42204.00  1993    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R42205.00  1993    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+R42206.00  1993    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB #04   QES-52D.04                
+R42278.00  1993    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R42279.00  1993    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R42280.00  1993    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+R44168.00  1993    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R44169.00  1993    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R44170.00  1993    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R44171.00  1993    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R44172.00  1993    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R44173.00  1993    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R44185.00  1993    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R44185.01  1993    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV93                  
+R45265.00  1994    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R45829.00  1994    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R45830.00  1994    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R45831.00  1994    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+R45832.00  1994    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #01          QES-52D.01                
+R46271.00  1994    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R46272.00  1994    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R46273.00  1994    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+R46274.00  1994    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #02          QES-52D.02                
+R46710.00  1994    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R46711.00  1994    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R46712.00  1994    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+R46713.00  1994    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #03          QES-52D.03                
+R47106.00  1994    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R47107.00  1994    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R47108.00  1994    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+R47109.00  1994    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #04          QES-52D.04                
+R47449.00  1994    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R47450.00  1994    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R47451.00  1994    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+R47452.00  1994    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #05          QES-52D.05                
+R50798.00  1994    HOURLY RATE OF PAY CURRENT/MOST RECENT JOB                              CPSHRP                    
+R50799.00  1994    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R50800.00  1994    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R50801.00  1994    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R50802.00  1994    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R50803.00  1994    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R50815.00  1994    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R51039.00  1994    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV94                  
+R51652.00  1996    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R51653.00  1996    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R51654.00  1996    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R51655.00  1996    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R51656.00  1996    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R51668.00  1996    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R51669.01  1996    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV96                  
+R52218.00  1996    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R52671.00  1996    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R52672.00  1996    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R52673.00  1996    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+R52674.00  1996    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #01          QES-52D.01                
+R53074.00  1996    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R53075.00  1996    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R53076.00  1996    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+R53077.00  1996    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #02          QES-52D.02                
+R53466.00  1996    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R53467.00  1996    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R53468.00  1996    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+R53469.00  1996    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #03          QES-52D.03                
+R53837.00  1996    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R53838.00  1996    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R53839.00  1996    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+R53840.00  1996    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #04          QES-52D.04                
+R54182.00  1996    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R54183.00  1996    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R54184.00  1996    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+R54185.00  1996    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #05          QES-52D.05                
+R58218.00  1998    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R59126.00  1998    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R59127.00  1998    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R59128.00  1998    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R59129.00  1998    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R59130.00  1998    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R59138.00  1998    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R59139.00  1998    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R59140.00  1998    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R59141.00  1998    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R59142.00  1998    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R59162.00  1998    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #01          QES-52D.01                
+R59163.00  1998    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #02          QES-52D.02                
+R59164.00  1998    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #03          QES-52D.03                
+R59165.00  1998    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #04          QES-52D.04                
+R59166.00  1998    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #05          QES-52D.05                
+R64780.00  1998    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R64781.00  1998    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R64782.00  1998    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R64783.00  1998    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R64784.00  1998    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R64794.00  1998    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R64796.00  1998    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV98                  
+R65042.00  1998    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #01         HOURS_WORKED_WEEK_ALL.01  
+R65043.00  1998    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #02         HOURS_WORKED_WEEK_ALL.02  
+R65044.00  1998    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #03         HOURS_WORKED_WEEK_ALL.03  
+R65045.00  1998    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #04         HOURS_WORKED_WEEK_ALL.04  
+R65046.00  1998    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #05         HOURS_WORKED_WEEK_ALL.05  
+R65404.00  2000    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R65782.00  2000    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R65783.00  2000    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R65784.00  2000    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R65785.00  2000    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R65786.00  2000    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R65787.00  2000    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R65788.00  2000    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R65789.00  2000    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R65790.00  2000    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R65791.00  2000    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R65792.00  2000    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+R65793.00  2000    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+R65794.00  2000    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+R65795.00  2000    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+R65796.00  2000    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+R65797.00  2000    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #01          QES-52D.01                
+R65798.00  2000    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #02          QES-52D.02                
+R65799.00  2000    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #03          QES-52D.03                
+R65800.00  2000    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #04          QES-52D.04                
+R65801.00  2000    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #05          QES-52D.05                
+R70057.00  2000    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R70058.00  2000    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R70059.00  2000    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R70060.00  2000    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R70061.00  2000    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R70071.00  2000    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R70073.00  2000    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV00                  
+R70804.00  2000    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #01         HOURS_WORKED_WEEK_ALL.01  
+R70805.00  2000    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #02         HOURS_WORKED_WEEK_ALL.02  
+R70806.00  2000    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #03         HOURS_WORKED_WEEK_ALL.03  
+R70807.00  2000    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #04         HOURS_WORKED_WEEK_ALL.04  
+R70808.00  2000    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #05         HOURS_WORKED_WEEK_ALL.05  
+R71036.00  2002    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R71929.00  2002    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R71930.00  2002    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R71931.00  2002    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R71932.00  2002    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R71933.00  2002    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R71934.00  2002    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R71935.00  2002    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R71936.00  2002    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R71937.00  2002    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R71938.00  2002    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R71939.00  2002    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+R71940.00  2002    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+R71941.00  2002    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+R71942.00  2002    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+R71943.00  2002    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+R71944.00  2002    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #01          QES-52D.01                
+R71945.00  2002    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #02          QES-52D.02                
+R71946.00  2002    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #03          QES-52D.03                
+R71947.00  2002    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #04          QES-52D.04                
+R71948.00  2002    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #05          QES-52D.05                
+R77029.00  2002    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R77030.00  2002    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R77031.00  2002    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R77032.00  2002    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R77033.00  2002    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R77044.00  2002    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R77046.00  2002    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV02                  
+R77690.00  2002    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #01         HOURS_WORKED_WEEK_ALL.01  
+R77691.00  2002    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #02         HOURS_WORKED_WEEK_ALL.02  
+R77692.00  2002    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #03         HOURS_WORKED_WEEK_ALL.03  
+R77693.00  2002    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #04         HOURS_WORKED_WEEK_ALL.04  
+R77694.00  2002    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #05         HOURS_WORKED_WEEK_ALL.05  
+R78105.00  2004    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+R78786.00  2004    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #01         HOURS_WORKED_WEEK_ALL.01  
+R78787.00  2004    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #02         HOURS_WORKED_WEEK_ALL.02  
+R78788.00  2004    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #03         HOURS_WORKED_WEEK_ALL.03  
+R78789.00  2004    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #04         HOURS_WORKED_WEEK_ALL.04  
+R78790.00  2004    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #05         HOURS_WORKED_WEEK_ALL.05  
+R78796.00  2004    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+R78797.00  2004    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+R78798.00  2004    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+R78799.00  2004    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+R78800.00  2004    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+R78801.00  2004    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+R78802.00  2004    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+R78803.00  2004    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+R78804.00  2004    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+R78805.00  2004    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+R78806.00  2004    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+R78807.00  2004    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+R78808.00  2004    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+R78809.00  2004    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+R78810.00  2004    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+R78811.00  2004    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #01          QES-52D.01                
+R78812.00  2004    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #02          QES-52D.02                
+R78813.00  2004    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #03          QES-52D.03                
+R78814.00  2004    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #04          QES-52D.04                
+R78815.00  2004    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #05          QES-52D.05                
+R84952.00  2004    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+R84953.00  2004    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+R84954.00  2004    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+R84955.00  2004    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+R84956.00  2004    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+R84968.00  2004    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+R84970.00  2004    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV04                  
+T00144.00  2006    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+T01208.00  2006    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #01         HOURS_WORKED_WEEK_ALL.01  
+T01209.00  2006    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #02         HOURS_WORKED_WEEK_ALL.02  
+T01210.00  2006    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #03         HOURS_WORKED_WEEK_ALL.03  
+T01211.00  2006    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #04         HOURS_WORKED_WEEK_ALL.04  
+T01212.00  2006    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #05         HOURS_WORKED_WEEK_ALL.05  
+T01219.00  2006    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+T01220.00  2006    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+T01221.00  2006    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+T01222.00  2006    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+T01223.00  2006    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+T01224.00  2006    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+T01225.00  2006    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+T01226.00  2006    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+T01227.00  2006    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+T01228.00  2006    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+T01229.00  2006    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+T01230.00  2006    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+T01231.00  2006    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+T01232.00  2006    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+T01233.00  2006    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+T01234.00  2006    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #01          QES-52D.01                
+T01235.00  2006    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #02          QES-52D.02                
+T01236.00  2006    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #03          QES-52D.03                
+T01237.00  2006    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #04          QES-52D.04                
+T01238.00  2006    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #05          QES-52D.05                
+T09868.00  2006    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+T09869.00  2006    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+T09870.00  2006    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+T09871.00  2006    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+T09872.00  2006    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+T09886.00  2006    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+T09888.00  2006    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV06                  
+T12143.00  2008    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+T12808.00  2008    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #01         HOURS_WORKED_WEEK_ALL.01  
+T12809.00  2008    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #02         HOURS_WORKED_WEEK_ALL.02  
+T12810.00  2008    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #03         HOURS_WORKED_WEEK_ALL.03  
+T12811.00  2008    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #04         HOURS_WORKED_WEEK_ALL.04  
+T12812.00  2008    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #05         HOURS_WORKED_WEEK_ALL.05  
+T12818.00  2008    HOURS PER WEEK WORKED JOB #01                                           QES-52A.01                
+T12819.00  2008    HOURS PER WEEK WORKED JOB #02                                           QES-52A.02                
+T12820.00  2008    HOURS PER WEEK WORKED JOB #03                                           QES-52A.03                
+T12821.00  2008    HOURS PER WEEK WORKED JOB #04                                           QES-52A.04                
+T12822.00  2008    HOURS PER WEEK WORKED JOB #05                                           QES-52A.05                
+T12823.00  2008    HOURS PER WEEK USUALLY WORKED AT HOME JOB #01                           QES-52B.01                
+T12824.00  2008    HOURS PER WEEK USUALLY WORKED AT HOME JOB #02                           QES-52B.02                
+T12825.00  2008    HOURS PER WEEK USUALLY WORKED AT HOME JOB #03                           QES-52B.03                
+T12826.00  2008    HOURS PER WEEK USUALLY WORKED AT HOME JOB #04                           QES-52B.04                
+T12827.00  2008    HOURS PER WEEK USUALLY WORKED AT HOME JOB #05                           QES-52B.05                
+T12828.00  2008    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #01     QES-52C.01                
+T12829.00  2008    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #02     QES-52C.02                
+T12830.00  2008    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #03     QES-52C.03                
+T12831.00  2008    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #04     QES-52C.04                
+T12832.00  2008    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB #05     QES-52C.05                
+T12833.00  2008    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #01          QES-52D.01                
+T12834.00  2008    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #02          QES-52D.02                
+T12835.00  2008    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #03          QES-52D.03                
+T12836.00  2008    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB #04          QES-52D.04                
+T22091.00  2008    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+T22092.00  2008    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+T22093.00  2008    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+T22094.00  2008    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+T22095.00  2008    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+T22106.00  2008    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+T22107.00  2008    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV08                  
+T22728.00  2010    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+T23013.00  2010    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #01         HOURS_WORKED_WEEK_ALL.01  
+T23014.00  2010    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #02         HOURS_WORKED_WEEK_ALL.02  
+T23015.00  2010    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #03         HOURS_WORKED_WEEK_ALL.03  
+T23016.00  2010    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #04         HOURS_WORKED_WEEK_ALL.04  
+T23017.00  2010    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #05         HOURS_WORKED_WEEK_ALL.05  
+T23023.00  2010    HOURS PER WEEK WORKED  JOB # 01                                         QES-52A.01                
+T23024.00  2010    HOURS PER WEEK WORKED  JOB # 02                                         QES-52A.02                
+T23025.00  2010    HOURS PER WEEK WORKED  JOB # 03                                         QES-52A.03                
+T23026.00  2010    HOURS PER WEEK WORKED  JOB # 04                                         QES-52A.04                
+T23027.00  2010    HOURS PER WEEK WORKED  JOB # 05                                         QES-52A.05                
+T23028.00  2010    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 01                          QES-52B.01                
+T23029.00  2010    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 02                          QES-52B.02                
+T23030.00  2010    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 03                          QES-52B.03                
+T23031.00  2010    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 04                          QES-52B.04                
+T23032.00  2010    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 05                          QES-52B.05                
+T23033.00  2010    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB # 01    QES-52C.01                
+T23034.00  2010    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB # 02    QES-52C.02                
+T23035.00  2010    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB # 03    QES-52C.03                
+T23036.00  2010    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB # 04    QES-52C.04                
+T23037.00  2010    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB # 05    QES-52C.05                
+T23038.00  2010    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB # 01         QES-52D.01                
+T23039.00  2010    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB # 02         QES-52D.02                
+T23040.00  2010    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB # 03         QES-52D.03                
+T23041.00  2010    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB # 04         QES-52D.04                
+T23042.00  2010    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB # 05         QES-52D.05                
+T31069.00  2010    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+T31070.00  2010    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+T31071.00  2010    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+T31072.00  2010    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+T31073.00  2010    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+T31085.00  2010    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+T31086.00  2010    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR (REVISED)               HGCREV10                  
+T32129.00  2012    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+T32798.00  2012    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #01         HOURS_WORKED_WEEK_ALL.01  
+T32799.00  2012    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #02         HOURS_WORKED_WEEK_ALL.02  
+T32800.00  2012    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #03         HOURS_WORKED_WEEK_ALL.03  
+T32801.00  2012    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #04         HOURS_WORKED_WEEK_ALL.04  
+T32802.00  2012    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #05         HOURS_WORKED_WEEK_ALL.05  
+T32808.00  2012    HOURS PER WEEK WORKED  JOB # 01                                         QES-52A.01                
+T32809.00  2012    HOURS PER WEEK WORKED  JOB # 02                                         QES-52A.02                
+T32810.00  2012    HOURS PER WEEK WORKED  JOB # 03                                         QES-52A.03                
+T32811.00  2012    HOURS PER WEEK WORKED  JOB # 04                                         QES-52A.04                
+T32812.00  2012    HOURS PER WEEK WORKED  JOB # 05                                         QES-52A.05                
+T32813.00  2012    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 01                          QES-52B.01                
+T32814.00  2012    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 02                          QES-52B.02                
+T32815.00  2012    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 03                          QES-52B.03                
+T32816.00  2012    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 04                          QES-52B.04                
+T32817.00  2012    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 05                          QES-52B.05                
+T32818.00  2012    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB # 01    QES-52C.01                
+T32819.00  2012    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB # 02    QES-52C.02                
+T32820.00  2012    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB # 03    QES-52C.03                
+T32821.00  2012    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB # 04    QES-52C.04                
+T32822.00  2012    HOURS PER WEEK USUALLY WORKED INCLUDE HOURS WORKED AT HOME? JOB # 05    QES-52C.05                
+T32823.00  2012    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB # 01         QES-52D.01                
+T32824.00  2012    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB # 02         QES-52D.02                
+T32825.00  2012    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB # 03         QES-52D.03                
+T32826.00  2012    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB # 04         QES-52D.04                
+T32827.00  2012    HOURS PER WEEK USUALLY WORKED (INCLUDES AT HOME HOURS) JOB # 05         QES-52D.05                
+T41109.00  2012    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+T41111.00  2012    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+T41113.00  2012    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+T41115.00  2012    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+T41117.00  2012    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+T41130.00  2012    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+T42011.00  2014    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+T42535.00  2014    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #01         HOURS_WORKED_WEEK_ALL.01  
+T42536.00  2014    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #02         HOURS_WORKED_WEEK_ALL.02  
+T42537.00  2014    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #03         HOURS_WORKED_WEEK_ALL.03  
+T42538.00  2014    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #04         HOURS_WORKED_WEEK_ALL.04  
+T42539.00  2014    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #05         HOURS_WORKED_WEEK_ALL.05  
+T42545.00  2014    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 01  QES-52D.01                
+T42546.00  2014    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 02  QES-52D.02                
+T42547.00  2014    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 03  QES-52D.03                
+T42548.00  2014    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 04  QES-52D.04                
+T42549.00  2014    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 05  QES-52D.05                
+T42550.00  2014    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 01                          QES-52B.01                
+T42551.00  2014    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 02                          QES-52B.02                
+T42552.00  2014    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 03                          QES-52B.03                
+T42553.00  2014    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 04                          QES-52B.04                
+T42554.00  2014    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 05                          QES-52B.05                
+T50197.00  2014    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+T50199.00  2014    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+T50201.00  2014    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+T50203.00  2014    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+T50205.00  2014    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+T50234.00  2014    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+T51761.00  2016    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+T52268.00  2016    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #01         HOURS_WORKED_WEEK_ALL.01  
+T52269.00  2016    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #02         HOURS_WORKED_WEEK_ALL.02  
+T52270.00  2016    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #03         HOURS_WORKED_WEEK_ALL.03  
+T52271.00  2016    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #04         HOURS_WORKED_WEEK_ALL.04  
+T52272.00  2016    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #05         HOURS_WORKED_WEEK_ALL.05  
+T52278.00  2016    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 01  QES-52D.01                
+T52279.00  2016    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 02  QES-52D.02                
+T52280.00  2016    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 03  QES-52D.03                
+T52281.00  2016    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 04  QES-52D.04                
+T52282.00  2016    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 05  QES-52D.05                
+T52283.00  2016    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 01                          QES-52B.01                
+T52284.00  2016    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 02                          QES-52B.02                
+T52285.00  2016    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 03                          QES-52B.03                
+T52286.00  2016    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 04                          QES-52B.04                
+T52287.00  2016    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 05                          QES-52B.05                
+T57686.00  2016    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+T57688.00  2016    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+T57690.00  2016    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+T57692.00  2016    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+T57694.00  2016    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+T57713.00  2016    HIGHEST GRADE COMPLETED AS OF MAY 1 SURVEY YEAR                         HGC                       
+T77439.00  2018    HIGHEST GRADE COMPLETED                                                 Q3-4                      
+T77930.00  2018    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 01  QES-52D.01                
+T77931.00  2018    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 02  QES-52D.02                
+T77932.00  2018    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 03  QES-52D.03                
+T77933.00  2018    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 04  QES-52D.04                
+T77934.00  2018    HOURS PER WEEK USUALLY WORKED (INCLUDES HOURS WORKED AT HOME) JOB # 05  QES-52D.05                
+T77935.00  2018    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 01                          QES-52B.01                
+T77936.00  2018    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 02                          QES-52B.02                
+T77937.00  2018    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 03                          QES-52B.03                
+T77938.00  2018    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 04                          QES-52B.04                
+T77939.00  2018    HOURS PER WEEK USUALLY WORKED AT HOME JOB # 05                          QES-52B.05                
+T77940.00  2018    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #01         HOURS_WORKED_WEEK_ALL.01  
+T77941.00  2018    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #02         HOURS_WORKED_WEEK_ALL.02  
+T77942.00  2018    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #03         HOURS_WORKED_WEEK_ALL.03  
+T77943.00  2018    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #04         HOURS_WORKED_WEEK_ALL.04  
+T77944.00  2018    COMBINED HOURS WORKED PER WEEK, INCLUDING HOURS AT HOME JOB #05         HOURS_WORKED_WEEK_ALL.05  
+T82154.00  2018    HOURLY RATE OF PAY JOB #01                                              HRP1                      
+T82156.00  2018    HOURLY RATE OF PAY JOB #02                                              HRP2                      
+T82158.00  2018    HOURLY RATE OF PAY JOB #03                                              HRP3                      
+T82160.00  2018    HOURLY RATE OF PAY JOB #04                                              HRP4                      
+T82162.00  2018    HOURLY RATE OF PAY JOB #05                                              HRP5                      
+T99000.00  XRND    HIGHEST GRADE EVER COMPLETED                                            HGC_EVER                  
