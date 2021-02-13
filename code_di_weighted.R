@@ -3,6 +3,7 @@ library(zoo)
 library(rstatix)
 
 
+
 # open the tidy raw data set
 wages <- read_csv("data-raw/wages-high-school-demo/data-frames/tidy_employment_weighted.csv")
 demog <- read_csv("data-raw/wages-high-school-demo/data-frames/tidy_demographics_v2.csv")
@@ -73,27 +74,11 @@ keep_me <- keep_me %>% filter(n > 4)
 wages_demog_hs <- wages_demog_hs %>%
   filter(id %in% keep_me$id)
 
+# Add the extreme value flag
 
-# calculate the IQR to create the extreme value flag
 
-# IQR_cut_off <- IQR(wages_demog_hs$mean_hourly_wage, na.rm = TRUE)*1.5
-# q1 <- quantile(wages_demog_hs$mean_hourly_wage, 0.25, na.rm = TRUE)
-# q3 <- quantile(wages_demog_hs$mean_hourly_wage, 0.75, na.rm = TRUE)
-#
-# lower_limit <- q1 - IQR_cut_off
-# upper_limit <- q3 + IQR_cut_off
-#
-# wages_demog_hs <- wages_demog_hs %>%
-#   mutate(is_extreme_val = ifelse(mean_hourly_wage < lower_limit |
-#                           mean_hourly_wage > upper_limit, TRUE,
-#                         FALSE)) %>%
-#   mutate(flag = case_when(is_wm == TRUE & is_extreme_val == FALSE ~ 1,
-#                           is_wm == TRUE & is_extreme_val == TRUE ~ 2,
-#                           is_wm == FALSE & is_extreme_val == FALSE ~ 3,
-#                           is_wm == FALSE & is_extreme_val == TRUE ~ 4))
-#
-# filtered <- filter(wages_demog_hs, is_extreme_val == FALSE)
-# summary(filtered$mean_hourly_wage)
+
+
 
 
 
