@@ -4,6 +4,8 @@ library(rstatix)
 library(robustlmm)
 library(modelr)
 library(patchwork)
+library(MASS)
+library(broom)
 
 
 
@@ -34,7 +36,7 @@ n_obs <- wages_demog_hs %>% count(id)
 
 # sample some IDs
 
-set.seed(20210217)
+set.seed(20210218)
 
 sample_id <- sample(unique(n_obs$id), 100)
 sample <- subset(wages_demog_hs, id %in% sample_id)
@@ -44,7 +46,7 @@ sample <- subset(wages_demog_hs, id %in% sample_id)
 sample_ext <- sample %>%
   group_by(id) %>%
   identify_outliers("mean_hourly_wage") %>%
-  select(year, id, is.outlier, is.extreme)
+  dplyr::select(year, id, is.outlier, is.extreme)
 
 # check the influential value using robust linear mixed model
 
@@ -98,14 +100,14 @@ wages_hs_sample <- wages_hs_sample %>%
 
 # doing locf
 for_locf <- wages_hs_sample %>%
-  select(id, year, wages_clean_ext) %>%
+  dplyr::select(id, year, wages_clean_ext) %>%
   group_by(id) %>%
   na.locf()
 
 
 # join back the locf value to wages_demog_hs
 wages_hs_sample <- left_join(wages_hs_sample, for_locf, by = c("id", "year")) %>%
-  select(-wages_clean_ext.x) %>%
+  dplyr::select(-wages_clean_ext.x) %>%
   rename(wages_clean_ext = wages_clean_ext.y)
 
 
@@ -120,5 +122,131 @@ p3 <- ggplot(wages_hs_sample) +
                 group = id), alpha = 0.3)
 
 p1 + p2 + p3
+
+
+wages_sample_long <- wages_hs_sample %>%
+  dplyr::select(id, year, mean_hourly_wage, wages_cleaned_rlmm, wages_clean_ext) %>%
+  pivot_longer(c(-id, -year), names_to = "type", values_to = "wages")
+
+n_obs_sample <- wages_sample_long %>% count(id) %>%
+  filter(n > 30)
+
+set.seed(20210218)
+
+sample_plot <- sample(unique(n_obs_sample$id), 20)
+sample_plot <- subset(wages_sample_long, id %in% sample_plot)
+
+ggplot(sample_plot) +
+  geom_line(aes(x = year,
+                y = wages,
+                colour = type)) +
+  facet_wrap(~id)
+
+
+##### ROBUST LINEAR MODEL
+
+keep_me <- wages_demog_hs %>% count(id) %>% filter(n >4)
+
+wages_demog_hs <- wages_demog_hs %>%
+  filter(id %in% keep_me$id)
+
+by_id <- wages_demog_hs %>%
+  dplyr::select(id, year, mean_hourly_wage) %>%
+  group_by(id) %>%
+  nest()
+
+
+id_rlm <- by_id %>%
+  mutate(model = map(.x = data,
+                     .f = function(x){
+                   rlm(mean_hourly_wage ~ year, data = x)
+                     }))
+
+id_aug <- id_rlm %>%
+  mutate(augmented = map(model, broom::augment)) %>%
+  unnest(augmented)
+
+id_w <- id_rlm %>%
+  mutate(w = map(.x = model,
+                 .f = function(x){
+                   x$w
+                 })) %>%
+  unnest(w) %>%
+  dplyr::select(w)
+
+
+id_aug_w <- cbind(id_aug, id_w) %>%
+  dplyr::select(`id...1`,
+                year,
+                mean_hourly_wage,
+                .fitted,
+                .resid,
+                .hat,
+                .sigma,
+                w) %>%
+  rename(id = `id...1`)
+
+wages_rlm_dat <- id_aug_w %>%
+  mutate(wages_rlm = ifelse(w != 1 & .fitted >= 0, .fitted,
+                            mean_hourly_wage)) %>%
+  mutate(is_pred = ifelse(w != 1 & .fitted >= 0, TRUE,
+                          FALSE)) %>%
+  rename(wages_original = mean_hourly_wage)
+
+p4 <- ggplot(wages_rlm_dat) +
+  geom_line(aes(x = year,
+                y = wages_rlm,
+                group = id),
+            alpha = 0.1)
+
+p5 <- ggplot(wages_rlm_dat) +
+  geom_line(aes(x = year,
+                y = wages_original,
+                group = id),
+            alpha = 0.1)
+
+wages_ext <- yowie::wages_hs2020 %>%
+  rename(wages_excl_extreme = mean_hourly_wage)
+
+p6 <- ggplot(wages_ext) +
+  geom_line(aes(x = year,
+                y = wages_excl_extreme,
+                group = id),
+            alpha = 0.1)
+
+
+
+p4+p5+p6
+
+summary(wages_rlm_dat$wages_rlm)
+summary(wages_ext$wages_excl_extreme)
+
+wages_compare <- left_join(wages_ext, wages_rlm_dat, by = c("id", "year")) %>%
+  dplyr::select(id, year, wages_original, wages_excl_extreme, wages_rlm) %>%
+  pivot_longer(c(-id, -year), names_to = "type", values_to = "wages")
+
+
+
+n_obs_sample_2 <- wages_compare %>% count(id) %>%
+  filter(n > 30)
+
+set.seed(123456789)
+
+sample_plot_2 <- sample(unique(n_obs_sample_2$id), 20)
+sample_plot_2 <- subset(wages_compare, id %in% sample_plot_2)
+
+ggplot(sample_plot_2) +
+  geom_line(aes(x = year,
+                y = wages,
+                colour = type,
+                linetype = type),
+            alpha = 1) +
+  facet_wrap(~id)
+
+
+
+
+
+
 
 
