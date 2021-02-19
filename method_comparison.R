@@ -230,7 +230,7 @@ wages_compare <- left_join(wages_ext, wages_rlm_dat, by = c("id", "year")) %>%
 n_obs_sample_2 <- wages_compare %>% count(id) %>%
   filter(n > 30)
 
-set.seed(123456789)
+set.seed(1234)
 
 sample_plot_2 <- sample(unique(n_obs_sample_2$id), 20)
 sample_plot_2 <- subset(wages_compare, id %in% sample_plot_2)
