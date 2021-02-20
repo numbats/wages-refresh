@@ -18,6 +18,7 @@ load("wages_hs2020.rda")
 load("wages_hs2020_weighted.rda")
 wages_old <- brolgar::wages %>%
   mutate(mean_hourly_wage = exp(ln_wages))
+load("wages_hs2020_weighted_updated2018.rda")
 ```
 
 
@@ -39,6 +40,8 @@ wages_old <- as_tsibble(x = wages_old,
                     key = id,
                     index = xp,
                     regular = FALSE)
+
+wages_weighted_2018 <- 
 ```
 
 

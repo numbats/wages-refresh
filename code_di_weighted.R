@@ -1,6 +1,7 @@
 library(tidyverse)
 library(zoo)
-library(rstatix)
+library(MASS)
+library(broom)
 
 
 
@@ -25,44 +26,6 @@ wages_demog_hs <- wages_demog  %>% filter(grepl("GRADE", hgc))
 ggplot(wages_demog_hs, aes(x = mean_hourly_wage)) +
   geom_boxplot()
 
-# replace the obs with mean_hourly_wage is.extreme == TRUE to be NA
-# since we will impute the missing values with the last observation carried forward (locf) for each id
-# we give the flag for that locf observation
-
-wages_demog_ext <- wages_demog_hs %>%
-  group_by(id) %>%
-  identify_outliers("mean_hourly_wage") %>%
-  filter(is.extreme == TRUE) %>%
-  select(year, id, is.extreme)
-
-
-
-
-wages_demog_hs <- left_join(wages_demog_hs, wages_demog_ext, by = c("id", "year"))
-
-wages_demog_hs <- wages_demog_hs %>%
-  mutate(is.extreme = ifelse(is.na(is.extreme), FALSE,
-                             is.extreme))
-
-wages_demog_hs <- wages_demog_hs %>%
-  mutate(mean_hourly_wage = ifelse(is.extreme == TRUE, NA, mean_hourly_wage),
-         is_locf = ifelse(is.na(mean_hourly_wage), TRUE, FALSE))
-
-
-# doing locf
-
-for_locf <- wages_demog_hs %>%
-  select(id, year, mean_hourly_wage) %>%
-  group_by(id) %>%
-  na.locf()
-
-
-# join back
-
-wages_demog_hs <- left_join(wages_demog_hs, for_locf, by = c("id", "year")) %>%
-  select(-mean_hourly_wage.x) %>%
-  rename(mean_hourly_wage = mean_hourly_wage.y)
-
 
 # calculate the number of observation
 keep_me <- wages_demog_hs %>% count(id)
@@ -74,19 +37,72 @@ keep_me <- keep_me %>% filter(n > 4)
 wages_demog_hs <- wages_demog_hs %>%
   filter(id %in% keep_me$id)
 
-# Add the extreme value flag
+# nesting the data by id to build a robust linear model
+by_id <- wages_demog_hs %>%
+  dplyr::select(id, year, mean_hourly_wage) %>%
+  group_by(id) %>%
+  nest()
+
+# build a robust linear model
+id_rlm <- by_id %>%
+  mutate(model = map(.x = data,
+                     .f = function(x){
+                       rlm(mean_hourly_wage ~ year, data = x)
+                     }))
+
+# extract the property of the regression model
+id_aug <- id_rlm %>%
+  mutate(augmented = map(model, broom::augment)) %>%
+  unnest(augmented)
+
+# extract the weight of each observation
+id_w <- id_rlm %>%
+  mutate(w = map(.x = model,
+                 .f = function(x){
+                   x$w
+                 })) %>%
+  unnest(w) %>%
+  dplyr::select(w)
+
+# bind the property of each observation with their weight
+id_aug_w <- cbind(id_aug, id_w) %>%
+  dplyr::select(`id...1`,
+                year,
+                mean_hourly_wage,
+                .fitted,
+                .resid,
+                .hat,
+                .sigma,
+                w) %>%
+  rename(id = `id...1`)
+
+# if the weight < 1, the mean_hourly_wage is replaced by the model's fitted/predicted value.
+# and add the flag whether the observation is predicted value or not.
+# since the fitted value is sometimes <0, and wages value could never be negative,
+# we keep the mean hourly wage value even its weight < 1.
+
+wages_rlm_dat <- id_aug_w %>%
+  mutate(wages_rlm = ifelse(w != 1 & .fitted >= 0, .fitted,
+                            mean_hourly_wage)) %>%
+  mutate(is_pred = ifelse(w != 1 & .fitted >= 0, TRUE,
+                          FALSE)) %>%
+  dplyr::select(id, year, wages_rlm, is_pred)
 
 
+# join back the `wages_rlm_dat` to `wages_demog_hs`
 
+wages_demog_hs <- left_join(wages_demog_hs, wages_rlm_dat, by = c("id", "year"))
 
-
-
+# select out the old value of mean hourly wage and change it with the wages_rlm value
+wages_demog_hs <- wages_demog_hs %>%
+  select(-mean_hourly_wage) %>%
+  rename(mean_hourly_wage = wages_rlm)
 
 # rename and select the wages in tidy
 wages_hs2020_weighted <- wages_demog_hs %>%
-  select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc, number_of_jobs, total_hours, is_wm, is_locf)
+  dplyr::select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc, number_of_jobs, total_hours, is_wm, is_pred)
 
-#save(wages_hs2020_weighted, file="wages_hs2020_weighted_updated2018.rda")
+save(wages_hs2020_weighted, file="wages_hs2020_weighted_updated2018.rda")
 
 summary(wages_hs2020_weighted$mean_hourly_wage)
 
@@ -94,5 +110,4 @@ ggplot(wages_hs2020_weighted) +
   geom_line(aes(x = year,
                 y = mean_hourly_wage,
                 group = id), alpha = 0.1)
-
 
