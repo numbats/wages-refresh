@@ -1,0 +1,192 @@
+\documentclass{article}
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{lmodern}        % https://github.com/rstudio/rticles/issues/343
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}
+\usepackage{graphicx}
+
+\title{Longitudinal Data Cleaning - A Case of the NLSY79 Data}
+
+\author{
+    Dewi Amaliah
+    \thanks{Use footnote for providing further information about author (webpage,
+alternative address)---\emph{not} for acknowledging funding agencies.
+Optional.}
+   \\
+    Department of Econometric and Business Statistics \\
+    Monash University \\
+  Clayton, VIC 3168 \\
+  \texttt{\href{mailto:dama0007@student.monash.edu}{\nolinkurl{dama0007@student.monash.edu}}} \\
+   \And
+    Dianne Cook
+   \\
+    Department of Econometric and Business Statistics \\
+    Monash University \\
+  Clayton, VIC 3168 \\
+  \texttt{\href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}} \\
+  }
+
+
+% Pandoc citation processing
+
+
+
+\begin{document}
+\maketitle
+
+\def\tightlist{}
+
+
+\begin{abstract}
+Enter the text of your abstract here.
+\end{abstract}
+
+\keywords{
+    longitudinal data
+   \and
+    data cleaning
+   \and
+    data tidying
+   \and
+    robust linear model
+  }
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+\hypertarget{the-nlsy79}{%
+\section{The NLSY79}\label{the-nlsy79}}
+
+\hypertarget{the-nlsy79-data-cleaning}{%
+\section{The NLSY79 Data Cleaning}\label{the-nlsy79-data-cleaning}}
+
+\hypertarget{getting-and-tyding-the-data}{%
+\subsection{Getting and Tyding the
+Data}\label{getting-and-tyding-the-data}}
+
+The NLYS data is stored in a
+\href{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data}{database}
+and could be downloaded by variables. Several variables are available to
+be downloaded and could be browsed by index. For the wages data set, we
+only extracted these variables:
+
+\begin{itemize}
+\tightlist
+\item
+  Education, Training \& Achievement Scores
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Education -\textgreater{} Summary measures -\textgreater{} All
+    schools -\textgreater{} By year -\textgreater{} Highest grade
+    completed
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Downloaded all of the 78 variables in Highest grade completed.
+    \end{itemize}
+  \end{itemize}
+\item
+  Employment
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Summary measures -\textgreater{} By job -\textgreater{} Hours worked
+    and Hourly wages
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Downloaded all of the 427 variables in Hours worked
+    \item
+      Downloaded all of the 151 variables in Hourly wages
+    \end{itemize}
+
+    Both hours worked and hourly wages are recorded by the job, up to
+    five jobs for each id/subject.
+  \end{itemize}
+\item
+  Household, Geography \& Contextual Variables
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Context -\textgreater{} Summary measures -\textgreater{} Basic
+    demographics
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Downloaded year and month of birth, race, and sex variables.
+    \end{itemize}
+
+    There are two versions of the year and month of birth, i.e.~1979 and
+    1981 data. We downloaded these two versions.
+  \end{itemize}
+\end{itemize}
+
+The downloaded data set came in a csv (wages-high-school-demo.csv) and
+dat (wages-high-school-demo.dat) format. We only used the .dat format.
+It also came along with these files:
+
+\begin{itemize}
+\tightlist
+\item
+  wages-high-school-demo.NLSY79: This is the tagset of variables that
+  can be uploaded to the web site to recreate the data set.
+\item
+  wages-high-school-demo.R: This is an R script provided automatically
+  by the database for reading the data into R and convert the variables'
+  name and its label into something more sensible. We utilized this code
+  to do an initial data tidying. It produced two data set,
+  \texttt{categories\_qnames} (the observations are stored in
+  categorical/interval values) and \texttt{new\_data\_qnames} (the
+  observations are stored in integer form). In this case, we only used
+  the latter.
+\end{itemize}
+
+\texttt{new\_data\_qnames} is still untidy, where all of the variables
+for each year and each job being stored in one column, hence the data
+contains a huge number of columns (686 columns). Thus, the data should
+be tidied and wrangled first to extract the demographic and employment
+variables that we want to put in the final data set.
+
+\hypertarget{tidying-demographic-variables}{%
+\subsubsection{Tidying demographic
+variables}\label{tidying-demographic-variables}}
+
+Date of birth, age in 1979, gender, race, highest grade completed
+(factor and integer), and the year when the highest grade completed are
+the variables that we want to use in the cleaned data set. There are two
+versions of date of birth variable, which are the 1979 version and the
+1981 version. In this case, we only used the 1979 data. We also did a
+consistency check for the 1979 and 1981 data and flag the inconsistent
+observations.
+
+\hypertarget{initial-data-analysis}{%
+\subsection{Initial Data Analysis}\label{initial-data-analysis}}
+
+\hypertarget{robust-linear-model-for-influential-values-treatment}{%
+\subsection{Robust Linear Model for Influential Values
+Treatment}\label{robust-linear-model-for-influential-values-treatment}}
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+\bibliographystyle{unsrt}
+\bibliography{references.bib}
+
+
+\end{document}
