@@ -243,7 +243,7 @@ consistency check of those years and flag the inconsistent observations.
 \begin{Highlighting}[]
 \CommentTok{## tidy the date of birth data}
 \NormalTok{dob_tidy <-}\StringTok{ }\NormalTok{new_data_qnames }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
          \KeywordTok{starts_with}\NormalTok{(}\StringTok{"Q1-3_A~"}\NormalTok{)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dob_year =} \KeywordTok{case_when}\NormalTok{(}
                     \CommentTok{# if the years recorded in both sets match, take 79 data}
@@ -268,7 +268,7 @@ consistency check of those years and flag the inconsistent observations.
 \NormalTok{                      (}\StringTok{`}\DataTypeTok{Q1-3_A~Y_1979}\StringTok{`} \OperatorTok{==}\StringTok{ `}\DataTypeTok{Q1-3_A~Y_1981}\StringTok{`}\NormalTok{) }\OperatorTok{&}\StringTok{ }
 \StringTok{                      }\NormalTok{(}\StringTok{`}\DataTypeTok{Q1-3_A~M_1979}\StringTok{`} \OperatorTok{==}\StringTok{ `}\DataTypeTok{Q1-3_A~M_1981}\StringTok{`}\NormalTok{) }\OperatorTok{~}\StringTok{ }\OtherTok{FALSE}\NormalTok{,}
                       \KeywordTok{is.na}\NormalTok{(}\StringTok{`}\DataTypeTok{Q1-3_A~M_1981}\StringTok{`}\NormalTok{) }\OperatorTok{|}\StringTok{ }\KeywordTok{is.na}\NormalTok{(}\StringTok{`}\DataTypeTok{Q1-3_A~Y_1981}\StringTok{`}\NormalTok{) }\OperatorTok{~}\StringTok{ }\OtherTok{FALSE}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
 \NormalTok{         dob_month,}
 \NormalTok{         dob_year,}
 \NormalTok{         dob_conflict)}
@@ -281,7 +281,7 @@ For \texttt{gender} and \texttt{race}, we only renamed these variables.
 \begin{Highlighting}[]
 \CommentTok{## tidy the gender and race variables}
 \NormalTok{demog_tidy <-}\StringTok{ }\NormalTok{categories_qnames }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
 \NormalTok{         SAMPLE_RACE_78SCRN,}
 \NormalTok{         SAMPLE_SEX_}\DecValTok{1979}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{gender =}\NormalTok{ SAMPLE_SEX_}\DecValTok{1979}\NormalTok{,}
@@ -302,7 +302,7 @@ used the ordinary May data.
 \StringTok{  }\KeywordTok{as_tibble}\NormalTok{() }\OperatorTok{%>%}
 \StringTok{  }\CommentTok{# in 2018, the variable's name is Q3-4_2018, instead of HGC_2018}
 \StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{HGC_2018 =} \StringTok{`}\DataTypeTok{Q3-4_2018}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
          \KeywordTok{starts_with}\NormalTok{(}\StringTok{"HGCREV"}\NormalTok{),}
          \StringTok{"HGC_2012"}\NormalTok{,}
          \StringTok{"HGC_2014"}\NormalTok{,}
@@ -313,7 +313,7 @@ used the ordinary May data.
                \DataTypeTok{values_to =} \StringTok{"grade"}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{separate}\NormalTok{(}\StringTok{"var"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"var"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\DataTypeTok{sep =} \DecValTok{-4}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(grade)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{var)}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{var)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -331,7 +331,7 @@ to mutate these variables.
 \StringTok{  }\KeywordTok{filter}\NormalTok{(hgc_i }\OperatorTok{==}\StringTok{ }\NormalTok{grade) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\KeywordTok{first}\NormalTok{(year)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{yr_hgc =}\NormalTok{ year) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{, yr_hgc, hgc_i) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{, yr_hgc, hgc_i) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\StringTok{'hgc'}\NormalTok{ =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(hgc_i }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{, }\StringTok{"NONE"}\NormalTok{, }\KeywordTok{ifelse}\NormalTok{(hgc_i }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"1ST GRADE"}\NormalTok{,}
                  \KeywordTok{ifelse}\NormalTok{(hgc_i }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"2ND GRADE"}\NormalTok{, }\KeywordTok{ifelse}\NormalTok{(hgc_i }\OperatorTok{==}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"3RD GRADE"}\NormalTok{,}
@@ -398,12 +398,12 @@ so we just used these.
 \NormalTok{get_hour <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(year)\{}
   \ControlFlowTok{if}\NormalTok{(year }\OperatorTok{%in%}\StringTok{ }\NormalTok{year_A)\{}
 \NormalTok{   temp <-}\StringTok{ }\NormalTok{new_data_qnames }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+\StringTok{    }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
             \KeywordTok{starts_with}\NormalTok{(}\StringTok{"QES-52A"}\NormalTok{) }\OperatorTok{&}
 \StringTok{              }\KeywordTok{ends_with}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(year)))\} }
   \ControlFlowTok{else}\NormalTok{\{}
 \NormalTok{    temp <-}\StringTok{ }\NormalTok{new_data_qnames }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+\StringTok{    }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
             \KeywordTok{starts_with}\NormalTok{(}\StringTok{"QES-52D"}\NormalTok{) }\OperatorTok{&}
 \StringTok{              }\KeywordTok{ends_with}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(year)))\} }
 \NormalTok{    temp }\OperatorTok{%>%}\StringTok{ }
@@ -438,7 +438,7 @@ invalid value. Thus, their hourly rate set to be N.A.
 \begin{Highlighting}[]
 \NormalTok{get_rate <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(year) \{}
 \NormalTok{  new_data_qnames }\OperatorTok{%>%}
-\StringTok{     }\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+\StringTok{    }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
             \KeywordTok{starts_with}\NormalTok{(}\StringTok{"HRP"}\NormalTok{) }\OperatorTok{&}
 \StringTok{              }\KeywordTok{ends_with}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(year))) }\OperatorTok{%>%}
 \StringTok{    }\KeywordTok{pivot_longer}\NormalTok{(}\OperatorTok{!}\NormalTok{CASEID_}\DecValTok{1979}\NormalTok{, }\DataTypeTok{names_to =} \StringTok{"job"}\NormalTok{, }\DataTypeTok{values_to =} \StringTok{"rate_per_hour"}\NormalTok{) }\OperatorTok{%>%}
@@ -554,7 +554,8 @@ wages information and flagged it as an arithmetic mean.
 The \texttt{mean\_hourly\_wage} and \texttt{full\_demographic} data are
 then joined. We also filtered the data to only have the cohort who
 completed the education up to 12th grade and participated at least five
-rounds in the survey.
+rounds in the survey and save it to an object called
+\texttt{wages\_demog\_hs}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -579,19 +580,65 @@ rounds in the survey.
 \hypertarget{initial-data-analysis}{%
 \subsection{Initial Data Analysis}\label{initial-data-analysis}}
 
+According to Huebner, Vach, and Cessie (2016), Initial Data Analysis
+(IDA) is the step of inspecting and screening the data after being
+collected to ensure that the data is clean, valid, and ready to be
+deployed in the later formal statistical analysis. Moreover, Chatfield
+(1985) argued that the two main objectives of IDA is data description,
+which is to assess the structure and the quality of the data; and model
+formulation without any formal statistical inference.
+
+In this paper, we conducted an IDA or a preliminary data analysis to
+assess the consistency of the data with the cohort information that is
+provided by the NLSY. In addition, we also aimed to find the anomaly in
+the wages values using this approach. We mainly used graphical summary
+to do the IDA using \texttt{ggplot2}(Wickham 2016) and \texttt{brolgar}
+(Tierney, Cook, and Prvan 2020).
+
+As stated previously, the respondents' ages ranged from 12 to 22 when
+first interviewed in 1979. Hence, we would like to validate whether all
+of the respondents were in this range. For the demographic data
+validation, we used the \texttt{full\_demographic} i.e.~the data with
+the survey years 1979 sample.
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/valid-age-1.pdf}
+\caption{Subjects' Age Distribution}
+\end{figure}
+
 \hypertarget{robust-linear-model-for-influential-values-treatment}{%
-\subsection{Robust Linear Model for Influential Values
+\subsubsection{Robust Linear Model for Influential Values
 Treatment}\label{robust-linear-model-for-influential-values-treatment}}
 
-\hypertarget{conclusion}{%
-\section*{Conclusion}\label{conclusion}}
-\addcontentsline{toc}{section}{Conclusion}
+\hypertarget{summary}{%
+\section*{Summary}\label{summary}}
+\addcontentsline{toc}{section}{Summary}
 
 \hypertarget{refs}{}
+\leavevmode\hypertarget{ref-Chatfield1985TIEo}{}%
+Chatfield, C. 1985. ``The Initial Examination of Data.'' \emph{Journal
+of the Royal Statistical Society. Series A. General} 148 (3): 214--53.
+
+\leavevmode\hypertarget{ref-HuebnerMariannePhD2016Asat}{}%
+Huebner, PhD, Marianne, Dr rer. nat Vach Werner, and PhD le Cessie
+Saskia. 2016. ``A Systematic Approach to Initial Data Analysis Is Good
+Research Practice.'' \emph{The Journal of Thoracic and Cardiovascular
+Surgery} 151 (1): 25--27.
+
+\leavevmode\hypertarget{ref-brolgar}{}%
+Tierney, Nicholas, Di Cook, and Tania Prvan. 2020. \emph{Brolgar: BRowse
+over Longitudinal Data Graphically and Analytically in R}.
+\url{https://github.com/njtierney/brolgar}.
+
+\leavevmode\hypertarget{ref-ggplot2}{}%
+Wickham, Hadley. 2016. \emph{Ggplot2: Elegant Graphics for Data
+Analysis}. Springer-Verlag New York.
+\url{https://ggplot2.tidyverse.org}.
+
 \leavevmode\hypertarget{ref-stringr}{}%
-Wickham, Hadley. 2019. \emph{Stringr: Simple, Consistent Wrappers for
-Common String Operations}.
-\url{https://CRAN.R-project.org/package=stringr}.
+---------. 2019. \emph{Stringr: Simple, Consistent Wrappers for Common
+String Operations}. \url{https://CRAN.R-project.org/package=stringr}.
 
 \leavevmode\hypertarget{ref-tidyr}{}%
 ---------. 2020. \emph{Tidyr: Tidy Messy Data}.
