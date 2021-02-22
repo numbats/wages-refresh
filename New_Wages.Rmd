@@ -125,7 +125,7 @@ demog_education <- new_data_qnames %>%
 
 ```{r}
 
-## getting the highest year of completed education
+## getting the highest year of completed education ever
 
 highest_year <- demog_education %>%
   group_by(CASEID_1979) %>%
@@ -230,7 +230,6 @@ rates_all <- bind_rows(!!!rates)
 
 
 ```{r}
-
 hours_wages <- left_join(rates_all, 
                          hours_all, 
                          by = c("id", "year", "job")) %>%
