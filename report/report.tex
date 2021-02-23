@@ -597,14 +597,67 @@ to do the IDA using \texttt{ggplot2}(Wickham 2016) and \texttt{brolgar}
 
 As stated previously, the respondents' ages ranged from 12 to 22 when
 first interviewed in 1979. Hence, we would like to validate whether all
-of the respondents were in this range. For the demographic data
-validation, we used the \texttt{full\_demographic} i.e.~the data with
-the survey years 1979 sample.
+of the respondents were in this range. Additionally, the
+\href{https://www.nlsinfo.org/content/cohorts/nlsy79/intro-to-the-sample/nlsy79-sample-introduction}{NLSY}
+also provided the number of the survey cohort by their gender (6,403
+males and 6,283 females) and race (7,510 Non-Black/Non-Hispanic; 3,174
+Black; 2,002 Hispanic). To validate this, we used the
+\texttt{full\_demographic} i.e.~the data with the survey years 1979
+sample. Figure \ref{fig:demoprofile} suggests that the demographic data
+we had is consistent with the sample information in the database.
 
 \begin{figure}
 \centering
-\includegraphics{report_files/figure-latex/valid-age-1.pdf}
-\caption{Subjects' Age Distribution}
+\includegraphics{report_files/figure-latex/demoprofile-1.pdf}
+\caption{Demography Profile of the NLSY79 Cohort}
+\end{figure}
+
+The next step is that we explored the mean hourly wage data, in this
+case, we only explored the wages data in \texttt{wages\_demog\_hs}.
+Figure \ref{fig:featureplot} conveys that there is clearly a problem in
+the mean hourly wage values. Figure \ref{fig:featureplot} a.) shows that
+some observations had an exceptionally high figure of wages, even more
+than US\$10,000 per hour. In Figure \ref{fig:featureplot} b.), we barely
+see any difference in the minimum, median, an maximum value of the wages
+since the distribution is heavily skewed to the right. Additionally,
+Table \ref{tab:summarytable} shows that the overall wages median of the
+cohort is only 7.2, while the mean is 11.87. It indicates that the data
+might contains a lot of extreme values.
+
+\includegraphics{report_files/figure-latex/featureplot-1.pdf}
+
+\begin{table}
+
+\caption{\label{tab:summarytable}Summary Statistics of Wages of High School Data}
+\centering
+\begin{tabular}[t]{l|r}
+\hline
+Statistics & Value\\
+\hline
+\rowcolor{gray!6}  Min. & 0.01000\\
+\hline
+1st Qu. & 4.50000\\
+\hline
+\rowcolor{gray!6}  Median & 7.20000\\
+\hline
+Mean & 11.86578\\
+\hline
+\rowcolor{gray!6}  3rd Qu. & 11.74000\\
+\hline
+Max. & 33400.00000\\
+\hline
+\end{tabular}
+\end{table}
+
+Further, we took 36 samples randomly from the data and plotted it as is
+seen in Figure \ref{fig:sampleplot}. It implies that not only that some
+observations earned an extremely high figures of wages, but some also
+had a very fluctuative wages, fo example in panel number 5, 7, and 11.
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/sampleplot-1.pdf}
+\caption{Some samples of observations}
 \end{figure}
 
 \hypertarget{robust-linear-model-for-influential-values-treatment}{%

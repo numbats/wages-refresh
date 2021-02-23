@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  23 FEB 2021 01:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  24 FEB 2021 00:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -830,34 +830,86 @@ Package xcolor Warning: Incompatible color definition on input line 578.
 
 Package xcolor Warning: Incompatible color definition on input line 578.
 
-<report_files/figure-latex/valid-age-1.pdf, id=88, 469.755pt x 325.215pt>
-File: report_files/figure-latex/valid-age-1.pdf Graphic file (type pdf)
-<use report_files/figure-latex/valid-age-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/valid-age-1.pdf  used on inp
-ut line 606.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-No file report.bbl.
+
+LaTeX Warning: Reference `fig:demoprofile' on page 7 undefined on input line 60
+6.
+
+<report_files/figure-latex/demoprofile-1.pdf, id=89, 433.62pt x 325.215pt>
+File: report_files/figure-latex/demoprofile-1.pdf Graphic file (type pdf)
+<use report_files/figure-latex/demoprofile-1.pdf>
+Package pdftex.def Info: report_files/figure-latex/demoprofile-1.pdf  used on i
+nput line 611.
+(pdftex.def)             Requested size: 433.61894pt x 325.2142pt.
+
+LaTeX Warning: Reference `fig:featureplot' on page 7 undefined on input line 61
+7.
+
+
+LaTeX Warning: Reference `fig:featureplot' on page 7 undefined on input line 61
+8.
+
+
+LaTeX Warning: Reference `fig:featureplot' on page 7 undefined on input line 62
+0.
+
+<report_files/figure-latex/featureplot-1.pdf, id=91, 433.62pt x 289.08pt>
+File: report_files/figure-latex/featureplot-1.pdf Graphic file (type pdf)
+<use report_files/figure-latex/featureplot-1.pdf>
+Package pdftex.def Info: report_files/figure-latex/featureplot-1.pdf  used on i
+nput line 627.
+(pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 [7] [8pdfTeX warning (ext4): destination with the same identifier (name{figure.
 1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.656 \end{document}
-                     <./report_files/figure-latex/valid-age-1.pdf>] (./report.a
-ux)
+l.650 \end{table}
+                  <./report_files/figure-latex/demoprofile-1.pdf> <./report_fil
+es/figure-latex/featureplot-1.pdf>]
+
+LaTeX Warning: Reference `fig:sampleplot' on page 9 undefined on input line 653
+.
+
+<report_files/figure-latex/sampleplot-1.pdf, id=118, 469.755pt x 325.215pt>
+File: report_files/figure-latex/sampleplot-1.pdf Graphic file (type pdf)
+<use report_files/figure-latex/sampleplot-1.pdf>
+Package pdftex.def Info: report_files/figure-latex/sampleplot-1.pdf  used on in
+put line 659.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[9pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.687 \leavevmode
+                 \hypertarget{ref-ggplot2}{}%pdfTeX warning (ext4): destination
+ with the same identifier (name{figure.2}) has been already used, duplicate ign
+ored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.687 \leavevmode
+                 \hypertarget{ref-ggplot2}{}% <./report_files/figure-latex/samp
+leplot-1.pdf>]
+No file report.bbl.
+[10] (./report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: AA833D81F6D7F79D14E3474320861387;1598.
  ) 
 Here is how much of TeX's memory you used:
- 13153 strings out of 481009
- 204713 string characters out of 5908205
+ 13179 strings out of 481009
+ 205434 string characters out of 5908205
  671766 words of memory out of 5000000
- 29891 multiletter control sequences out of 15000+600000
- 468791 words of font info for 131 fonts, out of 8000000 for 9000
+ 29907 multiletter control sequences out of 15000+600000
+ 468957 words of font info for 133 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 83i,11n,88p,428b,508s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 83i,12n,88p,428b,508s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/
 Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/
 Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</Use
@@ -875,10 +927,10 @@ deeamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/d
 eeamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/d
 eeamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/d
 eeamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on report.pdf (8 pages, 289164 bytes).
+Output written on report.pdf (10 pages, 458446 bytes).
 PDF statistics:
- 182 PDF objects out of 1000 (max. 8388607)
- 154 compressed objects within 2 object streams
- 36 named destinations out of 1000 (max. 500000)
- 36430 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 216 PDF objects out of 1000 (max. 8388607)
+ 182 compressed objects within 2 object streams
+ 40 named destinations out of 1000 (max. 500000)
+ 36440 words of extra memory for PDF output out of 42996 (max. 10000000)
 
