@@ -20,7 +20,11 @@ library(MASS)
 
 # Introduction
 
-Real world or wild caugh data 
+Wild caught data are often untidy and are not free from anomaly. Hence it is should be tidied and cleaned before a further analysis conducted to prevent inappropriate usage of statistical method that may leads to a misleading result [@HuebnerMariannePhD2016Asat]. @HuebnerMariannePhD2016Asat also argued that data tidying and cleaning is the first part of Initial Data Analysis (IDA). The second and third steps are to explore the data properties and to document and report the process for the later formal analysis. This second step is actually the same with Chatfield's perspective on the goal of Initial Data Analysis [@Chatfield1985TIEo], which is to get the "feel" of the data. 
+
+@DasuTamraparni2003Edma mentioned that data cleaning and exploration, which is the IDA notion, is a difficult task and determine 80 percent of data mining result. Despite its importance, this stage is often undervalued and neglected [@Chatfield1985TIEo]. @WickhamHadley2014TD also stated that there has been few research of the good practice of data cleaning. Furthermore, the decisions made in this stage is often unreported [@HuebnerMariannePhD2016Asat].
+
+This paper aims to demonstrate the steps of IDA, which is tidying, cleaning, and documenting the data. We used the longitudinal wages data of Americans from the National Longitudinal Survey of Youth 1979 or is known as the NLSY79.  
 
 # The NLSY79
 
