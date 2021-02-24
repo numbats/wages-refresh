@@ -1,0 +1,135 @@
+@Manual{tidyr,
+    title={tidyr: Tidy Messy Data},
+    author={Hadley Wickham},
+    year={2020},
+    note={R package version 1.1.2},
+    url={https://CRAN.R-project.org/package=tidyr}
+  }
+
+@Manual{dplyr,
+    title = {dplyr: A Grammar of Data Manipulation},
+    author = {Hadley Wickham and Romain François and Lionel {
+             Henry} and Kirill Müller},
+    year = {2020},
+    note = {R package version 1.0.2},
+    url = {https://CRAN.R-project.org/package=dplyr}
+  }
+
+@Manual{stringr,
+    title = {stringr: Simple, Consistent Wrappers for Common String Operations},
+    author = {Hadley Wickham},
+    year = {2019},
+    note = {R package version 1.4.0},
+    url = {https://CRAN.R-project.org/package=stringr}
+  }
+
+@article{HuebnerMariannePhD2016Asat,
+issn = {0022-5223},
+abstract = {Abstract Initial data analysis is conducted independently of the analysis needed to address the research questions. Shortcomings in these first steps may result in inappropriate statistical methods or incorrect conclusions. We outline a framework for initial data analysis and illustrate the impact of initial data analysis on research studies. Examples of reporting of initial data analysis in publications are given. A systematic and careful approach to initial data analysis is needed as good research practice.},
+journal = {The Journal of thoracic and cardiovascular surgery},
+pages = {25--27},
+volume = {151},
+publisher = {Elsevier Inc},
+number = {1},
+year = {2016},
+title = {A systematic approach to initial data analysis is good research practice},
+copyright = {The American Association for Thoracic Surgery},
+language = {eng},
+address = {United States},
+author = {Huebner, Marianne, PhD and Vach, Werner, Dr rer. nat and le Cessie, Saskia, PhD},
+keywords = {Cardiothoracic Surgery ; data screening ; data cleaning ; initial data analysis ; Data Collection - statistics & numerical data ; Data Interpretation, Statistical ; Reproducibility of Results ; Humans ; Biomedical Research - statistics & numerical data ; Biomedical Research - methods ; Models, Statistical ; Research Design - statistics & numerical data ; Analysis ; Information management ; Index Medicus ; Abridged Index Medicus},
+}
+
+@article{Chatfield1985TIEo,
+issn = {0035-9238},
+abstract = {The initial examination of data (abbreviated IDA) is a valuable stage of most statistical investigations, not only for scrutinizing and summarizing data, but also for model formulation. Several examples are presented to illustrate the benefits of IDA, particularly that IDA may be all that is necessary or desirable. In particular, a re-analysis of the notorious teaching styles data produces completely different conclusions to earlier studies. A critical comparison is made between IDA and Tukey's exploratory data analysis approach. Some reasons why IDA is often neglected or undervalued are discussed and countered. Some implications for the teaching of Statistics are considered.},
+journal = {Journal of the Royal Statistical Society. Series A. General},
+pages = {214--253},
+volume = {148},
+publisher = {Royal Statistical Society},
+number = {3},
+year = {1985},
+title = {The Initial Examination of Data},
+copyright = {Copyright 1985 Royal Statistical Society},
+language = {eng},
+address = {London},
+author = {C. Chatfield},
+keywords = {Outliers ; Datasets ; Statistical variance ; Data analysis ; Applied statistics ; Inference ; Mathematics education ; Descriptive statistics ; Statistics ; Modeling ; computer packages ; graphical procedures ; exploratory data analysis ; descriptive statistics ; model formulation ; teaching statistics ; outliers ; teaching styles data ; data editing ; significance tests ; errors},
+}
+
+@Manual{brolgar,
+    title = {brolgar: BRowse Over Longitudinal data Graphically and Analytically in R},
+    author = {Nicholas Tierney and Di Cook and Tania Prvan},
+    year = {2020},
+    note = {R package version 0.0.6.9100},
+    url = {https://github.com/njtierney/brolgar},
+  }
+
+@Book{ggplot2,
+    author = {Hadley Wickham},
+    title = {ggplot2: Elegant Graphics for Data Analysis},
+    publisher = {Springer-Verlag New York},
+    year = {2016},
+    isbn = {978-3-319-24277-4},
+    url = {https://ggplot2.tidyverse.org},
+  }
+
+@article{KollerManuel2016rARP,
+issn = {1548-7660},
+abstract = {As any real-life data, data modeled by linear mixed-effects models often contain outliers or other contamination. Even little contamination can drive the classic estimates far away from what they would be without the contamination. At the same time, datasets that require mixed-effects modeling are often complex and large. This makes it difficult to spot contamination. Robust estimation methods aim to solve both problems: to provide estimates where contamination has only little influence and to detect and flag contamination. We introduce an R package, robustlmm, to robustly fit linear mixed-effects models. The package's functions and methods are designed to closely equal those offered by lme4, the R package that implements classic linear mixed-effects model estimation in R. The robust estimation method in robustlmm is based on the random effects contamination model and the central contamination model. Contamination can be detected at all levels of the data. The estimation method does not make any assumption on the data's grouping structure except that the model parameters are estimable. robustlmm supports hierarchical and non-hierarchical (e.g., crossed) grouping structures. The robustness of the estimates and their asymptotic efficiency is fully controlled through the function interface. Individual parts (e.g., fixed effects and variance components) can be tuned independently. In this tutorial, we show how to fit robust linear mixed-effects models using robustlmm, how to assess the model fit, how to detect outliers, and how to compare different fits.},
+journal = {Journal of statistical software},
+pages = {1--24},
+volume = {75},
+publisher = {Foundation for Open Access Statistics},
+number = {6},
+year = {2016},
+title = {robustlmm: An R Package for Robust Estimation of Linear Mixed-Effects Models},
+language = {eng},
+author = {Koller, Manuel},
+keywords = {random effect ; hierarchical model ; mixed-effects model ; crossed ; ANOVA ; robust statistics},
+}
+
+@article{PapageorgiouGeorge,
+issn = {1053-587X},
+abstract = {The task of robust linear estimation in the presence of outliers is of particular importance in signal processing, statistics and machine learning. Although the problem has been stated a few decades ago and solved using classical (considered nowadays) methods, recently, it has attracted more attention in the context of sparse modeling, where several notable contributions have been made. In the present manuscript, a new approach is considered in the framework of greedy algorithms. The noise is split into two components: a) the inlier bounded noise and b) the outliers, which are explicitly modeled by employing sparsity arguments. Based on this scheme, a novel efficient algorithm (Greedy Algorithm for Robust Denoising-GARD), is derived. GARD alternates between a least square optimization criterion and an Orthogonal Matching Pursuit (OMP) selection step that identifies the outliers. The case where only outliers are present has been studied separately, where bounds on the Restricted Isometry Property guarantee that the recovery of the signal via GARD is exact. Moreover, theoretical results concerning convergence as well as the the recovery of the support of the sparse outlier vector and derivation of error bounds in the case of additional bounded noise are discussed. Finally, we provide extensive simulations, which demonstrate the comparative advantages of the new technique.},
+journal = {IEEE transactions on signal processing},
+pages = {3872--3887},
+volume = {63},
+publisher = {IEEE},
+number = {15},
+year = {2015},
+title = {Robust Linear Regression Analysis- A Greedy Approach},
+language = {eng},
+author = {Papageorgiou, George and Bouboulis, Pantelis and Theodoridis, Sergios},
+keywords = {Greedy algorithms ; Noise ; Linear regression ; Matching pursuit algorithms ; outlier detection ; robust orthogonal matching pursuit ; Greedy Algorithm for Robust Denoising (GARD) ; robust least squares ; Signal processing algorithms ; OMP for outlier detection ; robust regression ; Robustness ; Mathematical model ; Robust statistics ; Signal processing ; Usage ; Mathematical models ; Analysis ; Iterative methods (Mathematics)},
+}
+
+
+@ONLINE{rlm,
+  author = {{UCLA: Statistical Consulting Group}},
+  title = {Robust Regression | R Data Analysis Examples},
+  month = FEB,
+  year = {2021},
+  url = {https://stats.idre.ucla.edu/r/dae/robust-regression/}
+}
+
+
+@Book{mass,
+    title = {Modern Applied Statistics with S},
+    author = {W. N. Venables and B. D. Ripley},
+    publisher = {Springer},
+    edition = {Fourth},
+    address = {New York},
+    year = {2002},
+    note = {ISBN 0-387-95457-0},
+    url = {http://www.stats.ox.ac.uk/pub/MASS4},
+  }
+
+
+@Manual{purrr,
+    title = {purrr: Functional Programming Tools},
+    author = {Lionel Henry and Hadley Wickham},
+    year = {2020},
+    note = {R package version 0.3.4},
+    url = {https://CRAN.R-project.org/package=purrr},
+  }
