@@ -187,15 +187,29 @@ id_aug_w <- cbind(id_aug, id_w) %>%
   rename(id = `id...1`)
 
 wages_rlm_dat <- id_aug_w %>%
-  mutate(wages_rlm = ifelse(w != 1 & .fitted >= 0, .fitted,
-                            mean_hourly_wage)) %>%
-  mutate(is_pred = ifelse(w != 1 & .fitted >= 0, TRUE,
-                          FALSE)) %>%
+  mutate(wages_rlm_1 = ifelse(w != 1 & .fitted >= 0, .fitted,
+                            mean_hourly_wage),
+         wages_rlm_2 = ifelse(w < 0.7 & .fitted >= 0, .fitted,
+                              mean_hourly_wage),
+         wages_rlm_3 = ifelse(w < 0.5 & .fitted >= 0, .fitted,
+                              mean_hourly_wage),
+         wages_rlm_4 = ifelse(w < 0.3 & .fitted >= 0, .fitted,
+                              mean_hourly_wage)) %>%
+  mutate(is_pred1 = ifelse(w != 1 & .fitted >= 0, TRUE,
+                          FALSE),
+         is_pred2 = ifelse(w < 0.7 & .fitted >= 0, TRUE,
+                           FALSE),
+         is_pred3 = ifelse(w < 0.5 & .fitted >= 0, TRUE,
+                           FALSE),
+         is_pred4 = ifelse(w < 0.3 & .fitted >= 0, TRUE,
+                           FALSE)) %>%
   rename(wages_original = mean_hourly_wage)
+
+
 
 p4 <- ggplot(wages_rlm_dat) +
   geom_line(aes(x = year,
-                y = wages_rlm,
+                y = wages_rlm_1,
                 group = id),
             alpha = 0.1) +
   ggtitle("robust linear model")
@@ -207,99 +221,68 @@ p5 <- ggplot(wages_rlm_dat) +
             alpha = 0.1) +
   ggtitle("original data")
 
-wages_ext <- yowie::wages_hs2020 %>%
-  rename(wages_excl_extreme = mean_hourly_wage)
-
-p6 <- ggplot(wages_ext) +
+p6 <- ggplot(wages_rlm_dat) +
   geom_line(aes(x = year,
-                y = wages_excl_extreme,
+                y = wages_rlm_2,
                 group = id),
             alpha = 0.1) +
-  ggtitle("Exclude the extreme value")
+  ggtitle("original data")
+
+p7 <- ggplot(wages_rlm_dat) +
+  geom_line(aes(x = year,
+                y = wages_rlm_3,
+                group = id),
+            alpha = 0.1) +
+  ggtitle("original data")
+
+p8 <- ggplot(wages_rlm_dat) +
+  geom_line(aes(x = year,
+                y = wages_rlm_4,
+                group = id),
+            alpha = 0.1) +
+  ggtitle("original data")
+
+p5 + p4 + p6 + p7 + p8
 
 
 
-p5 + p6 + p4
 
-summary(wages_rlm_dat$wages_rlm)
-summary(wages_ext$wages_excl_extreme)
-
-wages_compare <- left_join(wages_ext, wages_rlm_dat, by = c("id", "year")) %>%
-  dplyr::select(id, year, wages_original, wages_excl_extreme, wages_rlm) %>%
+wages_compare <- wages_rlm_dat %>%
+  dplyr::select(id, year, wages_original, wages_rlm_1,
+                wages_rlm_2,
+                wages_rlm_3,
+                wages_rlm_4) %>%
   pivot_longer(c(-id, -year), names_to = "type", values_to = "wages")
 
 
 
-n_obs_sample_2 <- wages_compare %>% count(id) %>%
-  filter(n > 30)
+set.seed(20210228)
 
-set.seed(17021992)
+sample_id <- sample(unique(wages_compare$id), 20)
+sample <- subset(wages_compare, id %in% sample_id)
 
-sample_plot_2 <- sample(unique(n_obs_sample_2$id), 20)
-sample_plot_2 <- subset(wages_compare, id %in% sample_plot_2)
 
-ggplot(sample_plot_2) +
+
+ggplot(sample) +
   geom_line(aes(x = year,
                 y = wages,
                 colour = type,
                 linetype = type),
             alpha = 1) +
+  theme(axis.text.x = element_text(angle = 10, size = 5),
+        legend.position = "bottom") +
   facet_wrap(~id)
 
-library(brolgar)
-library(naniar)
-wages_rlm <- as_tsibble(x = wages_rlm_dat,
-                    key = id,
-                    index = year,
-                    regular = FALSE)
 
-wages_lm <- key_slope(wages_rlm,
-                      wages_rlm ~ year) %>%
-  left_join(wages_rlm, by = "id")
-
-#calculate the prediction value
-wages_lm <- wages_lm %>%
-  mutate(pred = .intercept + (.slope_year*year))
-
-wages_res <- wages_lm %>%
-  mutate(resid = wages_rlm - pred)
-
-wages_lm_var <- wages_res %>%
-  group_by(id) %>%
-  summarise(var = var(resid,
-                      na.rm = TRUE)) %>%
-  arrange(desc(var))
-
-top10 <- wages_lm_var %>%
-  slice_head(n =10) %>%
-  left_join(wages_rlm, by = "id")
-
-ggplot(top10,
-       aes(x = year,
-           y = wages_rlm)) +
-  geom_miss_point() +
-  geom_line() +
-  facet_wrap(~id)
-
-ggplot(filter(wages_compare, id %in% top10$id)) +
+ggplot(filter(sample, type %in% c("wages_original", "wages_rlm_3"))) +
   geom_line(aes(x = year,
                 y = wages,
                 colour = type,
                 linetype = type),
             alpha = 1) +
+  theme(axis.text.x = element_text(angle = 10, size = 5),
+        legend.position = "bottom") +
   facet_wrap(~id)
-
-
-sample_plot_3 <- subset(wages_rlm_dat, id %in% sample_id)
-
-p7 <- ggplot(sample_plot_3) +
-  geom_line(aes(x = year,
-                y = wages_rlm,
-                group = id))
-
-
-p1 + p7 + p3
-
 
 
 
