@@ -1,5 +1,5 @@
 ---
-title: "Longitudinal Data Cleaning"
+title: "Caring and Feeding the Wild Caught Data"
 subtitle: "A Case of The NLSY79 Data"
 author: "Dewi Lestari Amaliah, Dianne Cook, Emi Tanaka, Nicholas Tierney, Kate Hyde"
 date: "24/02/2021"
@@ -20,21 +20,21 @@ library(MASS)
 
 # Introduction
 
-Wild caught data are often untidy and are not free from anomaly. Hence it is should be tidied and cleaned before a further analysis conducted to prevent inappropriate usage of statistical method that may leads to a misleading result [@HuebnerMariannePhD2016Asat]. @HuebnerMariannePhD2016Asat also argued that data tidying and cleaning is the first part of Initial Data Analysis (IDA). The second and third steps are to explore the data properties and to document and report the process for the later formal analysis. This second step is actually the same with Chatfield's perspective on the goal of Initial Data Analysis [@Chatfield1985TIEo], which is to get the "feel" of the data. 
+Wild caught data are often untidy and are not free from anomaly. Hence, it is should be tidied and cleaned before a further analysis conducted to prevent inappropriate usage of statistical method that may leads to a misleading result [@HuebnerMariannePhD2016Asat]. @HuebnerMariannePhD2016Asat also argued that data tidying and cleaning is the first part of Initial Data Analysis (IDA). The second and third steps are to explore the data properties and to document and report the process for the later formal analysis. This second step is actually the same with Chatfield's perspective on the goal of Initial Data Analysis [@Chatfield1985TIEo], which is to get the "feel" of the data. 
 
-@DasuTamraparni2003Edma mentioned that data cleaning and exploration, which is the IDA notion, is a difficult task and determine 80 percent of data mining result. Despite its importance, this stage is often undervalued and neglected [@Chatfield1985TIEo]. @WickhamHadley2014TD also stated that there has been few research of the good practice of data cleaning. Furthermore, the decisions made in this stage is often unreported [@HuebnerMariannePhD2016Asat].
+@DasuTamraparni2003Edma mentioned that data cleaning and exploration, which is the IDA notion, is a difficult task and determine 80 percent of the data mining result. Despite its importance, this stage is often undervalued and neglected [@Chatfield1985TIEo]. @WickhamHadley2014TD also stated that there has been few research of the good practice of data cleaning. Furthermore, the decisions made in this stage is often unreported [@HuebnerMariannePhD2016Asat].
 
-This paper aims to demonstrate the steps of IDA, which is tidying, cleaning, and documenting the data. We used the longitudinal data of Americans from the National Longitudinal Survey of Youth 1979 or is known as the NLSY79. Particularly, we are interested in doing the IDA to the wages and several demographic variables of the cohort whose highest grade are up to 12th grade and the high school dropouts.  
+This paper aims to demonstrate the steps of IDA, which is tidying, cleaning, and documenting the data. We used the longitudinal data from the National Longitudinal Survey of Youth 1979 or is known as the NLSY79. Particularly, we are interested in doing the IDA to the wages and several demographic variables of the cohort whose highest grade are up to 12th grade and the high school dropouts.  
 
 # The NLSY79
 
-The NLSY79  is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of American Youth a sample of American youth born between 1957-64. The cohort originally included 12,686 respondents ages 14-22 when first interviewed in 1979. There were three race interviewed in the survey, which are Black, Hispanic, and non-Black/non-Hispanic. In 1984 interview, 1,079 members of the military sample were no longer eligible for interview; 201 respondents randomly selected from the military sample remained in the survey. Following the 1990 interview, none of the 1,643 members of the economically disadvantaged, non-Black/non-Hispanic sample were eligible for interview. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
+The NLSY79  is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth born between 1957-64. The cohort originally included 12,686 respondents ages 14-22 when first interviewed in 1979. There were three race interviewed in the survey, which are Black, Hispanic, and non-Black/non-Hispanic. In 1984 interview, 1,079 members of the military sample were no longer eligible for interview; 201 respondents randomly selected from the military sample remained in the survey. Following the 1990 interview, none of the 1,643 members of the economically disadvantaged, non-Black/non-Hispanic sample were eligible for interview. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
 
 The NLSY79 covers several topics including Education, Training & Achievement Scores; Employment; Household, Geography & Contextual Variables; Family Background; Dating, Marriage & Cohabitation, Sexual Activity, Pregnancy & Fertility; Children; Income, Assets & Program Participation; Health; Attitudes & Expectations; and Crime and Substance Use. 
 
 # The NLSY79 Data Cleaning 
 
-## Getting and Tidyng the Data
+## Getting and Tidying the Data
 
 The NLYS data is stored in a [database](https://www.nlsinfo.org/content/cohorts/nlsy79/get-data) and could be downloaded by variables. Several variables are available to be downloaded and could be browsed by index. For the wages data set, we only extracted these variables:
 

@@ -274,15 +274,79 @@ ggplot(sample) +
   facet_wrap(~id)
 
 
-ggplot(filter(sample, type %in% c("wages_original", "wages_rlm_3"))) +
+w05 <- ggplot(filter(sample, type %in% c("wages_original", "wages_rlm_3"))) +
   geom_line(aes(x = year,
                 y = wages,
                 colour = type,
                 linetype = type),
             alpha = 1) +
+  geom_point(aes(x = year,
+                y = wages,
+                colour = type),
+            alpha = 0.5,
+            size = 0.5) +
   theme(axis.text.x = element_text(angle = 10, size = 5),
         legend.position = "bottom") +
   facet_wrap(~id)
+
+
+w07 <- ggplot(filter(sample, type %in% c("wages_original", "wages_rlm_2"))) +
+  geom_line(aes(x = year,
+                y = wages,
+                colour = type,
+                linetype = type),
+            alpha = 1) +
+  geom_point(aes(x = year,
+                 y = wages,
+                 colour = type),
+             alpha = 0.5,
+             size = 0.5) +
+  theme(axis.text.x = element_text(angle = 10, size = 5),
+        legend.position = "bottom") +
+  facet_wrap(~id)
+
+w07
+
+
+w03 <- ggplot(filter(sample, type %in% c("wages_original", "wages_rlm_4"))) +
+  geom_line(aes(x = year,
+                y = wages,
+                colour = type,
+                linetype = type),
+            alpha = 1) +
+  geom_point(aes(x = year,
+                 y = wages,
+                 colour = type),
+             alpha = 0.5,
+             size = 0.5) +
+  theme(axis.text.x = element_text(angle = 10, size = 5),
+        legend.position = "bottom") +
+  facet_wrap(~id)
+
+w03
+
+
+w01 <- ggplot(filter(sample, type %in% c("wages_original", "wages_rlm_1"))) +
+  geom_line(aes(x = year,
+                y = wages,
+                colour = type,
+                linetype = type),
+            alpha = 1) +
+  geom_point(aes(x = year,
+                 y = wages,
+                 colour = type),
+             alpha = 0.5,
+             size = 0.5) +
+  theme(axis.text.x = element_text(angle = 10, size = 5),
+        legend.position = "bottom") +
+  facet_wrap(~id)
+
+w01
+
+
+w01 + w07 + w05 + w03
+
+
 
 
 
