@@ -10,7 +10,11 @@ bibliography: references.bib
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      message = FALSE,
+                      cache = TRUE, 
+                      cache.path = "cache/")
 library(tidyverse)
 library(brolgar)
 library(patchwork)
@@ -44,7 +48,7 @@ There are two ways to conduct the interview of the NLSY79, which are face to fac
 
 ## Getting and Tidying the Data
 
-The NLYS data is stored in a [database](https://www.nlsinfo.org/content/cohorts/nlsy79/get-data) and could be downloaded by variables. Several variables are available to be downloaded and could be browsed by index. For the wages data set, we only extracted these variables:
+The NLSY79 data are stored in a [database](https://www.nlsinfo.org/content/cohorts/nlsy79/get-data) and could be downloaded by variables. Several variables are available for download and could be browsed by index. For the wages data set, we only extracted these variables:
 
 - Education, Training & Achievement Scores
     -  Education -> Summary measures -> All schools -> By year -> Highest grade completed
