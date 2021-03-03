@@ -1,7 +1,12 @@
 ---
 title: "Caring and Feeding the Wild Caught Data"
 subtitle: "A Case of The NLSY79 Data"
-author: "Dewi Amaliah, Dianne Cook, Emi Tanaka, Nicholas Tierney, Kate Hyde"
+author: 
+ - Dewi Amaliah
+ - Kate Hyde
+ - Emi Tanaka
+ - Nicholas Tierney
+ - Dianne Cook
 date: "24/02/2021"
 output: 
   bookdown::pdf_document2:
