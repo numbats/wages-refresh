@@ -1,17 +1,44 @@
 ---
 title: "Caring and Feeding the Wild Caught Data"
 subtitle: "A Case of The NLSY79 Data"
-author: 
- - Dewi Amaliah
- - Kate Hyde
- - Emi Tanaka
- - Nicholas Tierney
- - Dianne Cook
-date: "24/02/2021"
-output: 
-  bookdown::pdf_document2:
-    toc : false
+authors:
+  - name: Dewi Amaliah
+    thanks: ""
+    department: Department of Econometrics and Business Statistics
+    affiliation: Monash University
+    location: Clayton, VIC 3800
+    email: ""
+  - name: Kate Hyde
+    thanks: ""
+    department: ""
+    affiliation: ""
+    location: ""
+    email: ""
+  - name: Emi Tanaka
+    thanks: emitanaka.org
+    department: Department of Econometrics and Business Statistics
+    affiliation: Monash University
+    location: Clayton, VIC 3800
+    email: emi.tanaka@monash.edu
+  - name: Nicholas Tierney
+    thanks: ""
+    department: ""
+    affiliation: ""
+    location: ""
+    email: ""
+  - name: Dianne Cook
+    thanks: dicook.org
+    department: Department of Econometrics and Business Statistics
+    affiliation: Monash University
+    location: Clayton, VIC 3800
+    email: dicook@monash.edu
 bibliography: references.bib
+biblio-style: unsrt
+#preamble: >
+output: 
+  rticles::arxiv_article:
+    keep_tex: false
+date: "24/02/2021"
 ---
 
 ```{r setup, include = FALSE}
@@ -19,7 +46,8 @@ knitr::opts_chunk$set(echo = TRUE,
                       warning = FALSE, 
                       message = FALSE,
                       cache = TRUE, 
-                      cache.path = "cache/")
+                      cache.path = "cache/",
+                      fig.path = "figures/")
 library(tidyverse)
 library(brolgar)
 library(patchwork)
@@ -362,7 +390,7 @@ kable(gender_race_table,
 
 ```
 
-```{r featureplot, echo = FALSE, fig.cap = "a) Pattern of Mean Hourly Wage of High School Cohort; b) The Three Features of the Cohort", fig.width=6, fig.height=4}
+```{r featureplot, echo = FALSE, fig.cap = "a) Pattern of Mean Hourly Wage of High School Cohort; b) The Three Features of the Cohort", fig.width=6, fig.height=4, cache = FALSE}
 
 spag <- wages_demog_hs %>%
   ggplot(aes(x = year,
