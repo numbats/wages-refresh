@@ -21,19 +21,24 @@ library(janitor)
 
 # Introduction
 
-*Explain a little bit about wild caught data*
+Just like the living things, the usage of the term "wild" could also be applied in the data domain. Wild data is the form of data that could be acquired from various source and might be generated from experiments, surveys, or may be from sensors or social media. Wild data also often associated with "Open Data", means that the data is freely accessible, modified, and shared by anyone for any purpose [@opendata]. 
 
-Wild caught data are often untidy and are not free from anomaly. Hence, it is should be tidied and cleaned before a further analysis conducted to prevent inappropriate usage of statistical method that may leads to a misleading result [@HuebnerMariannePhD2016Asat]. @HuebnerMariannePhD2016Asat also argued that data tidying and cleaning is the first part of Initial Data Analysis (IDA). The second and third steps are to explore the data properties and to document and report the process for the later formal analysis. This second step is actually the same with Chatfield's perspective on the goal of IDA [@Chatfield1985TIEo], which is to get the "feel" of the data. 
+Despite from its traits, open data is often have an issue with its quality in the sense of is often not tidy and clean. Hence, it is should be tidied and cleaned before a further analysis conducted to prevent inappropriate usage of statistical method that may leads to a misleading result [@HuebnerMariannePhD2016Asat]. @HuebnerMariannePhD2016Asat also argued that data tidying and cleaning is the first part of Initial Data Analysis (IDA). The second and third steps are to explore the data properties and to document and report the process for the later formal analysis. This second step is actually the same with Chatfield's perspective on the goal of IDA [@Chatfield1985TIEo], which is to get the "feel" of the data. In other word, IDA could be regarded as a way to assess the data quality. 
 
-@DasuTamraparni2003Edma mentioned that data cleaning and exploration, which is the IDA notion, is a difficult task and determine 80 percent of the data mining result. Despite its importance, this stage is often undervalued and neglected [@Chatfield1985TIEo]. @WickhamHadley2014TD also stated that there has been few research of the good practice of data cleaning. Furthermore, the decisions made in this stage is often unreported [@HuebnerMariannePhD2016Asat].
+@DasuTamraparni2003Edma mentioned that data cleaning and exploration, which is the IDA notion, is a difficult task and determine 80 percent of the data mining result. Despite its importance, this stage is often undervalued and neglected [@Chatfield1985TIEo]. @WickhamHadley2014TD also stated that there has been few research of the good practice of data cleaning. Furthermore, the decisions made in this stage is often unreported  in term that the IDA are often performed in an unplanned and unstructured way and is only shared among restricted party [@HuebnerMarianne2020Haar]. Further, In fact, documenting the result of IDA is utterly essential as the information preservation for the later statistical analyses and model building [@HuebnerMariannePhD2016Asat] and to avoid publication bias [@HuebnerMarianne2020Haar].
 
-This paper aims to demonstrate the steps of IDA, which is tidying, cleaning, and documenting the data. We used the longitudinal data from the National Longitudinal Survey of Youth 1979 or is known as the NLSY79.  *Why using NLSY79 data*. Particularly, we are interested in doing the IDA to the wages and several demographic variables of the cohort whose highest grade are up to 12th grade and the high school dropouts.  
+This paper aims to demonstrate the steps of IDA, which is tidying, cleaning, and documenting the data. We used the longitudinal data from the National Longitudinal Survey of Youth 1979 or is known as the NLSY79. Particularly, we are interested in doing the IDA to the wages and several demographic variables of the NLSY79 cohort whose highest grade are up to 12th grade and the high school dropouts.  
+
+We chose the NLSY data because this data has been played an important role in research in various discipline including economics, sociology, education, public policy, and public health for more than a quarter of century  [@MichaelRPergamit2001DWTN]. In addition, The NLS is considered as survey with high retention rates and carefully designed making it suitable for a life course research [@MichaelRPergamit2001DWTN] and [@eliznlsy]. According to @eliznlsy as of 2015, thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered as the most widely used and most important cohort in the NLS data sets [@MichaelRPergamit2001DWTN].
+
 
 # The NLSY79
 
-The NLSY79  is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth born between 1957-64. The cohort originally included 12,686 respondents ages 14-22 when first interviewed in 1979. There were three race interviewed in the survey, which are Black, Hispanic, and non-Black/non-Hispanic. In 1984 interview, 1,079 members of the military sample were no longer eligible for interview; 201 respondents randomly selected from the military sample remained in the survey. Following the 1990 interview, none of the 1,643 members of the economically disadvantaged, non-Black/non-Hispanic sample were eligible for interview. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
+The NLSY79  is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth and born between 1957-1964. The cohort originally included 12,686 respondents ages 14-22 when first interviewed in 1979. It was comprised of Blacks, Hispanics, economically disadvantaged non-Black non-Hispanics, and youth in the military. In 1984 and 1990, two sub-samples were dropped from the interview. They are  1,079 members of the military sample and 1,643 members of the economically disadvantaged non-Black non-Hispanics respectively. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
 
-The NLSY79 covers several topics including Education, Training & Achievement Scores; Employment; Household, Geography & Contextual Variables; Family Background; Dating, Marriage & Cohabitation, Sexual Activity, Pregnancy & Fertility; Children; Income, Assets & Program Participation; Health; Attitudes & Expectations; and Crime and Substance Use. 
+Although the main focus area of the NLSY is labor and employment, the NLSY also cover several other topics including education; training and achievement; household, geography and contextual variables; dating, marriage, cohabitation; sexual activity, pregnancy, and fertility; children; income, assets and program participation; health; attitudes and expectations; and crime and substance use. 
+
+There are two ways to conduct the interview of the NLSY, which are face to face interview or by telephone. In recent survey years, more than 90 percent of respondents were interviewed by telephone [@eliznlsy]. 
 
 # The NLSY79 Data Cleaning 
 
@@ -318,7 +323,7 @@ In this paper, we conducted an IDA or a preliminary data analysis to assess the 
 
 As stated previously, the respondents' ages ranged from 12 to 22 when first interviewed in 1979. Hence, we would like to validate whether all of the respondents were in this range. Additionally, the [NLSY](https://www.nlsinfo.org/content/cohorts/nlsy79/intro-to-the-sample/nlsy79-sample-introduction) also provided the number of the survey cohort by their gender (6,403 males and 6,283 females) and race (7,510 Non-Black/Non-Hispanic; 3,174 Black; 2,002 Hispanic). To validate this, we used the `full_demographic` i.e. the data with the survey years 1979 sample. Table \ref{tab:age-table} and Table \ref{tab:gender-race-table} suggest that the demographic data we had is consistent with the sample information in the database.
 
-```{r age-table}
+```{r age-table, echo = FALSE}
 age_table <- yowie::demographic_nlsy79 %>%
   group_by(age_1979) %>%
   count(age_1979) 
@@ -330,7 +335,7 @@ kable(age_table,
 ```
 
 
-```{r gender-race-table}
+```{r gender-race-table, echo = FALSE}
 gender_race_table <- yowie::demographic_nlsy79 %>%
   tabyl(gender, race) %>%
   adorn_totals(c("row", "col")) %>%
