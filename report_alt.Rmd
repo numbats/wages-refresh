@@ -39,6 +39,7 @@ output:
   rticles::arxiv_article:
     keep_tex: false
 date: "24/02/2021"
+always_allow_html: true
 ---
 
 ```{r setup, include = FALSE}
@@ -54,6 +55,7 @@ library(patchwork)
 library(kableExtra)
 library(MASS)
 library(janitor)
+library(DiagrammeR)
 ```
 
 # Introduction
@@ -101,7 +103,7 @@ The NLSY79 data are stored in a [database](https://www.nlsinfo.org/content/cohor
 The downloaded data set came in a csv (NLSY79.csv) and dat (NLSY79.dat) format. We only used the .dat format. It also came along with these files:
 
 - NLSY79.NLSY79: This is the tagset of variables that can be uploaded to the web site to recreate the data set.
-- NLSY79.R: This is an R script provided automatically by the database for reading the data into R and convert the variables' name and its label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set,  `categories_qnames` (the observations are stored in categorical/interval values) and `new_data_qnames` (the observations are stored in integer form). In this case, we only used the latter.  
+- NLSY79.R: This is an R script provided automatically by the database for reading the data into R and convert the variables' name and its label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set,  `categories_qnames` (the observations are stored in categorical/interval values) and `new_data_qnames` (the observations are stored in integer form).
 
 ```{r, cache = TRUE}
 source(here::here("data-raw/NLSY79/NLSY79.R"))
@@ -602,7 +604,9 @@ ggplot(wages_compare) +
 
 ```
 
-Finally, we saved the imputed data and set the appropriate data type for the variables. We also saved the NLSY79 cohort's demographic information and the high school dropout cohort in a separate data sets. 
+Finally, we saved the imputed data and set the appropriate data type for the variables. We also saved the NLSY79 cohort's demographic information and the high school dropout cohort in a separate data sets. Here, we defined high school dropouts as respondents who only completed either $9^{th}$, $10^{th}$, $11^{th}$ grade, or who completed $12^{th}$ when their age are at least 19 years old (means that these IDs being dropped out in certain year, but they returned back to high school to complete it). 
+
+The complete flow from the raw data to these data set is displayed in Figure \ref(fig:flowchart).
 
 ```{r}
 # select out the old value of mean hourly wage and change it with the wages_rlm value
@@ -648,7 +652,71 @@ wages_hs_dropout <- wages_hs2020 %>%
 
 ```
 
-# Summary
+
+
+
+```{r nrow, echo FALSE}
+a = nrow(categories_qnames)
+b = nrow(full_demographics)
+d = eligible_wages %>%
+  group_by(id) %>%
+  count(id) %>%
+  nrow()
+n_hgc = wages_hs2020 %>%
+  group_by(id) %>%
+  count(id) %>%
+  nrow()
+n_obs_hgc = nrow(wages_hs2020)
+n_obs_hgc_pred = filter(wages_hs2020, is_pred == TRUE) %>%
+  nrow()
+
+n_do = wages_hs_dropout %>%
+  group_by(id) %>%
+  count(id) %>%
+  nrow()
+n_obs_do = nrow(wages_hs_dropout)
+n_obs_do_pred = filter(wages_hs_dropout, is_pred == TRUE) %>%
+  nrow()
+```
+
+
+```{r flowchart, fig.cap="The stages of data filtering from the raw data to get three datasets that are contained in an R package called 'yowie', 'n' means the number of ID, while 'n_obs' means the number of observations."}
+
+grViz("digraph flowchart {
+      node [fontname = Helvetica, shape = rectangle]        
+      tab1 [label = '@@1']
+      tab2 [label = '@@2']
+      tab3 [label = '@@3']
+      tab4 [label = '@@4']
+      tab5 [label = '@@5']
+      tab6 [label = '@@6']
+      tab7 [label = '@@7']
+
+      tab1 -> tab2;
+      tab1 -> tab3;
+      tab1 -> tab4 -> tab5 -> tab6;
+      tab5 -> tab7;
+      tab6 -> tab7;
+      tab2 -> tab7
+      }
+
+      [1]: paste0('NLSY79, n = ', a)
+      [2]: paste0('Extract demographic variable, n = ', b)
+      [3]: paste0('Exclude ', a - d, ' IDs whose hourly rate is missing')
+      [4]: paste0('Eligible ID, n = ', d)
+      [5]: paste0('Cohort whose hgc is up to 12th grade and \\n participated at least 5 years in the survey, \\n n = ', n_hgc, ', n_obs = ', n_obs_hgc, ' \\n (', n_obs_hgc_pred, ' observations are predicted value)')
+      [6]: paste0('High school dropouts cohort, \\n n = ', n_do, ', n_obs = ', n_obs_do, ' \\n (', n_obs_do_pred, ' observations are predicted value)')
+      [7]: 'yowie Package'
+      ")
+```
+
+
+
+
+# Exploratory Data Analysis
+
+
+# Summary and Discussion
 
 Wild caught data is often not tidy and clean. IDA, as a way to assess data quality should be performed and most importantly documented to avoid bias publication. In this paper, we performed an IDA on the NLSY79 data, specifically the wages data. We chose this data set because it play an important role in various discipline of research, especially the life course research. Getting the data from the database is pretty straightforward. However, it cannot be directly deployed to the analysis since the form is untidy. Data exploration also found some anomalies in the wages data where some IDs had an extremely high wages and large spikes. Hence, we performed data wrangling to tidy the data and robust linear regression model for each ID to find and treat the anomalies. We used the robustness weight of  less than 0.5 as threshold of the wages considered as outliers. 
 
