@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  11 MAR 2021 01:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  11 MAR 2021 02:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -973,41 +973,24 @@ Package xcolor Warning: Incompatible color definition on input line 1044.
 
 Package xcolor Warning: Incompatible color definition on input line 1044.
 
+<figures/flowchart-1.pdf, id=176, 1003.75pt x 281.05pt>
+File: figures/flowchart-1.pdf Graphic file (type pdf)
+<use figures/flowchart-1.pdf>
+Package pdftex.def Info: figures/flowchart-1.pdf  used on input line 1048.
+(pdftex.def)             Requested size: 1003.74756pt x 281.0493pt.
 
-Package xcolor Warning: Incompatible color definition on input line 1046.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1070.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1070.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1072.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1101.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1101.
-
-
-Underfull \vbox (badness 3108) detected at line 1101
+Overfull \hbox (533.99257pt too wide) in paragraph at lines 1048--1051
+ [][] 
  []
 
-
-Package xcolor Warning: Incompatible color definition on input line 1101.
-
-[14]
-
-Package xcolor Warning: Incompatible color definition on input line 1101.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1101.
-
-[15]
+[14pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.1073 
+        <./figures/flowchart-1.pdf>]
 No file report_alt.bbl.
-[16] (./report_alt.aux)
+[15] (./report_alt.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1018,13 +1001,13 @@ Package rerunfilecheck Info: File `report_alt.out' has not changed.
 (rerunfilecheck)             Checksum: 091F72A6F33B3CC5FBF91F02C19EC2F2;1795.
  ) 
 Here is how much of TeX's memory you used:
- 13224 strings out of 481009
- 205819 string characters out of 5908205
+ 13229 strings out of 481009
+ 205962 string characters out of 5908205
  671774 words of memory out of 5000000
- 29915 multiletter control sequences out of 15000+600000
+ 29920 multiletter control sequences out of 15000+600000
  460815 words of font info for 138 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 83i,12n,88p,646b,478s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 83i,11n,88p,646b,478s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/
 Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/
 Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/User
@@ -1042,10 +1025,10 @@ aliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on report_alt.pdf (16 pages, 835941 bytes).
+Output written on report_alt.pdf (15 pages, 843362 bytes).
 PDF statistics:
- 287 PDF objects out of 1000 (max. 8388607)
- 246 compressed objects within 3 object streams
- 64 named destinations out of 1000 (max. 500000)
- 32357 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 293 PDF objects out of 1000 (max. 8388607)
+ 250 compressed objects within 3 object streams
+ 63 named destinations out of 1000 (max. 500000)
+ 32362 words of extra memory for PDF output out of 35830 (max. 10000000)
 

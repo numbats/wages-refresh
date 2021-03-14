@@ -237,7 +237,14 @@ hours_wages <- left_join(rates_all,
 # set the 0 value in rate_per_hour as NA 
   mutate(rate_per_hour = ifelse(rate_per_hour == 0, NA,
                                 rate_per_hour))
+
+
+
+hours_wages <- hours_wages %>%
+  mutate(rate_per_hour_adj = ifelse(as.numeric(year) < 1994 & rate_per_hour > 1000, 1000,
+                                    ifelse(as.numeric(year) >= 1994 & rate_per_hour > 5000, 5000, rate_per_hour)))
 ```
+
 
 
 
@@ -245,13 +252,13 @@ hours_wages <- left_join(rates_all,
 
 # calculate number of jobs that a person has in one year
 no_job <- hours_wages %>%
-  filter(!is.na(rate_per_hour)) %>%
+  filter(!is.na(rate_per_hour_adj)) %>%
   group_by(id, year) %>%
-  summarise(no_jobs = length(rate_per_hour))
+  summarise(no_jobs = length(rate_per_hour_adj))
 
 # filter the observations with available rate per hour
 eligible_wages <- hours_wages %>%
-  filter(!is.na(rate_per_hour)) %>%
+  filter(!is.na(rate_per_hour_adj)) %>%
   left_join(no_job, by = c("id", "year")) 
 
 # calcultae the mean_hourly_wage
@@ -263,13 +270,13 @@ mean_hourly_wage <-
   eligible_wages %>%
   group_by(id, year) %>%
   #calculate the weighted mean if the number of jobs > 1
-  mutate(wages = ifelse(no_jobs == 1, rate_per_hour/100,
-                        weighted.mean(rate_per_hour, hours_work, na.rm = TRUE)/100)) %>%
+  mutate(wages = ifelse(no_jobs == 1, rate_per_hour_adj/100,
+                        weighted.mean(rate_per_hour_adj, hours_work, na.rm = TRUE)/100)) %>%
   #give the flag if it the weighted mean
   mutate(flag1 = ifelse(!is.na(wages) & no_jobs != 1, 1,
                         0)) %>%
   #calculate the arithmetic mean for the na
-  mutate(wages = ifelse(is.na(wages), mean(rate_per_hour)/100,
+  mutate(wages = ifelse(is.na(wages), mean(rate_per_hour_adj)/100,
                         wages))
   
 

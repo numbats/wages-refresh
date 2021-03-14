@@ -56,13 +56,17 @@ library(kableExtra)
 library(MASS)
 library(janitor)
 library(DiagrammeR)
+library(DiagrammeRsvg)
+library(rsvg)
+library(knitr)
+library(webshot)
 ```
 
 # Introduction
 
-Just like the living things, the usage of the term "wild" could also be applied in the data domain. Wild data is the form of data that could be acquired from various source and might be generated from experiments, surveys, or may be from sensors or social media. Wild data also often associated with "Open Data", means that the data are freely accessible, modified, and shared by anyone for any purpose [@opendata]. 
+The idea of "Open Data" is that the data are freely accessible, modified, and shared by anyone for any purpose [@opendata]. Due too its openness, Open Data are sometimes used and modified to be incorporated as the data in statistical text book or in research. Despite its traits, open data often have an issue with its quality in the sense that it is often not tidy and clean. Hence, it should be tidied and cleaned before further analysis to prevent inappropriate usage of statistical method that may lead to a misleading result [@HuebnerMariannePhD2016Asat]. 
 
-Despite its traits, wild data often have an issue with its quality in the sense that it is often not tidy and clean. Hence, it should be tidied and cleaned before further analysis to prevent inappropriate usage of statistical method that may lead to a misleading result [@HuebnerMariannePhD2016Asat]. @HuebnerMariannePhD2016Asat also argued that data tidying and cleaning is the first part of Initial Data Analysis (IDA). The second and third steps are to explore the data properties and to document and report the process for the later formal analysis. This second step is the same with Chatfield's perspective on the goal of IDA [@Chatfield1985TIEo], which is to get the "feel" of the data. In other word, IDA could be regarded as a way to assess the data quality. 
+@HuebnerMariannePhD2016Asat also argued that data tidying and cleaning is the first part of Initial Data Analysis (IDA). The second and third steps are to explore the data properties and to document and report the process for the later formal analysis. This second step is the same with Chatfield's perspective on the goal of IDA [@Chatfield1985TIEo], which is to get the "feel" of the data. In other word, IDA could be regarded as a way to assess the data quality. 
 
 @DasuTamraparni2003Edma mentioned that data cleaning and exploration, which is the IDA notion, is a difficult task and determine 80 percent of the data mining result. Despite its importance, this stage is often undervalued and neglected [@Chatfield1985TIEo]. @WickhamHadley2014TD also stated that there has been few research of the good practice of data cleaning. Furthermore, the decisions made in this stage is often unreported  in term that the IDA are often performed in an unplanned and unstructured way and is only shared among restricted party [@HuebnerMarianne2020Haar]. Furthermore, documenting the result of IDA is utterly essential as the information preservation for the downstream statistical analyses and model building [@HuebnerMariannePhD2016Asat] and to avoid publication bias [@HuebnerMarianne2020Haar].
 
@@ -645,8 +649,10 @@ wages_hs_dropout <- wages_hs2020 %>%
   filter((hgc %in% c("9TH GRADE",
                      "10TH GRADE",
                      "11TH GRADE")) |
-           (hgc == "12TH GRADE" &
-              age_hgc >= 19)) %>%
+          (hgc == "12TH GRADE" &
+              age_hgc > 19)) %>%
+  filter(age_1979 <= 17,
+         gender == "MALE") %>%
   dplyr::select(-dob,
          -age_hgc)
 
@@ -655,7 +661,7 @@ wages_hs_dropout <- wages_hs2020 %>%
 
 
 
-```{r nrow, echo FALSE}
+```{r nrow, echo=FALSE}
 a = nrow(categories_qnames)
 b = nrow(full_demographics)
 d = eligible_wages %>%
@@ -680,9 +686,9 @@ n_obs_do_pred = filter(wages_hs_dropout, is_pred == TRUE) %>%
 ```
 
 
-```{r flowchart, fig.cap="The stages of data filtering from the raw data to get three datasets that are contained in an R package called 'yowie', 'n' means the number of ID, while 'n_obs' means the number of observations."}
+```{r flowchart, echo=FALSE, fig.cap="The stages of data filtering from the raw data to get three datasets that are contained in an R package called yowie, n means the number of ID, while n_obs means the number of observations.", fig.height=3, fig.width=3}
 
-grViz("digraph flowchart {
+fc <- grViz("digraph flowchart {
       node [fontname = Helvetica, shape = rectangle]        
       tab1 [label = '@@1']
       tab2 [label = '@@2']
@@ -707,9 +713,11 @@ grViz("digraph flowchart {
       [5]: paste0('Cohort whose hgc is up to 12th grade and \\n participated at least 5 years in the survey, \\n n = ', n_hgc, ', n_obs = ', n_obs_hgc, ' \\n (', n_obs_hgc_pred, ' observations are predicted value)')
       [6]: paste0('High school dropouts cohort, \\n n = ', n_do, ', n_obs = ', n_obs_do, ' \\n (', n_obs_do_pred, ' observations are predicted value)')
       [7]: 'yowie Package'
-      ")
-```
+      ",
+      height = 200)
 
+fc
+```
 
 
 
@@ -723,5 +731,7 @@ Wild caught data is often not tidy and clean. IDA, as a way to assess data quali
 - From this IDA, we learned that the open data is not only the matter of opennes, but also how that data could be analyzed flexibly with a tidy dataset. Hence, our recommendation that the database for every open data should be built to produce a tidy data. 
 
 - For the future study, the room for improvement: linear mixed model and more sophisticated method to determine the threshold?
+
+- Data provider should provide validation rules for data user
 
 
