@@ -227,8 +227,17 @@ wages_compare <- wages_rlm_dat %>%
   pivot_longer(c(-id, -year), names_to = "type", values_to = "wages")
 
 
+ggplot(filter(wages_compare, type == "wages_rlm_5")) +
+  geom_line(aes(x = year,
+                y = wages,
+                group = id),
+            alpha = 0.1)
 
-set.seed(333222123)
+
+
+
+
+set.seed(156370113)
 
 sample_id <- sample(unique(wages_compare$id), 20)
 sample <- subset(wages_compare, id %in% sample_id)
@@ -265,6 +274,8 @@ w05 <- ggplot(filter(sample, type %in% c("wages_original", "wages_rlm_5"))) +
 
 w05
 
+
+## INSPECT OBS WITH PREDICTED VALUE (THRESHOL < 0.1)
 wages_rlm_zero_pone <- wages_rlm_dat %>%
   dplyr::select(id, year, wages_original, w, wages_rlm_5, is_pred5)
 
@@ -309,11 +320,31 @@ ggplot(filter(sum_pred_filtered2, type %in% c("wages_original", "wages_rlm_5")))
 
 
 
+## CHECK WAGES MORE THAN US$ 150
+
+id_more_than_150 <- wages_rlm_zero_pone %>%
+  filter(wages_rlm_5 > 150)
 
 
 
+wages_more_than_150 <- wages_compare %>%
+  filter(id %in% id_more_than_150$id)
 
 
+ggplot(filter(wages_more_than_150, type %in% c("wages_original", "wages_rlm_5"))) +
+  geom_line(aes(x = year,
+                y = wages,
+                colour = type,
+                linetype = type),
+            alpha = 1) +
+  geom_point(aes(x = year,
+                 y = wages,
+                 colour = type),
+             alpha = 0.5,
+             size = 1) +
+  theme(axis.text.x = element_text(angle = 10, size = 5),
+        legend.position = "bottom") +
+  facet_wrap(~id, scales = "free_y")
 
 
 
