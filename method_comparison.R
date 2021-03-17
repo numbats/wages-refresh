@@ -142,7 +142,9 @@ ggplot(sample) +
 
 # plot by threshold
 
-w05 <- ggplot(filter(sample, type %in% c("wages_original", "wages_rlm_5"))) +
+for_plot <- dplyr::filter(sample, type %in% c("wages_original", "wages_rlm_5"))
+
+w05 <- ggplot(for_plot) +
   geom_line(aes(x = year,
                 y = wages,
                 colour = type,
