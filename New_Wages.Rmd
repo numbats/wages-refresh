@@ -63,7 +63,7 @@ categories_qnames <- read_rds(here::here("data-raw/NLSY79/NLSY79-categories_qnam
 ## tidy the date of birth data
 
 dob_tidy <- new_data_qnames %>%
-  select(CASEID_1979,
+  dplyr::select(CASEID_1979,
          starts_with("Q1-3_A~")) %>%
   mutate(dob_year = case_when(
                     # if the years recorded in both sets match, take 79 data
@@ -85,7 +85,7 @@ dob_tidy <- new_data_qnames %>%
                       (`Q1-3_A~Y_1979` != `Q1-3_A~Y_1981`) & !is.na(`Q1-3_A~Y_1981`) ~ TRUE,
                       (`Q1-3_A~Y_1979` == `Q1-3_A~Y_1981`) & (`Q1-3_A~M_1979` == `Q1-3_A~M_1981`) ~ FALSE,
                       is.na(`Q1-3_A~M_1981`) | is.na(`Q1-3_A~Y_1981`) ~ FALSE)) %>%
-  select(CASEID_1979,
+  dplyr::select(CASEID_1979,
          dob_month,
          dob_year,
          dob_conflict)
@@ -95,7 +95,7 @@ dob_tidy <- new_data_qnames %>%
 
 ## tidy the sex and race data
 demog_tidy <- categories_qnames %>%
-  select(CASEID_1979,
+  dplyr::select(CASEID_1979,
          SAMPLE_RACE_78SCRN,
          SAMPLE_SEX_1979) %>%
   rename(gender = SAMPLE_SEX_1979,
@@ -108,7 +108,7 @@ demog_tidy <- categories_qnames %>%
 demog_education <- new_data_qnames %>%
   as_tibble() %>%
   rename(HGC_2018 = `Q3-4_2018`) %>%
-  select(CASEID_1979,
+  dplyr::select(CASEID_1979,
          starts_with("HGCREV"),
          "HGC_2012",
          "HGC_2014",
@@ -119,7 +119,7 @@ demog_education <- new_data_qnames %>%
                values_to = "grade") %>%
   separate("var", c("var", "year"), sep = -4) %>%
   filter(!is.na(grade)) %>%
-  select(-var)
+  dplyr::select(-var)
   
 ```
 
@@ -133,7 +133,7 @@ highest_year <- demog_education %>%
   filter(hgc_i == grade) %>%
   filter(year == first(year)) %>%
   rename(yr_hgc = year) %>%
-  select(CASEID_1979, yr_hgc, hgc_i) %>%
+  dplyr::select(CASEID_1979, yr_hgc, hgc_i) %>%
   ungroup() %>%
   mutate('hgc' = ifelse(hgc_i == 0, "NONE",
                                   ifelse(hgc_i == 1, "1ST GRADE",
@@ -167,12 +167,12 @@ year_A <- c(1979:1987, 1993)
 get_hour <- function(year){
   if(year %in% year_A){
    temp <- new_data_qnames %>%
-    select(CASEID_1979,
+    dplyr::select(CASEID_1979,
             starts_with("QES-52A") &
               ends_with(as.character(year)))} 
   else{
     temp <- new_data_qnames %>%
-    select(CASEID_1979,
+    dplyr::select(CASEID_1979,
             starts_with("QES-52D") &
               ends_with(as.character(year)))} 
     temp %>% 
@@ -205,7 +205,7 @@ hours_all <- bind_rows(!!!hours)
 ```{r}
 get_rate <- function(year) {
   new_data_qnames %>%
-     select(CASEID_1979,
+     dplyr::select(CASEID_1979,
             starts_with("HRP") &
               ends_with(as.character(year))) %>%
     pivot_longer(!CASEID_1979, names_to = "job", values_to = "rate_per_hour") %>%
@@ -238,11 +238,6 @@ hours_wages <- left_join(rates_all,
   mutate(rate_per_hour = ifelse(rate_per_hour == 0, NA,
                                 rate_per_hour))
 
-
-
-hours_wages <- hours_wages %>%
-  mutate(rate_per_hour_adj = ifelse(as.numeric(year) < 1994 & rate_per_hour > 1000, 1000,
-                                    ifelse(as.numeric(year) >= 1994 & rate_per_hour > 5000, 5000, rate_per_hour)))
 ```
 
 
@@ -252,13 +247,13 @@ hours_wages <- hours_wages %>%
 
 # calculate number of jobs that a person has in one year
 no_job <- hours_wages %>%
-  filter(!is.na(rate_per_hour_adj)) %>%
+  filter(!is.na(rate_per_hour)) %>%
   group_by(id, year) %>%
-  summarise(no_jobs = length(rate_per_hour_adj))
+  summarise(no_jobs = length(rate_per_hour))
 
 # filter the observations with available rate per hour
 eligible_wages <- hours_wages %>%
-  filter(!is.na(rate_per_hour_adj)) %>%
+  filter(!is.na(rate_per_hour)) %>%
   left_join(no_job, by = c("id", "year")) 
 
 # calcultae the mean_hourly_wage
@@ -270,13 +265,13 @@ mean_hourly_wage <-
   eligible_wages %>%
   group_by(id, year) %>%
   #calculate the weighted mean if the number of jobs > 1
-  mutate(wages = ifelse(no_jobs == 1, rate_per_hour_adj/100,
-                        weighted.mean(rate_per_hour_adj, hours_work, na.rm = TRUE)/100)) %>%
+  mutate(wages = ifelse(no_jobs == 1, rate_per_hour/100,
+                        weighted.mean(rate_per_hour, hours_work, na.rm = TRUE)/100)) %>%
   #give the flag if it the weighted mean
   mutate(flag1 = ifelse(!is.na(wages) & no_jobs != 1, 1,
                         0)) %>%
   #calculate the arithmetic mean for the na
-  mutate(wages = ifelse(is.na(wages), mean(rate_per_hour_adj)/100,
+  mutate(wages = ifelse(is.na(wages), mean(rate_per_hour)/100,
                         wages))
   
 
@@ -299,7 +294,7 @@ mhw_to_write <- mean_hourly_wage %>%
   rename(mean_hourly_wage = wages) %>%
   mutate(is_wm = ifelse(flag1 == 1, TRUE,
                         FALSE)) %>%
-  select(-flag1)
+  dplyr::select(-flag1)
 ```
 
 ```{r}
@@ -309,7 +304,7 @@ summary(mhw_to_write$mean_hourly_wage)
 ```{r}
 ggplot(mhw_to_write) +
   geom_boxplot(aes(x = mean_hourly_wage)) +
-  facet_wrap(~year)
+  facet_wrap(~year, scales = "free_x")
 ```
 ```{r}
 write.csv(mhw_to_write, here::here("data-raw/wages-high-school-demo/data-frames/tidy_employment_weighted.csv"))

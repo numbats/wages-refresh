@@ -27,121 +27,6 @@ wages_demog <- wages_demog %>%
 # filter only the id with high school education
 wages_demog_hs <- wages_demog  %>% filter(grepl("GRADE", hgc))
 
-ggplot(wages_demog_hs, aes(x = mean_hourly_wage)) +
-  geom_boxplot()
-
-
-# get the number of observations
-n_obs <- wages_demog_hs %>% count(id)
-
-# sample some IDs
-
-set.seed(20210218)
-
-sample_id <- sample(unique(n_obs$id), 100)
-sample <- subset(wages_demog_hs, id %in% sample_id)
-
-# check the extreme value
-
-sample_ext <- sample %>%
-  group_by(id) %>%
-  identify_outliers("mean_hourly_wage") %>%
-  dplyr::select(year, id, is.outlier, is.extreme)
-
-# check the influential value using robust linear mixed model
-
-rfm <- rlmer(mean_hourly_wage ~ (1|year) + (1|id), sample)
-summary(rfm)
-
-weight_obs <- as.vector(getME(rfm, "w_e"))
-
-
-# join the weight with the data
-sample_weight <- cbind(sample, weight_obs)
-
-
-# join the extreme value with the data
-wages_hs_sample <- left_join(sample_weight, sample_ext, by = c("id", "year"))
-
-# flag the extreme value and outlier flag based on IQR methos
-wages_hs_sample <- wages_hs_sample %>%
-  mutate(is.outlier = ifelse(is.na(is.outlier), FALSE, is.outlier),
-         is.extreme = ifelse(is.na(is.extreme), FALSE, is.extreme))
-
-# add the prediction and residual of robust lmm model
-wages_hs_sample <- wages_hs_sample %>%
-  add_predictions(rfm, var = "pred") %>%
-  add_residuals(rfm, var = "res")
-
-# create a clean wages data based on robust lmm model
-wages_hs_sample <- wages_hs_sample %>%
-  mutate(wages_cleaned_rlmm = ifelse(weight_obs != 1, pred,
-                                     mean_hourly_wage),
-         is_pred = ifelse(weight_obs != 1, TRUE, FALSE),
-         wages_cleaned_rlmm = ifelse(wages_cleaned_rlmm < 0, mean_hourly_wage, wages_cleaned_rlmm))
-
-summary(wages_hs_sample$wages_cleaned_rlmm)
-
-p1 <- ggplot(wages_hs_sample) +
-  geom_line(aes(x = year,
-                y = wages_cleaned_rlmm,
-                group = id), alpha = 0.3)
-
-
-# create a clean wages data based on IQR method
-
-
-# make the extreme values as NA and give the flag to that observation
-# since we're gonna do locf
-wages_hs_sample <- wages_hs_sample %>%
-  mutate(wages_clean_ext = ifelse(is.extreme == TRUE, NA, mean_hourly_wage),
-         is_locf = ifelse(is.na(wages_clean_ext), TRUE, FALSE))
-
-
-# doing locf
-for_locf <- wages_hs_sample %>%
-  dplyr::select(id, year, wages_clean_ext) %>%
-  group_by(id) %>%
-  na.locf()
-
-
-# join back the locf value to wages_demog_hs
-wages_hs_sample <- left_join(wages_hs_sample, for_locf, by = c("id", "year")) %>%
-  dplyr::select(-wages_clean_ext.x) %>%
-  rename(wages_clean_ext = wages_clean_ext.y)
-
-
-p2 <- ggplot(wages_hs_sample) +
-  geom_line(aes(x = year,
-                y = wages_clean_ext,
-                group = id), alpha = 0.3)
-
-p3 <- ggplot(wages_hs_sample) +
-  geom_line(aes(x = year,
-                y = mean_hourly_wage,
-                group = id), alpha = 0.3)
-
-p1 + p2 + p3
-
-
-wages_sample_long <- wages_hs_sample %>%
-  dplyr::select(id, year, mean_hourly_wage, wages_cleaned_rlmm, wages_clean_ext) %>%
-  pivot_longer(c(-id, -year), names_to = "type", values_to = "wages")
-
-n_obs_sample <- wages_sample_long %>% count(id) %>%
-  filter(n > 30)
-
-set.seed(31251587)
-
-sample_plot <- sample(unique(n_obs_sample$id), 20)
-sample_plot <- subset(wages_sample_long, id %in% sample_plot)
-
-ggplot(sample_plot) +
-  geom_line(aes(x = year,
-                y = wages,
-                colour = type)) +
-  facet_wrap(~id)
-
 
 ##### ROBUST LINEAR MODEL
 
@@ -197,7 +82,7 @@ wages_rlm_dat <- id_aug_w %>%
                               mean_hourly_wage),
          wages_rlm_5 = ifelse(w < 0.1 & .fitted >= 0, .fitted,
                               mean_hourly_wage),
-         wages_rlm_6 = ifelse(w < 0.2 & .fitted >= 0, .fitted,
+         wages_rlm_6 = ifelse(w < 0.15 & .fitted >= 0, .fitted,
                               mean_hourly_wage)) %>%
   mutate(is_pred1 = ifelse(w != 1 & .fitted >= 0, TRUE,
                           FALSE),
@@ -209,7 +94,7 @@ wages_rlm_dat <- id_aug_w %>%
                            FALSE),
          is_pred5 = ifelse(w < 0.1 & .fitted >= 0, TRUE,
                            FALSE),
-         is_pred6 = ifelse(w < 0.2 & .fitted >= 0, TRUE,
+         is_pred6 = ifelse(w < 0.15 & .fitted >= 0, TRUE,
                            FALSE)) %>%
   rename(wages_original = mean_hourly_wage)
 
@@ -227,7 +112,7 @@ wages_compare <- wages_rlm_dat %>%
   pivot_longer(c(-id, -year), names_to = "type", values_to = "wages")
 
 
-ggplot(filter(wages_compare, type == "wages_rlm_5")) +
+ggplot(filter(wages_compare, type == "wages_rlm_6")) +
   geom_line(aes(x = year,
                 y = wages,
                 group = id),
@@ -252,7 +137,7 @@ ggplot(sample) +
             alpha = 1) +
   theme(axis.text.x = element_text(angle = 10, size = 5),
         legend.position = "bottom") +
-  facet_wrap(~id)
+  facet_wrap(~id, scales = "free_y")
 
 
 # plot by threshold
@@ -275,7 +160,7 @@ w05 <- ggplot(filter(sample, type %in% c("wages_original", "wages_rlm_5"))) +
 w05
 
 
-## INSPECT OBS WITH PREDICTED VALUE (THRESHOL < 0.1)
+## INSPECT OBS WITH PREDICTED VALUE (THRESHOLD < 0.1)
 wages_rlm_zero_pone <- wages_rlm_dat %>%
   dplyr::select(id, year, wages_original, w, wages_rlm_5, is_pred5)
 
@@ -303,7 +188,51 @@ sum_pred_filtered2 <- wages_compare %>%
 
 
 
-ggplot(filter(sum_pred_filtered2, type %in% c("wages_original", "wages_rlm_5"))) +
+ggplot(filter(sum_pred_filtered2, type %in% c("wages_original", "wages_rlm_5", "wages_rlm_6"))) +
+  geom_line(aes(x = year,
+                y = wages,
+                colour = type,
+                linetype = type),
+            alpha = 1) +
+  geom_point(aes(x = year,
+                 y = wages,
+                 colour = type),
+             alpha = 0.5,
+             size = 1) +
+  theme(axis.text.x = element_text(angle = 10, size = 5),
+        legend.position = "bottom") +
+  facet_wrap(~id, scales = "free_y")
+
+
+## INSPECT OBS WITH PREDICTED VALUE (THRESHOLD < 0.15)
+wages_rlm_zero_ponefive <- wages_rlm_dat %>%
+  dplyr::select(id, year, wages_original, w, wages_rlm_6, is_pred6)
+
+sum_id2 <- wages_rlm_zero_ponefive %>%
+  group_by(id) %>%
+  summarise(n_obs = length(id))
+
+sum_pred2 <- wages_rlm_zero_ponefive %>%
+  filter(is_pred6 == TRUE) %>%
+  group_by(id) %>%
+  summarise(n_pred = length(id))
+
+
+summarize_pred2 <- left_join(sum_pred2, sum_id2, by = "id") %>%
+  mutate(perc_pred = (n_pred/n_obs)*100) %>%
+  arrange(perc_pred, decrease = TRUE) %>%
+  dplyr::select(id, n_pred, perc_pred)
+
+
+sum_pred_filtered3 <- summarize_pred2 %>%
+  filter(perc_pred > 10)
+
+sum_pred_filtered4 <- wages_compare %>%
+  filter(id %in% sum_pred_filtered3$id)
+
+
+
+ggplot(filter(sum_pred_filtered4, type %in% c("wages_rlm_5") & id == 4495)) +
   geom_line(aes(x = year,
                 y = wages,
                 colour = type,
@@ -347,4 +276,6 @@ ggplot(filter(wages_more_than_150, type %in% c("wages_original", "wages_rlm_5"))
   facet_wrap(~id, scales = "free_y")
 
 
+summary(wages_rlm_dat$wages_rlm_5)
+summary(wages_rlm_dat$wages_rlm_6)
 

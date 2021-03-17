@@ -1,5 +1,5 @@
 ---
-title: "Caring and Feeding the Wild Caught Data"
+title: "From Open to Text Book Data: The Role of Initial Data Analysis in Longitudinal Data Cleaning"
 subtitle: "A Case of The NLSY79 Data"
 authors:
   - name: Dewi Amaliah
@@ -64,15 +64,18 @@ library(webshot)
 
 # Introduction
 
-The idea of "Open Data" is that the data are freely accessible, modified, and shared by anyone for any purpose [@opendata]. Due too its openness, Open Data are sometimes used and modified to be incorporated as the data in statistical text book or in research. Despite its traits, open data often have an issue with its quality in the sense that it is often not tidy and clean. Hence, it should be tidied and cleaned before further analysis to prevent inappropriate usage of statistical method that may lead to a misleading result [@HuebnerMariannePhD2016Asat]. 
+The idea of "Open Data" is that the data are freely accessible, modified, and shared by anyone for any purpose [@opendata]. Due too its openness, Open Data are sometimes utilized and incorporated as the example data in statistical text book or in research. Despite its traits, open data often have an issue with its quality in the sense that it is often not tidy and clean. Hence, it should be tidied and cleaned before further analysis to prevent inappropriate usage of statistical method that may lead to a misleading result [@HuebnerMariannePhD2016Asat]. 
 
 @HuebnerMariannePhD2016Asat also argued that data tidying and cleaning is the first part of Initial Data Analysis (IDA). The second and third steps are to explore the data properties and to document and report the process for the later formal analysis. This second step is the same with Chatfield's perspective on the goal of IDA [@Chatfield1985TIEo], which is to get the "feel" of the data. In other word, IDA could be regarded as a way to assess the data quality. 
 
-@DasuTamraparni2003Edma mentioned that data cleaning and exploration, which is the IDA notion, is a difficult task and determine 80 percent of the data mining result. Despite its importance, this stage is often undervalued and neglected [@Chatfield1985TIEo]. @WickhamHadley2014TD also stated that there has been few research of the good practice of data cleaning. Furthermore, the decisions made in this stage is often unreported  in term that the IDA are often performed in an unplanned and unstructured way and is only shared among restricted party [@HuebnerMarianne2020Haar]. Furthermore, documenting the result of IDA is utterly essential as the information preservation for the downstream statistical analyses and model building [@HuebnerMariannePhD2016Asat] and to avoid publication bias [@HuebnerMarianne2020Haar].
+@DasuTamraparni2003Edma mentioned that data cleaning and exploration, which is the IDA notion, is a difficult task and determine 80 percent of the data mining result. Despite its importance, this stage is often undervalued and neglected [@Chatfield1985TIEo]. @WickhamHadley2014TD also stated that there has been few research of the good practice of data cleaning. Furthermore, the decisions made in this stage is often unreported  in term that the IDA are often performed in an unplanned and unstructured way and is only shared among restricted party [@HuebnerMarianne2020Haar]. In fact, documenting the result of IDA is utterly essential as the information preservation for the downstream statistical analyses and model building [@HuebnerMariannePhD2016Asat] as well as to avoid publication bias [@HuebnerMarianne2020Haar]. It is also important to keep the data cleaning process accountable and transparent. 
 
-This paper aims to demonstrate the steps of IDA, which is tidying, cleaning, and documenting the data. We used the longitudinal data from the National Longitudinal Survey of Youth 1979 (NLSY79) or is known as the NLSY79. Particularly, we are interested in doing the IDA to the wages and several demographic variables of the NLSY79 cohort whose highest grade are up to 12th grade and the high school dropouts.  
+This paper aims to demonstrate the steps of IDA, which is tidying, cleaning, and documenting the data. We used the longitudinal data from the National Longitudinal Survey of Youth 1979 (NLSY79) or is known as the NLSY79. Particularly, we are interested in doing the IDA to the wages and several demographic variables of the NLSY79 cohort whose highest grade are up to 12th grade and the high school dropouts.
 
-We chose the NLSY79 data because this data play an important role in research in various discipline including economics, sociology, education, public policy, and public health for more than a quarter of the century [@MichaelRPergamit2001DWTN]. In addition, The National Longitudinal Survey is considered as survey with high retention rates and carefully designed making it suitable for a life course research [@MichaelRPergamit2001DWTN] and [@eliznlsy]. According to @eliznlsy as of 2015, thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY79 data. Moreover, the NLSY79 is considered as the most widely used and most important cohort in the NLSY79 data sets [@MichaelRPergamit2001DWTN].
+
+We chose the NLSY79 data because this data is one of the instances of Open Data that has been playing an important role in research in various disciplines including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century [@MichaelRPergamit2001DWTN]. In addition, The National Longitudinal Survey is considered as survey with high retention rates and carefully designed making it suitable for a life course research [@MichaelRPergamit2001DWTN] and [@eliznlsy]. According to @eliznlsy as of 2015, thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY79 data. Moreover, the NLSY79 is considered as the most widely used and most important cohort in the NLSY79 data sets [@MichaelRPergamit2001DWTN]. @SingerJudithD2003Alda used the wages and other variables of the NLSY79 data in their book in longitudinal data analysis. This is also being our motivation in incorporating the wages of high school cohort, specifically the high school dropouts, is that we want to make an open data to be suitable as an example data in text book or in research. 
+
+  
 
 
 # The NLSY79
@@ -455,6 +458,30 @@ kable(as.array(summary(wages_demog_hs$mean_hourly_wage)),
   kable_styling(latex_options = "striped")
 ```
 
+In Figure \ref{fig:high-wages}, we plotted some respondents with a high value of mean hourly wages. We filtered all of the IDs who earned more than US$ 500 per hour averagely. We found that most of these respondents only experienced one point of extremely high wages. Thus, we suspected that these high values are erroneous values resulted from a data entry error. 
+
+```{r high-wages, echo = FALSE, fig.cap= "Some observations with extremely high mean hourly wage. Most of the IDs only have one point of high wage.", fig.height=8, fig.width=6}
+
+wages_high <- filter(wages_demog_hs, mean_hourly_wage > 500) %>%
+  as_tibble() 
+
+wages_high2 <- wages_demog_hs %>%
+  filter(id %in% wages_high$id)
+
+ggplot(wages_high2) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage)) +
+  geom_point(aes(x = year,
+                y = mean_hourly_wage),
+             size = 0.5,
+             alpha = 0.5) +
+  facet_wrap(~id, scales = "free_y", ncol = 5) +
+  theme(axis.text.x = element_text(angle = 10, size = 6)) +
+  ylab("mean hourly wage") 
+  
+```
+
+
 
 Further, we took 36 samples randomly from the data and plotted it as is seen in Figure \ref{fig:sampleplot}. It implies that not only that some observations earned an extremely high figures of wages, but some also had a reasonably fluctuate wages, for example the IDs in panel number 5, 7, and 11. The plot also implies that the samples had a different pattern of mean hourly wages. Some had a flat wages for years but had a sudden increase in a year than it went down again, while the other experienced a upsurge in their wage, for instance the IDs in panel 9. 
 
@@ -482,7 +509,7 @@ In this paper, we built the model using the `rlm` function from `MASS` package [
 
 Since we worked with longitudinal data, we should built the model for each ID, instead of the overall data. The robust mixed model is actually the best model to be employed in this case. However, this method is too computationally and memory expensive, especially for a large data set, like the NLSY79 data. Thus, the model for each ID is built utilizing the `nest` and `map` function from `tidyr` [@tidyr] and `purrr` [@purrr] respectively. 
 
-The challenging part of detecting the anomaly using the robustness weight is to determine the threshold of the weight where the observations considered as outliers. Moreover, it should be noted that not all the outliers is due to an error, instead it might be that one had a reasonably increasing or decreasing wages. To, minimize the risk of being mistakenly regard an outlier as an error outlier, we have simulated some threshold and study the behavior of the spikes in each threshold. We found that 0.3 is the most reasonable value to be the threshold to minimize the risk of that drawback because it still capture the sensible spikes in the data. After deciding the threshold, we flagged the observations with the weight less than 0.3, and imputed their mean hourly wage with the models' predicted value. 
+The challenging part of detecting the anomaly using the robustness weight is to determine the threshold of the weight where the observations considered as outliers. Moreover, it should be noted that not all the outliers is due to an error, instead it might be that one had a reasonably increasing or decreasing wages. To, minimize the risk of being mistakenly regard an outlier as an error outlier, we have simulated some threshold and study the behavior of the spikes in each threshold. We found that 0.1 is the most reasonable value to be the threshold to minimize the risk of that drawback because it still capture the sensible spikes in the data. After deciding the threshold, we flagged the observations with the weight less than 0.1, and imputed their mean hourly wage with the models' predicted value. 
 
 
 ```{r rlm, cache=TRUE, warning = FALSE, message = FALSE}
@@ -531,9 +558,9 @@ id_aug_w <- cbind(id_aug, id_w) %>%
 # we keep the mean hourly wage value even its weight < 1.
 
 wages_rlm_dat <- id_aug_w %>%
-  mutate(wages_rlm = ifelse(w < 0.3  & .fitted >= 0, .fitted,
+  mutate(wages_rlm = ifelse(w < 0.1  & .fitted >= 0, .fitted,
                             mean_hourly_wage)) %>%
-  mutate(is_pred = ifelse(w < 0.3 & .fitted >= 0, TRUE,
+  mutate(is_pred = ifelse(w < 0.1 & .fitted >= 0, TRUE,
                           FALSE)) %>%
   dplyr::select(id, year, wages_rlm, is_pred)
 
@@ -577,7 +604,7 @@ spag2 + feature2
 ```
 
 ```{r compare-data, echo = FALSE}
-set.seed(20210228)
+set.seed(31251587)
 
 sample_id <- sample(unique(wages_demog_hs$id), 20)
 sample <- subset(wages_demog_hs, id %in% sample_id)
@@ -589,7 +616,7 @@ wages_compare <- sample %>%
 ```
 
 
-```{r compare, echo = FALSE, fig.cap="Comparison between the original and the treated mean hourly wage. The orange line portray the original value of mean hourly wage, while the turquoise line display the mean hourly wages value after the extreme values imputed with the robust linear model's prediction value. We can see that some extreme spikes has been reduced by the model.", fig.height=4, fig.width=5}
+```{r compare, echo = FALSE, fig.cap="Comparison between the original and the treated mean hourly wage. The orange line portray the original value of mean hourly wage, while the turquoise line display the mean hourly wages value after the extreme values imputed with the robust linear model's prediction value. We can see that some extreme spikes has been reduced by the model.", fig.height=5, fig.width=6}
 ggplot(wages_compare) +
   geom_line(aes(x = year,
                 y = wages,
@@ -600,17 +627,17 @@ ggplot(wages_compare) +
                 y = wages,
                 colour = type),
             alpha = 0.5,
-            size = 0.5) +
+            size = 1) +
   theme(axis.text.x = element_text(angle = 10, size = 5),
         legend.position = "bottom") +
-  facet_wrap(~id)
+  facet_wrap(~id, scales = "free_y")
 
 
 ```
 
-Finally, we saved the imputed data and set the appropriate data type for the variables. We also saved the NLSY79 cohort's demographic information and the high school dropout cohort in a separate data sets. Here, we defined high school dropouts as respondents who only completed either $9^{th}$, $10^{th}$, $11^{th}$ grade, or who completed $12^{th}$ when their age are at least 19 years old (means that these IDs being dropped out in certain year, but they returned back to high school to complete it). 
+Finally, we saved the imputed data and set the appropriate data type for the variables. We also saved the NLSY79 cohort's demographic information and the high school dropout cohort in a separate data sets. Here, we defined high school dropouts as respondents who only completed either $9^{th}$, $10^{th}$, $11^{th}$ grade, or who completed $12^{th}$ when their age are at least 19 years old (means that these IDs being dropped out in certain year, but they returned back to high school to complete it). We also filtered the data to be only male and aged between 14 and 17 years old to refresh the high school dropouts data in the `brolgar` package. 
 
-The complete flow from the raw data to these data set is displayed in Figure \ref(fig:flowchart).
+We then make these three data sets and its processing documentation to be publicly available through an R data container package called `yowie`. The complete flow from the raw data to these data set is displayed in Figure \ref(fig:flowchart).
 
 ```{r}
 # select out the old value of mean hourly wage and change it with the wages_rlm value
@@ -726,12 +753,11 @@ fc
 
 # Summary and Discussion
 
-Wild caught data is often not tidy and clean. IDA, as a way to assess data quality should be performed and most importantly documented to avoid bias publication. In this paper, we performed an IDA on the NLSY79 data, specifically the wages data. We chose this data set because it play an important role in various discipline of research, especially the life course research. Getting the data from the database is pretty straightforward. However, it cannot be directly deployed to the analysis since the form is untidy. Data exploration also found some anomalies in the wages data where some IDs had an extremely high wages and large spikes. Hence, we performed data wrangling to tidy the data and robust linear regression model for each ID to find and treat the anomalies. We used the robustness weight of  less than 0.5 as threshold of the wages considered as outliers. 
+One take away from this paper is to make an open data set to be suitable for a text book data or to make it ready to be incorporated in a research, an IDA should be performed and documented. The IDA shows that the NLSY79 data has two problems. Firstly, the downloaded data format is untidy, in term of its column name contains the year values, not just the variable names. Secondly, some anomalies i.e. an extreme high hourly wages are found. We addressed the first problem by tidying the data according to three principles of a tidy data. For the latter problem, we fixed the anomalies using the predicted value of the robust linear regression model. Further, we kept maintaining the natural variability of the wages while minimizing the presence of anomalies because of the error in the data recording. As an effort to provide the good practice IDA documentation, we also provided two additional variables in the final data sets, which is `is_wm` and `is_pred`. These variables could be a precaution for the data users in analyzing the data. 
 
-- From this IDA, we learned that the open data is not only the matter of opennes, but also how that data could be analyzed flexibly with a tidy dataset. Hence, our recommendation that the database for every open data should be built to produce a tidy data. 
+In addition to demonstrating the importance of IDA to transform the open data to be a analysis-ready data, the finding in this paper also implies that data providers should also design the database that is able to produce tidy data sets. A data provider should also check for data anomalies prior the data publishing or at least provides a set of rules or threshold value, for example, in this case is the threshold of reasonable wages. This will greatly support the data users to carry out further validation and set the same line of which data are considered as outliers by all of the data users. Moreover, some data cleaning tools also require validation rules. For example, `validates`, an R package that is powerful enough to perform a data validation, cannot be used in this case. 
 
-- For the future study, the room for improvement: linear mixed model and more sophisticated method to determine the threshold?
-
-- Data provider should provide validation rules for data user
+For the future study, we suggested the usage of linear mixed model to find and fixed the anomalies in the data set. 
 
 
+# References
