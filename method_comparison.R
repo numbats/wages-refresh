@@ -82,7 +82,7 @@ wages_rlm_dat <- id_aug_w %>%
                               mean_hourly_wage),
          wages_rlm_5 = ifelse(w < 0.1 & .fitted >= 0, .fitted,
                               mean_hourly_wage),
-         wages_rlm_6 = ifelse(w < 0.15 & .fitted >= 0, .fitted,
+         wages_rlm_6 = ifelse(w < 0.12 & .fitted >= 0, .fitted,
                               mean_hourly_wage)) %>%
   mutate(is_pred1 = ifelse(w != 1 & .fitted >= 0, TRUE,
                           FALSE),
@@ -94,7 +94,7 @@ wages_rlm_dat <- id_aug_w %>%
                            FALSE),
          is_pred5 = ifelse(w < 0.1 & .fitted >= 0, TRUE,
                            FALSE),
-         is_pred6 = ifelse(w < 0.15 & .fitted >= 0, TRUE,
+         is_pred6 = ifelse(w < 0.12 & .fitted >= 0, TRUE,
                            FALSE)) %>%
   rename(wages_original = mean_hourly_wage)
 
@@ -142,7 +142,7 @@ ggplot(sample) +
 
 # plot by threshold
 
-for_plot <- dplyr::filter(sample, type %in% c("wages_original", "wages_rlm_5"))
+for_plot <- dplyr::filter(sample, type %in% c("wages_original", "wages_rlm_6"))
 
 w05 <- ggplot(for_plot) +
   geom_line(aes(x = year,
@@ -164,14 +164,14 @@ w05
 
 ## INSPECT OBS WITH PREDICTED VALUE (THRESHOLD < 0.1)
 wages_rlm_zero_pone <- wages_rlm_dat %>%
-  dplyr::select(id, year, wages_original, w, wages_rlm_5, is_pred5)
+  dplyr::select(id, year, wages_original, w, wages_rlm_6, is_pred6)
 
 sum_id <- wages_rlm_zero_pone %>%
   group_by(id) %>%
   summarise(n_obs = length(id))
 
 sum_pred <- wages_rlm_zero_pone %>%
-  filter(is_pred5 == TRUE) %>%
+  filter(is_pred6 == TRUE) %>%
   group_by(id) %>%
   summarise(n_pred = length(id))
 
@@ -190,7 +190,7 @@ sum_pred_filtered2 <- wages_compare %>%
 
 
 
-ggplot(filter(sum_pred_filtered2, type %in% c("wages_original", "wages_rlm_5", "wages_rlm_6"))) +
+ggplot(filter(sum_pred_filtered2, type %in% c("wages_original", "wages_rlm_6"))) +
   geom_line(aes(x = year,
                 y = wages,
                 colour = type,
@@ -254,7 +254,7 @@ ggplot(filter(sum_pred_filtered4, type %in% c("wages_rlm_5") & id == 4495)) +
 ## CHECK WAGES MORE THAN US$ 150
 
 id_more_than_150 <- wages_rlm_zero_pone %>%
-  filter(wages_rlm_5 > 150)
+  filter(wages_rlm_6 > 150)
 
 
 
