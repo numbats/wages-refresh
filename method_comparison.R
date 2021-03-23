@@ -122,7 +122,7 @@ ggplot(filter(wages_compare, type == "wages_rlm_6")) +
 
 
 
-set.seed(156370113)
+set.seed(31251587)
 
 sample_id <- sample(unique(wages_compare$id), 20)
 sample <- subset(wages_compare, id %in% sample_id)

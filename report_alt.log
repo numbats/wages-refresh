@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  18 MAR 2021 01:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  24 MAR 2021 01:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -694,349 +694,404 @@ LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
 {/Users/deeamaliah/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 }]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
-31.
+29.
 (/Users/deeamaliah/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [2]
 
-Package xcolor Warning: Incompatible color definition on input line 305.
+Package xcolor Warning: Incompatible color definition on input line 303.
 
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 307.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 305.
 
-Package xcolor Warning: Incompatible color definition on input line 309.
-
-
-Package xcolor Warning: Incompatible color definition on input line 309.
+Package xcolor Warning: Incompatible color definition on input line 307.
 
 
-Overfull \hbox (7.4769pt too wide) in paragraph at lines 327--344
+Package xcolor Warning: Incompatible color definition on input line 307.
+
+
+Overfull \hbox (7.4769pt too wide) in paragraph at lines 325--342
  [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 366.
+Package xcolor Warning: Incompatible color definition on input line 364.
 
 
-Package xcolor Warning: Incompatible color definition on input line 400.
+Package xcolor Warning: Incompatible color definition on input line 398.
 
 
-Package xcolor Warning: Incompatible color definition on input line 400.
+Package xcolor Warning: Incompatible color definition on input line 398.
 
 
-Package xcolor Warning: Incompatible color definition on input line 400.
+Package xcolor Warning: Incompatible color definition on input line 398.
 
 [3pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.400 \end{Shaded}
+l.398 \end{Shaded}
                   ]
 
-Package xcolor Warning: Incompatible color definition on input line 400.
+Package xcolor Warning: Incompatible color definition on input line 398.
 
 
-Package xcolor Warning: Incompatible color definition on input line 400.
+Package xcolor Warning: Incompatible color definition on input line 398.
 
 
-Package xcolor Warning: Incompatible color definition on input line 404.
+Package xcolor Warning: Incompatible color definition on input line 402.
 
 
-Package xcolor Warning: Incompatible color definition on input line 414.
+Package xcolor Warning: Incompatible color definition on input line 412.
 
 
-Package xcolor Warning: Incompatible color definition on input line 414.
+Package xcolor Warning: Incompatible color definition on input line 412.
 
 
-Package xcolor Warning: Incompatible color definition on input line 422.
+Package xcolor Warning: Incompatible color definition on input line 420.
 
 
-Package xcolor Warning: Incompatible color definition on input line 442.
+Package xcolor Warning: Incompatible color definition on input line 440.
 
 
-Package xcolor Warning: Incompatible color definition on input line 442.
+Package xcolor Warning: Incompatible color definition on input line 440.
 
 
-Package xcolor Warning: Incompatible color definition on input line 449.
+Package xcolor Warning: Incompatible color definition on input line 447.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [4]
 
-Package xcolor Warning: Incompatible color definition on input line 469.
+Package xcolor Warning: Incompatible color definition on input line 467.
 
 
-Package xcolor Warning: Incompatible color definition on input line 469.
+Package xcolor Warning: Incompatible color definition on input line 467.
 
 
-Package xcolor Warning: Incompatible color definition on input line 474.
+Package xcolor Warning: Incompatible color definition on input line 472.
 
 
-Package xcolor Warning: Incompatible color definition on input line 482.
+Package xcolor Warning: Incompatible color definition on input line 480.
 
 
-Package xcolor Warning: Incompatible color definition on input line 482.
+Package xcolor Warning: Incompatible color definition on input line 480.
 
 
-Package xcolor Warning: Incompatible color definition on input line 517.
+Package xcolor Warning: Incompatible color definition on input line 515.
 
 
-Package xcolor Warning: Incompatible color definition on input line 552.
+Package xcolor Warning: Incompatible color definition on input line 550.
 
 
-Package xcolor Warning: Incompatible color definition on input line 552.
+Package xcolor Warning: Incompatible color definition on input line 550.
 
 
-Package xcolor Warning: Incompatible color definition on input line 552.
+Package xcolor Warning: Incompatible color definition on input line 550.
 
 [5]
 
-Package xcolor Warning: Incompatible color definition on input line 552.
+Package xcolor Warning: Incompatible color definition on input line 550.
 
 
-Package xcolor Warning: Incompatible color definition on input line 552.
+Package xcolor Warning: Incompatible color definition on input line 550.
 
 
-Package xcolor Warning: Incompatible color definition on input line 561.
+Package xcolor Warning: Incompatible color definition on input line 559.
 
 
-Package xcolor Warning: Incompatible color definition on input line 588.
+Package xcolor Warning: Incompatible color definition on input line 586.
 
 
-Package xcolor Warning: Incompatible color definition on input line 588.
+Package xcolor Warning: Incompatible color definition on input line 586.
 
 [6]
 
-Package xcolor Warning: Incompatible color definition on input line 618.
+Package xcolor Warning: Incompatible color definition on input line 616.
 
 
-Package xcolor Warning: Incompatible color definition on input line 660.
+Package xcolor Warning: Incompatible color definition on input line 658.
 
 
-Package xcolor Warning: Incompatible color definition on input line 660.
+Package xcolor Warning: Incompatible color definition on input line 658.
 
 
 Underfull \vbox (badness 6332) has occurred while \output is active []
 
 [7]
 
-Package xcolor Warning: Incompatible color definition on input line 684.
+Package xcolor Warning: Incompatible color definition on input line 682.
 
 
-Package xcolor Warning: Incompatible color definition on input line 702.
+Package xcolor Warning: Incompatible color definition on input line 700.
 
 
-Package xcolor Warning: Incompatible color definition on input line 702.
+Package xcolor Warning: Incompatible color definition on input line 700.
 
 <figures/featureplot-1.pdf, id=103, 433.62pt x 289.08pt>
 File: figures/featureplot-1.pdf Graphic file (type pdf)
 <use figures/featureplot-1.pdf>
-Package pdftex.def Info: figures/featureplot-1.pdf  used on input line 782.
+Package pdftex.def Info: figures/featureplot-1.pdf  used on input line 780.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
 
 LaTeX Warning: Reference `fig:featureplot' on page 8 undefined on input line 79
-3.
+1.
+
+
+LaTeX Warning: Reference `fig:featureplot' on page 8 undefined on input line 79
+2.
 
 
 LaTeX Warning: Reference `fig:featureplot' on page 8 undefined on input line 79
 4.
 
 
-LaTeX Warning: Reference `fig:featureplot' on page 8 undefined on input line 79
-6.
-
-
-LaTeX Warning: Reference `fig:high-wages' on page 8 undefined on input line 826
+LaTeX Warning: Reference `fig:high-wages' on page 8 undefined on input line 824
 .
 
 [8] [9pdfTeX warning (ext4): destination with the same identifier (name{table.2
 }) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.832 
+l.830 
       pdfTeX warning (ext4): destination with the same identifier (name{table.3
 }) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.832 
+l.830 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.832 
+l.830 
        <./figures/featureplot-1.pdf>]
 <figures/high-wages-1.pdf, id=127, 433.62pt x 578.16pt>
 File: figures/high-wages-1.pdf Graphic file (type pdf)
 <use figures/high-wages-1.pdf>
-Package pdftex.def Info: figures/high-wages-1.pdf  used on input line 835.
+Package pdftex.def Info: figures/high-wages-1.pdf  used on input line 833.
 (pdftex.def)             Requested size: 433.61894pt x 578.15858pt.
 
-LaTeX Warning: Reference `fig:sampleplot' on page 10 undefined on input line 84
-1.
+LaTeX Warning: Reference `fig:sampleplot' on page 10 undefined on input line 83
+9.
 
 <figures/sampleplot-1.pdf, id=128, 361.35pt x 289.08pt>
 File: figures/sampleplot-1.pdf Graphic file (type pdf)
 <use figures/sampleplot-1.pdf>
-Package pdftex.def Info: figures/sampleplot-1.pdf  used on input line 860.
+Package pdftex.def Info: figures/sampleplot-1.pdf  used on input line 858.
 (pdftex.def)             Requested size: 361.34912pt x 289.07928pt.
 
-LaTeX Warning: Reference `fig:sampleplot' on page 10 undefined on input line 87
-0.
+LaTeX Warning: Reference `fig:sampleplot' on page 10 undefined on input line 86
+8.
 
 
-Package xcolor Warning: Incompatible color definition on input line 909.
+Package xcolor Warning: Incompatible color definition on input line 907.
 
 
-Package xcolor Warning: Incompatible color definition on input line 965.
+Package xcolor Warning: Incompatible color definition on input line 963.
 
 
-Package xcolor Warning: Incompatible color definition on input line 965.
+Package xcolor Warning: Incompatible color definition on input line 963.
 
 
-Overfull \vbox (0.79329pt too high) detected at line 965
+Overfull \vbox (0.79329pt too high) detected at line 963
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 965.
+Package xcolor Warning: Incompatible color definition on input line 963.
 
 [10pdfTeX warning (ext4): destination with the same identifier (name{table.4}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.965 \end{Shaded}
+l.963 \end{Shaded}
                   ] [11pdfTeX warning (ext4): destination with the same identif
 ier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.965 \end{Shaded}
+l.963 \end{Shaded}
                    <./figures/high-wages-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 965.
+Package xcolor Warning: Incompatible color definition on input line 963.
 
 
-Package xcolor Warning: Incompatible color definition on input line 965.
+Package xcolor Warning: Incompatible color definition on input line 963.
 
 
-Underfull \vbox (badness 10000) detected at line 965
+Underfull \vbox (badness 10000) detected at line 963
  []
 
 
-Underfull \vbox (badness 10000) detected at line 965
+Underfull \vbox (badness 10000) detected at line 963
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 965.
+Package xcolor Warning: Incompatible color definition on input line 963.
 
 [12pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.965 \end{Shaded}
+l.963 \end{Shaded}
                    <./figures/sampleplot-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 965.
+Package xcolor Warning: Incompatible color definition on input line 963.
 
 
-Package xcolor Warning: Incompatible color definition on input line 965.
+Package xcolor Warning: Incompatible color definition on input line 963.
 
 
-LaTeX Warning: Reference `fig:comppict' on page 13 undefined on input line 967.
-
-
-
-LaTeX Warning: Reference `fig:comppict' on page 13 undefined on input line 970.
+LaTeX Warning: Reference `fig:comppict' on page 13 undefined on input line 965.
 
 
 
-LaTeX Warning: Reference `fig:compare' on page 13 undefined on input line 979.
+LaTeX Warning: Reference `fig:comppict' on page 13 undefined on input line 968.
+
+
+
+LaTeX Warning: Reference `fig:compare' on page 13 undefined on input line 977.
 
 <figures/comppict-1.pdf, id=162, 433.62pt x 289.08pt>
 File: figures/comppict-1.pdf Graphic file (type pdf)
 <use figures/comppict-1.pdf>
-Package pdftex.def Info: figures/comppict-1.pdf  used on input line 987.
+Package pdftex.def Info: figures/comppict-1.pdf  used on input line 985.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
 <figures/compare-1.pdf, id=163, 433.62pt x 361.35pt>
 File: figures/compare-1.pdf Graphic file (type pdf)
 <use figures/compare-1.pdf>
-Package pdftex.def Info: figures/compare-1.pdf  used on input line 1000.
+Package pdftex.def Info: figures/compare-1.pdf  used on input line 998.
 (pdftex.def)             Requested size: 433.61894pt x 361.34912pt.
 
-LaTeX Warning: Reference `(' on page 13 undefined on input line 1022.
+LaTeX Warning: Reference `(' on page 13 undefined on input line 1020.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1024.
+Package xcolor Warning: Incompatible color definition on input line 1022.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1069.
+Package xcolor Warning: Incompatible color definition on input line 1067.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1069.
+Package xcolor Warning: Incompatible color definition on input line 1067.
 
 
-Underfull \vbox (badness 1490) detected at line 1069
+Underfull \vbox (badness 1490) detected at line 1067
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1069.
+Package xcolor Warning: Incompatible color definition on input line 1067.
 
 [13]
 
-Package xcolor Warning: Incompatible color definition on input line 1069.
+Package xcolor Warning: Incompatible color definition on input line 1067.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1069.
+Package xcolor Warning: Incompatible color definition on input line 1067.
 
 
-Underfull \vbox (badness 10000) detected at line 1069
+Underfull \vbox (badness 10000) detected at line 1067
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1069
+Underfull \vbox (badness 10000) detected at line 1067
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1069.
+Package xcolor Warning: Incompatible color definition on input line 1067.
 
 [14pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.1069 \end{Shaded}
+l.1067 \end{Shaded}
                     <./figures/comppict-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 1069.
+Package xcolor Warning: Incompatible color definition on input line 1067.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1069.
+Package xcolor Warning: Incompatible color definition on input line 1067.
 
 <figures/flowchart-1.pdf, id=185, 1003.75pt x 281.05pt>
 File: figures/flowchart-1.pdf Graphic file (type pdf)
 <use figures/flowchart-1.pdf>
-Package pdftex.def Info: figures/flowchart-1.pdf  used on input line 1073.
+Package pdftex.def Info: figures/flowchart-1.pdf  used on input line 1071.
 (pdftex.def)             Requested size: 1003.74756pt x 281.0493pt.
 
-Overfull \hbox (533.99257pt too wide) in paragraph at lines 1073--1076
+Overfull \hbox (533.99257pt too wide) in paragraph at lines 1071--1074
  [][] 
  []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1087.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1105.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1105.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1105.
 
 [15pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.1101 
-        <./figures/compare-1.pdf>]
-Underfull \vbox (badness 2790) has occurred while \output is active []
+l.1105 \end{Shaded}
+                    <./figures/compare-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1105.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1105.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1107.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1114.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1114.
+
+<figures/unnamed-chunk-6-1.pdf, id=201, 469.755pt x 325.215pt>
+File: figures/unnamed-chunk-6-1.pdf Graphic file (type pdf)
+<use figures/unnamed-chunk-6-1.pdf>
+Package pdftex.def Info: figures/unnamed-chunk-6-1.pdf  used on input line 1116
+.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Package xcolor Warning: Incompatible color definition on input line 1118.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [16pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.1143 \leavevmode
-                  \hypertarget{ref-HuebnerMarianne2020Haar}{}% <./figures/flowc
-hart-1.pdf>]
+l.1118 \begin{Shaded}
+                      <./figures/flowchart-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1131.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1131.
+
+<figures/unnamed-chunk-7-1.pdf, id=216, 469.755pt x 325.215pt>
+File: figures/unnamed-chunk-7-1.pdf Graphic file (type pdf)
+<use figures/unnamed-chunk-7-1.pdf>
+Package pdftex.def Info: figures/unnamed-chunk-7-1.pdf  used on input line 1133
+.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[17 <./figures/unnamed-chunk-6-1.pdf>]
+Underfull \vbox (badness 2662) has occurred while \output is active []
+
+[18 <./figures/unnamed-chunk-7-1.pdf>]
 No file report_alt.bbl.
-[17] (./report_alt.aux)
+[19] (./report_alt.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1044,16 +1099,16 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `report_alt.out' has not changed.
-(rerunfilecheck)             Checksum: A0E3A54D6C089105F80D423C81A2FA91;1890.
+(rerunfilecheck)             Checksum: 974776F3A2BFE8FE13AC81CE715B7B80;1809.
  ) 
 Here is how much of TeX's memory you used:
- 13244 strings out of 481009
- 206248 string characters out of 5908205
+ 13258 strings out of 481009
+ 206650 string characters out of 5908205
  675774 words of memory out of 5000000
- 29928 multiletter control sequences out of 15000+600000
+ 29938 multiletter control sequences out of 15000+600000
  460815 words of font info for 138 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 83i,12n,88p,646b,503s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 83i,12n,88p,673b,503s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/
 Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/
 Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/User
@@ -1071,10 +1126,10 @@ aliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on report_alt.pdf (17 pages, 915906 bytes).
+Output written on report_alt.pdf (19 pages, 935542 bytes).
 PDF statistics:
- 319 PDF objects out of 1000 (max. 8388607)
- 272 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
- 32375 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 340 PDF objects out of 1000 (max. 8388607)
+ 287 compressed objects within 3 object streams
+ 71 named destinations out of 1000 (max. 500000)
+ 32385 words of extra memory for PDF output out of 35830 (max. 10000000)
 

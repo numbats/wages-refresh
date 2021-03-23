@@ -438,10 +438,10 @@ wages_three_feat <- wages_demog_hs_tsibble %>%
            )
 wages_feat_long <- wages_three_feat %>%
   pivot_longer(c(min, med, max), names_to = "feature", values_to = "value")
- feature <- ggplot(wages_feat_long) +
+feature <- ggplot(wages_feat_long) +
   geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
-   ggtitle("b)") +
-   theme(plot.title = element_text(size = 10))
+  ggtitle("b)") +
+  theme(plot.title = element_text(size = 10)) 
  
 spag + feature
 ```
@@ -558,9 +558,9 @@ id_aug_w <- cbind(id_aug, id_w) %>%
 # we keep the mean hourly wage value even its weight < 1.
 
 wages_rlm_dat <- id_aug_w %>%
-  mutate(wages_rlm = ifelse(w < 0.1  & .fitted >= 0, .fitted,
+  mutate(wages_rlm = ifelse(w < 0.12  & .fitted >= 0, .fitted,
                             mean_hourly_wage)) %>%
-  mutate(is_pred = ifelse(w < 0.1 & .fitted >= 0, TRUE,
+  mutate(is_pred = ifelse(w < 0.12 & .fitted >= 0, TRUE,
                           FALSE)) %>%
   dplyr::select(id, year, wages_rlm, is_pred)
 
@@ -570,11 +570,11 @@ wages_demog_hs <- left_join(wages_demog_hs, wages_rlm_dat, by = c("id", "year"))
 
 ```
 
-Figure \ref{fig:comppict} A shows that after imputing the "error outliers" with the models' predicted value, the highest wages value has decreased to be around US$250. The spikes were still observed, but are not as extreme as the original data set. In Figure \ref{fig:comppict} B) although the distributions of the features are still positively skewed, we can still examine it clearly the difference shape of those features. The minimum value is heavily skewed, means that most the subjects have a small minimum value of wages, but there are still extreme cases where their minimum wages was extremely higher than others. Moreover, these cases had a minimum wages that is higher than others' maximum wages. 
+Figure \ref{fig:comppict} A shows that after imputing the anomalies with the models' predicted value, the highest wages value has decreased to be around $350. The spikes were still observed, but are not as extreme as the original data set. In Figure \ref{fig:comppict} B) although the distributions of the features are still positively skewed, we can still examine it clearly the difference shape of those features. The minimum value is heavily skewed, means that most the subjects have a small minimum value of wages, but there are still extreme cases where their minimum wages was extremely higher than others. Moreover, these cases had a minimum wages that is higher than others' maximum wages. 
 
 Furthermore, the robust linear regression has reduce the level of noise in the data set as is seen in Figure \ref{fig:compare}. The figure also implies that after the treatment, the fluctuation can still be observed in the data and only the large spikes, which are considered as "error outliers", are eliminated from the data. Hence, the model results a data set with the reasonable degree of fluctuation.
 
-```{r comppict, echo = FALSE, fig.cap = "The distribution of the mean hourly wage after treating the extreme values. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value. We can see that some observations still had reasonbaly higher wages than the others. The minimum, median, and maximum distribution is positively skewed, where some IDs' have a minimum wages that is higher than others' maximum wages.", fig.width=6, fig.height=4}
+```{r comppict, echo = FALSE, fig.cap = "The distribution of the mean hourly wage after treating the extreme values. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value transformed to log10 scale. We can see that some observations still had reasonbaly higher wages than the others. The minimum, median, and maximum distribution is positively skewed, where some IDs' have a minimum wages that is higher than others' maximum wages.", fig.width=6, fig.height=4}
 
 spag2 <- wages_demog_hs %>%
   ggplot(aes(x = year,
@@ -598,7 +598,9 @@ wages_feat_long_rlm <- wages_three_feat_rlm %>%
 feature2 <- ggplot(wages_feat_long_rlm) +
   geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
   ggtitle("b)") +
-  theme(plot.title = element_text(size = 10))
+  scale_x_log10() + 
+  theme(plot.title = element_text(size = 10)) +
+  xlab("value (log10)")
  
 spag2 + feature2
 ```
@@ -750,12 +752,52 @@ fc
 
 # Exploratory Data Analysis
 
+In this part, we gave some examples of how the data might be used for data analysis in text book. The first example is that we observed the relationship between wage and the respondents' demographic variables.  Using `features` function in `brolgar`, we extracted the median of the mean hourly age of each ID and examine its relationship with respondents' gender, race, and education. 
 
-# Summary and Discussion
+```{r}
+wages_hs2020_tsibble <- wages_hs2020 %>%
+  as_tsibble(key = id,
+             index = year,
+             regular = FALSE) 
+
+wages_hs2020_feature <- wages_hs2020_tsibble %>%
+  features(mean_hourly_wage,
+           feat_three_num) 
+
+wages_median_demog <- left_join(wages_hs2020_feature, demographic_nlsy79, by = "id") %>%
+  mutate(hgc = factor(hgc, levels = c("1ST GRADE", "2ND GRADE", "3RD GRADE", 
+                                      "4TH GRADE", "5TH GRADE", "6TH GRADE", 
+                                      "7TH GRADE", "8TH GRADE", "9TH GRADE",
+                                      "10TH GRADE", "11TH GRADE", "12TH GRADE", 
+                                      "UNGRADED")))
+```
+
+
+```{r}
+ggplot(filter(wages_median_demog, hgc != "UNGRADED"), aes(x = gender, y = med, color = gender)) +
+  geom_boxplot() +
+  facet_wrap(~hgc, scales = "free_y") +
+  theme_bw()
+```
+```{r}
+wages_hs2020_grouped <- wages_hs2020 %>%
+  group_by(race, year) %>%
+  summarise(median = median(mean_hourly_wage))
+
+ggplot(wages_hs2020_grouped) +
+  geom_line(aes(x = year,
+                y = median,
+                group = race,
+                colour = race)) +
+  theme_classic()
+```
+
+
+# Summary 
 
 One take away from this paper is to make an open data set to be suitable for a text book data or to make it ready to be incorporated in a research, an IDA should be performed and documented. The IDA shows that the NLSY79 data has two problems. Firstly, the downloaded data format is untidy, in term of its column name contains the year values, not just the variable names. Secondly, some anomalies i.e. an extreme high hourly wages are found. We addressed the first problem by tidying the data according to three principles of a tidy data. For the latter problem, we fixed the anomalies using the predicted value of the robust linear regression model. Further, we kept maintaining the natural variability of the wages while minimizing the presence of anomalies because of the error in the data recording. As an effort to provide the good practice IDA documentation, we also provided two additional variables in the final data sets, which is `is_wm` and `is_pred`. These variables could be a precaution for the data users in analyzing the data. 
 
-In addition to demonstrating the importance of IDA to transform the open data to be a analysis-ready data, the finding in this paper also implies that data providers should also design the database that is able to produce tidy data sets. A data provider should also check for data anomalies prior the data publishing or at least provides a set of rules or threshold value, for example, in this case is the threshold of reasonable wages. This will greatly support the data users to carry out further validation and set the same line of which data are considered as outliers by all of the data users. Moreover, some data cleaning tools also require validation rules. For example, `validates`, an R package that is powerful enough to perform a data validation, cannot be used in this case. 
+In addition to demonstrating the importance of IDA to transform the open data to be a analysis-ready data, the finding in this paper also implies that data providers should design the database that is able to produce tidy data sets. A data provider should also check for data anomalies prior the data publishing or at least provides a set of rules or threshold value, for example, in this case is the threshold of reasonable wages. This will greatly support the data users to carry out further validation and set the same understanding of which data are considered as outliers by all of the data users. Moreover, some data cleaning tools also require validation rules. For example, `validates`, an R package that is powerful enough to perform a data validation, cannot be used in this case. 
 
 For the future study, we suggested the usage of linear mixed model to find and fixed the anomalies in the data set. 
 
