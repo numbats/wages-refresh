@@ -50,7 +50,28 @@ ui <- fluidPage(
             h2("Potential Outliers"),
             plotOutput("outlier_plot",
                        height = 800)
-
+            )
+    ),
+    fluidRow(
+        column(
+            width = 6,
+            h2("The Spaghetti Plots"),
+            plotOutput("spag1"),
+            br(),
+            textOutput("summary_before"),
+            textOutput("n_obs"),
+            textOutput("n_id")
+        ),
+        column(
+            width = 6,
+            br(),
+            br(),
+            br(),
+            plotOutput("spag2"),
+            br(),
+            textOutput("summary_after"),
+            textOutput("n_obs_pred"),
+            textOutput("n_id_pred")
         )
     )
 )
@@ -122,9 +143,63 @@ server <- function(input, output) {
             facet_wrap(~id, scales = "free_y", ncol = 5) +
             theme(axis.text.x = element_text(angle = 10, size = 6)) +
             ylab("mean hourly wage")
+    })
 
+    output$spag1 <- renderPlot({
 
+        ggplot(wages_hs) +
+            geom_line(aes(x = year,
+                          y = mean_hourly_wage,
+                          group = id),
+                      alpha = 0.1) +
+            ggtitle("Before")
+    })
 
+    output$spag2 <- renderPlot({
+
+        ggplot(thres_data()) +
+            geom_line(aes(x = year,
+                          y = wages_rlm,
+                          group = id),
+                      alpha = 0.1) +
+            ggtitle("After")
+    })
+
+    output$summary_before <- renderText({
+
+        summary(wages_hs$mean_hourly_wage)
+    })
+
+    output$summary_after <- renderText({
+        summary(thres_data()$wages_rlm)
+    })
+
+    output$n_obs <- renderText({
+        paste0("Number of observations: ", nrow(wages_hs))
+    })
+
+    output$n_id <- renderText({
+        n_id <- wages_hs %>%
+            group_by(id) %>%
+            count(id) %>%
+            nrow()
+
+        paste0("Number of IDs: ", n_id)
+    })
+
+    output$n_obs_pred <- renderText({
+        n_obs_pred <- filter(thres_data(), is_pred == TRUE) %>%
+            nrow()
+        paste0("Number of observations predicted: ", n_obs_pred)
+    })
+
+    output$n_id_pred <- renderText({
+        n_id_pred <- filter(thres_data(), is_pred == TRUE) %>%
+            group_by(id) %>%
+            count(id) %>%
+            nrow()
+
+        paste0("Number of IDs predicted: ", n_id_pred)
     })
 }
 
