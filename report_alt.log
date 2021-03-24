@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  24 MAR 2021 01:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  24 MAR 2021 17:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1021,77 +1021,38 @@ Overfull \hbox (533.99257pt too wide) in paragraph at lines 1071--1074
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1087.
+LaTeX Warning: Reference `fig:eda-plot' on page 15 undefined on input line 1085
+.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1105.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1105.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1105.
+LaTeX Warning: Reference `fig:eda-plot' on page 15 undefined on input line 1093
+.
 
 [15pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.1105 \end{Shaded}
-                    <./figures/compare-1.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 1105.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1105.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1107.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1114.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1114.
-
-<figures/unnamed-chunk-6-1.pdf, id=201, 469.755pt x 325.215pt>
-File: figures/unnamed-chunk-6-1.pdf Graphic file (type pdf)
-<use figures/unnamed-chunk-6-1.pdf>
-Package pdftex.def Info: figures/unnamed-chunk-6-1.pdf  used on input line 1116
-.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Package xcolor Warning: Incompatible color definition on input line 1118.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+l.1100 
+        <./figures/compare-1.pdf>]
+<figures/eda-plot-1.pdf, id=201, 433.62pt x 433.62pt>
+File: figures/eda-plot-1.pdf Graphic file (type pdf)
+<use figures/eda-plot-1.pdf>
+Package pdftex.def Info: figures/eda-plot-1.pdf  used on input line 1103.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
 [16pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.1118 \begin{Shaded}
-                      <./figures/flowchart-1.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 1131.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1131.
-
-<figures/unnamed-chunk-7-1.pdf, id=216, 469.755pt x 325.215pt>
-File: figures/unnamed-chunk-7-1.pdf Graphic file (type pdf)
-<use figures/unnamed-chunk-7-1.pdf>
-Package pdftex.def Info: figures/unnamed-chunk-7-1.pdf  used on input line 1133
-.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[17 <./figures/unnamed-chunk-6-1.pdf>]
-Underfull \vbox (badness 2662) has occurred while \output is active []
-
-[18 <./figures/unnamed-chunk-7-1.pdf>]
+l.1149 \section*{References}\label{references}}
+                                                <./figures/flowchart-1.pdf>] [1
+7pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.1149 \section*{References}\label{references}}
+                                                <./figures/eda-plot-1.pdf>]
 No file report_alt.bbl.
-[19] (./report_alt.aux)
+[18] (./report_alt.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1102,13 +1063,13 @@ Package rerunfilecheck Info: File `report_alt.out' has not changed.
 (rerunfilecheck)             Checksum: 974776F3A2BFE8FE13AC81CE715B7B80;1809.
  ) 
 Here is how much of TeX's memory you used:
- 13258 strings out of 481009
- 206650 string characters out of 5908205
+ 13253 strings out of 481009
+ 206414 string characters out of 5908205
  675774 words of memory out of 5000000
- 29938 multiletter control sequences out of 15000+600000
+ 29934 multiletter control sequences out of 15000+600000
  460815 words of font info for 138 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 83i,12n,88p,673b,503s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 83i,11n,88p,673b,503s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/
 Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/
 Users/deeamaliah/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/User
@@ -1126,10 +1087,10 @@ aliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on report_alt.pdf (19 pages, 935542 bytes).
+Output written on report_alt.pdf (18 pages, 930912 bytes).
 PDF statistics:
- 340 PDF objects out of 1000 (max. 8388607)
- 287 compressed objects within 3 object streams
+ 330 PDF objects out of 1000 (max. 8388607)
+ 280 compressed objects within 3 object streams
  71 named destinations out of 1000 (max. 500000)
- 32385 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 32380 words of extra memory for PDF output out of 35830 (max. 10000000)
 

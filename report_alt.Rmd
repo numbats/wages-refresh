@@ -424,7 +424,7 @@ spag <- wages_demog_hs %>%
              y = mean_hourly_wage,
              group = id)) +
   geom_line(alpha = 0.1) +
-  ggtitle("a)") +
+  ggtitle("A)") +
   theme(plot.title = element_text(size = 10))
 
 
@@ -440,7 +440,7 @@ wages_feat_long <- wages_three_feat %>%
   pivot_longer(c(min, med, max), names_to = "feature", values_to = "value")
 feature <- ggplot(wages_feat_long) +
   geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
-  ggtitle("b)") +
+  ggtitle("B)") +
   theme(plot.title = element_text(size = 10)) 
  
 spag + feature
@@ -581,7 +581,7 @@ spag2 <- wages_demog_hs %>%
              y = wages_rlm,
              group = id)) +
   geom_line(alpha = 0.1) +
-  ggtitle("a)") +
+  ggtitle("A)") +
   theme(plot.title = element_text(size = 10))
 
 wages_hs2020_rlm <- as_tsibble(x = wages_demog_hs,
@@ -597,7 +597,7 @@ wages_feat_long_rlm <- wages_three_feat_rlm %>%
 
 feature2 <- ggplot(wages_feat_long_rlm) +
   geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
-  ggtitle("b)") +
+  ggtitle("B)") +
   scale_x_log10() + 
   theme(plot.title = element_text(size = 10)) +
   xlab("value (log10)")
@@ -752,9 +752,11 @@ fc
 
 # Exploratory Data Analysis
 
-In this part, we gave some examples of how the data might be used for data analysis in text book. The first example is that we observed the relationship between wage and the respondents' demographic variables.  Using `features` function in `brolgar`, we extracted the median of the mean hourly age of each ID and examine its relationship with respondents' gender, race, and education. 
+In this part, we gave some examples of how the data might be used for data analysis in text book. The first example is that we observed relationship between wages and education. Using `features` function in `brolgar`, we extracted the median of the mean hourly age of each ID and plotted according to highest grade completed. We found in Figure \ref{fig:eda-plot} A that the higher the education completed does not necessarily means the higher wages earned. However, people who completed 12th grade tend to have higher wage compared to the other groups. Further, respondents who only completed 4th grade happen to have median about as high as the respondents who completed 10th grade. 
 
-```{r}
+Secondly, we examined the pattern of mean hourly wage corresponding to different groups of race and gender. Figure \ref{fig:eda-plot} B and C suggest that in general, the mean hourly wage median increased over the years. Regarding the race, we found that Non-Black Non-Hispanic group had a higher wages than the other groups. We can also see a reasonable gap between the wages median of Black people and the Hispanic and the Non-Black Non-Hispanic. Regarding the gender, male earn more than female, and unfortunately, the gap keep increasing over time.  
+
+```{r, echo = FALSE}
 wages_hs2020_tsibble <- wages_hs2020 %>%
   as_tsibble(key = id,
              index = year,
@@ -773,23 +775,48 @@ wages_median_demog <- left_join(wages_hs2020_feature, demographic_nlsy79, by = "
 ```
 
 
-```{r}
-ggplot(filter(wages_median_demog, hgc != "UNGRADED"), aes(x = gender, y = med, color = gender)) +
+```{r eda-plot, echo = FALSE, fig.height=6, fig.width=6, fig.cap="The example of EDA plot. Plot A shows the pattern of the mean hourly wage median against the highest grade completed. It shows that the higher eductaion completed does not necessarily means the more wages earned. Plot B and C show the mean hourly wage median over the years based on the race and gender respectively. Generally, the respondents experienced a positive trend over time despite of what their race and gender."}
+hgc_plot <- ggplot(filter(wages_median_demog, hgc != "UNGRADED"), aes(y = hgc, x = med)) +
   geom_boxplot() +
-  facet_wrap(~hgc, scales = "free_y") +
-  theme_bw()
-```
-```{r}
+  theme(axis.text.y = element_text(size = 6),
+        axis.title = element_text(size = 9)) +
+  ggtitle("A)") +
+  xlab("median of mean hourly wage (US$)") +
+  ylab("highest grade completed") 
+
 wages_hs2020_grouped <- wages_hs2020 %>%
   group_by(race, year) %>%
   summarise(median = median(mean_hourly_wage))
 
-ggplot(wages_hs2020_grouped) +
+race_plot <- ggplot(wages_hs2020_grouped) +
   geom_line(aes(x = year,
                 y = median,
                 group = race,
                 colour = race)) +
-  theme_classic()
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 5),
+        axis.title = element_text(size = 9)) +
+  scale_color_brewer(palette = "Accent") +
+  ggtitle("B)") +
+  ylab("median of mean hourly wage (US$)")
+
+wages_hs2020_grouped_gender <- wages_hs2020 %>%
+  group_by(gender, year) %>%
+  summarise(median = median(mean_hourly_wage)) 
+
+gender_plot <- ggplot(wages_hs2020_grouped_gender) +
+  geom_line(aes(x = year,
+                y = median,
+                group = gender,
+                colour = gender)) +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 5),
+        axis.title = element_text(size = 9)) +
+  scale_color_brewer(palette = "Dark2") +
+  ggtitle("C)") +
+  ylab("median of mean hourly wage (US$)")
+
+hgc_plot / (race_plot + gender_plot)
 ```
 
 
@@ -797,7 +824,7 @@ ggplot(wages_hs2020_grouped) +
 
 One take away from this paper is to make an open data set to be suitable for a text book data or to make it ready to be incorporated in a research, an IDA should be performed and documented. The IDA shows that the NLSY79 data has two problems. Firstly, the downloaded data format is untidy, in term of its column name contains the year values, not just the variable names. Secondly, some anomalies i.e. an extreme high hourly wages are found. We addressed the first problem by tidying the data according to three principles of a tidy data. For the latter problem, we fixed the anomalies using the predicted value of the robust linear regression model. Further, we kept maintaining the natural variability of the wages while minimizing the presence of anomalies because of the error in the data recording. As an effort to provide the good practice IDA documentation, we also provided two additional variables in the final data sets, which is `is_wm` and `is_pred`. These variables could be a precaution for the data users in analyzing the data. 
 
-In addition to demonstrating the importance of IDA to transform the open data to be a analysis-ready data, the finding in this paper also implies that data providers should design the database that is able to produce tidy data sets. A data provider should also check for data anomalies prior the data publishing or at least provides a set of rules or threshold value, for example, in this case is the threshold of reasonable wages. This will greatly support the data users to carry out further validation and set the same understanding of which data are considered as outliers by all of the data users. Moreover, some data cleaning tools also require validation rules. For example, `validates`, an R package that is powerful enough to perform a data validation, cannot be used in this case. 
+In addition, the finding in this paper implies that data providers should design the database that is able to produce tidy data sets. A data provider should also check for data anomalies prior the data publishing or at least provides a set of rules or threshold value, for example, in this case is the threshold of reasonable wages. This will greatly support the data users to carry out further validation and set the same understanding of which data are considered as outliers. Moreover, providing validation rules would facilitate the usage of any establish data validation tool, such as `validates` package. In this case, we cannot use this handy validation package due to the absence of validation rules.  
 
 For the future study, we suggested the usage of linear mixed model to find and fixed the anomalies in the data set. 
 
