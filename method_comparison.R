@@ -30,7 +30,7 @@ wages_demog_hs <- wages_demog  %>% filter(grepl("GRADE", hgc))
 
 ##### ROBUST LINEAR MODEL
 
-keep_me <- wages_demog_hs %>% count(id) %>% filter(n >4)
+keep_me <- wages_demog_hs %>% count(id) %>% filter(n > 4)
 
 wages_demog_hs <- wages_demog_hs %>%
   filter(id %in% keep_me$id)
@@ -70,6 +70,8 @@ id_aug_w <- cbind(id_aug, id_w) %>%
                 .sigma,
                 w) %>%
   rename(id = `id...1`)
+
+
 
 wages_rlm_dat <- id_aug_w %>%
   mutate(wages_rlm_1 = ifelse(w != 1 & .fitted >= 0, .fitted,
