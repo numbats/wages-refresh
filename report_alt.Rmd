@@ -55,9 +55,7 @@ library(kableExtra)
 library(MASS)
 library(janitor)
 library(DiagrammeR)
-library(DiagrammeRsvg)
 library(rsvg)
-library(knitr)
 library(webshot)
 ```
 
@@ -78,7 +76,7 @@ This paper is structured to have 5 sections. Section 2 describes the original da
 
 # The NLSY79
 
-The NLSY79 is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth and born between 1957-1964. The cohort originally included 12,686 respondents ages 14-22 when first interviewed in 1979. It was comprised of Blacks, Hispanics, economically disadvantaged non-Black non-Hispanics, and youth in the military. In 1984 and 1990, two sub-samples were dropped from the interview; the dropped subjects are the 1,079 members of the military sample and 1,643 members of the economically disadvantaged non-Black non-Hispanics respectively. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
+The NLSY79 is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth and born between 1957-1964 [@nlsy79]. The cohort originally included 12,686 respondents ages 14-22 when first interviewed in 1979. It was comprised of Blacks, Hispanics, economically disadvantaged non-Black non-Hispanics, and youth in the military. In 1984 and 1990, two sub-samples were dropped from the interview; the dropped subjects are the 1,079 members of the military sample and 1,643 members of the economically disadvantaged non-Black non-Hispanics respectively. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
 
 Although the main focus area of the NLSY is labor and employment, the NLSY also cover several other topics including education; training and achievement; household, geography and contextual variables; dating, marriage, cohabitation; sexual activity, pregnancy, and fertility; children; income, assets and program participation; health; attitudes and expectations; and crime and substance use. 
 
@@ -833,9 +831,21 @@ Moreover, the documentation also includes the process of how did we generate the
 Finally, this paper implies that data providers should design the database that is able to produce tidy data sets. A data provider should also check for data anomalies prior the data publishing or at least provides a set of rules or threshold value, for example, in this case is the threshold of reasonable wages. This will greatly support the data users to carry out further validation and set the same understanding of which data are considered as outliers. Moreover, providing validation rules would facilitate the usage of any establish data validation tool, such as `validate` [@validate] package. In this case, we cannot use this handy validation package due to the absence of validation rules.  
 
 
-## Acknowledgements (Aarathy, software recources (R packages used to write the paper and packages that are used for entire analysis) )
+# Acknowledgements 
 
-## Supplementary materials (github repo for, package, and shiny app)
+We would like to thank Aarathy Babu for the insight and discussion during the writing of this paper. 
+
+The entire analysis is conducted using `R` [@R] in `rstudio` using these packages: `tidyverse` [@tidyverse], `ggplot2` [@ggplot2], `dplyr` [@dplyr], `readr` [@readr], `tidyr` [@tidyr], `stringr` [@stringr], `purrr` [@purrr], `broom` [@broom], `blorgar` [@brolgar], `patchwork` [@patchwork], `kableExtra` [@kableExtra], `MASS` [@mass], `janitor` [@janitor], `DiagrammeR` [@DiagrammeR], `rsvg` [@rsvg], and `webshot` [@webshot]. The paper are generated using `knitr` [@knitr], `rmarkdown` [@rmarkdown], and `rticles` [@rticles]. 
+
+
+# Supplementary Materials 
+
+
+**Codes** : R script to reproduce data tidying and cleaning are available in this [Github Repository](https://github.com/numbats/yowie/blob/master/data-raw/data_preprocessing.R)
+
+**R Package `yowie`**:`yowie` is a data container R package that contains 3 datasets, namely the high school mean hourly wage data, high school dropouts mean hourly wage data, and demographic data of the NLSY79 cohort. This package could be accessed [here](https://github.com/numbats/yowie).
+
+**shiny app**: An web interactive `shiny` app to run a simulation to customize the weight threshold. This app could be accessed [here](https://github.com/numbats/summer-wages-refresh/tree/main/app).
 
 
 
