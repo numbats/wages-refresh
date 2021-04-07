@@ -758,75 +758,90 @@ fc
 
 # Exploratory Data Analysis
 
-In this part, we gave some examples of how the data might be used for data analysis in text book. The first example is that we observed relationship between wages and education. Using `features` function in `brolgar`, we extracted the median of the mean hourly age of each ID and plotted according to highest grade completed. We found in Figure \ref{fig:eda-plot} A that the higher the education completed does not necessarily means the higher wages earned. However, people who completed 12th grade tend to have higher wage compared to the other groups. Further, respondents who only completed 4th grade happen to have median about as high as the respondents who completed 10th grade. 
+In this part, we gave some examples of how the data might be used for data analysis in text book. We used `brolgar` [@brolgar] to perform exploratory data analysis. In first example, 
 
-Secondly, we examined the pattern of mean hourly wage corresponding to different groups of race and gender. Figure \ref{fig:eda-plot} B and C suggest that in general, the mean hourly wage median increased over the years. Regarding the race, we found that Non-Black Non-Hispanic group had a higher wages than the other groups. We can also see a reasonable gap between the wages median of Black people and the Hispanic and the Non-Black Non-Hispanic. Regarding the gender, male earn more than female, and unfortunately, the gap keep increasing over time.  
-
-```{r, echo = FALSE}
+```{r wages-tsibble, echo = FALSE}
+# create the wages data as tsibble
 wages_hs2020_tsibble <- wages_hs2020 %>%
   as_tsibble(key = id,
              index = year,
-             regular = FALSE) 
-
-wages_hs2020_feature <- wages_hs2020_tsibble %>%
-  features(mean_hourly_wage,
-           feat_three_num) 
-
-wages_median_demog <- left_join(wages_hs2020_feature, demographic_nlsy79, by = "id") %>%
-  mutate(hgc = factor(hgc, levels = c("1ST GRADE", "2ND GRADE", "3RD GRADE", 
-                                      "4TH GRADE", "5TH GRADE", "6TH GRADE", 
-                                      "7TH GRADE", "8TH GRADE", "9TH GRADE",
-                                      "10TH GRADE", "11TH GRADE", "12TH GRADE", 
-                                      "UNGRADED")))
+             regular = FALSE)
 ```
 
 
-```{r eda-plot, echo = FALSE, fig.height=6, fig.width=6, fig.cap="The example of EDA plot. Plot A shows the pattern of the mean hourly wage median against the highest grade completed. It shows that the higher eductaion completed does not necessarily means the more wages earned. Plot B and C show the mean hourly wage median over the years based on the race and gender respectively. Generally, the respondents experienced a positive trend over time despite of what their race and gender."}
-hgc_plot <- ggplot(filter(wages_median_demog, hgc != "UNGRADED"), aes(y = hgc, x = med)) +
-  geom_boxplot() +
-  theme(axis.text.y = element_text(size = 6),
-        axis.title = element_text(size = 9)) +
-  ggtitle("A)") +
-  xlab("median of mean hourly wage (US$)") +
-  ylab("highest grade completed") 
+```{r gender-plot, echo = FALSE}
+# sample the data by gender
 
-wages_hs2020_grouped <- wages_hs2020 %>%
-  group_by(race, year) %>%
-  summarise(median = median(mean_hourly_wage))
+set.seed(31251587)
+wages_hs2020_male <- wages_hs2020_tsibble %>%
+  filter(gender == "MALE") %>%
+  sample_n_keys(size = 120)
 
-race_plot <- ggplot(wages_hs2020_grouped) +
-  geom_line(aes(x = year,
-                y = median,
-                group = race,
-                colour = race)) +
-  theme(legend.position = "bottom",
-        legend.text = element_text(size = 5),
-        axis.title = element_text(size = 9)) +
-  scale_color_brewer(palette = "Accent") +
-  ggtitle("B)") +
-  ylab("median of mean hourly wage (US$)")
+set.seed(31251587)
+wages_hs2020_female <- wages_hs2020_tsibble %>%
+  filter(gender == "FEMALE") %>%
+  sample_n_keys(size = 120)
 
-wages_hs2020_grouped_gender <- wages_hs2020 %>%
-  group_by(gender, year) %>%
-  summarise(median = median(mean_hourly_wage)) 
-
-gender_plot <- ggplot(wages_hs2020_grouped_gender) +
-  geom_line(aes(x = year,
-                y = median,
-                group = gender,
-                colour = gender)) +
-  theme(legend.position = "bottom",
-        legend.text = element_text(size = 5),
-        axis.title = element_text(size = 9)) +
-  scale_color_brewer(palette = "Dark2") +
-  ggtitle("C)") +
-  ylab("median of mean hourly wage (US$)")
-
-hgc_plot / (race_plot + gender_plot)
+wages_hs2020_sample_gender <- bind_rows(wages_hs2020_male, wages_hs2020_female)
 
 
-#### using brolgar to explore the individual experiences <- change the EDA
+ggplot(wages_hs2020_sample_gender, 
+       aes(x = year,
+           y = mean_hourly_wage,
+           group = id,
+           color = gender)) + 
+  geom_line(alpha = 0.4) +
+  facet_strata(along = gender)
 ```
+
+```{r race-plot, echo = FALSE}
+
+set.seed(31251587)
+wages_hs2020_white <- wages_hs2020_tsibble %>%
+  filter(race == "NON-BLACK, NON-HISPANIC") %>%
+  sample_n_keys(size = 60)
+
+set.seed(31251587)
+wages_hs2020_black <- wages_hs2020_tsibble %>%
+  filter(race == "BLACK") %>%
+  sample_n_keys(size = 60)
+
+
+set.seed(31251587)
+wages_hs2020_hisp <- wages_hs2020_tsibble %>%
+  filter(race == "HISPANIC") %>%
+  sample_n_keys(size = 60)
+
+
+wages_hs2020_sample_race <- bind_rows(wages_hs2020_white, wages_hs2020_black, wages_hs2020_hisp)
+
+ggplot(wages_hs2020_sample_race, 
+       aes(x = year,
+           y = mean_hourly_wage,
+           group = id,
+           color = race)) + 
+  geom_line(alpha = 0.4) +
+  facet_strata(along = race) +
+  theme(legend.position = "bottom")
+```
+
+
+```{r wages-slope, echo = FALSE}
+wages_slope <- key_slope(wages_hs2020_tsibble, 
+                         mean_hourly_wage ~ year) %>%
+  left_join(demographic_nlsy79, by = "id")
+
+ggplot(wages_slope, aes(y = hgc,
+                        x = .slope_year)) +
+  geom_boxplot()
+```
+
+
+The first example is that we observed relationship between wages and education. Using `features` function in `brolgar`, we extracted the median of the mean hourly age of each ID and plotted according to highest grade completed. We found in Figure \ref{fig:eda-plot} A that the higher the education completed does not necessarily means the higher wages earned. However, people who completed 12th grade tend to have higher wage compared to the other groups. Further, respondents who only completed 4th grade happen to have median about as high as the respondents who completed 10th grade. 
+
+Secondly, we examined the pattern of mean hourly wage corresponding to different groups of race and gender. Figure \ref{fig:eda-plot} B and C suggest that in general, the mean hourly wage median increased over the years. Regarding the race, we found that Non-Black Non-Hispanic group had a higher wages than the other groups. We can also see a reasonable gap between the wages median of Black people and the Hispanic and the Non-Black Non-Hispanic. Regarding the gender, male earn more than female, and unfortunately, the gap keep increasing over time.  
+
+
 
 
 # Summary
