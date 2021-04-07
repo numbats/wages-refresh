@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+library(shinythemes)
 library(tidyverse)
 
 
@@ -16,68 +17,85 @@ library(tidyverse)
 wages_hs <- readRDS(here::here("app/wages_hs.rds")) %>%
     dplyr::select(-`X1.x`, -`X1.y`)
 
-# Define UI for application that draws a histogram
-ui <- fluidPage(
 
-    # Application title
-    titlePanel("Customize Your Threshold"),
+## Make it separate tab for these three plots
 
-    # Sidebar with a slider input for number of bins
-    fluidRow(
-        column(width = 4,
-            sliderInput("th",
-                        "Set the weight threshold:",
-                        min = 0.01,
-                        max = 1,
-                        value = 5),
-            br(),
-            br(),
-            textInput("seed",
-                      "Set the seed:",
-                      value = "123")
+## Add progress bar for how long will it take to recalculate threshold and resample the ids
 
-        ),
+ui <- bootstrapPage(
+    navbarPage(theme = shinytheme("cerulean"),
+               collapsible = TRUE,
+               # Application title
+               "Customize Your Threshold",
+               tabPanel("Set the weight threshold",
+                        sidebarLayout(
+                            sidebarPanel(width = 4,
+                                   sliderInput("th",
+                                               "Set the weight threshold:",
+                                               min = 0.01,
+                                               max = 1,
+                                               value = 5),
+                                   br(),
+                                   br(),
+                                   actionButton("resample",
+                                             "Compare individuals")
 
-        # Show a plot of the generated distribution
-        column(width = 8,
-           plotOutput("compar_plot",
-                      height = 500)
-        )
-    ),
-    fluidRow(
-        column(
-            width = 12,
-            h2("Potential Outliers"),
-            plotOutput("outlier_plot",
-                       height = 800)
-            )
-    ),
-    fluidRow(
-        column(
-            width = 6,
-            h2("The Spaghetti Plots"),
-            plotOutput("spag1"),
-            br(),
-            textOutput("summary_before"),
-            textOutput("n_obs"),
-            textOutput("n_id")
-        ),
-        column(
-            width = 6,
-            br(),
-            br(),
-            br(),
-            plotOutput("spag2"),
-            br(),
-            textOutput("summary_after"),
-            textOutput("n_obs_pred"),
-            textOutput("n_id_pred")
+                            ),
+
+                            # Show a plot of the samples of indivudial before and after
+                            mainPanel(width = 8,
+                                      plotOutput("compar_plot",
+                                              height = 500)
+                                      # h3("Before"),
+                                      # plotOutput("spag1"),
+                                      # br(),
+                                      # textOutput("summary_before"),
+                                      # textOutput("n_obs"),
+                                      # textOutput("n_id"),
+                                      #
+                                      # h3("After"),
+                                      # plotOutput("spag2"),
+                                      # br(),
+                                      # textOutput("summary_after"),
+                                      # textOutput("n_obs_pred"),
+                                      # textOutput("n_id_pred")
+
+                            )
+                        )),
+               tabPanel(
+                   "Inspect the Potential Outliers",
+                   column(
+                       width = 12,
+                       plotOutput("outlier_plot",
+                       height = 800))
+                   ),
+
+               tabPanel(
+                   "The Spaghetty Plots",
+                   column(
+                       width = 6,
+                       h3("Before"),
+                       plotOutput("spag1"),
+                       br(),
+                       textOutput("summary_before"),
+                       textOutput("n_obs"),
+                       textOutput("n_id")),
+                   column(
+                       width = 6,
+                       h3("After"),
+                       plotOutput("spag2"),
+                       br(),
+                       textOutput("summary_after"),
+                       textOutput("n_obs_pred"),
+                       textOutput("n_id_pred")
         )
     )
 )
+)
 
-# Define server logic required to draw a histogram
-server <- function(input, output) {
+
+# SERVER
+server <- function(input, output, session) {
 
     thres_data <- reactive({
         temp_data <- wages_hs %>%
@@ -87,8 +105,7 @@ server <- function(input, output) {
                                     FALSE))
     })
 
-    compare_data <- reactive({
-        set.seed(input$seed)
+    compare_data <- eventReactive(input$resample, {
 
         sample_id <- sample(unique(thres_data()$id), 30)
         sample <- subset(thres_data(), id %in% sample_id)
@@ -98,6 +115,7 @@ server <- function(input, output) {
             rename(mean_hourly_wage_rlm = wages_rlm) %>%
             pivot_longer(c(-id, -year), names_to = "type", values_to = "wages")
     })
+
 
     pot_out_data <- reactive({
         wages_high <- filter(wages_hs, mean_hourly_wage > 500) %>%
@@ -151,8 +169,7 @@ server <- function(input, output) {
             geom_line(aes(x = year,
                           y = mean_hourly_wage,
                           group = id),
-                      alpha = 0.1) +
-            ggtitle("Before")
+                      alpha = 0.1)
     })
 
     output$spag2 <- renderPlot({
@@ -161,8 +178,7 @@ server <- function(input, output) {
             geom_line(aes(x = year,
                           y = wages_rlm,
                           group = id),
-                      alpha = 0.1) +
-            ggtitle("After")
+                      alpha = 0.1)
     })
 
     output$summary_before <- renderText({
