@@ -758,7 +758,9 @@ fc
 
 # Exploratory Data Analysis
 
-In this part, we gave some examples of how the data might be used for data analysis in text book. We used `brolgar` [@brolgar] to perform exploratory data analysis. In first example, 
+In this part, we gave some examples of how the data might be used for data analysis in text book. We used `brolgar` [@brolgar] to perform exploratory data analysis. The first example is that we observed relationship between wages and education in terms of how the wages increase year by year. Using `key_slope` function in `brolgar`, we performed a liner regression with  mean hourly wage as response variable and year as predictor and extracted the regression slope of each ID and plotted it according to highest grade completed. 
+
+We found in Figure \ref{fig:wages-slope} that the higher the education completed does not necessarily increase the wages more from year to year. We can see that people who completed 4th grade happen to have relatively the same median as people who completed 11th grade, even though it is probably because some respondents in this group had an extremely high mean hourly wages. Moreover, the annual increasing wages of people who completed 6th grade to 11th grade are relatively same. People who completed 12th grade tend to have higher slope of year compared to the other groups. We can also see that some respondents have a negative slope, meaning that their wages tend to decrease over the year.
 
 ```{r wages-tsibble, echo = FALSE}
 # create the wages data as tsibble
@@ -767,6 +769,26 @@ wages_hs2020_tsibble <- wages_hs2020 %>%
              index = year,
              regular = FALSE)
 ```
+
+```{r wages-slope, echo = FALSE, fig.cap="Regression slope of mean hourly wage regression by highest grade completed. The regression model has mean hourly wage as response variable and year as predictor. Respondents who completed 12th grade has the highest median of slope."}
+
+
+wages_slope <- key_slope(wages_hs2020_tsibble, 
+            mean_hourly_wage ~ year) %>%
+  left_join(demographic_nlsy79, by = "id") %>%
+  mutate(hgc = factor(hgc, levels = c("1ST GRADE", "2ND GRADE", "3RD GRADE", 
+                                      "4TH GRADE", "5TH GRADE", "6TH GRADE", 
+                                      "7TH GRADE", "8TH GRADE", "9TH GRADE",
+                                      "10TH GRADE", "11TH GRADE", "12TH GRADE", 
+                                      "UNGRADED"))) %>%
+  filter(hgc != "UNGRADED")
+
+ggplot(wages_slope, aes(y = hgc,
+                      x = .slope_year)) +
+  geom_boxplot()
+```
+
+
 
 
 ```{r gender-plot, echo = FALSE}
@@ -791,7 +813,7 @@ ggplot(wages_hs2020_sample_gender,
            group = id,
            color = gender)) + 
   geom_line(alpha = 0.4) +
-  facet_strata(along = gender)
+  facet_strata(along = gender) 
 ```
 
 ```{r race-plot, echo = FALSE}
@@ -825,30 +847,11 @@ ggplot(wages_hs2020_sample_race,
   theme(legend.position = "bottom")
 ```
 
-
-```{r wages-slope, echo = FALSE}
-wages_slope <- key_slope(wages_hs2020_tsibble, 
-                         mean_hourly_wage ~ year) %>%
-  left_join(demographic_nlsy79, by = "id")
-
-ggplot(wages_slope, aes(y = hgc,
-                        x = .slope_year)) +
-  geom_boxplot()
-```
-
-
-The first example is that we observed relationship between wages and education. Using `features` function in `brolgar`, we extracted the median of the mean hourly age of each ID and plotted according to highest grade completed. We found in Figure \ref{fig:eda-plot} A that the higher the education completed does not necessarily means the higher wages earned. However, people who completed 12th grade tend to have higher wage compared to the other groups. Further, respondents who only completed 4th grade happen to have median about as high as the respondents who completed 10th grade. 
-
-Secondly, we examined the pattern of mean hourly wage corresponding to different groups of race and gender. Figure \ref{fig:eda-plot} B and C suggest that in general, the mean hourly wage median increased over the years. Regarding the race, we found that Non-Black Non-Hispanic group had a higher wages than the other groups. We can also see a reasonable gap between the wages median of Black people and the Hispanic and the Non-Black Non-Hispanic. Regarding the gender, male earn more than female, and unfortunately, the gap keep increasing over time.  
-
-
-
-
 # Summary
 
 This paper has performed a set of stages to make an open data suitable for a text book data or to make it ready for research. In the first stage, we showed the steps that are performed to get the data from the NLSY79 database. Since the data format is untidy, we showed how the data has been tidied. After that, we conducted an initial data analysis to investigate and screen the quality of the data. Using robust linear regression model, we found and fixed the anomalous observations in the data set with its predicted values. We also performed an example of exploratory data analysis using the cleaned data set. 
 
-This paper also has demonstrated the documentation of data cleaning. We also provided all of the codes in performing data tidying and initial data analysis. Thus, this paper provided an opportunity to continuously refresh the text book data whenever the updated data is published in the NLSY79 database. This could be done by following the documentation of the code that is provided in this paper. 
+This paper also has demonstrated the documentation of data cleaning by providing all of the codes in performing data tidying and initial data analysis. Thus, this paper provided an opportunity to continuously refresh the text book data whenever the updated data is published in the NLSY79 database. This could be done by following the documentation of the code that is provided in this paper. 
 
 Moreover, the documentation also includes the process of how did we generate the robustness weight and how did we decide the threshold of anomalous observations. It is also documented along with the flag of whether an observation is imputed value or not. Accordingly, if somebody wish to make another decision, it can be done by making a small changes in the code provided. Further, this paper is also supplemented by a `shiny`  [@shiny] app as a simulation tool to customize the weight threshold. 
 

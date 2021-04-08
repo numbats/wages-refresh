@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  7 APR 2021 23:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  8 APR 2021 10:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1011,12 +1011,21 @@ Underfull \vbox (badness 1275) has occurred while \output is active []
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.1114 \includegraphics
-                       {figures/gender-plot-1.pdf} <./figures/compare-1.pdf>]
-<figures/gender-plot-1.pdf, id=209, 469.755pt x 325.215pt>
+l.1119 
+        <./figures/compare-1.pdf>]
+
+LaTeX Warning: Reference `fig:wages-slope' on page 16 undefined on input line 1
+120.
+
+<figures/wages-slope-1.pdf, id=209, 469.755pt x 325.215pt>
+File: figures/wages-slope-1.pdf Graphic file (type pdf)
+<use figures/wages-slope-1.pdf>
+Package pdftex.def Info: figures/wages-slope-1.pdf  used on input line 1134.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<figures/gender-plot-1.pdf, id=210, 469.755pt x 325.215pt>
 File: figures/gender-plot-1.pdf Graphic file (type pdf)
 <use figures/gender-plot-1.pdf>
-Package pdftex.def Info: figures/gender-plot-1.pdf  used on input line 1114.
+Package pdftex.def Info: figures/gender-plot-1.pdf  used on input line 1141.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1025,40 +1034,28 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.1116 \includegraphics
+l.1143 \includegraphics
                        {figures/race-plot-1.pdf} <./figures/flowchart-1.pdf>]
-<figures/race-plot-1.pdf, id=224, 469.755pt x 325.215pt>
+Overfull \vbox (68.74283pt too high) has occurred while \output is active []
+
+[17pdfTeX warning (ext4): destination with the same identifier (name{figure.7})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.1143 \includegraphics
+                       {figures/race-plot-1.pdf} <./figures/wages-slope-1.pdf> 
+<./figures/gender-plot-1.pdf>]
+<figures/race-plot-1.pdf, id=243, 469.755pt x 325.215pt>
 File: figures/race-plot-1.pdf Graphic file (type pdf)
 <use figures/race-plot-1.pdf>
-Package pdftex.def Info: figures/race-plot-1.pdf  used on input line 1116.
+Package pdftex.def Info: figures/race-plot-1.pdf  used on input line 1143.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[17 <./figures/gender-plot-1.pdf>]
-<figures/wages-slope-1.pdf, id=237, 469.755pt x 325.215pt>
-File: figures/wages-slope-1.pdf Graphic file (type pdf)
-<use figures/wages-slope-1.pdf>
-Package pdftex.def Info: figures/wages-slope-1.pdf  used on input line 1118.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[18 <./figures/race-plot-1.pdf>]
-
-LaTeX Warning: Reference `fig:eda-plot' on page 19 undefined on input line 1124
-.
-
-
-LaTeX Warning: Reference `fig:eda-plot' on page 19 undefined on input line 1131
-.
-
-[19 <./figures/wages-slope-1.pdf>] [20]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[21]
+[18 <./figures/race-plot-1.pdf>] [19]
 No file report_alt.bbl.
-[22] (./report_alt.aux)
+[20] (./report_alt.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1069,8 +1066,8 @@ Package rerunfilecheck Info: File `report_alt.out' has not changed.
 (rerunfilecheck)             Checksum: EBBC05BA6EA6BAC9E9017310EBBB251E;2095.
  ) 
 Here is how much of TeX's memory you used:
- 13307 strings out of 481009
- 207270 string characters out of 5908205
+ 13306 strings out of 481009
+ 207267 string characters out of 5908205
  669774 words of memory out of 5000000
  29948 multiletter control sequences out of 15000+600000
  461548 words of font info for 145 fonts, out of 8000000 for 9000
@@ -1093,10 +1090,10 @@ aliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/deeama
 liah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on report_alt.pdf (22 pages, 985895 bytes).
+Output written on report_alt.pdf (20 pages, 985573 bytes).
 PDF statistics:
- 424 PDF objects out of 1000 (max. 8388607)
- 365 compressed objects within 4 object streams
- 95 named destinations out of 1000 (max. 500000)
+ 417 PDF objects out of 1000 (max. 8388607)
+ 360 compressed objects within 4 object streams
+ 94 named destinations out of 1000 (max. 500000)
  32406 words of extra memory for PDF output out of 35830 (max. 10000000)
 
