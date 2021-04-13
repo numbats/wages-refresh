@@ -57,6 +57,9 @@ library(janitor)
 library(DiagrammeR)
 library(rsvg)
 library(webshot)
+library(mgcv)
+library(modelr)
+library(tsibble)
 ```
 
 
@@ -760,7 +763,7 @@ fc
 
 In this part, we gave some examples of how the data might be used for data analysis in text book. We used `brolgar` [@brolgar] to perform exploratory data analysis. The first example is that we observed relationship between wages and education in terms of how the wages increase year by year. Using `key_slope` function in `brolgar`, we performed a liner regression with  mean hourly wage as response variable and year as predictor and extracted the regression slope of each ID and plotted it according to highest grade completed. 
 
-We found in Figure \ref{fig:wages-slope} that the higher the education completed does not necessarily increase the wages more from year to year. We can see that people who completed 4th grade happen to have relatively the same median as people who completed 11th grade, even though it is probably because some respondents in this group had an extremely high mean hourly wages. Moreover, the annual increasing wages of people who completed 6th grade to 11th grade are relatively same. People who completed 12th grade tend to have higher slope of year compared to the other groups. We can also see that some respondents have a negative slope, meaning that their wages tend to decrease over the year.
+We found in Figure \ref{fig:wages-slope} that the higher the education completed does not necessarily increase the wages more from year to year. We can see that people who completed 4th grade happen to have relatively the same median of slope as people who completed 11th grade, even though it is probably because some respondents in this group had an extremely high mean hourly wages. Moreover, the annual increasing wages of people who completed 6th grade to 11th grade are relatively same. People who completed 12th grade tend to have higher slope of year compared to the other groups. Some outliers are also spotted in this group. Additionally, we can see that some respondents have a negative slope, meaning that their wages tend to decrease over the year.
 
 ```{r wages-tsibble, echo = FALSE}
 # create the wages data as tsibble
@@ -789,9 +792,10 @@ ggplot(wages_slope, aes(y = hgc,
 ```
 
 
+In the second example, we examined the pattern of mean hourly wage corresponding to different groups of gender and race. We took 240 samples of female and male equally and spread it into twelve facets as is seen in Figure \ref{fig:gender-plot} using `facet_strata` function from `brolgar` [@brolgar]. We learn that the mean hourly wage of female and male fluctuated over the years. In some facets, for example in facet 4, 5, and 10, males tend to earn more wages than females. This finding is also shown in Figure \ref{fig:gender-plot2} where we plotted the median wage of males and females against the year. We learn that males had a higher mean of mean hourly wage over the period of survey than females. Unfortunately, the gap between them tend to be wider from time to time.
 
 
-```{r gender-plot, echo = FALSE}
+```{r gender-plot, echo = FALSE, warning = FALSE, fig.cap= "The pattern of mean hourly wages overtime displayed in 12 facets coloured by gender. The respondents belong to high school cohort are randomly sampled. We learn that both male and female respondents had a fluctuate mean hourly wage over the year." }
 # sample the data by gender
 
 set.seed(31251587)
@@ -812,39 +816,75 @@ ggplot(wages_hs2020_sample_gender,
            y = mean_hourly_wage,
            group = id,
            color = gender)) + 
-  geom_line(alpha = 0.4) +
-  facet_strata(along = gender) 
+  geom_line(alpha = 0.7) +
+  scale_color_brewer(palette = "Dark2") +
+  facet_strata(along = ~gender) 
 ```
 
-```{r race-plot, echo = FALSE}
-
-set.seed(31251587)
-wages_hs2020_white <- wages_hs2020_tsibble %>%
-  filter(race == "NON-BLACK, NON-HISPANIC") %>%
-  sample_n_keys(size = 60)
-
-set.seed(31251587)
-wages_hs2020_black <- wages_hs2020_tsibble %>%
-  filter(race == "BLACK") %>%
-  sample_n_keys(size = 60)
 
 
-set.seed(31251587)
-wages_hs2020_hisp <- wages_hs2020_tsibble %>%
-  filter(race == "HISPANIC") %>%
-  sample_n_keys(size = 60)
+```{r gender-plot2, echo=FALSE, fig.cap="The yearly mean of mean hourly wage by gender along with its standard error. Males generally earn more wages than females. The error interval tend to be wider over the years."}
+wages_hs2020_grouped_gender <- wages_hs2020 %>%
+  group_by(gender, year) %>%
+  summarise(mean = mean(mean_hourly_wage),
+             sd = sd(mean_hourly_wage),
+             samplesize = n()) %>%
+  ungroup() %>%
+  mutate(upper = mean + sd/sqrt(samplesize),
+         lower = mean - sd/sqrt(samplesize)) 
 
+gender_plot <- ggplot(wages_hs2020_grouped_gender,
+                      aes(x = year,
+                          y = mean,
+                          group = gender,
+                          colour = gender)) +
+  geom_point(size = 1) +
+  geom_errorbar(aes(ymin=lower, ymax=upper), width=1,
+                 position=position_dodge(0.1)) +
+  theme(legend.position = "bottom",
+         legend.text = element_text(size = 5),
+         axis.title = element_text(size = 9)) +
+  scale_color_brewer(palette = "Dark2") +
+  ylab("median of mean hourly wage (US$)")
 
-wages_hs2020_sample_race <- bind_rows(wages_hs2020_white, wages_hs2020_black, wages_hs2020_hisp)
+gender_plot
 
-ggplot(wages_hs2020_sample_race, 
-       aes(x = year,
-           y = mean_hourly_wage,
-           group = id,
-           color = race)) + 
-  geom_line(alpha = 0.4) +
-  facet_strata(along = race) +
-  theme(legend.position = "bottom")
+```
+
+For the final example, we show the example of modeling the longitudinal data using Generelized Additive Model (GAM) for each ID. We fit a more flexible model to fit in to the data since the relationship between mean hourly wage and year is not linear due to the spikes. Since this approach is computationally expensive, we only show the model in a little fraction of the data. We sample 1 percent of the total respondents using `brolgar's` `sample_frac_keys` function. 
+
+```{r gam, cache=TRUE, echo=FALSE, fig.cap="Exploration of wages data by fitting a GAM. The fitted model displayed by blue line. The fitted line shows that the model flexible enough to follow the pattern of the data."}
+
+# take a small fraction of key
+set.seed(2020)
+wages_sample_gam <- sample_frac_keys(wages_hs2020_tsibble, size = 0.01) %>%
+  mutate(id_fct = as.factor(id),
+         year0 = year - 1979)
+
+# build GAM model
+wages_gam <- gam(
+  mean_hourly_wage ~ s(year0, by = id_fct) + id_fct,
+  data = wages_sample_gam,
+  method = "REML"
+)
+
+wages_aug_gam <- wages_sample_gam %>%
+  add_predictions(wages_gam, var = "pred") %>%
+  add_residuals(wages_gam, var = "res") %>%
+  group_by_key() %>%
+  mutate(rss = sum(res^2)) %>%
+  ungroup()
+
+set.seed(2021)
+wages_aug_gam %>%
+  sample_n_keys(12) %>%
+  ggplot(aes(x = year,
+             y = pred,
+             group = id)) +
+  geom_line(color = "steelblue") +
+  geom_point(aes(y = mean_hourly_wage)) +
+  facet_wrap(~id)
+
 ```
 
 # Summary
@@ -862,7 +902,7 @@ Finally, this paper implies that data providers should design the database that 
 
 We would like to thank Aarathy Babu for the insight and discussion during the writing of this paper. 
 
-The entire analysis is conducted using `R` [@R] in `rstudio` using these packages: `tidyverse` [@tidyverse], `ggplot2` [@ggplot2], `dplyr` [@dplyr], `readr` [@readr], `tidyr` [@tidyr], `stringr` [@stringr], `purrr` [@purrr], `broom` [@broom], `blorgar` [@brolgar], `patchwork` [@patchwork], `kableExtra` [@kableExtra], `MASS` [@mass], `janitor` [@janitor], `DiagrammeR` [@DiagrammeR], `rsvg` [@rsvg], and `webshot` [@webshot]. The paper are generated using `knitr` [@knitr], `rmarkdown` [@rmarkdown], and `rticles` [@rticles]. 
+The entire analysis is conducted using `R` [@R] in `rstudio` using these packages: `tidyverse` [@tidyverse], `ggplot2` [@ggplot2], `dplyr` [@dplyr], `readr` [@readr], `tidyr` [@tidyr], `stringr` [@stringr], `purrr` [@purrr], `broom` [@broom], `blorgar` [@brolgar], `patchwork` [@patchwork], `kableExtra` [@kableExtra], `MASS` [@mass], `janitor` [@janitor], `DiagrammeR` [@DiagrammeR], `rsvg` [@rsvg], `webshot` [@webshot], `mgcv` [@mgcv], `tsibble` [@tsibble], and `modelr` [@modelr]. The paper are generated using `knitr` [@knitr], `rmarkdown` [@rmarkdown], and `rticles` [@rticles]. 
 
 
 # Supplementary Materials 
