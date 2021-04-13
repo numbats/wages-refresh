@@ -851,7 +851,7 @@ gender_plot
 
 ```
 
-For the final example, we show the example of modeling the longitudinal data using Generelized Additive Model (GAM) for each ID. We fit a more flexible model to fit in to the data since the relationship between mean hourly wage and year is not linear due to the spikes. Since this approach is computationally expensive, we only show the model in a little fraction of the data. We sample 1 percent of the total respondents using `brolgar's` `sample_frac_keys` function. 
+For the final example, we show the example of modeling the longitudinal data using Generelized Additive Model (GAM) with `mgcv` package [@mgcv] for each ID. We fit a more flexible model to fit in to the data since the relationship between mean hourly wage and year is not linear due to the spikes. Since this approach is computationally expensive, we only show the model in a little fraction of the data. We sample 1 percent of the total respondents using `brolgar's` `sample_frac_keys` function. Further, we plotted the some sample of the fitted model in Figure \@ref{fig:gam}. We learn that the model flexible enough to deal with the fluctuation in the data. Moreover, model with small spikes tend to be linearly fitted.  
 
 ```{r gam, cache=TRUE, echo=FALSE, fig.cap="Exploration of wages data by fitting a GAM. The fitted model displayed by blue line. The fitted line shows that the model flexible enough to follow the pattern of the data."}
 
