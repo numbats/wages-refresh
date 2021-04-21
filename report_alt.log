@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.13)  22 APR 2021 09:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.13)  22 APR 2021 09:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1087,7 +1087,7 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1490.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1490.
 
 Package rerunfilecheck Info: File `report_alt.out' has not changed.
-(rerunfilecheck)             Checksum: F4DEEE498C15A30C0E8FDBDEAE9116B7;833.
+(rerunfilecheck)             Checksum: A55BA8DC8436405977E4556E83018171;817.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1098,7 +1098,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1490.
  ) 
 Here is how much of TeX's memory you used:
  11335 strings out of 480608
- 182932 string characters out of 5903630
+ 182900 string characters out of 5903630
  606010 words of memory out of 5000000
  26718 multiletter control sequences out of 15000+600000
  578829 words of font info for 115 fonts, out of 8000000 for 9000
@@ -1117,7 +1117,7 @@ dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2020/texmf-dist/fonts
 /type1/public/lm/lmtko10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/pu
 blic/lm/lmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lm
 tti10.pfb>
-Output written on report_alt.pdf (21 pages, 988361 bytes).
+Output written on report_alt.pdf (21 pages, 987933 bytes).
 PDF statistics:
  434 PDF objects out of 1000 (max. 8388607)
  371 compressed objects within 4 object streams

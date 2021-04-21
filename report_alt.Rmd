@@ -507,7 +507,7 @@ ggplot(wages_demog_hs_tsibble,
   ylab("mean hourly wage") 
 ```
 
-### Robust Linear Model for Noises Treatment
+### Replacing extreme values
 
 As it is seen from figure \ref{fig:sampleplot}, there are many spikes in the mean hourly wage data. As part of the IDA, which is the model formulation, we built a robust linear regression model to address this issue. The notion of robust linear regression is to yield an estimation that is robust to the influence of noise or contamination [@KollerManuel2016rARP]. It also aims to detect the contamination by weighting each observation based on how "well-behave" they are, known as robustness weight. Observations with lower robustness weight are suggested as an outliers by this method [@KollerManuel2016rARP]. 
 
