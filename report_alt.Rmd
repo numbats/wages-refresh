@@ -14,7 +14,6 @@ authors:
     location: ""
     email: ""
   - name: Emi Tanaka
-    thanks: emitanaka.org
     department: Department of Econometrics and Business Statistics
     affiliation: Monash University
     location: Clayton, VIC 3800
@@ -26,7 +25,6 @@ authors:
     location: ""
     email: ""
   - name: Dianne Cook
-    thanks: dicook.org
     department: Department of Econometrics and Business Statistics
     affiliation: Monash University
     location: Clayton, VIC 3800
@@ -63,7 +61,7 @@ library(tsibble)
 ```
 
 
-The NSLY79 is a prominent open data source that has been playing an important role in multidisciplinary research. This article aims to demonstrate the steps of initial data analysis (IDA), namely tidying, cleaning, and documenting the process to make the data available for text book or research data. Besides, this article provides the opportunity to continuously refresh the text book data by updating the codes that are provided in this article. The IDA shows that the NLSY79 data has two problems. Firstly, the downloaded data format is untidy. Secondly, some anomalies in terms of extreme high hourly wages are found. We addressed the first problem by tidying the data according to three principles of a tidy data. For the latter problem, we found the anomalies using the robustness weight threshold of robust linear regression. An observation with weight < 1.12 is considered as an outlier. Further, we fixed the anomalies using the predicted value of the robust linear regression model. Using the cleaned data, we provided three data sets, the high school mean hourly wage data, the high school dropouts mean hourly wage data, and demographic variables of the NLSY79 cohort. These data sets are contained in an open source R package `yowie`. Supplementary materials for this article are available online. 
+NSLY79 is a prominent open data source that has been an important support in multidisciplinary research on longitudinal data. Subsets of this data can be found in numerous textbooks and research articles, however the steps and decisions taken to get from the original data to these subsets is never clearly articulated. This article describes our journey when trying to re-create a textbook example data set from the original data, with a goal to refresh it for use in the classroom. It thus demonstrates the process of initial data analysis (IDA) -- tidying, cleaning, and documenting the process -- to make data available for text book examples or research. Three new data sets, and the code to produce them are provided in an accompanying open source R package, called `yowie`.  The code might be useful for future refreshing of this particular text book data. As a result of this process, some recommendations are made for the NLSY79 curators for incorporating data quality checks, and providing more convenient samples of the data to potential users. 
 
 **Keywords**: Data cleaning; Data tidying; Longitudinal data; NLSY79; Open data; Initial data analysis; Outlier detection; Robust linear regression
 
@@ -908,11 +906,11 @@ The entire analysis is conducted using `R` [@R] in `rstudio` using these package
 # Supplementary Materials 
 
 
-**Codes** : R script to reproduce data tidying and cleaning are available in this [Github Repository](https://github.com/numbats/yowie/blob/master/data-raw/data_preprocessing.R)
+- **Codes** : R script to reproduce data tidying and cleaning are available in this [Github Repository](https://github.com/numbats/yowie/blob/master/data-raw/data_preprocessing.R).
 
-**R Package `yowie`**:`yowie` is a data container R package that contains 3 datasets, namely the high school mean hourly wage data, high school dropouts mean hourly wage data, and demographic data of the NLSY79 cohort. This package could be accessed [here](https://github.com/numbats/yowie).
+- **R Package `yowie`**:`yowie` is a data container R package that contains 3 datasets, namely the high school mean hourly wage data, high school dropouts mean hourly wage data, and demographic data of the NLSY79 cohort. This package could be accessed [here](https://github.com/numbats/yowie).
 
-**shiny app**: An web interactive `shiny` app to run a simulation to customize the weight threshold. This app could be accessed [here](https://github.com/numbats/summer-wages-refresh/tree/main/app).
+- **shiny app**: An web interactive `shiny` app to run a simulation to customize the weight threshold. This app could be accessed [here](https://github.com/numbats/summer-wages-refresh/tree/main/app).
 
 
 
