@@ -86,11 +86,19 @@ This paper is structured to have 5 sections. Section 2 describes the original da
 
 # The NLSY79
 
+## Database
+
 The NLSY79 is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth and born between 1957-1964 [@nlsy79]. The cohort originally included 12,686 respondents ages 14-22 when first interviewed in 1979. It was comprised of Blacks, Hispanics, economically disadvantaged non-Black non-Hispanics, and youth in the military. In 1984 and 1990, two sub-samples were dropped from the interview; the dropped subjects are the 1,079 members of the military sample and 1,643 members of the economically disadvantaged non-Black non-Hispanics respectively. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
 
 Although the main focus area of the NLSY is labor and employment, the NLSY also cover several other topics including education; training and achievement; household, geography and contextual variables; dating, marriage, cohabitation; sexual activity, pregnancy, and fertility; children; income, assets and program participation; health; attitudes and expectations; and crime and substance use. 
 
-There are two ways to conduct the interview of the NLSY79, which are face to face interview or by telephone. In recent survey years, more than 90 percent of respondents were interviewed by telephone [@eliznlsy]. 
+There are two ways to conduct the interview of the NLSY79, which are face to face interview or by telephone. In recent survey years, more than 90 percent of respondents were interviewed by telephone [@eliznlsy].
+
+## Target Data
+
+As mentioned in Section 1, this paper aims to refresh the NLSY79 data as used in Singer and Willet's text book (@SingerJudithD2003Alda). This data set contains the information of yearly mean hourly wages from the NLSY79 cohort, with education and race as covariates. This data set represents the measurement of male high-school dropouts, aged from 14 to 17 years old when first time measured. Hence, in this paper, after getting the data set of high school graduates, we subset it by only having the high school dropouts. 
+
+Since there is no information of high school drop-outs in Singer and Willet's book, we define high school dropouts as respondents who only completed either $9^{th}$, $10^{th}$, $11^{th}$ grade, or who completed $12^{th}$ when their age are at least 19 years old (means that these IDs being dropped out in certain year, but they returned back to high school to complete it). 
 
 # The NLSY79 Data Cleaning 
 
@@ -644,9 +652,7 @@ ggplot(wages_compare) +
 
 ```
 
-Finally, we saved the imputed data and set the appropriate data type for the variables. We also saved the NLSY79 cohort's demographic information and the high school dropout cohort in a separate data sets. Here, we defined high school dropouts as respondents who only completed either $9^{th}$, $10^{th}$, $11^{th}$ grade, or who completed $12^{th}$ when their age are at least 19 years old (means that these IDs being dropped out in certain year, but they returned back to high school to complete it). We also filtered the data to be only male and aged between 14 and 17 years old to refresh the high school dropouts data in the `brolgar` package. 
-
-We then make these three data sets and its processing documentation to be publicly available through an R data container package called `yowie`. The complete flow from the raw data to these data set is displayed in Figure \ref(fig:flowchart).
+Finally, we saved the imputed data and set the appropriate data type for the variables. As our target data is the mean hourly wage of the high-school dropouts, we then subset the high-school graduate data set to be only having the male-high school dropout data. We also saved the NLSY79 cohort's demographic information in a separate dataset. We then make these three data sets and its processing documentation to be publicly available through an R data container package called `yowie`. The complete flow from the raw data to these data set is displayed in Figure \ref(fig:flowchart).
 
 ```{r}
 # select out the old value of mean hourly wage and change it with the wages_rlm value
