@@ -435,7 +435,23 @@ kable(gender_race_table,
 
 ```
 
-```{r featureplot, echo = FALSE, fig.cap = "Two plots showing the distribution of the mean hourly wage. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value. We can see that some IDs had an extremely high of wages and it made the distribution of the three features is extremely skewed.", fig.width=6, fig.height=4}
+The next step is that we explored the mean hourly wage data, in this case, we only explored the wages data in `wages_demog_hs`. Table \ref{tab:summarytable} shows that the overall wages median of the cohort is only 7.2, while the mean is 11.87. It indicates that the data might contains a lot of extreme values. 
+
+
+
+```{r summarytable, echo = FALSE}
+kable(as.array(summary(wages_demog_hs$mean_hourly_wage)), 
+      caption = "Summary Statistics of Wages of High School Data",
+      col.names = c("Statistics", "Value")) %>%
+  kable_styling(latex_options = "striped")
+```
+
+
+
+However, we can not be sure only by observing the summary statistics. Hence, we used visualisation techniques to investigate this matter. Figure \ref{fig:feature-plot} conveys a problem in the mean hourly wage values. Figure \ref{fig:feature-plot} A shows that some observations had an exceptionally high figure of wages, even more than US$10,000 per hour. In Figure \ref{fig:feature-plot} B, we barely see any difference in the minimum, median, and maximum value of the wages since the distribution is heavily skewed to the right. 
+
+
+```{r feature-plot, echo = FALSE, fig.cap = "Two plots showing the distribution of the mean hourly wage. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value. We can see that some IDs had an extremely high of wages and it made the distribution of the three features is extremely skewed.", fig.width=6, fig.height=4}
 
 spag <- wages_demog_hs %>%
   ggplot(aes(x = year,
@@ -465,18 +481,8 @@ spag + feature
 ```
 
 
-The next step is that we explored the mean hourly wage data, in this case, we only explored the wages data in `wages_demog_hs`. Figure \@ref(fig:featureplot) conveys that there is clearly a problem in the mean hourly wage values. Figure \ref{fig:featureplot} A shows that some observations had an exceptionally high figure of wages, even more than US$10,000 per hour. In Figure \ref{fig:featureplot} B, we barely see any difference in the minimum, median, an maximum value of the wages since the distribution is heavily skewed to the right. Additionally, Table \ref{tab:summarytable} shows that the overall wages median of the cohort is only 7.2, while the mean is 11.87. It indicates that the data might contains a lot of extreme values. 
 
-
-
-```{r summarytable, echo = FALSE}
-kable(as.array(summary(wages_demog_hs$mean_hourly_wage)), 
-      caption = "Summary Statistics of Wages of High School Data",
-      col.names = c("Statistics", "Value")) %>%
-  kable_styling(latex_options = "striped")
-```
-
-In Figure \ref{fig:high-wages}, we plotted some respondents with a high value of mean hourly wages. We filtered all of the IDs who earned more than US$ 500 per hour averagely. We found that most of these respondents only experienced one point of extremely high wages. Thus, we suspected that these high values are erroneous values resulted from a data entry error. 
+In Figure \ref{fig:high-wages}, we plotted some respondents with a high value of mean hourly wages. We filtered all of the IDs who earned more than US$ 500 per hour on average. We found that these respondents only experienced one point of extremely high wages. Thus, we suspected that these high values are erroneous resulted from a data entry error. 
 
 ```{r high-wages, echo = FALSE, fig.cap= "6 out of 45 IDs with extremely high mean hourly wage. Most of the IDs only have one point of high wage."}
 
@@ -500,13 +506,10 @@ ggplot(wages_high2) +
   
 ```
 
+Further, we took 36 samples randomly from the data and plotted them, as shown in Figure \ref{fig:sample-plot}. It implies that not only that some observations earned extremely high figures of wages, but some also had reasonably fluctuated wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples had a different pattern of mean hourly wages. Some had flat wages for years but had a sudden increase in one particular year, then it went down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9. 
 
 
-Further, we took 36 samples randomly from the data and plotted it as is seen in Figure \ref{fig:sampleplot}. It implies that not only that some observations earned an extremely high figures of wages, but some also had a reasonably fluctuate wages, for example the IDs in panel number 5, 7, and 11. The plot also implies that the samples had a different pattern of mean hourly wages. Some had a flat wages for years but had a sudden increase in a year than it went down again, while the other experienced a upsurge in their wage, for instance the IDs in panel 9. 
-
-According to @MichaelRPergamit2001DWTN, one of the flaws of the NLSY79 employment data is that since the NLSY79 collect the information of the working hours since the last interview, it might be challenging for the respondents to track the within-job hours changes that happens between survey year, especially for the respondents with fluctuate working hours or whose job is seasonal. It even has been more challenging since 1994, where the respondents had to recall two years period. This shortcoming might also contribute on the fluctuation of one's wages data. 
-
-```{r sampleplot, echo = FALSE, fig.cap="The mean hourly wages of some random samples are shown in twelve facets, three IDs per facet. It suggests that some IDs had a reasonably fluctuate wages.", fig.height=4, fig.width=5}
+```{r sample-plot, echo = FALSE, fig.cap="The mean hourly wages of some random samples are shown in twelve facets, three IDs per facet. It suggests that some IDs had a reasonably fluctuate wages.", fig.height=4, fig.width=5}
 
 set.seed(20210225)
 
@@ -520,15 +523,18 @@ ggplot(wages_demog_hs_tsibble,
   ylab("mean hourly wage") 
 ```
 
+According to @MichaelRPergamit2001DWTN, one of the flaws of the NLSY79 employment data is that since the NLSY79 collect the information of the working hours since the last interview, it might be challenging for the respondents to track the within-job hours' changes that happens between survey year, especially for the respondents with fluctuate working hours or whose job is seasonal. It even has been more challenging since 1994, where the respondents had to recall two years period. This shortcoming might also contribute to the fluctuation of one's wages data. 
+
+
 ### Replacing extreme values
 
-As it is seen from figure \ref{fig:sampleplot}, there are many spikes in the mean hourly wage data. As part of the IDA, which is the model formulation, we built a robust linear regression model to address this issue. The notion of robust linear regression is to yield an estimation that is robust to the influence of noise or contamination [@KollerManuel2016rARP]. It also aims to detect the contamination by weighting each observation based on how "well-behave" they are, known as robustness weight. Observations with lower robustness weight are suggested as an outliers by this method [@KollerManuel2016rARP]. 
+As part of the IDA, which is the model formulation, we built a robust linear regression model to handle the extreme values in the data. Robust linear regression yields an estimation that is robust to the influence of noise or contamination [@KollerManuel2016rARP]. It also aims to detect the contamination by weighting each observation based on how "well-behaved" they are, known as robustness weight. Observations with lower robustness weight are suggested as an outlier by this method [@KollerManuel2016rARP]. 
 
-In this paper, we built the model using the `rlm` function from `MASS` package [@mass]. We set the `mean_hourly_wage` and `year` as the dependent and predictor respectively. Furthermore, we used M-Estimation with Huber weighting where the observation with small residual get a weight of 1, while the larger the residual, the smaller the weight (less than 1) [@rlm]. 
+Since we worked with longitudinal data, we built the model for each ID instead of the overall data. The robust mixed model is might be the best model to be employed in this case. However, this method is too computationally and memory expensive, especially for a large data set, like the NLSY79 data. Thus, the model for each ID is built utilizing the `nest` and `map` function from `tidyr` [@tidyr] and `purrr` [@purrr] respectively. 
 
-Since we worked with longitudinal data, we should built the model for each ID, instead of the overall data. The robust mixed model is actually the best model to be employed in this case. However, this method is too computationally and memory expensive, especially for a large data set, like the NLSY79 data. Thus, the model for each ID is built utilizing the `nest` and `map` function from `tidyr` [@tidyr] and `purrr` [@purrr] respectively. 
+We built the model using the `rlm` function from `MASS` package [@mass]. We set the `mean_hourly_wage` and `year` as the dependent and predictor, respectively. Furthermore, we used M-Estimation with Huber weighting where the observation with a slight residual gets a weight of 1, while the larger the residual, the smaller the weight (less than 1) [@rlm]. However, the challenging part of detecting the anomaly using the robustness weight is determining the threshold of the weight in which the observations are considered outliers. Moreover, it should be noted that not all the outliers are due to an error. Instead, it might be that one had reasonably increasing or decreasing wages in a particular period. 
 
-The challenging part of detecting the anomaly using the robustness weight is to determine the threshold of the weight where the observations considered as outliers. Moreover, it should be noted that not all the outliers is due to an error, instead it might be that one had a reasonably increasing or decreasing wages. To, minimize the risk of being mistakenly regard an outlier as an "erronous outlier", we have simulated some threshold and study the behavior of the spikes in each threshold. We found that 0.12 is the most reasonable value to be the threshold to minimize the risk of that drawback because it still capture the sensible spikes in the data. In other words, we kept maintaining the natural variability of the wages while minimizing the presence of anomalies because of the error in the data recording. After deciding the threshold, we imputed the observations with weight less than 0.2 wage with the models' predicted value. We then flagged those observations in a new variable called `is_pred`, 
+To minimize the risk of mistakenly regarding an outlier as an "erroneous outlier", we have simulated some thresholds and study how they affected the data. We found that 0.12 is the most reasonable value to be the threshold to minimize that drawback's risk because it still captures the sensible spikes in the data. In other words, we kept maintaining the natural variability of the wages while minimizing anomalies because of the error in the data recording. After deciding the threshold, we imputed the observations whose weight less than 0.12 with the models' predicted value. We then flagged those observations in a new variable called `is_pred`. 
 
 
 ```{r rlm, cache=TRUE, warning = FALSE, message = FALSE, echo = FALSE}
@@ -589,12 +595,10 @@ wages_demog_hs <- left_join(wages_demog_hs, wages_rlm_dat, by = c("id", "year"))
 
 ```
 
-Figure \ref{fig:comppict} A shows that after imputing the anomalies with the models' predicted value, the highest wages value has decreased to be around $350. The spikes were still observed, but are not as extreme as the original data set. In Figure \ref{fig:comppict} B), we plotted the three features of mean hourly wages, namely the minimum, median, an maximum value, transformed to log scale. The plot implies that the skewness are slightly negative. We also see that the three features are overlapped each other. It indicates that some ID's minimum wage are higher than some ID's maximum wage. 
+Figure \ref{fig:comppict} A shows the mean hourly wage feature after the extreme values are replaced. It shows that the highest value has decreased to be around $350. The spikes were still observed but are not as extreme as the original data set. In Figure \ref{fig:comppict} B), we plotted the three features of mean hourly wages, namely the minimum, median, and maximum value, transformed to log scale. The plot implies that the skewness is slightly negative. We also see that the three features are overlapped each other. It indicates that some ID's minimum wages are higher than some ID's maximum wages. 
 
 
-Furthermore, Figure \ref{fig:compare} implies that after the treatment, the fluctuation can still be observed in the data and only the large spikes, which are considered as "erronous outliers", are eliminated from the data. Hence, the model results a data set with the reasonable degree of fluctuation.
-
-```{r comppict, echo = FALSE, fig.cap = "The distribution of the mean hourly wage after treating the extreme values. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value transformed to log10 scale. We can see that some observations still had reasonbaly higher wages than the others. Also, some IDs' have a minimum wages that is higher than others' maximum wages.", fig.width=6, fig.height=4}
+```{r comppict, echo = FALSE, fig.cap = "The distribution of the mean hourly wage after the extreme values are replaced. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value transformed to log10 scale. We can see that some observations still had reasonbaly higher wages than the others. Also, some IDs' have a minimum wages that is higher than others' maximum wages.", fig.width=6, fig.height=4}
 
 spag2 <- wages_demog_hs %>%
   ggplot(aes(x = year,
@@ -637,8 +641,9 @@ wages_compare <- sample %>%
   pivot_longer(c(-id, -year), names_to = "type", values_to = "wages")
 ```
 
+Furthermore, Figure \ref{fig:compare-plot} implies that the fluctuation can still be observed in the data after the treatment. However, the large spikes, which are considered "erroneous outliers", are already eliminated from the data. Hence, the model produces a data set with a more reasonable degree of fluctuation.
 
-```{r compare, echo = FALSE, fig.cap="Comparison between the original and the treated mean hourly wage. The orange line portray the original value of mean hourly wage, while the turquoise line display the mean hourly wages value after the extreme values imputed with the robust linear model's prediction value. We can see that some extreme spikes has been reduced by the model.", fig.height=5, fig.width=6}
+```{r compare-plot, echo = FALSE, fig.cap="Comparison between the original and the treated mean hourly wage. The orange line portray the original value of mean hourly wage, while the turquoise line display the mean hourly wages value after the extreme values imputed with the robust linear model's prediction value. We can see that some extreme spikes has been reduced by the model.", fig.height=5, fig.width=6}
 ggplot(wages_compare) +
   geom_line(aes(x = year,
                 y = wages,
@@ -657,7 +662,7 @@ ggplot(wages_compare) +
 
 ```
 
-Finally, we saved the imputed data and set the appropriate data type for the variables. As our target data is the mean hourly wage of the high-school dropouts, we then subset the high-school graduate data set to be only having the male-high school dropout data. We also saved the NLSY79 cohort's demographic information in a separate dataset. We then make these three data sets and its processing documentation to be publicly available through an R data container package called `yowie`. The complete flow from the raw data to these data set is displayed in Figure \ref(fig:flowchart).
+Finally, we saved the imputed data and set the appropriate data type for the variables. As our target data is the mean hourly wage of the high-school dropouts, we then subset the high-school graduate data set to have only the male-high school dropout data. We also saved the NLSY79 cohort's demographic information in a separate dataset. We then make these three data sets and their processing documentation publicly available through an R data container package called `yowie`. The complete flow from the raw data to these data set is displayed in Figure \ref{fig:flow-chart}.
 
 ```{r save-data, echo = FALSE}
 # select out the old value of mean hourly wage and change it with the wages_rlm value
@@ -733,7 +738,7 @@ n_obs_do_pred = filter(wages_hs_dropout, is_pred == TRUE) %>%
 ```
 
 
-```{r flowchart, echo=FALSE, fig.cap="The stages of data filtering from the raw data to get three datasets that are contained in an R package called yowie, n means the number of ID, while n_obs means the number of observations.", fig.height=3, fig.width=3}
+```{r flow-chart, echo=FALSE, fig.cap="The stages of data filtering from the raw data to get three datasets that are contained in an R package called yowie, n means the number of ID, while n_obs means the number of observations.", fig.height=3, fig.width=3}
 
 fc <- grViz("digraph flowchart {
       node [fontname = Helvetica, shape = rectangle]        
@@ -770,9 +775,9 @@ fc
 
 # Exploratory Data Analysis
 
-In this part, we gave some examples of how the data might be used for data analysis in text book. We used `brolgar` [@brolgar] to perform exploratory data analysis. The first example is that we observed relationship between wages and education in terms of how the wages increase year by year. Using `key_slope` function in `brolgar`, we performed a liner regression with  mean hourly wage as response variable and year as predictor and extracted the regression slope of each ID and plotted it according to highest grade completed. 
+This part gives some examples of how the data might be used for data analysis in a textbook. We used `brolgar` [@brolgar] to perform exploratory data analysis. In the first example, we observed the relationship between wages and education regarding how the wages increase year by year. Using `key_slope` function in `brolgar`, we performed linear regression with the mean hourly wage as response variable and year as the predictor, extracted the regression slope of each ID, and plotted it according to the highest grade completed. 
 
-We found in Figure \ref{fig:wages-slope} that the higher the education completed does not necessarily increase the wages more from year to year. We can see that people who completed 4th grade happen to have relatively the same median of slope as people who completed 11th grade, even though it is probably because some respondents in this group had an extremely high mean hourly wages. Moreover, the annual increasing wages of people who completed 6th grade to 11th grade are relatively same. People who completed 12th grade tend to have higher slope of year compared to the other groups. Some outliers are also spotted in this group. Additionally, we can see that some respondents have a negative slope, meaning that their wages tend to decrease over the year.
+Figure \ref{fig:slope-fig} shows that the higher the education completed does not necessarily increase the wages more from year to year. We can see that people who completed 4th grade happen to have relatively the same median of slope as people who completed 11th grade, even though it is probably because some respondents in this group had extremely high mean hourly wages. Moreover, the annual increasing wages of people who completed 6th grade to 11th grade are relatively the same. People who completed 12th grade tend to have a higher slope of the year than the other groups. Some outliers are also spotted in this group. Additionally, we can see that some respondents have a negative slope, meaning that their wages tend to decrease over the year.
 
 ```{r wages-tsibble, echo = FALSE}
 # create the wages data as tsibble
@@ -782,7 +787,7 @@ wages_hs2020_tsibble <- wages_hs2020 %>%
              regular = FALSE)
 ```
 
-```{r wages-slope, echo = FALSE, fig.cap="Regression slope of mean hourly wage regression by highest grade completed. The regression model has mean hourly wage as response variable and year as predictor. Respondents who completed 12th grade has the highest median of slope."}
+```{r slope-fig, echo = FALSE, fig.cap="Regression slope of mean hourly wage regression by highest grade completed. The regression model has mean hourly wage as response variable and year as predictor. Respondents who completed 12th grade has the highest median of slope."}
 
 
 wages_slope <- key_slope(wages_hs2020_tsibble, 
@@ -801,10 +806,10 @@ ggplot(wages_slope, aes(y = hgc,
 ```
 
 
-In the second example, we examined the pattern of mean hourly wage corresponding to different groups of gender and race. We took 240 samples of female and male equally and spread it into twelve facets as is seen in Figure \ref{fig:gender-plot} using `facet_strata` function from `brolgar` [@brolgar]. We learn that the mean hourly wage of female and male fluctuated over the years. In some facets, for example in facet 4, 5, and 10, males tend to earn more wages than females. This finding is also shown in Figure \ref{fig:gender-se} where we plotted the median wage of males and females against the year. We learn that males had a higher mean of mean hourly wage over the period of survey than females. Unfortunately, the gap between them tend to be wider from time to time.
+In the second example, we examined the pattern of mean hourly wage corresponding to different groups of gender and race. We took 240 samples of females and males equally and spread them into twelve facets, as shown in Figure \ref{fig:plot-gender} using `facet_strata` function from `brolgar` [@brolgar]. We learn that the mean hourly wage of females and males fluctuated over the years. For example,  in facets 4, 5, and 10, males tend to earn more wages than females. This finding is also shown in Figure \ref{fig:se-gender} where we plotted the median wage of males and females against the year. We learn that males had a higher mean of mean hourly wage throughout the survey than females. Unfortunately, the gap between them tends to be wider from time to time.
 
 
-```{r gender-plot, echo = FALSE, warning = FALSE, fig.cap= "The pattern of mean hourly wages overtime displayed in 12 facets coloured by gender. The respondents belong to high school cohort are randomly sampled. We learn that both male and female respondents had a fluctuate mean hourly wage over the year." }
+```{r plot-gender, echo = FALSE, warning = FALSE, fig.cap= "The pattern of mean hourly wages overtime displayed in 12 facets coloured by gender. The respondents belong to high school cohort are randomly sampled. We learn that both male and female respondents had a fluctuate mean hourly wage over the year." }
 # sample the data by gender
 
 set.seed(31251587)
@@ -832,7 +837,7 @@ ggplot(wages_hs2020_sample_gender,
 
 
 
-```{r gender-se, echo=FALSE, fig.cap="The yearly mean of mean hourly wage by gender along with its standard error. Males generally earn more wages than females. The error interval tend to be wider over the years."}
+```{r se-gender, echo=FALSE, fig.cap="The yearly mean of mean hourly wage by gender along with its standard error. Males generally earn more wages than females. The error interval tend to be wider over the years."}
 wages_hs2020_grouped_gender <- wages_hs2020 %>%
   group_by(gender, year) %>%
   summarise(mean = mean(mean_hourly_wage),
@@ -860,9 +865,9 @@ gender_plot
 
 ```
 
-For the final example, we show the example of modeling the longitudinal data using Generelized Additive Model (GAM) with `mgcv` package [@mgcv] for each ID. We fit a more flexible model to fit in to the data since the relationship between mean hourly wage and year is not linear due to the spikes. Since this approach is computationally expensive, we only show the model in a little fraction of the data. We sample 1 percent of the total respondents using `brolgar's` `sample_frac_keys` function. Further, we plotted the some sample of the fitted model in Figure \@ref{fig:gam-plot}. We learn that the model flexible enough to deal with the fluctuation in the data. Moreover, model with small spikes tend to be linearly fitted.  
+For the final example, we showed modeling the longitudinal data using the Generalized Additive Model (GAM) with `mgcv` package [@mgcv] for each ID. We fitted a more flexible model to fit into the data since the relationship between mean hourly wage and year is not linear due to the spikes. Since this approach is computationally expensive, we only showed the model in a small fraction of the data. We sampled 1 percent of the total respondents using `brolgar's` `sample_frac_keys` function. Further, we plotted some IDs overlayed by the fitted GAM model in Figure \ref{fig:plot-gam}. We learn that the model flexible enough to deal with the fluctuation in the data. Moreover, the data with small spikes tend to be linearly fitted.  
 
-```{r gam-plot, cache=TRUE, echo=FALSE, fig.cap="Exploration of wages data by fitting a GAM. The fitted model displayed by blue line. The fitted line shows that the model flexible enough to follow the pattern of the data."}
+```{r plot-gam, cache=TRUE, echo=FALSE, fig.cap="Exploration of wages data by fitting a GAM. The fitted model displayed by blue line. The fitted line shows that the model flexible enough to follow the pattern of the data."}
 
 # take a small fraction of key
 set.seed(2020)
@@ -898,13 +903,13 @@ wages_aug_gam %>%
 
 # Summary
 
-This paper has performed a set of stages to make an open data suitable for a text book data or to make it ready for research. In the first stage, we showed the steps that are performed to get the data from the NLSY79 database. Since the data format is untidy, we showed how the data has been tidied. After that, we conducted an initial data analysis to investigate and screen the quality of the data. Using robust linear regression model, we found and fixed the anomalous observations in the data set with its predicted values. We also performed an example of exploratory data analysis using the cleaned data set. 
+This paper has performed a set of stages to make open data suitable for textbook data or make it ready for research. In the first stage, we showed the steps performed to get the data from the NLSY79 database. Since the data format is untidy, we showed how the data had been tidied. After that, we conducted initial data analysis to investigate and screen the quality of the data. Using the robust linear regression model, we found and fixed the anomalous observations in the data set with its predicted values. We also performed an example of exploratory data analysis using the cleaned data set. 
 
-This paper also has demonstrated the documentation of data cleaning by providing all of the codes in performing data tidying and initial data analysis. Thus, this paper provided an opportunity to continuously refresh the text book data whenever the updated data is published in the NLSY79 database. This could be done by following the documentation of the code that is provided in this paper. 
+This paper has also demonstrated data cleaning documentation by providing all of the codes in performing data tidying and initial data analysis. Thus, this paper provided an opportunity to continuously refresh the textbook data whenever the updated data is published in the NLSY79 database. It could be done by following the documentation of the code that is provided in this paper. 
 
-Moreover, the documentation also includes the process of how did we generate the robustness weight and how did we decide the threshold of anomalous observations. It is also documented along with the flag of whether an observation is imputed value or not. Accordingly, if somebody wish to make another decision, it can be done by making a small changes in the code provided. Further, this paper is also supplemented by a `shiny`  [@shiny] app as a simulation tool to customize the weight threshold. 
+Moreover, the documentation also includes how we generated the robustness weight and how we decided the threshold of anomalous observations. It is also documented along with the flag of whether an observation is imputed value or not. Accordingly, if somebody wishes to make another decision, it can be done by making a small change in the code provided. Further, this paper is also supplemented by a `shiny`  [@shiny] app as a simulation tool to customize the weight threshold. 
 
-Finally, this paper implies that data providers should design the database that is able to produce tidy data sets. A data provider should also check for data anomalies prior the data publishing or at least provides a set of rules or threshold value, for example, in this case is the threshold of reasonable wages. This will greatly support the data users to carry out further validation and set the same understanding of which data are considered as outliers. Moreover, providing validation rules would facilitate the usage of any establish data validation tool, such as `validate` [@validate] package. In this case, we cannot use this handy validation package due to the absence of validation rules.  
+Finally, this paper implies that data providers should design a database that is able to produce tidy data sets. A data provider should also check for data anomalies before the data publishing or at least provides a set of rules or threshold values. For example, in this case, is the threshold of reasonable wages. This will greatly support the data users to validate and set the same understanding of which data are considered outliers. Moreover, providing validation rules would facilitate any established data validation tool, such as `validate` [@validate] package. In this case, we cannot use this handy validation package due to the absence of validation rules. 
 
 
 # Acknowledgements 
