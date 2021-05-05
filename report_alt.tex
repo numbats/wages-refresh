@@ -533,20 +533,20 @@ We built the model using the \texttt{rlm} function from \texttt{MASS} package (V
 
 To minimize the risk of mistakenly regarding an outlier as an ``erroneous outlier'', we have simulated some thresholds and study how they affected the data. We found that 0.12 is the most reasonable value to be the threshold to minimize that drawback's risk because it still captures the sensible spikes in the data. In other words, we kept maintaining the natural variability of the wages while minimizing anomalies because of the error in the data recording. After deciding the threshold, we imputed the observations whose weight less than 0.12 with the models' predicted value. We then flagged those observations in a new variable called \texttt{is\_pred}.
 
-Figure \ref{fig:comppict} A shows the mean hourly wage feature after the extreme values are replaced. It shows that the highest value has decreased to be around \$350. The spikes were still observed but are not as extreme as the original data set. In Figure \ref{fig:comppict} B), we plotted the three features of mean hourly wages, namely the minimum, median, and maximum value, transformed to log scale. The plot implies that the skewness is slightly negative. We also see that the three features are overlapped each other. It indicates that some ID's minimum wages are higher than some ID's maximum wages.
-
-\begin{figure}
-\centering
-\includegraphics{figures/comppict-1.pdf}
-\caption{\label{fig:comppict}The distribution of the mean hourly wage after the extreme values are replaced. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value transformed to log10 scale. We can see that some observations still had reasonbaly higher wages than the others. Also, some IDs' have a minimum wages that is higher than others' maximum wages.}
-\end{figure}
-
-Furthermore, Figure \ref{fig:compare-plot} implies that the fluctuation can still be observed in the data after the treatment. However, the large spikes, which are considered ``erroneous outliers'', are already eliminated from the data. Hence, the model produces a data set with a more reasonable degree of fluctuation.
+Figure \ref{fig:compare-plot} shows the mean hourly wage before and after the extreme values are replaced. It implies that the fluctuation can still be observed in the data after the treatment. However, the large spikes, which are considered ``erroneous outliers'', are already eliminated from the data. Hence, the model produces a data set with a more reasonable degree of fluctuation.
 
 \begin{figure}
 \centering
 \includegraphics{figures/compare-plot-1.pdf}
 \caption{\label{fig:compare-plot}Comparison between the original and the treated mean hourly wage. The orange line portray the original value of mean hourly wage, while the turquoise line display the mean hourly wages value after the extreme values imputed with the robust linear model's prediction value. We can see that some extreme spikes has been reduced by the model.}
+\end{figure}
+
+Further, \ref{fig:comppict} A shows that after eliminating the extreme values, the highest value has decreased to be around \$350. The spikes were still observed but are not as extreme as the original data set. In Figure \ref{fig:comppict} B), we plotted the three features of mean hourly wages, namely the minimum, median, and maximum value, transformed to log scale. The plot implies that the skewness is slightly negative. We also see that the three features are overlapped each other. It indicates that some ID's minimum wages are higher than some ID's maximum wages.
+
+\begin{figure}
+\centering
+\includegraphics{figures/comppict-1.pdf}
+\caption{\label{fig:comppict}The distribution of the mean hourly wage after the extreme values are replaced. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value transformed to log10 scale. We can see that some observations still had reasonbaly higher wages than the others. Also, some IDs' have a minimum wages that is higher than others' maximum wages.}
 \end{figure}
 
 Finally, we saved the imputed data and set the appropriate data type for the variables. As our target data is the mean hourly wage of the high-school dropouts, we then subset the high-school graduate data set to have only the male-high school dropout data. We also saved the NLSY79 cohort's demographic information in a separate dataset. We then make these three data sets and their processing documentation publicly available through an R data container package called \texttt{yowie}. The complete flow from the raw data to these data set is displayed in Figure \ref{fig:flow-chart}.

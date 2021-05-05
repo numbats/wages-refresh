@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  6 MAY 2021 05:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.21)  6 MAY 2021 05:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -810,16 +810,16 @@ has been already used, duplicate ignored
                                                   
 l.537 
        <./figures/high-wages-1.pdf>]
-<figures/comppict-1.pdf, id=166, 433.62pt x 289.08pt>
-File: figures/comppict-1.pdf Graphic file (type pdf)
-<use figures/comppict-1.pdf>
-Package pdftex.def Info: figures/comppict-1.pdf  used on input line 540.
-(pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
-<figures/compare-plot-1.pdf, id=168, 433.62pt x 361.35pt>
+<figures/compare-plot-1.pdf, id=165, 433.62pt x 361.35pt>
 File: figures/compare-plot-1.pdf Graphic file (type pdf)
 <use figures/compare-plot-1.pdf>
-Package pdftex.def Info: figures/compare-plot-1.pdf  used on input line 548.
+Package pdftex.def Info: figures/compare-plot-1.pdf  used on input line 540.
 (pdftex.def)             Requested size: 433.61894pt x 361.34912pt.
+<figures/comppict-1.pdf, id=168, 433.62pt x 289.08pt>
+File: figures/comppict-1.pdf Graphic file (type pdf)
+<use figures/comppict-1.pdf>
+Package pdftex.def Info: figures/comppict-1.pdf  used on input line 548.
+(pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
 <figures/flow-chart-1.pdf, id=170, 1003.75pt x 281.05pt>
 File: figures/flow-chart-1.pdf Graphic file (type pdf)
 <use figures/flow-chart-1.pdf>
@@ -830,23 +830,26 @@ Overfull \hbox (533.99257pt too wide) in paragraph at lines 556--557
  [][] 
  []
 
+
+Underfull \vbox (badness 4582) has occurred while \output is active []
+
 [10pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
 l.566 
        <./figures/sample-plot-1.pdf>]
-<figures/slope-fig-1.pdf, id=189, 469.755pt x 325.215pt>
+<figures/slope-fig-1.pdf, id=188, 469.755pt x 325.215pt>
 File: figures/slope-fig-1.pdf Graphic file (type pdf)
 <use figures/slope-fig-1.pdf>
 Package pdftex.def Info: figures/slope-fig-1.pdf  used on input line 569.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<figures/plot-gender-1.pdf, id=192, 469.755pt x 325.215pt>
+<figures/plot-gender-1.pdf, id=191, 469.755pt x 325.215pt>
 File: figures/plot-gender-1.pdf Graphic file (type pdf)
 <use figures/plot-gender-1.pdf>
 Package pdftex.def Info: figures/plot-gender-1.pdf  used on input line 577.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<figures/se-gender-1.pdf, id=193, 469.755pt x 325.215pt>
+<figures/se-gender-1.pdf, id=192, 469.755pt x 325.215pt>
 File: figures/se-gender-1.pdf Graphic file (type pdf)
 <use figures/se-gender-1.pdf>
 Package pdftex.def Info: figures/se-gender-1.pdf  used on input line 583.
@@ -863,11 +866,6 @@ Package microtype Info: Loading generic protrusion settings for font family
 Package microtype Info: Character `texttrademark ' is missing
 (microtype)             in font `TS1/lmtt/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
-<figures/plot-gam-1.pdf, id=195, 469.755pt x 325.215pt>
-File: figures/plot-gam-1.pdf Graphic file (type pdf)
-<use figures/plot-gam-1.pdf>
-Package pdftex.def Info: figures/plot-gam-1.pdf  used on input line 591.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -875,18 +873,23 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.599 
-       <./figures/comppict-1.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+l.588 
+       <./figures/compare-plot-1.pdf>]
+<figures/plot-gam-1.pdf, id=210, 469.755pt x 325.215pt>
+File: figures/plot-gam-1.pdf Graphic file (type pdf)
+<use figures/plot-gam-1.pdf>
+Package pdftex.def Info: figures/plot-gam-1.pdf  used on input line 591.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 4582) has occurred while \output is active []
 
 [12pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
 l.605 
-       <./figures/compare-plot-1.pdf>] [13pdfTeX warning (ext4): destination wi
-th the same identifier (name{figure.6}) has been already used, duplicate ignore
-d
+       <./figures/comppict-1.pdf>] [13pdfTeX warning (ext4): destination with t
+he same identifier (name{figure.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
 l.623 \end{itemize}
@@ -948,7 +951,7 @@ eamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/de
 eamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/de
 eamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/de
 eamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on report_alt.pdf (18 pages, 902670 bytes).
+Output written on report_alt.pdf (18 pages, 902691 bytes).
 PDF statistics:
  433 PDF objects out of 1000 (max. 8388607)
  379 compressed objects within 4 object streams
