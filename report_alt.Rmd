@@ -33,8 +33,10 @@ bibliography: references.bib
 biblio-style: unsrt
 #preamble: >
 output: 
-  rticles::arxiv_article:
-    keep_tex: false
+  #rticles::arxiv_article:
+    #keep_tex: false
+  bookdown::pdf_book:
+    base_format: rticles::arxiv_article
 date: "24/02/2021"
 always_allow_html: true
 ---
@@ -126,7 +128,7 @@ The downloaded data set came in a csv (NLSY79.csv) and dat (NLSY79.dat) format. 
 - NLSY79.NLSY79: This is the tagset of variables that can be uploaded to the web site to recreate the data set.
 - NLSY79.R: This is an R script provided automatically by the database for reading the data into R and convert the variables' name and its label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set,  `categories_qnames` (the observations are stored in categorical/interval values) and `new_data_qnames` (the observations are stored in integer form).
 
-```{r, cache = TRUE}
+```{r, cache = TRUE, echo = FALSE}
 source(here::here("data-raw/NLSY79/NLSY79.R"))
 ```
 
@@ -204,9 +206,9 @@ demog_tidy <- categories_qnames %>%
          race = SAMPLE_RACE_78SCRN)
 ```
 
-The `highest grade completed` came with several version in each year. We chose the revised May data because the May data seemed to have less missing and presumably the revised data has been checked. However, there was no revised May data for 2012, 2014, 2016, and 2018 so we just used the ordinary May data. 
+The next step is tidying the `highest grade completed` variable. This variable came with several version in each year. We chose the revised May data because it seemed to have less missing and presumably has been checked. However, there was no revised May data for 2012, 2014, 2016, and 2018 so we just used the ordinary May data for these years. The code for tidying this variable is provided in the supplementary code whose details could be seen in the Supplementary Materials section of this paper. 
 
-```{r tidy-grade}
+```{r tidy-grade, echo = FALSE}
 # tidy the grade 
 demog_education <- new_data_qnames %>%
   as_tibble() %>%
@@ -226,9 +228,9 @@ demog_education <- new_data_qnames %>%
   dplyr::select(-var)
 ```
 
-In the final data, we only used the highest grade completed ever and derived the year of when the highest grade completed its categorical value. Therefore, we wrangled the highest grade completed in each year to mutate these variables. 
+Further, `highest grade completed` is measured and could be updated in each period of the survey. Hence, we only used the highest grade completed ever and derived the year when it is completed. The code for tidying this variable is also available in the supplementary code of this paper. 
 
-```{r tidy-hgc}
+```{r tidy-hgc, echo = FALSE}
 
 ## getting the highest year of completed education ever
 highest_year <- demog_education %>%
@@ -249,9 +251,9 @@ highest_year <- demog_education %>%
                         paste0((hgc_i - 12), "TH YEAR COL")))))))))))
 ```
 
-Finally, we join all the tidy variables in a data set called `full_demographics`.
+Finally, we join all of the tidy variables in a data set called `full_demographics` as displayed as follows:
 
-```{r full-demog}
+```{r full-demog, echo = FALSE}
 full_demographics <- full_join(dob_tidy, demog_tidy, by = "CASEID_1979") %>%
   full_join(highest_year, by = "CASEID_1979") %>%
   rename("id" = "CASEID_1979")
@@ -261,7 +263,9 @@ head(full_demographics)
 
 ### Tidying employment variables
 
-The employment data comprises of three variables, i.e. `total hours of work per week`, `number of jobs that an individual has`, and `mean hourly wage`. For hours worked per week, initially only one version per job, no choice from 1979 to 1987 (QES-52A). From 1988 onward, when we had more options, we chose the variable for total hours including time spent working from home (QES-52D). However, 1993 did not have all the five D variables (the first one and the last one were missing), so we used QES-52A variable instead. In addition, 2008 only had jobs 1-4 for the QES-52D variable (whereas the other years had 1-5), so we just used these.
+The employment data comprises of three variables, i.e. `total hours of work per week`, `number of jobs that an individual has`, and `mean hourly wage`. 
+
+`hours worked per week` initially has only one version per job, no choice from 1979 to 1987 (QES-52A). From 1988 onward, when we had more options, we chose the variable for total hours including time spent working from home (QES-52D). However, in 1993, this variable did not have all the five D variables (the first one and the last one were missing), so we used QES-52A variable instead. In addition, 2008 only had jobs 1-4 for the QES-52D variable (whereas the other years had 1-5), so we just used these.
 
 ```{r tidy-hours}
 # make a list for years where we used the "QES-52A"
@@ -298,9 +302,9 @@ for(ayear in c(1979:1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010,
 hours_all <- bind_rows(!!!hours)
 ```
 
-The same algorithm was also deployed to tidy the rate of wage by year and by ID. The difference is that the hourly rate had only one version of each year. The hours of work and the hourly rate were then joined to calculate the number of jobs that an ID has and their mean hourly wage. Some observations had 0 in their hourly rate, which is considered as invalid value. Thus, their hourly rate set to be N.A.
+The same way was also deployed to tidy the rate of wage by year and by ID. The difference is that the hourly rate had only one version of each year. The hours of work and the hourly rate were then joined to calculate the number of jobs that a respondent has and their mean hourly wage. Some observations had 0 in their hourly rate, which is considered as invalid value. Thus, their hourly rate set to be N.A. the result of the joining variables could be seen in the following tibble. 
 
-```{r tidy-rate}
+```{r tidy-rate, echo = FALSE}
 get_rate <- function(year) {
   new_data_qnames %>%
     dplyr::select(CASEID_1979,
@@ -327,11 +331,11 @@ hours_wages <- left_join(rates_all,
 head(hours_wages)
 ```
 
-Since our ultimate goal is to calculate the mean hourly wage, the number of jobs is calculate based on the availability of the `rate_per_hour` information. For example, the number of jobs of ID 1, based on `hours_work`, is two. However, since the information of hourly rate of `job_02` is not available, the number of job is considered as 1. 
+Since our ultimate goal is to calculate the mean hourly wage, the number of jobs is calculate based on the availability of the `rate_per_hour` information. For example, the number of jobs of ID 1, based on `hours_work`, is 2. However, since the information of hourly rate of `job_02` is not available, the number of job is considered as 1. 
 
-Further, we calculated the mean hourly wage for each ID in each year using a weighted mean with the hours of work as the weight. However, there are a lot of missing value in `hours_work` variable. In that case, we only calculated the mean hourly wage based on arithmetic/regular mean method. Hence, we created a new variable to flag whether the mean hourly wage is a weighted or a regular mean. Additionally, if an ID only had one job, we directly used their hourly wages information and flagged it as an arithmetic mean.
+Further, we calculated the mean hourly wage for each ID in each year using a weighted mean with the hours of work as the weight. However, there are a lot of missing value in `hours_work` variable. In that case, we only calculated the mean hourly wage based on arithmetic/regular mean method. Hence, we created a new variable to flag whether the mean hourly wage is a weighted or a regular mean. Additionally, if an ID only had one job, we directly used their hourly wages information and flagged it as an arithmetic mean. The following tibble shows the result of this tidying process.
 
-```{r}
+```{r tidy-nojob, echo = FALSE}
 # calculate number of jobs that a person has in one year
 no_job <- hours_wages %>%
   filter(!is.na(rate_per_hour)) %>%
@@ -375,7 +379,7 @@ head(mean_hourly_wage, n = 10)
 
 The `mean_hourly_wage` and `full_demographic` data are then joined. We also filtered the data to only have the cohort who completed the education up to 12th grade and participated at least five rounds in the survey and save it to an object called `wages_demog_hs`. 
 
-```{r}
+```{r wages-demog-hs, echo = FALSE}
 # join the wages information and the demographic information by case id.
 wages_demog <- left_join(mean_hourly_wage, full_demographics, by="id")
 # calculate the years in work force and the age of the subjects in 1979
@@ -461,7 +465,7 @@ spag + feature
 ```
 
 
-The next step is that we explored the mean hourly wage data, in this case, we only explored the wages data in `wages_demog_hs`. Figure \ref{fig:featureplot} conveys that there is clearly a problem in the mean hourly wage values. Figure \ref{fig:featureplot} A shows that some observations had an exceptionally high figure of wages, even more than US$10,000 per hour. In Figure \ref{fig:featureplot} B, we barely see any difference in the minimum, median, an maximum value of the wages since the distribution is heavily skewed to the right. Additionally, Table \ref{tab:summarytable} shows that the overall wages median of the cohort is only 7.2, while the mean is 11.87. It indicates that the data might contains a lot of extreme values. 
+The next step is that we explored the mean hourly wage data, in this case, we only explored the wages data in `wages_demog_hs`. Figure \@ref(fig:featureplot) conveys that there is clearly a problem in the mean hourly wage values. Figure \ref{fig:featureplot} A shows that some observations had an exceptionally high figure of wages, even more than US$10,000 per hour. In Figure \ref{fig:featureplot} B, we barely see any difference in the minimum, median, an maximum value of the wages since the distribution is heavily skewed to the right. Additionally, Table \ref{tab:summarytable} shows that the overall wages median of the cohort is only 7.2, while the mean is 11.87. It indicates that the data might contains a lot of extreme values. 
 
 
 
@@ -474,10 +478,11 @@ kable(as.array(summary(wages_demog_hs$mean_hourly_wage)),
 
 In Figure \ref{fig:high-wages}, we plotted some respondents with a high value of mean hourly wages. We filtered all of the IDs who earned more than US$ 500 per hour averagely. We found that most of these respondents only experienced one point of extremely high wages. Thus, we suspected that these high values are erroneous values resulted from a data entry error. 
 
-```{r high-wages, echo = FALSE, fig.cap= "Some observations with extremely high mean hourly wage. Most of the IDs only have one point of high wage.", fig.height=8, fig.width=6}
+```{r high-wages, echo = FALSE, fig.cap= "6 out of 45 IDs with extremely high mean hourly wage. Most of the IDs only have one point of high wage."}
 
 wages_high <- filter(wages_demog_hs, mean_hourly_wage > 500) %>%
-  as_tibble() 
+  as_tibble() %>%
+  head(n = 6)
 
 wages_high2 <- wages_demog_hs %>%
   filter(id %in% wages_high$id)
@@ -489,7 +494,7 @@ ggplot(wages_high2) +
                 y = mean_hourly_wage),
              size = 0.5,
              alpha = 0.5) +
-  facet_wrap(~id, scales = "free_y", ncol = 5) +
+  facet_wrap(~id, scales = "free_y") +
   theme(axis.text.x = element_text(angle = 10, size = 6)) +
   ylab("mean hourly wage") 
   
@@ -526,7 +531,7 @@ Since we worked with longitudinal data, we should built the model for each ID, i
 The challenging part of detecting the anomaly using the robustness weight is to determine the threshold of the weight where the observations considered as outliers. Moreover, it should be noted that not all the outliers is due to an error, instead it might be that one had a reasonably increasing or decreasing wages. To, minimize the risk of being mistakenly regard an outlier as an "erronous outlier", we have simulated some threshold and study the behavior of the spikes in each threshold. We found that 0.12 is the most reasonable value to be the threshold to minimize the risk of that drawback because it still capture the sensible spikes in the data. In other words, we kept maintaining the natural variability of the wages while minimizing the presence of anomalies because of the error in the data recording. After deciding the threshold, we imputed the observations with weight less than 0.2 wage with the models' predicted value. We then flagged those observations in a new variable called `is_pred`, 
 
 
-```{r rlm, cache=TRUE, warning = FALSE, message = FALSE}
+```{r rlm, cache=TRUE, warning = FALSE, message = FALSE, echo = FALSE}
  
 # nest the data by id to build a robust linear model
 by_id <- wages_demog_hs %>%
@@ -654,7 +659,7 @@ ggplot(wages_compare) +
 
 Finally, we saved the imputed data and set the appropriate data type for the variables. As our target data is the mean hourly wage of the high-school dropouts, we then subset the high-school graduate data set to be only having the male-high school dropout data. We also saved the NLSY79 cohort's demographic information in a separate dataset. We then make these three data sets and its processing documentation to be publicly available through an R data container package called `yowie`. The complete flow from the raw data to these data set is displayed in Figure \ref(fig:flowchart).
 
-```{r}
+```{r save-data, echo = FALSE}
 # select out the old value of mean hourly wage and change it with the wages_rlm value
 wages_demog_hs <- wages_demog_hs %>%
   dplyr::select(-mean_hourly_wage) %>%
