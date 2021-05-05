@@ -790,7 +790,7 @@ ggplot(wages_slope, aes(y = hgc,
 ```
 
 
-In the second example, we examined the pattern of mean hourly wage corresponding to different groups of gender and race. We took 240 samples of female and male equally and spread it into twelve facets as is seen in Figure \ref{fig:gender-plot} using `facet_strata` function from `brolgar` [@brolgar]. We learn that the mean hourly wage of female and male fluctuated over the years. In some facets, for example in facet 4, 5, and 10, males tend to earn more wages than females. This finding is also shown in Figure \ref{fig:gender-plot2} where we plotted the median wage of males and females against the year. We learn that males had a higher mean of mean hourly wage over the period of survey than females. Unfortunately, the gap between them tend to be wider from time to time.
+In the second example, we examined the pattern of mean hourly wage corresponding to different groups of gender and race. We took 240 samples of female and male equally and spread it into twelve facets as is seen in Figure \ref{fig:gender-plot} using `facet_strata` function from `brolgar` [@brolgar]. We learn that the mean hourly wage of female and male fluctuated over the years. In some facets, for example in facet 4, 5, and 10, males tend to earn more wages than females. This finding is also shown in Figure \ref{fig:gender-se} where we plotted the median wage of males and females against the year. We learn that males had a higher mean of mean hourly wage over the period of survey than females. Unfortunately, the gap between them tend to be wider from time to time.
 
 
 ```{r gender-plot, echo = FALSE, warning = FALSE, fig.cap= "The pattern of mean hourly wages overtime displayed in 12 facets coloured by gender. The respondents belong to high school cohort are randomly sampled. We learn that both male and female respondents had a fluctuate mean hourly wage over the year." }
@@ -821,7 +821,7 @@ ggplot(wages_hs2020_sample_gender,
 
 
 
-```{r gender-plot2, echo=FALSE, fig.cap="The yearly mean of mean hourly wage by gender along with its standard error. Males generally earn more wages than females. The error interval tend to be wider over the years."}
+```{r gender-se, echo=FALSE, fig.cap="The yearly mean of mean hourly wage by gender along with its standard error. Males generally earn more wages than females. The error interval tend to be wider over the years."}
 wages_hs2020_grouped_gender <- wages_hs2020 %>%
   group_by(gender, year) %>%
   summarise(mean = mean(mean_hourly_wage),
@@ -849,9 +849,9 @@ gender_plot
 
 ```
 
-For the final example, we show the example of modeling the longitudinal data using Generelized Additive Model (GAM) with `mgcv` package [@mgcv] for each ID. We fit a more flexible model to fit in to the data since the relationship between mean hourly wage and year is not linear due to the spikes. Since this approach is computationally expensive, we only show the model in a little fraction of the data. We sample 1 percent of the total respondents using `brolgar's` `sample_frac_keys` function. Further, we plotted the some sample of the fitted model in Figure \@ref{fig:gam}. We learn that the model flexible enough to deal with the fluctuation in the data. Moreover, model with small spikes tend to be linearly fitted.  
+For the final example, we show the example of modeling the longitudinal data using Generelized Additive Model (GAM) with `mgcv` package [@mgcv] for each ID. We fit a more flexible model to fit in to the data since the relationship between mean hourly wage and year is not linear due to the spikes. Since this approach is computationally expensive, we only show the model in a little fraction of the data. We sample 1 percent of the total respondents using `brolgar's` `sample_frac_keys` function. Further, we plotted the some sample of the fitted model in Figure \@ref{fig:gam-plot}. We learn that the model flexible enough to deal with the fluctuation in the data. Moreover, model with small spikes tend to be linearly fitted.  
 
-```{r gam, cache=TRUE, echo=FALSE, fig.cap="Exploration of wages data by fitting a GAM. The fitted model displayed by blue line. The fitted line shows that the model flexible enough to follow the pattern of the data."}
+```{r gam-plot, cache=TRUE, echo=FALSE, fig.cap="Exploration of wages data by fitting a GAM. The fitted model displayed by blue line. The fitted line shows that the model flexible enough to follow the pattern of the data."}
 
 # take a small fraction of key
 set.seed(2020)
