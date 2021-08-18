@@ -62,6 +62,7 @@ library(modelr)
 library(tsibble)
 library(lme4)
 library(modelr)
+library(forcats)
 ```
 
 
@@ -802,21 +803,93 @@ wages_hs2020_tsibble <- wages_hs2020 %>%
 
 ```{r slope-fig, echo = FALSE, fig.cap="Regression slope of mean hourly wage regression by highest grade completed. The regression model has mean hourly wage as response variable and year as predictor. Respondents who completed 12th grade has the highest median of slope."}
 
+# transform the data for modeling purpose
+wages_model_data <- wages_hs2020_tsibble %>%
+  mutate(id_fct = as.factor(id),
+         year0 = year - 1979,
+         ln_wages = log(mean_hourly_wage)) %>%
+  mutate(hgc_regroup = fct_collapse(hgc, `8TH grade or less` = c("UNGRADED","1ST GRADE", "3RD GRADE",
+                                                                 "4TH GRADE", "5TH GRADE",
+                                                                 "6TH GRADE", "7TH GRADE",
+                                                                 "8TH GRADE"),
+                                    `9TH to 11TH grade` = c("9TH GRADE",
+                                                            "10TH GRADE",
+                                                            "11TH GRADE"),
+                                    `12TH grade` = "12TH GRADE"))
 
-wages_slope <- key_slope(wages_hs2020_tsibble, 
-            mean_hourly_wage ~ year) %>%
+
+# extract the slope for every individual 
+wages_slope <- key_slope(wages_model_data, 
+            ln_wages ~ year0) %>%
   left_join(demographic_nlsy79, by = "id") %>%
-  mutate(hgc = factor(hgc, levels = c("1ST GRADE", "2ND GRADE", "3RD GRADE", 
-                                      "4TH GRADE", "5TH GRADE", "6TH GRADE", 
-                                      "7TH GRADE", "8TH GRADE", "9TH GRADE",
-                                      "10TH GRADE", "11TH GRADE", "12TH GRADE", 
-                                      "UNGRADED"))) %>%
-  filter(hgc != "UNGRADED")
+  mutate(hgc_regroup = fct_collapse(hgc, `8TH grade or less` = c("UNGRADED","1ST GRADE", "3RD GRADE",
+                                                                 "4TH GRADE", "5TH GRADE",
+                                                                 "6TH GRADE", "7TH GRADE",
+                                                                 "8TH GRADE"),
+                                    `9TH to 11TH grade` = c("9TH GRADE",
+                                                            "10TH GRADE",
+                                                            "11TH GRADE"),
+                                    `12TH grade` = "12TH GRADE"))
 
-ggplot(wages_slope, aes(y = hgc,
-                      x = .slope_year)) +
-  geom_boxplot()
+ggplot(wages_slope) +
+  geom_boxplot(aes(x = `.slope_year0`, y = hgc_regroup))
+
 ```
+```{r}
+ggplot(wages_slope, aes(x = .slope_year0)) +
+  geom_histogram()
+```
+
+```{r}
+slope_bottom_5<- wages_slope %>%
+  arrange(.slope_year0) %>%
+  slice_head(n = 5)
+
+slope_top_5<- wages_slope %>%
+  arrange(desc(.slope_year0)) %>%
+  slice_head(n = 5)
+
+keep_contrast <- rbind(slope_bottom_5, slope_top_5) %>%
+  dplyr::select(.slope_year0, id)
+
+contrast_slope <- left_join(keep_contrast, wages_model_data, by = "id") %>%
+  arrange(.slope_year0) %>%
+  mutate(id = factor(id, levels = c("7918", "11695", "9176", "10119", "6464", "1271", 
+                                    "12371", "9039", "10217", "7782")))
+  
+
+ggplot(contrast_slope, aes(x = year, y = ln_wages, color = gender)) +
+  geom_line() +
+  geom_point() +
+  facet_wrap(~id)
+
+```
+
+
+```{r}
+ggplot(contrast_slope, aes(x = year, y = ln_wages, color = hgc_regroup)) +
+  geom_line() +
+  geom_point() +
+  facet_wrap(~id)
+```
+
+
+```{r}
+quartile <- wages_slope %>%
+  mutate(quartile = as.factor(ntile(.slope_year0, 4)))
+
+ggplot(quartile) +
+  geom_bar(aes(x = quartile, fill = gender, position = "fill"))
+```
+
+
+```{r}
+ggplot(quartile) +
+  geom_bar(aes(x = quartile, fill = hgc_regroup, position = "fill"))
+```
+
+
+
 
 
 In the second example, we examined the pattern of mean hourly wage corresponding to different groups of gender and race. We took 240 samples of females and males equally and spread them into twelve facets, as shown in Figure \ref{fig:plot-gender} using `facet_strata` function from `brolgar` [@brolgar]. We learn that the mean hourly wage of females and males fluctuated over the years. For example,  in facets 4, 5, and 10, males tend to earn more wages than females.
@@ -897,29 +970,24 @@ We fitted a more flexible model to fit into the data since the relationship betw
 
 ```{r plot-gam, cache=TRUE, echo=FALSE, fig.cap="Exploration of wages data by fitting a GAM. The fitted model displayed by blue line. The fitted line shows that the model flexible enough to follow the pattern of the data."}
 
-# transform the data type and year for modeling
-wages_model <- wages_hs2020_tsibble %>%
-  mutate(id_fct = as.factor(id),
-         year0 = year - 1979,
-         ln_wages = log(mean_hourly_wage))
-
-# build GAM model
+# build linear-mixed model
 wages_fit <- lmer(
-  ln_wages ~ year0 + hgc_i + gender + (1|id),
-  data = wages_model
+  ln_wages ~ year0*hgc_regroup*gender + (1|id),
+  data = wages_model_data
 )
 
-wages_fit_aug<- wages_model %>%
+
+wages_fit_aug<- wages_model_data %>%
   add_predictions(wages_fit, var = "pred") %>%
   add_residuals(wages_fit, var = "resid") 
 
-slope_only <- wages_slope %>%
-  dplyr::select(id, .slope_year) %>%
-  arrange(desc(.slope_year)) %>%
+slope_bottom_12 <- wages_slope %>%
+  dplyr::select(id, .slope_year0) %>%
+  arrange(.slope_year0) %>%
   slice_head(n = 12)
 
 wages_fit_aug2 <- wages_fit_aug %>%
-  filter(id %in% slope_only$id)
+  filter(id %in% slope_bottom_12$id)
 
 ggplot(wages_fit_aug2, aes(x = year,
              y = pred,
