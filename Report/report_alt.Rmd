@@ -1,5 +1,5 @@
 ---
-title: "The Journey from Wild to Text Book Data: A Case Study of the National Longitudinal Survey of Youth"
+title: "The Journey from Wild to Text Book Data: A Case Study from the National Longitudinal Survey of Youth"
 authors:
   - name: Dewi Amaliah
     thanks: ""

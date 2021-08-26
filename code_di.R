@@ -111,3 +111,52 @@ wages_demog %>% filter(CASEID_1979 == "6803") %>% print(n=50)
 wages_demog %>% filter(CASEID_1979 == "7980") %>% print(n=50)
 wages_demog %>% filter(CASEID_1979 == "5140") %>% print(n=50)
 
+# RE-DO
+library(tidyverse)
+library(yowie)
+data("wages_hs_dropout")
+glimpse(wages_hs_dropout)
+
+# Number of observations per person
+wages_hs_dropout %>% count(id, sort=TRUE) %>% summary(n)
+wages_hs_dropout %>% count(id, sort=TRUE) %>%
+  ggplot(aes(x=n)) +
+  geom_histogram(breaks = seq(4.5, 28.5, 1), colour="white") +
+  xlab("Number of observations per individual")
+
+# Check values for long individuals
+long <- wages_hs_dropout %>%
+  count(id, sort=TRUE) %>%
+  filter(n == 28)
+wages_hs_dropout %>%
+  filter(id %in% long$id) %>%
+  ggplot(aes(x=year, y=mean_hourly_wage)) +
+    geom_point() +
+    geom_smooth(method="lm", se=FALSE) +
+    facet_wrap(~id) +
+  scale_x_continuous("", breaks = seq(1980, 2020, 10),
+                     labels = c("80", "90", "00", "10", "20")) +
+  ylab("Hourly wage")
+
+# Check values for short individuals
+short <- wages_hs_dropout %>%
+  count(id, sort=TRUE) %>%
+  filter(n == 5)
+wages_hs_dropout %>%
+  filter(id %in% short$id) %>%
+  ggplot(aes(x=year, y=mean_hourly_wage)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  facet_wrap(~id) +
+  scale_x_continuous("", breaks = seq(1980, 2020, 10),
+                     labels = c("80", "90", "00", "10", "20")) +
+  ylab("Hourly wage")
+
+# Random collection of individuals
+
+# By demographics
+# hgc
+# race
+# gender
+# number of jobs or hours worked, aggregated over time
+
