@@ -63,6 +63,7 @@ library(tsibble)
 library(lme4)
 library(modelr)
 library(forcats)
+library(yowie)
 ```
 
 
@@ -305,7 +306,7 @@ for(ayear in c(1979:1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010,
 hours_all <- bind_rows(!!!hours)
 ```
 
-The same way was also deployed to tidy the rate of wage by year and by ID. The difference is that the hourly rate had only one version of each year. The hours of work and the hourly rate were then joined to calculate the number of jobs that a respondent has and their mean hourly wage. Some observations had 0 in their hourly rate, which is considered as invalid value. Thus, their hourly rate set to be N.A. the result of the joining variables could be seen in the following tibble. 
+The same way was also deployed to tidy the rate of wage by year and by ID. The difference is that the hourly rate had only one version of each year. The hours of work and the hourly rate were then joined to calculate the number of jobs that a respondent has and their mean hourly wage. Some observations had 0 in their hourly rate, which is considered as invalid value. Thus, their hourly rate set to be NA. The result of the joining variables could be seen in the following tibble. 
 
 ```{r tidy-rate, echo = FALSE}
 get_rate <- function(year) {
@@ -330,7 +331,9 @@ hours_wages <- left_join(rates_all,
                          by = c("id", "year", "job")) %>%
   # set the 0 value in rate_per_hour as NA 
   mutate(rate_per_hour = ifelse(rate_per_hour == 0, NA,
-                                rate_per_hour))
+                                rate_per_hour),
+         hours_work = ifelse(hours_work == 0 | hours_work > 84, NA, hours_work))
+ 
 head(hours_wages)
 ```
 
@@ -353,8 +356,7 @@ eligible_wages <- hours_wages %>%
 # calculate the mean_hourly_wage
 # flag1 = code 1 for weighted mean
 # code 0 for arithmetic mean
-mean_hourly_wage <- 
-  eligible_wages %>%
+mean_hourly_wage <- eligible_wages %>%
   group_by(id, year) %>%
   #calculate the weighted mean if the number of jobs > 1
   mutate(wages = ifelse(no_jobs == 1, rate_per_hour/100,
@@ -400,6 +402,7 @@ wages_demog_hs <- wages_demog_hs %>%
   filter(id %in% keep_me$id)
 ```
 
+
 ## Initial Data Analysis
 
 According to @HuebnerMariannePhD2016Asat, Initial Data Analysis (IDA) is the step of inspecting and screening the data after being collected to ensure that the data is clean, valid, and ready to be deployed in the later formal statistical analysis. Moreover, @Chatfield1985TIEo argued that the two main objectives of IDA is data description, which is to assess the structure and the quality of the data; and model formulation without any formal statistical inference. 
@@ -409,7 +412,7 @@ In this paper, we conducted an IDA or a preliminary data analysis to assess the 
 As stated previously, the respondents' ages ranged from 12 to 22 when first interviewed in 1979. Hence, we would like to validate whether all of the respondents were in this range. Additionally, the [NLSY](https://www.nlsinfo.org/content/cohorts/nlsy79/intro-to-the-sample/nlsy79-sample-introduction) also provided the number of the survey cohort by their gender (6,403 males and 6,283 females) and race (7,510 Non-Black/Non-Hispanic; 3,174 Black; 2,002 Hispanic). To validate this, we used the `full_demographic` i.e. the data with the survey years 1979 sample. Table \ref{tab:age-table} and Table \ref{tab:gender-race-table} suggest that the demographic data we had is consistent with the sample information in the database.
 
 ```{r age-table, echo = FALSE}
-age_table <- yowie::demographic_nlsy79 %>%
+age_table <- yowie::demog_nlsy79 %>%
   group_by(age_1979) %>%
   count(age_1979) 
 
@@ -421,7 +424,7 @@ kable(age_table,
 
 
 ```{r gender-race-table, echo = FALSE}
-gender_race_table <- yowie::demographic_nlsy79 %>%
+gender_race_table <- yowie::demog_nlsy79 %>%
   tabyl(gender, race) %>%
   adorn_totals(c("row", "col")) %>%
   adorn_percentages("row") %>%
@@ -793,154 +796,115 @@ This part gives some examples of how the data might be used for data analysis in
 
 Figure \ref{fig:slope-fig} shows that the higher the education completed does not necessarily increase the wages more from year to year. We can see that people who completed 4th grade happen to have relatively the same median of slope as people who completed 11th grade, even though it is probably because some respondents in this group had extremely high mean hourly wages. Moreover, the annual increasing wages of people who completed 6th grade to 11th grade are relatively the same. People who completed 12th grade tend to have a higher slope of the year than the other groups. Some outliers are also spotted in this group. Additionally, we can see that some respondents have a negative slope, meaning that their wages tend to decrease over the year.
 
-```{r wages-tsibble, echo = FALSE}
-# create the wages data as tsibble
-wages_hs2020_tsibble <- wages_hs2020 %>%
-  as_tsibble(key = id,
-             index = year,
-             regular = FALSE)
-```
 
-```{r slope-fig, echo = FALSE, fig.cap="Regression slope of mean hourly wage regression by highest grade completed. The regression model has mean hourly wage as response variable and year as predictor. Respondents who completed 12th grade has the highest median of slope."}
-
-# transform the data for modeling purpose
-wages_model_data <- wages_hs2020_tsibble %>%
-  mutate(id_fct = as.factor(id),
-         year0 = year - 1979,
-         ln_wages = log(mean_hourly_wage)) %>%
-  mutate(hgc_regroup = fct_collapse(hgc, `8TH grade or less` = c("UNGRADED","1ST GRADE", "3RD GRADE",
-                                                                 "4TH GRADE", "5TH GRADE",
-                                                                 "6TH GRADE", "7TH GRADE",
-                                                                 "8TH GRADE"),
-                                    `9TH to 11TH grade` = c("9TH GRADE",
-                                                            "10TH GRADE",
-                                                            "11TH GRADE"),
-                                    `12TH grade` = "12TH GRADE"))
-
-
-# extract the slope for every individual 
-wages_slope <- key_slope(wages_model_data, 
-            ln_wages ~ year0) %>%
-  left_join(demographic_nlsy79, by = "id") %>%
-  mutate(hgc_regroup = fct_collapse(hgc, `8TH grade or less` = c("UNGRADED","1ST GRADE", "3RD GRADE",
-                                                                 "4TH GRADE", "5TH GRADE",
-                                                                 "6TH GRADE", "7TH GRADE",
-                                                                 "8TH GRADE"),
-                                    `9TH to 11TH grade` = c("9TH GRADE",
-                                                            "10TH GRADE",
-                                                            "11TH GRADE"),
-                                    `12TH grade` = "12TH GRADE"))
-
-ggplot(wages_slope) +
-  geom_boxplot(aes(x = `.slope_year0`, y = hgc_regroup))
-
-```
 ```{r}
-ggplot(wages_slope, aes(x = .slope_year0)) +
-  geom_histogram()
+wages <- yowie::wages %>%
+  mutate(year0 = year - 1979,
+         ln_wages = log(wage))
+
+wages_slope <- key_slope(wages, ln_wages ~ year0) %>%
+  left_join(yowie::demog_nlsy79, by = "id") %>%
+  mutate(hgc_regroup = fct_collapse(hgc, `ungraded` = "UNGRADED",
+                                    `8TH grade or less` = c("1ST GRADE", "3RD GRADE",
+                                                                 "4TH GRADE", "5TH GRADE",
+                                                                 "6TH GRADE", "7TH GRADE",
+                                                                 "8TH GRADE"),
+                                    `9TH to 11TH grade` = c("9TH GRADE",
+                                                            "10TH GRADE",
+                                                            "11TH GRADE"),
+                                    `12TH grade` = "12TH GRADE")) %>%
+  mutate(hgc_regroup = factor(hgc_regroup, levels = c("8TH grade or less", 
+                                                      "9TH to 11TH grade", 
+                                                      "12TH grade")))
+  
 ```
+
+
+EDA:
+
+Exploring the wages slope of each individual:
+  - By sex
+  - By education 
+  - Exploring the wages slope pattern based on the number of observation 
+  
+- Slope by sex 
 
 ```{r}
 slope_bottom_5<- wages_slope %>%
   arrange(.slope_year0) %>%
-  slice_head(n = 5)
+  slice_head(n = 5) %>%
+  arrange(desc(.slope_year0)) %>%
+  mutate(note = "bottom 5") %>%
+  mutate(rank = seq_along(1:5))
 
 slope_top_5<- wages_slope %>%
   arrange(desc(.slope_year0)) %>%
-  slice_head(n = 5)
+  slice_head(n = 5) %>%
+  mutate(note = "top 5") %>%
+  mutate(rank = seq_along(1:5))
 
 keep_contrast <- rbind(slope_bottom_5, slope_top_5) %>%
-  dplyr::select(.slope_year0, id)
+  dplyr::select(.slope_year0, id, note, rank, hgc_regroup)
 
-contrast_slope <- left_join(keep_contrast, wages_model_data, by = "id") %>%
+contrast_slope <- left_join(keep_contrast, wages, by = "id") %>%
   arrange(.slope_year0) %>%
   mutate(id = factor(id, levels = c("7918", "11695", "9176", "10119", "6464", "1271", 
-                                    "12371", "9039", "10217", "7782")))
+                                    "12371", "9039", "10217", "7782")),
+         note = factor(note, levels = c("top 5", "bottom 5")))
   
 
 ggplot(contrast_slope, aes(x = year, y = ln_wages, color = gender)) +
-  geom_line() +
   geom_point() +
-  facet_wrap(~id)
+  geom_smooth(method = "lm") +
+  facet_grid(note ~ rank) +
+  scale_color_manual(values = c("#04B4AE", "#BF00FF"))
 
 ```
+
+
+
+
 
 
 ```{r}
 ggplot(contrast_slope, aes(x = year, y = ln_wages, color = hgc_regroup)) +
-  geom_line() +
   geom_point() +
-  facet_wrap(~id)
+  geom_smooth(method = "lm") +
+  facet_grid(note ~ rank)
 ```
+
 
 
 ```{r}
-quartile <- wages_slope %>%
-  mutate(quartile = as.factor(ntile(.slope_year0, 4)))
+wages_obs <- wages %>%
+  features(wage, n_obs) %>%
+  left_join(wages_slope, by = "id")
 
-ggplot(quartile) +
-  geom_bar(aes(x = quartile, fill = gender, position = "fill"))
+ggplot(wages_obs, aes(x = n_obs, y = .slope_year0)) +
+  geom_point() +
+  geom_jitter()
 ```
 
-
-```{r}
-ggplot(quartile) +
-  geom_bar(aes(x = quartile, fill = hgc_regroup, position = "fill"))
-```
-
-
-
-
-
-In the second example, we examined the pattern of mean hourly wage corresponding to different groups of gender and race. We took 240 samples of females and males equally and spread them into twelve facets, as shown in Figure \ref{fig:plot-gender} using `facet_strata` function from `brolgar` [@brolgar]. We learn that the mean hourly wage of females and males fluctuated over the years. For example,  in facets 4, 5, and 10, males tend to earn more wages than females.
-
-
-```{r plot-gender, echo = FALSE, warning = FALSE, fig.cap= "The pattern of mean hourly wages overtime displayed in 12 facets coloured by gender. The respondents belong to high school cohort are randomly sampled. We learn that both male and female respondents had a fluctuate mean hourly wage over the year." }
-# sample the data by gender
-
-set.seed(31251587)
-wages_hs2020_male <- wages_hs2020_tsibble %>%
-  filter(gender == "MALE") %>%
-  sample_n_keys(size = 120)
-
-set.seed(31251587)
-wages_hs2020_female <- wages_hs2020_tsibble %>%
-  filter(gender == "FEMALE") %>%
-  sample_n_keys(size = 120)
-
-wages_hs2020_sample_gender <- bind_rows(wages_hs2020_male, wages_hs2020_female)
-
-
-ggplot(wages_hs2020_sample_gender, 
-       aes(x = year,
-           y = mean_hourly_wage,
-           group = id,
-           color = gender)) + 
-  geom_line(alpha = 0.7) +
-  scale_color_brewer(palette = "Dark2") +
-  facet_strata(along = ~gender) 
-```
-
-To further investigate this, we calculated the median wage of females relative to males, which is called gender wage gap. According to @OECD, gender pay gap is the difference between median wage of males and females relative to median wage of males. We find that, as shown in \ref{fig:se-gender}, over the years, females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every $1 earned by males. The widest gender gaps were observed in 1990s. 
+According to @OECD, gender pay gap is the difference between median wage of males and females relative to median wage of males. We find that, as shown in \ref{fig:se-gender}, over the years, females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every $1 earned by males. The widest gender gaps were observed in 1990s. 
 
 ```{r se-gender, echo=FALSE, fig.cap="Gender wage gap or the median wages of females relatives to median wages of males. Females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every $1 earned by males."}
 
-wages_hs2020_grouped_gender <- wages_hs2020 %>%
+wages_gender <- as.tibble(wages) %>%
   group_by(gender, year) %>%
-  summarise(mean = mean(mean_hourly_wage),
-            median = median(mean_hourly_wage),
-             sd = sd(mean_hourly_wage),
-             samplesize = n()) %>%
+  summarise(mean = mean(wage),
+            median = median(wage),
+            sd = sd(wage),
+            samplesize = n()) %>%
   ungroup() %>%
   mutate(upper = mean + sd/sqrt(samplesize),
          lower = mean - sd/sqrt(samplesize)) 
 
-wage_female <- wages_hs2020_grouped_gender %>%
+wage_female <- wages_gender %>%
   filter(gender == "FEMALE") %>%
   dplyr::select(year, median) %>%
   rename(female = median)
 
-wage_male <- wages_hs2020_grouped_gender %>%
+wage_male <- wages_gender %>%
   filter(gender == "MALE") %>%
   dplyr::select(median) %>%
   rename(male = median)
