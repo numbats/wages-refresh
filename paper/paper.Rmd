@@ -792,10 +792,6 @@ fc
 
 # Exploratory Data Analysis
 
-This part gives some examples of how the data might be used for data analysis in a textbook. We used `brolgar` [@brolgar] to perform exploratory data analysis. In the first example, we observed the relationship between wages and education regarding how the wages increase year by year. Using `key_slope` function in `brolgar`, we performed linear regression with the mean hourly wage as response variable and year as the predictor, extracted the regression slope of each ID, and plotted it according to the highest grade completed. 
-
-Figure \ref{fig:slope-fig} shows that the higher the education completed does not necessarily increase the wages more from year to year. We can see that people who completed 4th grade happen to have relatively the same median of slope as people who completed 11th grade, even though it is probably because some respondents in this group had extremely high mean hourly wages. Moreover, the annual increasing wages of people who completed 6th grade to 11th grade are relatively the same. People who completed 12th grade tend to have a higher slope of the year than the other groups. Some outliers are also spotted in this group. Additionally, we can see that some respondents have a negative slope, meaning that their wages tend to decrease over the year.
-
 
 ```{r}
 wages <- yowie::wages %>%
@@ -813,23 +809,23 @@ wages_slope <- key_slope(wages, ln_wages ~ year0) %>%
                                                             "10TH GRADE",
                                                             "11TH GRADE"),
                                     `12TH grade` = "12TH GRADE")) %>%
-  mutate(hgc_regroup = factor(hgc_regroup, levels = c("8TH grade or less", 
+  mutate(hgc_regroup = factor(hgc_regroup, levels = c("UNGRADED",
+                                                      "8TH grade or less", 
                                                       "9TH to 11TH grade", 
                                                       "12TH grade")))
   
 ```
 
 
-EDA:
+This part gives some examples of exploratory data analysis using the data. In this example, we are interested to explore how people experience changes in their wages over the years. Hence, we focus the analysis in their slope of wages. Using `key_slope` function in `brolgar` [@brolgar], we perform linear regression with the mean hourly wage as response variable and year as the predictor for each individual. 
+
 
 Exploring the wages slope of each individual:
-  - By sex
-  - By education 
   - Exploring the wages slope pattern based on the number of observation 
   
-- Slope by sex 
 
-```{r}
+
+```{r slope-gender, fig.cap=""}
 slope_bottom_5<- wages_slope %>%
   arrange(.slope_year0) %>%
   slice_head(n = 5) %>%
@@ -855,7 +851,7 @@ contrast_slope <- left_join(keep_contrast, wages, by = "id") %>%
 
 ggplot(contrast_slope, aes(x = year, y = ln_wages, color = gender)) +
   geom_point() +
-  geom_smooth(method = "lm") +
+  geom_smooth(method = "lm", se = FALSE) +
   facet_grid(note ~ rank) +
   scale_color_manual(values = c("#04B4AE", "#BF00FF"))
 
@@ -869,7 +865,7 @@ ggplot(contrast_slope, aes(x = year, y = ln_wages, color = gender)) +
 ```{r}
 ggplot(contrast_slope, aes(x = year, y = ln_wages, color = hgc_regroup)) +
   geom_point() +
-  geom_smooth(method = "lm") +
+  geom_smooth(method = "lm", se = FALSE) +
   facet_grid(note ~ rank)
 ```
 
@@ -884,6 +880,19 @@ ggplot(wages_obs, aes(x = n_obs, y = .slope_year0)) +
   geom_point() +
   geom_jitter()
 ```
+
+
+Notes:
+
+Trimming the slope by 95% percentile and 5% percentile. 
+After that explore the slope after trimmed:
+- By sex (including the wage gender gap)
+- By education 
+
+
+
+
+
 
 According to @OECD, gender pay gap is the difference between median wage of males and females relative to median wage of males. We find that, as shown in \ref{fig:se-gender}, over the years, females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every $1 earned by males. The widest gender gaps were observed in 1990s. 
 
@@ -928,43 +937,7 @@ ggplot(gender_wage_gap) +
   annotate("text", x = 2012, y = 0.8, label = "female wages relative to male", vjust = 1)
 ```
 
-For the final example, we showed modeling the longitudinal data using linear mixed model with `lme4` package [@lme4]. 
 
-We fitted a more flexible model to fit into the data since the relationship between mean hourly wage and year is not linear due to the spikes. Since this approach is computationally expensive, we only showed the model in a small fraction of the data. We sampled 1 percent of the total respondents using `brolgar's` `sample_frac_keys` function. Further, we plotted some IDs overlayed by the fitted GAM model in Figure \ref{fig:plot-gam}. We learn that the model is flexible enough to deal with the fluctuation in the data. Moreover, the data with small spikes tend to be linearly fitted.  
-
-```{r plot-gam, cache=TRUE, echo=FALSE, fig.cap="Exploration of wages data by fitting a GAM. The fitted model displayed by blue line. The fitted line shows that the model flexible enough to follow the pattern of the data."}
-
-# build linear-mixed model
-wages_fit <- lmer(
-  ln_wages ~ year0*hgc_regroup*gender + (1|id),
-  data = wages_model_data
-)
-
-
-wages_fit_aug<- wages_model_data %>%
-  add_predictions(wages_fit, var = "pred") %>%
-  add_residuals(wages_fit, var = "resid") 
-
-slope_bottom_12 <- wages_slope %>%
-  dplyr::select(id, .slope_year0) %>%
-  arrange(.slope_year0) %>%
-  slice_head(n = 12)
-
-wages_fit_aug2 <- wages_fit_aug %>%
-  filter(id %in% slope_bottom_12$id)
-
-ggplot(wages_fit_aug2, aes(x = year,
-             y = pred,
-             group = id,
-             colour = factor(id))) + 
-  geom_line() + 
-  geom_point(aes(x = year,
-                 y = ln_wages,
-                 colour = factor(id))) + 
-  facet_wrap(~id) + 
-  theme(legend.position = "none")
-
-```
 
 # Summary
 
