@@ -33,7 +33,7 @@ untidy_demo <- new_data_qnames %>%
 
 kable(untidy_demo,
       caption = "The Untidy Form of the NLSY79 Raw Data") %>%
-  kable_styling(latex_options = "striped")
+  kable_styling()
 
 ## ---- dob-tidy
 #tidy the date of birth data

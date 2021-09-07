@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.9.7)  7 SEP 2021 17:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.9.7)  7 SEP 2021 23:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -939,10 +939,10 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 0169AE0564C8F62FFB4CF812F920E6AC;2220.
  ) 
 Here is how much of TeX's memory you used:
- 13680 strings out of 480559
- 215927 string characters out of 5902200
- 661409 words of memory out of 5000000
- 30797 multiletter control sequences out of 15000+600000
+ 13679 strings out of 480559
+ 215914 string characters out of 5902200
+ 660115 words of memory out of 5000000
+ 30796 multiletter control sequences out of 15000+600000
  449013 words of font info for 118 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,12n,81p,1101b,407s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -959,7 +959,7 @@ eamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/de
 eamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/de
 eamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/de
 eamaliah/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on paper.pdf (18 pages, 1468089 bytes).
+Output written on paper.pdf (18 pages, 1467675 bytes).
 PDF statistics:
  428 PDF objects out of 1000 (max. 8388607)
  361 compressed objects within 4 object streams

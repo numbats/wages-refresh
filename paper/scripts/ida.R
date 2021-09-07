@@ -6,7 +6,7 @@ group_by(age_1979) %>%
 kable(age_table,
       caption = "Age Distribution of the NLSY79 samples",
       col.names = c("Age", "Number of Sample")) %>%
-  kable_styling(latex_options = "striped")
+  kable_styling()
 
 ## ---- gender-race-table
 gender_race_table <- yowie::demog_nlsy79 %>%
@@ -21,14 +21,14 @@ gender_race_table <- yowie::demog_nlsy79 %>%
 kable(gender_race_table,
       caption = "Gender and Race Distribution of the NLSY79 Samples",
       col.names = c("Gender", "Hispanic", "Black", "Non-Black, Non-Hispanic", "Total")) %>%
-  kable_styling(latex_options = "striped") %>%
+  kable_styling() %>%
   add_header_above(c(" " = 1, "Race" = 3, " " = 1))
 
 ## ---- summarytable
 kable(as.array(summary(wages_demog_hs$mean_hourly_wage)),
       caption = "Summary Statistics of Wages of High School Data",
       col.names = c("Statistics", "Value")) %>%
-  kable_styling(latex_options = "striped")
+  kable_styling()
 
 ## ---- feature-plot
 spag <- wages_demog_hs %>%
