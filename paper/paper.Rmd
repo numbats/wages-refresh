@@ -54,6 +54,7 @@ opts_chunk$set(echo = FALSE, warning = FALSE,
 
 read_chunk(here::here("paper/scripts/data-preprocessing.R"))
 read_chunk(here::here("paper/scripts/ida.R"))
+read_chunk(here::here("paper/scripts/eda.R"))
 ```
 
 
@@ -61,14 +62,10 @@ NSLY79 is a prominent open data source that has been an important support in mul
 
 **Keywords**: Data cleaning; Data tidying; Longitudinal data; NLSY79; Open data; Initial data analysis; Outlier detection; Robust linear regression
 
-
 ```{r, load-pkgs}
 ```
 
-
-
 # Introduction
-
 
 "Open data" is data that are freely accessible, modifiable, and shareable by anyone for any purpose [@opendata]. This type of data can be useful as example data in statistical text books and for research purposes. However, open data are often, what we might call "wild data", because it requires substantial cleaning and tidying to tame it into text book shape. @HuebnerMariannePhD2016Asat emphasize that making the data cleaning process accountable and transparent is imperative. Documenting the data cleaning is essential for the integrity of downstream statistical analyses and model building [@HuebnerMarianne2020Haar]. 
 
@@ -143,7 +140,6 @@ Age in 1979 are derived from year of birth and month of birth variables in the r
 ```{r dob-tidy, echo=TRUE}
 ```
 
-
 For `gender` and `race`, we only renamed these variables. 
 
 ```{r demog-tidy, echo = TRUE}
@@ -202,23 +198,18 @@ As stated previously, the respondents' ages ranged from 12 to 22 when first inte
 ```{r age-table}
 ```
 
-
 ```{r gender-race-table}
 ```
 
 The next step is that we explored the mean hourly wage data, in this case, we only explored the wages data in `wages_demog_hs`. Table \ref{tab:summarytable} shows that the overall wages median of the cohort is only 7.2, while the mean is 11.87. It indicates that the data might contains a lot of extreme values. 
 
-
 ```{r summarytable}
 ```
 
-
 However, we can not be sure only by observing the summary statistics. Hence, we used visualisation techniques to investigate this matter. Figure \ref{fig:feature-plot} conveys a problem in the mean hourly wage values. Figure \ref{fig:feature-plot} A shows that some observations had an exceptionally high figure of wages, even more than US$10,000 per hour. In Figure \ref{fig:feature-plot} B, we barely see any difference in the minimum, median, and maximum value of the wages since the distribution is heavily skewed to the right. 
-
 
 ```{r feature-plot, fig.cap = "Two plots showing the distribution of the mean hourly wage. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value. We can see that some IDs had an extremely high of wages and it made the distribution of the three features is extremely skewed.", fig.width=6, fig.height=4}
 ```
-
 
 In Figure \ref{fig:high-wages}, we plotted some respondents with a high value of mean hourly wages. We filtered all of the IDs who earned more than US$ 500 per hour on average. We found that these respondents only experienced one point of extremely high wages. Thus, we suspected that these high values are erroneous resulted from a data entry error. 
 
@@ -274,147 +265,40 @@ Finally, we saved the imputed data and set the appropriate data type for the var
 ```{r nrow}
 ```
 
-
 ```{r flow-chart, echo=FALSE, fig.cap="The stages of data filtering from the raw data to get three datasets that are contained in an R package called yowie, n means the number of ID, while n_obs means the number of observations.", fig.height=5, fig.width=5}
 ```
 
 
-
 # Exploratory Data Analysis
 
+This part gives some examples of exploratory data analysis using the data. We are interested to explore how people experience changes in their wages over the years. Hence, we focus the analysis in their slope of wages. Using `key_slope` function in `brolgar` [@brolgar], we perform linear regression with the mean hourly wage as response variable and year as the predictor for each individual. 
 
-```{r}
-wages <- yowie::wages %>%
-  mutate(year0 = year - 1979,
-         ln_wages = log(wage))
 
-wages_slope <- key_slope(wages, ln_wages ~ year0) %>%
-  left_join(yowie::demog_nlsy79, by = "id") %>%
-  mutate(hgc_regroup = fct_collapse(hgc, `ungraded` = "UNGRADED",
-                                    `8TH grade or less` = c("1ST GRADE", "3RD GRADE",
-                                                                 "4TH GRADE", "5TH GRADE",
-                                                                 "6TH GRADE", "7TH GRADE",
-                                                                 "8TH GRADE"),
-                                    `9TH to 11TH grade` = c("9TH GRADE",
-                                                            "10TH GRADE",
-                                                            "11TH GRADE"),
-                                    `12TH grade` = "12TH GRADE")) %>%
-  mutate(hgc_regroup = factor(hgc_regroup, levels = c("UNGRADED",
-                                                      "8TH grade or less", 
-                                                      "9TH to 11TH grade", 
-                                                      "12TH grade")))
-  
+```{r nobs-plot, fig.cap="Distribution of observations. The numbers of rounds varies among respondents. Most of respondents participated in 28 rounds of survey."}
+```
+
+```{r slope}
 ```
 
 
-This part gives some examples of exploratory data analysis using the data. In this example, we are interested to explore how people experience changes in their wages over the years. Hence, we focus the analysis in their slope of wages. Using `key_slope` function in `brolgar` [@brolgar], we perform linear regression with the mean hourly wage as response variable and year as the predictor for each individual. 
-
-
-Exploring the wages slope of each individual:
-  - Exploring the wages slope pattern based on the number of observation 
-  
-
-
-```{r slope-gender, fig.cap="slope-gender"}
-slope_bottom_5<- wages_slope %>%
-  arrange(.slope_year0) %>%
-  slice_head(n = 5) %>%
-  arrange(desc(.slope_year0)) %>%
-  mutate(note = "bottom 5") %>%
-  mutate(rank = seq_along(1:5))
-
-slope_top_5<- wages_slope %>%
-  arrange(desc(.slope_year0)) %>%
-  slice_head(n = 5) %>%
-  mutate(note = "top 5") %>%
-  mutate(rank = seq_along(1:5))
-
-keep_contrast <- rbind(slope_bottom_5, slope_top_5) %>%
-  dplyr::select(.slope_year0, id, note, rank, hgc_regroup)
-
-contrast_slope <- left_join(keep_contrast, wages, by = "id") %>%
-  arrange(.slope_year0) %>%
-  mutate(id = factor(id, levels = c("7918", "11695", "9176", "10119", "6464", "1271", 
-                                    "12371", "9039", "10217", "7782")),
-         note = factor(note, levels = c("top 5", "bottom 5")))
-  
-
-ggplot(contrast_slope, aes(x = year, y = ln_wages, color = gender)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE) +
-  facet_grid(note ~ rank) +
-  scale_color_manual(values = c("#04B4AE", "#BF00FF"))
-
+```{r slope-nobs, fig.cap="Distribution of wages slope by number of observations. The slopes' range are more stable with more observations."}
 ```
 
-
-
-
-
-
-```{r slope-educ}
-ggplot(contrast_slope, aes(x = year, y = ln_wages, color = hgc_regroup)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE) +
-  facet_grid(note ~ rank)
+```{r trim-slope}
 ```
 
-
-
-```{r slope-nobs}
-wages_obs <- wages %>%
-  features(wage, n_obs) %>%
-  left_join(wages_slope, by = "id")
-
-ggplot(wages_obs, aes(x = n_obs, y = .slope_year0)) +
-  geom_point() +
-  geom_jitter()
+```{r slope-gender, fig.cap = "Wages slope over the years based on gender. Most of respondents who experienced high wages slope are males. In contrast, respondents who experienced lower wages slope are mostly females."}
 ```
-
 
 According to @OECD, gender pay gap is the difference between median wage of males and females relative to median wage of males. We find that, as shown in \ref{fig:se-gender}, over the years, females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every $1 earned by males. The widest gender gaps were observed in 1990s. 
 
-```{r wages-gender-gap, echo=FALSE, fig.cap="Gender wage gap or the median wages of females relatives to median wages of males. Females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every $1 earned by males."}
-
-wages_gender <- as.tibble(wages) %>%
-  group_by(gender, year) %>%
-  summarise(mean = mean(wage),
-            median = median(wage),
-            sd = sd(wage),
-            samplesize = n()) %>%
-  ungroup() %>%
-  mutate(upper = mean + sd/sqrt(samplesize),
-         lower = mean - sd/sqrt(samplesize)) 
-
-wage_female <- wages_gender %>%
-  filter(gender == "FEMALE") %>%
-  dplyr::select(year, median) %>%
-  rename(female = median)
-
-wage_male <- wages_gender %>%
-  filter(gender == "MALE") %>%
-  dplyr::select(median) %>%
-  rename(male = median)
-
-gender_wage_gap <- cbind(wage_female, wage_male) %>%
-  mutate(gap = (male-female)/male) %>%
-  mutate(relative = 1-gap)
-  
-
-ggplot(gender_wage_gap) +
-  geom_line(aes(x = year,
-                y = relative),
-            color = "#DF7401", size = 0.8) +
-  geom_point(aes(x = year,
-                y = relative),
-             color = "#DF7401", size = 2) +
-  geom_hline(yintercept = 1, colour = "#088A68", size = 1) +
-  scale_x_continuous(limits = c(1978.7,2018.3), expand = c(0, 0)) +
-  ylab("females' median wages relative to males (US$)") +
-  annotate("text", x = 2014.5, y = 1, label = "$1 of male wages", vjust = 1.4) +
-  annotate("text", x = 2012, y = 0.8, label = "female wages relative to male", vjust = 1)
+```{r wages-gender-gap, echo=FALSE, fig.cap="Gender wage gap or the median wages of females relatives to median wages of males. Females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every $1 earned by males. Note that this is a crude measure as gap is calculated not based on other variable, such as experience and job class."}
 ```
 
+
+
+```{r slope-educ, fig.cap = "Wages slope over the years based on highest education completed. People who are in top-5 and bottom-5 wages are dominated by people who completed high school."}
+```
 
 
 # Summary

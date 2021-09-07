@@ -37,7 +37,8 @@ spag <- wages_demog_hs %>%
              group = id)) +
   geom_line(alpha = 0.1) +
   ggtitle("A)") +
-  theme(plot.title = element_text(size = 10))
+  theme(plot.title = element_text(size = 10)) +
+  theme_bw()
 
 wages_demog_hs_tsibble <- as_tsibble(x = wages_demog_hs,
                                      key = id,
@@ -52,7 +53,8 @@ wages_feat_long <- wages_three_feat %>%
 feature <- ggplot(wages_feat_long) +
   geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
   ggtitle("B)") +
-  theme(plot.title = element_text(size = 10))
+  theme(plot.title = element_text(size = 10))+
+  theme_bw()
 
 spag + feature
 
@@ -73,7 +75,8 @@ ggplot(wages_high2) +
              alpha = 0.5) +
   facet_wrap(~id, scales = "free_y") +
   theme(axis.text.x = element_text(angle = 10, size = 6)) +
-  ylab("mean hourly wage")
+  ylab("mean hourly wage") +
+  theme_bw()
 
 ## ---- sample-plot
 set.seed(20210225)
@@ -84,7 +87,8 @@ ggplot(wages_demog_hs_tsibble,
   geom_line(alpha = 0.7) +
   facet_sample() +
   theme(axis.text.x = element_text(angle = 10, size = 6)) +
-  ylab("mean hourly wage")
+  ylab("mean hourly wage") +
+  theme_bw()
 
 ## ---- rlm
 # nest the data by id to build a robust linear model
@@ -170,7 +174,8 @@ ggplot(wages_compare) +
              size = 1) +
   theme(axis.text.x = element_text(angle = 10, size = 5),
         legend.position = "bottom") +
-  facet_wrap(~id, scales = "free_y")
+  facet_wrap(~id, scales = "free_y") +
+  theme_bw()
 
 ## ---- comppict
 spag2 <- wages_demog_hs %>%
@@ -179,7 +184,8 @@ spag2 <- wages_demog_hs %>%
              group = id)) +
   geom_line(alpha = 0.1) +
   ggtitle("A)") +
-  theme(plot.title = element_text(size = 10))
+  theme(plot.title = element_text(size = 10)) +
+  theme_bw()
 
 wages_hs2020_rlm <- as_tsibble(x = wages_demog_hs,
                                key = id,
@@ -197,7 +203,8 @@ feature2 <- ggplot(wages_feat_long_rlm) +
   ggtitle("B)") +
   scale_x_log10() +
   theme(plot.title = element_text(size = 10)) +
-  xlab("value (log10)")
+  xlab("value (log10)") +
+  theme_bw()
 
 spag2 + feature2
 

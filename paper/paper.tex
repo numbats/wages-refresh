@@ -603,10 +603,25 @@ Finally, we saved the imputed data and set the appropriate data type for the var
 \hypertarget{exploratory-data-analysis}{%
 \section{Exploratory Data Analysis}\label{exploratory-data-analysis}}
 
-This part gives some examples of exploratory data analysis using the data. In this example, we are interested to explore how people experience changes in their wages over the years. Hence, we focus the analysis in their slope of wages. Using \texttt{key\_slope} function in \texttt{brolgar} (Tierney, Cook, and Prvan 2020), we perform linear regression with the mean hourly wage as response variable and year as the predictor for each individual.
+This part gives some examples of exploratory data analysis using the data. We are interested to explore how people experience changes in their wages over the years. Hence, we focus the analysis in their slope of wages. Using \texttt{key\_slope} function in \texttt{brolgar} (Tierney, Cook, and Prvan 2020), we perform linear regression with the mean hourly wage as response variable and year as the predictor for each individual.
 
-Exploring the wages slope of each individual:
-- Exploring the wages slope pattern based on the number of observation
+\begin{figure}
+
+{\centering \includegraphics[width=\textwidth]{figures/nobs-plot-1} 
+
+}
+
+\caption{Distribution of observations. The numbers of rounds varies among respondents. Most of respondents participated in 28 rounds of survey.}\label{fig:nobs-plot}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=\textwidth]{figures/slope-nobs-1} 
+
+}
+
+\caption{Distribution of wages slope by number of observations. The slopes' range are more stable with more observations.}\label{fig:slope-nobs}
+\end{figure}
 
 \begin{figure}
 
@@ -614,12 +629,8 @@ Exploring the wages slope of each individual:
 
 }
 
-\caption{slope-gender}\label{fig:slope-gender}
+\caption{Wages slope over the years based on gender. Most of respondents who experienced high wages slope are males. In contrast, respondents who experienced lower wages slope are mostly females.}\label{fig:slope-gender}
 \end{figure}
-
-\begin{center}\includegraphics[width=\textwidth]{figures/slope-educ-1} \end{center}
-
-\begin{center}\includegraphics[width=\textwidth]{figures/slope-nobs-1} \end{center}
 
 According to OECD (n.d.), gender pay gap is the difference between median wage of males and females relative to median wage of males. We find that, as shown in \ref{fig:se-gender}, over the years, females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every \$1 earned by males. The widest gender gaps were observed in 1990s.
 
@@ -629,8 +640,17 @@ According to OECD (n.d.), gender pay gap is the difference between median wage o
 
 \}
 
-\textbackslash caption\{Gender wage gap or the median wages of females relatives to median wages of males. Females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every \$1 earned by males.\}\label{fig:wages-gender-gap}
+\textbackslash caption\{Gender wage gap or the median wages of females relatives to median wages of males. Females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every \$1 earned by males. Note that this is a crude measure as gap is calculated not based on other variable, such as experience and job class.\}\label{fig:wages-gender-gap}
 \textbackslash end\{figure\}
+
+\begin{figure}
+
+{\centering \includegraphics[width=\textwidth]{figures/slope-educ-1} 
+
+}
+
+\caption{Wages slope over the years based on highest education completed. People who are in top-5 and bottom-5 wages are dominated by people who completed high school.}\label{fig:slope-educ}
+\end{figure}
 
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
