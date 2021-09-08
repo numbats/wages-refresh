@@ -172,10 +172,10 @@ ggplot(wages_compare) +
                  colour = type),
              alpha = 0.5,
              size = 1) +
-  theme(axis.text.x = element_text(angle = 10, size = 5),
-        legend.position = "bottom") +
   facet_wrap(~id, scales = "free_y") +
-  theme_bw()
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 10, size = 5),
+        legend.position = "bottom")
 
 ## ---- comppict
 spag2 <- wages_demog_hs %>%
@@ -290,7 +290,7 @@ n_obs_do_pred = filter(wages_hs_do, is_pred == TRUE) %>%
   nrow()
 
 ### ---- flow-chart
-fc <- grViz("digraph flowchart {
+grViz("digraph flowchart {
       node [fontname = Helvetica, shape = rectangle]
       tab1 [label = '@@1']
       tab2 [label = '@@2']
@@ -316,5 +316,4 @@ fc <- grViz("digraph flowchart {
       [6]: paste0('High school dropouts cohort, \\n n = ', n_do, ', n_obs = ', n_obs_do, ' \\n (', n_obs_do_pred, ' observations are predicted value)')
       [7]: 'yowie Package'
       ",
-            height = 200)
-fc
+            height = 700)

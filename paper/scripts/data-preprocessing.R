@@ -17,6 +17,7 @@ library(modelr)
 library(forcats)
 library(yowie)
 
+
 ## ---- raw-data
 source(here::here("data-raw/NLSY79/NLSY79.R"))
 
@@ -118,7 +119,6 @@ highest_year <- demog_education %>%
 full_demographics <- full_join(dob_tidy, demog_tidy, by = "CASEID_1979") %>%
   full_join(highest_year, by = "CASEID_1979") %>%
   rename("id" = "CASEID_1979")
-head(full_demographics)
 
 ## ---- tidy-hours
 # make a list for years where we used the "QES-52A"
@@ -178,7 +178,7 @@ hours_wages <- left_join(rates_all,
   mutate(rate_per_hour = ifelse(rate_per_hour == 0, NA,
                                 rate_per_hour),
          hours_work = ifelse(hours_work == 0 | hours_work > 84, NA, hours_work))
-head(hours_wages)
+
 
 ## ---- tidy-nojob
 # calculate number of jobs that a person has in one year

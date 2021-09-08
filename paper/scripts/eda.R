@@ -2,10 +2,12 @@
 wages_obs <- yowie::wages %>%
   features(wage, n_obs) %>%
   arrange(n_obs)
-ggplot(wages_obs, aes(x = n_obs)) +
+
+wages_obs_p <- ggplot(wages_obs, aes(x = n_obs)) +
   geom_bar() +
   xlab("number of observations") +
-  theme_bw()
+  theme_bw() +
+  ggtitle("A)")
 
 ## ---- slope
 wages <- yowie::wages %>%
@@ -29,12 +31,16 @@ wages_slope <- key_slope(wages, ln_wages ~ year0) %>%
                                                       "12TH grade")))
 ## ---- slope-nobs
 wages_obs_slope <- left_join(wages_obs, wages_slope, by = "id")
-ggplot(wages_obs_slope, aes(x = n_obs, y = .slope_year0)) +
+wages_obs_slop_p <- ggplot(wages_obs_slope, aes(x = n_obs, y = .slope_year0)) +
   geom_point() +
   geom_jitter() +
   xlab("number of observations") +
   ylab("slope") +
-  theme_bw()
+  theme_bw() +
+  ggtitle("B)")
+
+## ---- slope-nobs-plot
+wages_obs_p + wages_obs_slop_p
 
 ## ---- trim-slope
 slope_trimmed <- wages_slope %>%
@@ -69,9 +75,10 @@ ggplot(contrast_slope, aes(x = year, y = ln_wages, color = gender)) +
   scale_color_manual(values = c("#04B4AE", "#BF00FF")) +
   ylab("ln(wages)") +
   theme_bw() +
-  theme(axis.text.x = element_text(angle = 25))
+  theme(axis.text.x = element_text(angle = 25),
+        legend.position = "bottom")
 
-## ---- wages-gender-gap
+## ---- gap-gender
 wages_gender <- as.tibble(wages) %>%
   group_by(gender, year) %>%
   summarise(mean = mean(wage),
@@ -104,7 +111,7 @@ ggplot(gender_wage_gap) +
                  y = relative),
              color = "#DF7401", size = 2) +
   geom_hline(yintercept = 1, colour = "#088A68", size = 1) +
-  scale_x_continuous(limits = c(1978.7,2018.3), expand = c(0, 0)) +
+  #scale_x_continuous(limits = c(1978.7,2018.3), expand = c(0, 0)) +
   ylab("females' median wages relative to males (US$)") +
   annotate("text", x = 2014.5, y = 1, label = "$1 of male wages", vjust = 1.4) +
   annotate("text", x = 2012, y = 0.8, label = "female wages relative to male", vjust = 1)
@@ -117,4 +124,5 @@ ggplot(contrast_slope, aes(x = year, y = ln_wages, color = hgc_regroup)) +
   ylab("ln(wages)") +
   labs(color = "education") +
   theme_bw() +
-  theme(axis.text.x = element_text(angle = 25))
+  theme(axis.text.x = element_text(angle = 25),
+        legend.position = "bottom")
