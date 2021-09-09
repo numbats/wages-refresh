@@ -271,11 +271,12 @@ Finally, we save the imputed data and set the appropriate data type for the vari
 ```
 
 
-
 # Exploratory Data Analysis {#eda}
 
-This part gives some examples of exploratory data analysis using the data. We are interested to explore how people experience changes in their wages over the years. Hence, we focus the analysis in their slope of wages. Using `key_slope` function in `brolgar` [@brolgar], we perform linear regression with the mean hourly wage as response variable and year as the predictor for each individual. 
+This section will provide an example of how data sets could be used to do exploratory data analysis as in textbook data. We are interested in examining how the respondents experience changes in their wages based on their demographic characteristics. Thus, we use `wages` data instead of the refreshed `wages_hs_do` as it only has male respondents.
 
+The statistics we use in measuring the change in wages experience is the slope of the wages of each respondent. 
+Using `key_slope` function in `brolgar` [@brolgar], we perform linear regression with the log of mean hourly wage as the response variable and year as the predictor. Since we do modeling, it is important to look at the number of observations from each respondent. Figure \ref{fig:slope-nobs-plot} shows that the number of observations for each individual varies. Moreover, each number of observations seems to have an impact on the slope. Extreme values in slope are observed in a few observations, while the range of slope is more stable with more observations. Accordingly, we trim the data to only include $5^{th} - 12^{th}$ percentile.
 
 ```{r nobs-plot}
 ```
@@ -286,7 +287,6 @@ This part gives some examples of exploratory data analysis using the data. We ar
 ```{r slope-nobs}
 ```
 
-
 ```{r slope-nobs-plot, fig.cap = "A) Distribution of observations. The numbers of rounds varies among respondents. Most of respondents participated in 28 rounds of survey. B) Distribution of wages slope by number of observations. The slopes' range are more stable with more observations."}
 ```
 
@@ -294,29 +294,18 @@ This part gives some examples of exploratory data analysis using the data. We ar
 ```{r trim-slope}
 ```
 
+We then create some visualizations of five respondents with the highest slope and five respondents with the lowest slope, henceforth referred to as top-5 slopes and bottom-5 slopes, respectively. We plot them based on their gender and education. Figure \ref{fig:slope-gender} shows top-5 slopes are dominated by males, while females dominate bottom-5 slopes. However, as this figure only shows a small portion of the data, we further inspect the gender wage gap.
 
 ```{r slope-gender, fig.cap = "Wages slope over the years based on gender. Most of respondents who experienced high wages slope are males. In contrast, respondents who experienced lower wages slope are mostly females."}
 ```
 
-
-According to @OECD, gender pay gap is the difference between median wage of males and females relative to median wage of males. We find that, as shown in \ref{fig:gap-gender}, over the years, females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every $1 earned by males. The widest gender gaps were observed in 1990s. 
+According to @OECD, the gender pay gap is the difference between the median wage of males and females relative to the median wage of males. We find that, as shown in \ref{fig:gap-gender}, over the years, females tend to earn fewer than males. For example, in 2018, females earned about 78 cents for every $1 earned by males. The widest gender gaps were observed in the 1990s. 
 
 
 ```{r gap-gender, fig.cap="Gender wage gap or the median wages of females relatives to median wages of males. Females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every \\$1 earned by males. Note that this is a crude measure as gap is calculated not based on other variable, such as experience and job class."}
 ```
 
-
-
-
-a
-b
-c
-d
-e
-f
-gh
-
-
+According to their highest education completed, both top-5 and bottom-5 slopes are dominated by people who completed high school. This is understandable since the respondents are mostly completed high school.
 
 ```{r slope-educ, fig.cap = "Wages slope over the years based on highest education completed. People who are in top-5 and bottom-5 wages are dominated by people who completed high school."}
 ```
@@ -324,11 +313,11 @@ gh
 
 # Summary {#summary}
 
-This paper has performed a set of stages to make open data suitable for textbook data or make it ready for research. In the first stage, we showed the steps performed to get the data from the NLSY79 database. Since the data format is untidy, we showed how the data had been tidied. After that, we conducted initial data analysis to investigate and screen the quality of the data. Using the robust linear regression model, we found and fixed the anomalous observations in the data set with its predicted values. We also performed an example of exploratory data analysis using the cleaned data set. 
+This paper has performed stages to make open data suitable for textbook data or make it ready for research. In the first stage, we showed the steps performed to get the data from the NLSY79 database. Since the data format is untidy, we showed how the data had been tidied. After that, we conducted an initial data analysis to investigate and screen the quality of the data. We found and fixed the anomalous observations in the data set using the robust linear regression model with its predicted values. We also performed an example of exploratory data analysis using the cleaned data set. 
 
 This paper has also demonstrated data cleaning documentation by providing all of the codes in performing data tidying and initial data analysis. Thus, this paper provided an opportunity to continuously refresh the textbook data whenever the updated data is published in the NLSY79 database. It could be done by following the documentation of the code that is provided in this paper. 
 
-Moreover, the documentation also includes how we generated the robustness weight and how we decided the threshold of anomalous observations. It is also documented along with the flag of whether an observation is imputed value or not. Accordingly, if somebody wishes to make another decision, it can be done by making a small change in the code provided. Further, this paper is also supplemented by a `shiny`  [@shiny] app as a simulation tool to customize the weight threshold. 
+Moreover, the documentation also includes how we generated the robustness weight and how we decided the threshold of anomalous observations. It is also documented along with the flag of whether an observation is an imputed value or not. Accordingly, if somebody wishes to make another decision, it can be done by making a small change in the code provided. Further, this paper is also supplemented by a `shiny`  [@shiny] app as a simulation tool to customize the weight threshold. 
 
 Finally, this paper implies that data providers should design a database that is able to produce tidy data sets. A data provider should also check for data anomalies before the data publishing or at least provides a set of rules or threshold values. For example, in this case, is the threshold of reasonable wages. This will greatly support the data users to validate and set the same understanding of which data are considered outliers. Moreover, providing validation rules would facilitate any established data validation tool, such as `validate` [@validate] package. In this case, we cannot use this handy validation package due to the absence of validation rules. 
 
