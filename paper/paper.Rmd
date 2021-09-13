@@ -49,7 +49,7 @@ opts_chunk$set(echo = FALSE, warning = FALSE,
                cache.path = "paper_cache/",
                fig.path = "figures/",
                comment = "#>",
-               fig.align = 'center', #fig.show = 'hold',
+               fig.align = 'center', 
                out.width = "70%")
 
 read_chunk(here::here("paper/scripts/data-preprocessing.R"))
@@ -276,7 +276,7 @@ Finally, we save the imputed data and set the appropriate data type for the vari
 This section will provide an example of how data sets could be used to do exploratory data analysis as in textbook data. We are interested in examining how the respondents experience changes in their wages based on their demographic characteristics. Thus, we use `wages` data instead of the refreshed `wages_hs_do` as it only has male respondents.
 
 The statistics we use in measuring the change in wages experience is the slope of the wages of each respondent. 
-Using `key_slope` function in `brolgar` [@brolgar], we perform linear regression with the log of mean hourly wage as the response variable and year as the predictor. Since we do modeling, it is important to look at the number of observations from each respondent. Figure \ref{fig:slope-nobs-plot} shows that the number of observations for each individual varies. Moreover, each number of observations seems to have an impact on the slope. Extreme values in slope are observed in a few observations, while the range of slope is more stable with more observations. Accordingly, we trim the data to only include $5^{th} - 12^{th}$ percentile.
+Using `key_slope` function in `brolgar` [@brolgar], we perform linear regression with the log of mean hourly wage as the response variable and year as the predictor. Since we do modeling, it is important to look at the number of observations from each respondent. Figure \ref{fig:slope-nobs-plot} shows that the number of observations for each individual varies. Moreover, each number of observations seems to have an impact on the slope. Extreme values in slope are observed in a few observations, while the range of slope is more stable with more observations. Accordingly, we trim the data to only include $5^{th} - 95^{th}$ percentile.
 
 ```{r nobs-plot}
 ```
@@ -302,7 +302,7 @@ We then create some visualizations of five respondents with the highest slope an
 According to @OECD, the gender pay gap is the difference between the median wage of males and females relative to the median wage of males. We find that, as shown in \ref{fig:gap-gender}, over the years, females tend to earn fewer than males. For example, in 2018, females earned about 78 cents for every $1 earned by males. The widest gender gaps were observed in the 1990s. 
 
 
-```{r gap-gender, fig.cap="Gender wage gap or the median wages of females relatives to median wages of males. Females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every \\$1 earned by males. Note that this is a crude measure as gap is calculated not based on other variable, such as experience and job class."}
+```{r gap-gender, fig.cap="A) Number of observations by gender and by year. There are more males participated in survey than females. The number of observations decreased over the years. B) Gender wage gap or the median wages of females relatives to median wages of males. Females tend to earn fewer than males. For example, in 2018 females earn about 78 cents for every \\$1 earned by males. Note that this is a crude measure as gap is calculated not based on other variable, such as experience and job class.", out.width="90%"}
 ```
 
 According to their highest education completed, both top-5 and bottom-5 slopes are dominated by people who completed high school. This is understandable since the respondents are mostly completed high school.

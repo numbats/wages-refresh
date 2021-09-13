@@ -43,9 +43,8 @@ wages_obs_slop_p <- ggplot(wages_obs_slope, aes(x = n_obs, y = .slope_year0)) +
 wages_obs_p + wages_obs_slop_p
 
 ## ---- trim-slope
-slope_trimmed <- wages_slope %>%
-  filter(.slope_year0 < quantile(.slope_year0, 0.95) &
-           .slope_year0 > quantile(.slope_year0, 0.05))
+slope_trimmed <- wages_obs_slope %>%
+  filter(n_obs >= 10)
 
 ## ---- slope-gender
 slope_bottom_5<- slope_trimmed %>%
@@ -80,6 +79,8 @@ ggplot(contrast_slope, aes(x = year, y = ln_wages, color = gender)) +
 
 ## ---- gap-gender
 wages_gender <- as.tibble(wages) %>%
+  left_join(wages_obs, by = "id") %>%
+  filter(n_obs >= 10) %>%
   group_by(gender, year) %>%
   summarise(mean = mean(wage),
             median = median(wage),
@@ -89,6 +90,15 @@ wages_gender <- as.tibble(wages) %>%
   mutate(upper = mean + sd/sqrt(samplesize),
          lower = mean - sd/sqrt(samplesize))
 
+# number of observations by gender
+nobs_gender <- ggplot(wages_gender, aes(fill=gender, y=samplesize, x=year)) +
+  geom_bar(position="dodge", stat="identity") +
+  theme(legend.position = "bottom") +
+  ylab("number of observations") +
+  scale_fill_manual(values = c("#088A68", "#DF7401")) +
+  ggtitle("A)")
+
+# wages by gender
 wage_female <- wages_gender %>%
   filter(gender == "FEMALE") %>%
   dplyr::select(year, median) %>%
@@ -103,7 +113,7 @@ gender_wage_gap <- cbind(wage_female, wage_male) %>%
   mutate(gap = (male-female)/male) %>%
   mutate(relative = 1-gap)
 
-ggplot(gender_wage_gap) +
+gender_gap_plot <- ggplot(gender_wage_gap) +
   geom_line(aes(x = year,
                 y = relative),
             color = "#DF7401", size = 0.8) +
@@ -113,8 +123,11 @@ ggplot(gender_wage_gap) +
   geom_hline(yintercept = 1, colour = "#088A68", size = 1) +
   #scale_x_continuous(limits = c(1978.7,2018.3), expand = c(0, 0)) +
   ylab("females' median wages relative to males (US$)") +
-  annotate("text", x = 2014.5, y = 1, label = "$1 of male wages", vjust = 1.4) +
-  annotate("text", x = 2012, y = 0.8, label = "female wages relative to male", vjust = 1)
+  annotate("text", x = 2010, y = 1, size = 3, label = "$1 of male wages", vjust = 1.4) +
+  annotate("text", x = 2005, y = 0.81, size = 3, label = "female wages relative to male", vjust = 1) +
+  ggtitle("B)")
+
+nobs_gender + gender_gap_plot
 
 ## ---- slope-educ
 ggplot(contrast_slope, aes(x = year, y = ln_wages, color = hgc_regroup)) +
