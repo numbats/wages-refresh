@@ -139,3 +139,8 @@ ggplot(contrast_slope, aes(x = year, y = ln_wages, color = hgc_regroup)) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 25),
         legend.position = "bottom")
+
+## ---- regression
+
+fit <- lm(.slope_year0 ~ age_1979 + hgc_regroup*gender, data = slope_trimmed)
+summary(fit)
