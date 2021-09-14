@@ -38,17 +38,18 @@ wages_high <- filter(wages_demog_hs, mean_hourly_wage > 500) %>%
 wages_high2 <- wages_demog_hs %>%
   filter(id %in% wages_high$id)
 
-ggplot(wages_high2) +
+plot_high <- ggplot(filter(wages_high2, id == 39)) +
   geom_line(aes(x = year,
                 y = mean_hourly_wage)) +
   geom_point(aes(x = year,
                  y = mean_hourly_wage),
              size = 0.5,
              alpha = 0.5) +
-  facet_wrap(~id, scales = "free_y") +
-  theme(axis.text.x = element_text(angle = 10, size = 6)) +
+  theme(axis.text.x = element_text(angle = 10, size = 6),
+        plot.title = element_text(size = 10)) +
   ylab("mean hourly wage") +
-  theme_bw()
+  theme_bw() +
+  ggtitle("D)")
 
 ## ---- sample-plot
 wages_demog_hs_tsibble <- as_tsibble(x = wages_demog_hs,
@@ -75,7 +76,8 @@ spag <- wages_demog_hs %>%
   geom_line(alpha = 0.1) +
   ggtitle("A)") +
   theme(plot.title = element_text(size = 10)) +
-  theme_bw()
+  theme_bw() +
+  ylab("mean hourly wage")
 
 wages_three_feat <- wages_demog_hs_tsibble %>%
   features(mean_hourly_wage,
@@ -86,10 +88,18 @@ wages_feat_long <- wages_three_feat %>%
 feature <- ggplot(wages_feat_long) +
   geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
   ggtitle("B)") +
-  theme(plot.title = element_text(size = 10))+
-  theme_bw()
+  theme_bw() +
+  theme(plot.title = element_text(size = 10))
 
-spag + feature
+feature_bp <- ggplot(wages_feat_long, aes(y=value, fill = feature, color = feature)) +
+  geom_boxplot() +
+  theme_bw() +
+  ggtitle("C)") +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 10))
+
+spag + feature + feature_bp + plot_high + plot_layout(nrow = 1, guides = "collect") &
+  theme(legend.position = "bottom")
 
 ## ---- rlm
 # nest the data by id to build a robust linear model
@@ -202,7 +212,6 @@ wages_feat_long_rlm <- wages_three_feat_rlm %>%
 feature2 <- ggplot(wages_feat_long_rlm) +
   geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
   ggtitle("B)") +
-  scale_x_log10() +
   theme(plot.title = element_text(size = 10)) +
   xlab("value (log10)") +
   theme_bw()
