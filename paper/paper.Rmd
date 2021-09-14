@@ -326,7 +326,7 @@ Finally, this paper implies that data providers should design a database that is
 
 We would like to thank Aarathy Babu for the insight and discussion during the writing of this paper. 
 
-The entire analysis is conducted using `R` [@R] in `rstudio` using these packages: `tidyverse` [@tidyverse], `ggplot2` [@ggplot2], `dplyr` [@dplyr], `readr` [@readr], `tidyr` [@tidyr], `stringr` [@stringr], `purrr` [@purrr], `broom` [@broom], `blorgar` [@brolgar], `patchwork` [@patchwork], `kableExtra` [@kableExtra], `MASS` [@mass], `janitor` [@janitor], `DiagrammeR` [@DiagrammeR], `rsvg` [@rsvg], `webshot` [@webshot], `mgcv` [@mgcv], `tsibble` [@tsibble], and `modelr` [@modelr]. The paper are generated using `knitr` [@knitr], `rmarkdown` [@rmarkdown], and `rticles` [@rticles]. 
+The entire analysis is conducted using `R` [@R] in `rstudio` using these packages: `tidyverse` [@tidyverse], `ggplot2` [@ggplot2], `dplyr` [@dplyr], `readr` [@readr], `tidyr` [@tidyr], `stringr` [@stringr], `purrr` [@purrr], `broom` [@broom], `brolgar` [@brolgar], `patchwork` [@patchwork], `kableExtra` [@kableExtra], `MASS` [@mass], `janitor` [@janitor], `DiagrammeR` [@DiagrammeR], `rsvg` [@rsvg], `webshot` [@webshot], `mgcv` [@mgcv], `tsibble` [@tsibble], and `modelr` [@modelr]. The paper are generated using `knitr` [@knitr], `rmarkdown` [@rmarkdown], and `rticles` [@rticles]. 
 
 
 # Supplementary Materials 
