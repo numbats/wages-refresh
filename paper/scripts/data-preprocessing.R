@@ -118,7 +118,8 @@ highest_year <- demog_education %>%
 ## ---- full-demog
 full_demographics <- full_join(dob_tidy, demog_tidy, by = "CASEID_1979") %>%
   full_join(highest_year, by = "CASEID_1979") %>%
-  rename("id" = "CASEID_1979")
+  rename("id" = "CASEID_1979") %>%
+  mutate(age_1979 = 1979 - (dob_year + 1900))
 
 ## ---- tidy-hours
 # make a list for years where we used the "QES-52A"
