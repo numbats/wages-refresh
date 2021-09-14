@@ -1,6 +1,6 @@
 ## ---- age-table
-age_table <- yowie::demog_nlsy79 %>%
-group_by(age_1979) %>%
+age_table <- full_demographics %>%
+  group_by(age_1979) %>%
   count(age_1979)
 
 kable(age_table,
@@ -9,7 +9,7 @@ kable(age_table,
   kable_styling()
 
 ## ---- gender-race-table
-gender_race_table <- yowie::demog_nlsy79 %>%
+gender_race_table <- full_demographics %>%
   tabyl(gender, race) %>%
   adorn_totals(c("row", "col")) %>%
   adorn_percentages("row") %>%
@@ -235,7 +235,6 @@ wages <- wages_demog_hs %>%
 
 # Create a data set for demographic variables
 demog_nlsy79 <- full_demographics %>%
-  mutate(age_1979 = 1979 - (dob_year + 1900)) %>%
   dplyr::select(id,
                 age_1979,
                 gender,
