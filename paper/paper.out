@@ -2,7 +2,7 @@
 \BOOKMARK [1][-]{section.2}{The NLSY79}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Database}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Target Data}{section.2}% 4
-\BOOKMARK [1][-]{section.3}{The NLSY79 Data Cleaning}{}% 5
+\BOOKMARK [1][-]{section.3}{Data Cleaning}{}% 5
 \BOOKMARK [2][-]{subsection.3.1}{Getting and Tidying the Data}{section.3}% 6
 \BOOKMARK [3][-]{subsubsection.3.1.1}{Tidying demographic variables}{subsection.3.1}% 7
 \BOOKMARK [3][-]{subsubsection.3.1.2}{Tidying employment variables}{subsection.3.1}% 8

@@ -95,7 +95,7 @@ As mentioned in Section \@ref(intro), this paper aims to refresh the NLSY79 data
 
 Since there is no information on high school dropouts in Singer and Willet's book, we define high school dropouts as respondents who only completed either $9^{th}$, $10^{th}$, $11^{th}$ grade, or who completed $12^{th}$ when their age is at least 19 years old (means that these IDs being dropped out in a certain year, but they returned back to high school to complete it). 
 
-# The NLSY79 Data Cleaning {#cleaning}
+# Data Cleaning {#cleaning}
 
 ## Getting and Tidying the Data
 
@@ -209,9 +209,12 @@ The next step is that explore the mean hourly wage data. In this case, we only e
 ```{r summarytable}
 ```
 
+```{r sample-plot, echo = FALSE, fig.cap="Getting a glimpse of the data: random sample of 36 individuals, divided into  twelve subplots. Wages are shown against year. There is a lot of variability in wages.", fig.height=4, fig.width=5}
+```
+
 However, we can not be sure only by observing the summary statistics. Hence, we use visualisation techniques to investigate this matter. Figure \ref{fig:feature-plot} conveys a problem in the mean hourly wage values. Figure \ref{fig:feature-plot} A shows that some observations have an exceptionally high figure of wages, even more than US$10,000 per hour. In Figure \ref{fig:feature-plot} B, we barely see any difference in the minimum, median, and maximum value of the wages since the distribution is heavily skewed to the right. 
 
-```{r feature-plot, fig.cap = "Two plots showing the distribution of the mean hourly wage. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value. We can see that some IDs had an extremely high of wages and it made the distribution of the three features is extremely skewed.", fig.width=6, fig.height=4}
+```{r feature-plot, fig.cap = "Several plots showing anomalies observed the input data. XX Add a couple more plots that reveal the initial problems in the data. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value. We can see that some IDs had an extremely high of wages and it made the distribution of the three features is extremely skewed.", fig.width=6, fig.height=4}
 ```
 
 In Figure \ref{fig:high-wages}, we plot some respondents with a high value of mean hourly wages. We filter all of the IDs who earned more than US$ 500 per hour on average. We find that these respondents only experienced one point of extremely high wages. Thus, we suspect that these high values are erroneous resulted from a data entry error. 
@@ -221,9 +224,6 @@ In Figure \ref{fig:high-wages}, we plot some respondents with a high value of me
 
 Further, we take 36 samples randomly from the data and plot them, as shown in Figure \ref{fig:sample-plot}. It implies that not only that some observations earn extremely high figures of wages, but some also have reasonably fluctuated wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples have a different pattern of mean hourly wages. Some have had flat wages for years but had a sudden increase in one particular year, then it gone down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9. 
 
-
-```{r sample-plot, echo = FALSE, fig.cap="The mean hourly wages of some random samples are shown in twelve facets, three IDs per facet. It suggests that some IDs had a reasonably fluctuate wages.", fig.height=4, fig.width=5}
-```
 
 The anomalies are also found in the total hours of work, where some observations work for 420 hours a week in total. According to @MichaelRPergamit2001DWTN, one of the flaws of the NLSY79 employment data is that the NLSY79 collects the information of the working hours since the last interview. Thus, it might be challenging for the respondents to track the within-job hours' changes between survey years, especially for the respondents with fluctuated working hours or seasonal jobs. It even has been more challenging since 1994, where the respondents had to recall two years periods. This shortcoming might also contribute to the fluctuation of one's wages data. 
 
@@ -328,7 +328,7 @@ Finally, this paper implies that data providers should design a database that is
 
 We would like to thank Aarathy Babu for the insight and discussion during the writing of this paper. 
 
-The entire analysis is conducted using `R` [@R] in `rstudio` using these packages: `tidyverse` [@tidyverse], `ggplot2` [@ggplot2], `dplyr` [@dplyr], `readr` [@readr], `tidyr` [@tidyr], `stringr` [@stringr], `purrr` [@purrr], `broom` [@broom], `blorgar` [@brolgar], `patchwork` [@patchwork], `kableExtra` [@kableExtra], `MASS` [@mass], `janitor` [@janitor], `DiagrammeR` [@DiagrammeR], `rsvg` [@rsvg], `webshot` [@webshot], `mgcv` [@mgcv], `tsibble` [@tsibble], and `modelr` [@modelr]. The paper are generated using `knitr` [@knitr], `rmarkdown` [@rmarkdown], and `rticles` [@rticles]. 
+The entire analysis is conducted using `R` [@R] in `rstudio` using these packages: `tidyverse` [@tidyverse], `ggplot2` [@ggplot2], `dplyr` [@dplyr], `readr` [@readr], `tidyr` [@tidyr], `stringr` [@stringr], `purrr` [@purrr], `broom` [@broom], `brolgar` [@brolgar], `patchwork` [@patchwork], `kableExtra` [@kableExtra], `MASS` [@mass], `janitor` [@janitor], `DiagrammeR` [@DiagrammeR], `rsvg` [@rsvg], `webshot` [@webshot], `mgcv` [@mgcv], `tsibble` [@tsibble], and `modelr` [@modelr]. The paper are generated using `knitr` [@knitr], `rmarkdown` [@rmarkdown], and `rticles` [@rticles]. 
 
 
 # Supplementary Materials 
