@@ -30,34 +30,6 @@ kable(as.array(summary(wages_demog_hs$mean_hourly_wage)),
       col.names = c("Statistics", "Value")) %>%
   kable_styling()
 
-## ---- feature-plot
-spag <- wages_demog_hs %>%
-  ggplot(aes(x = year,
-             y = mean_hourly_wage,
-             group = id)) +
-  geom_line(alpha = 0.1) +
-  ggtitle("A)") +
-  theme(plot.title = element_text(size = 10)) +
-  theme_bw()
-
-wages_demog_hs_tsibble <- as_tsibble(x = wages_demog_hs,
-                                     key = id,
-                                     index = year,
-                                     regular = FALSE)
-wages_three_feat <- wages_demog_hs_tsibble %>%
-  features(mean_hourly_wage,
-           feat_three_num
-  )
-wages_feat_long <- wages_three_feat %>%
-  pivot_longer(c(min, med, max), names_to = "feature", values_to = "value")
-feature <- ggplot(wages_feat_long) +
-  geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
-  ggtitle("B)") +
-  theme(plot.title = element_text(size = 10))+
-  theme_bw()
-
-spag + feature
-
 ## ---- high-wages
 wages_high <- filter(wages_demog_hs, mean_hourly_wage > 500) %>%
   as_tibble() %>%
@@ -79,6 +51,11 @@ ggplot(wages_high2) +
   theme_bw()
 
 ## ---- sample-plot
+wages_demog_hs_tsibble <- as_tsibble(x = wages_demog_hs,
+                                     key = id,
+                                     index = year,
+                                     regular = FALSE)
+
 set.seed(20210225)
 ggplot(wages_demog_hs_tsibble,
        aes(x = year,
@@ -89,6 +66,30 @@ ggplot(wages_demog_hs_tsibble,
   theme(axis.text.x = element_text(angle = 10, size = 6)) +
   ylab("mean hourly wage") +
   theme_bw()
+
+## ---- feature-plot
+spag <- wages_demog_hs %>%
+  ggplot(aes(x = year,
+             y = mean_hourly_wage,
+             group = id)) +
+  geom_line(alpha = 0.1) +
+  ggtitle("A)") +
+  theme(plot.title = element_text(size = 10)) +
+  theme_bw()
+
+wages_three_feat <- wages_demog_hs_tsibble %>%
+  features(mean_hourly_wage,
+           feat_three_num
+  )
+wages_feat_long <- wages_three_feat %>%
+  pivot_longer(c(min, med, max), names_to = "feature", values_to = "value")
+feature <- ggplot(wages_feat_long) +
+  geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
+  ggtitle("B)") +
+  theme(plot.title = element_text(size = 10))+
+  theme_bw()
+
+spag + feature
 
 ## ---- rlm
 # nest the data by id to build a robust linear model
