@@ -25,19 +25,19 @@ kable(gender_race_table,
   add_header_above(c(" " = 1, "Race" = 3, " " = 1))
 
 ## ---- summarytable
-kable(as.array(summary(wages_demog_hs$mean_hourly_wage)),
+kable(as.array(summary(wages_before$mean_hourly_wage)),
       caption = "Summary Statistics of Wages of High School Data",
       col.names = c("Statistics", "Value")) %>%
   kable_styling()
 
 ## ---- sample-plot
-wages_demog_hs_tsibble <- as_tsibble(x = wages_demog_hs,
+wages_before_tsibble <- as_tsibble(x = wages_before,
                                      key = id,
                                      index = year,
                                      regular = FALSE)
 
 set.seed(20210225)
-ggplot(wages_demog_hs_tsibble,
+ggplot(wages_before_tsibble,
        aes(x = year,
            y = mean_hourly_wage,
            group = id)) +
@@ -52,14 +52,14 @@ ggplot(wages_demog_hs_tsibble,
   theme_bw()
 
 ## ---- feature-plot
-wages_high <- filter(wages_demog_hs, mean_hourly_wage > 500) %>%
+wages_high <- filter(wages_before, mean_hourly_wage > 500) %>%
   as_tibble() %>%
   head(n = 6)
 
-wages_high2 <- wages_demog_hs %>%
+wages_high2 <- wages_before %>%
   filter(id %in% wages_high$id)
 
-spag <- wages_demog_hs %>%
+spag <- wages_before %>%
   ggplot(aes(x = year,
              y = mean_hourly_wage,
              group = id)) +
@@ -73,7 +73,7 @@ spag <- wages_demog_hs %>%
   theme_bw() +
   ylab("Hourly wage ($)")
 
-wages_three_feat <- wages_demog_hs_tsibble %>%
+wages_three_feat <- wages_before_tsibble %>%
   features(mean_hourly_wage,
            feat_three_num
   )
@@ -132,7 +132,7 @@ spag + feature_bp + plot_high +
 
 ## ---- rlm
 # nest the data by id to build a robust linear model
-by_id <- wages_demog_hs %>%
+by_id <- wages_before %>%
   dplyr::select(id, year, mean_hourly_wage) %>%
   group_by(id) %>%
   nest()
@@ -183,17 +183,17 @@ wages_rlm_dat <- id_aug_w %>%
 
 # join back the `wages_rlm_dat` to `wages_demog_hs`
 
-wages_demog_hs <- left_join(wages_demog_hs, wages_rlm_dat, by = c("id", "year"))
+wages_after <- left_join(wages_before, wages_rlm_dat, by = c("id", "year"))
 
 # save it to rds file so it would faster the knitting process
-# saveRDS(wages_demog_hs, here::here("Report/Result/wages_demog_hs_tmp.rds"))
+saveRDS(wages_after, here::here("paper/results/wages_after.rds"))
 
 ## ---- compare-data
 set.seed(31251587)
 
-wages_demog_hs <- readRDS(here::here("paper/results/wages_demog_hs_tmp.rds"))
-sample_id <- sample(unique(wages_demog_hs$id), 20)
-sample <- subset(wages_demog_hs, id %in% sample_id)
+wages_cleaned <- readRDS(here::here("paper/results/wages_after.rds"))
+sample_id <- sample(unique(wages_cleaned$id), 20)
+sample <- subset(wages_cleaned, id %in% sample_id)
 
 wages_compare <- sample %>%
   dplyr::select(id, year, mean_hourly_wage, wages_rlm) %>%
@@ -218,7 +218,7 @@ ggplot(wages_compare) +
         legend.position = "bottom")
 
 ## ---- comppict
-spag2 <- wages_demog_hs %>%
+spag2 <- wages_cleaned %>%
   ggplot(aes(x = year,
              y = wages_rlm,
              group = id)) +
@@ -227,7 +227,7 @@ spag2 <- wages_demog_hs %>%
   theme(plot.title = element_text(size = 10)) +
   theme_bw()
 
-wages_hs2020_rlm <- as_tsibble(x = wages_demog_hs,
+wages_hs2020_rlm <- as_tsibble(x = wages_cleaned,
                                key = id,
                                index = year,
                                regular = FALSE)
@@ -248,38 +248,15 @@ feature2 <- ggplot(wages_feat_long_rlm) +
 spag2 + feature2
 
 
-## ---- save-data
-# select out the old value of mean hourly wage and change it with the wages_rlm value
-wages_demog_hs <- wages_demog_hs %>%
-  dplyr::select(-mean_hourly_wage) %>%
-  rename(mean_hourly_wage = wages_rlm)
-
-# rename and select the wages in tidy
-wages <- wages_demog_hs %>%
-  dplyr::select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc,
-                number_of_jobs, total_hours, is_wm, is_pred) %>%
-  mutate(id = as.factor(id),
-         hgc = as.factor(hgc),
-         year = as.integer(year),
-         age_1979 = as.integer(age_1979),
-         yr_hgc = as.integer(yr_hgc),
-         number_of_jobs = as.integer(number_of_jobs)) %>%
-  rename(wage = mean_hourly_wage,
-         njobs = number_of_jobs,
-         hours = total_hours) %>%
-  as_tsibble(key = id,
-             index = year,
-             regular = FALSE)
-
 ## ---- fixed-feature-plot
-wages_high <- filter(wages_demog_hs, mean_hourly_wage > 500) %>%
+wages_high <- filter(wages_before, mean_hourly_wage > 500) %>%
   as_tibble() %>%
   head(n = 6)
 
-wages_high2 <- wages_demog_hs %>%
+wages_high2 <- wages_before %>%
   filter(id %in% wages_high$id)
 
-spag <- wages_demog_hs %>%
+spag <- wages_before %>%
   ggplot(aes(x = year,
              y = mean_hourly_wage,
              group = id)) +
@@ -293,7 +270,7 @@ spag <- wages_demog_hs %>%
   theme_bw() +
   ylab("Hourly wage ($)")
 
-wages_three_feat <- wages_demog_hs_tsibble %>%
+wages_three_feat <- wages_before_tsibble %>%
   features(mean_hourly_wage,
            feat_three_num
   )
@@ -343,6 +320,30 @@ plot_high <- ggplot(filter(wages_high2, id == 39)) +
 spag + feature_bp + plot_high +
   plot_layout(nrow = 1, guides = "collect") #&
 #theme(legend.position = "bottom")
+
+
+## ---- save-data
+# select out the old value of mean hourly wage and change it with the wages_rlm value
+wages_clean <- wages_cleaned %>%
+  dplyr::select(-mean_hourly_wage) %>%
+  rename(mean_hourly_wage = wages_rlm)
+
+# rename and select the wages in tidy
+wages <- wages_clean %>%
+  dplyr::select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc,
+                number_of_jobs, total_hours, is_wm, is_pred) %>%
+  mutate(id = as.factor(id),
+         hgc = as.factor(hgc),
+         year = as.integer(year),
+         age_1979 = as.integer(age_1979),
+         yr_hgc = as.integer(yr_hgc),
+         number_of_jobs = as.integer(number_of_jobs)) %>%
+  rename(wage = mean_hourly_wage,
+         njobs = number_of_jobs,
+         hours = total_hours) %>%
+  as_tsibble(key = id,
+             index = year,
+             regular = FALSE)
 
 # Create a data set for demographic variables
 demog_nlsy79 <- full_demographics %>%

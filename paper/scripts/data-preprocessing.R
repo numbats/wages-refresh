@@ -229,10 +229,10 @@ wages_demog <- wages_demog %>%
   mutate(years_in_workforce = year - yr_hgc) %>%
   mutate(age_1979 = 1979 - (dob_year + 1900))
 # filter only the id with high school education
-wages_demog_hs <- wages_demog  %>% filter(grepl("GRADE", hgc))
+wages_before <- wages_demog  %>% filter(grepl("GRADE", hgc))
 # calculate the number of observation
-keep_me <- wages_demog_hs %>%
+keep_me <- wages_before %>%
   count(id) %>%
   filter(n > 4)
-wages_demog_hs <- wages_demog_hs %>%
+wages_before <- wages_before %>%
   filter(id %in% keep_me$id)
