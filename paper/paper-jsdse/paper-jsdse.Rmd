@@ -43,6 +43,6 @@ always_allow_html: true
 
 
 
-```{r, child = "../paper.Rmd", eval = FALSE}
+```{r, child = "../paper.Rmd"}
 ```
 
