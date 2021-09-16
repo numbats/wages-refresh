@@ -45,11 +45,11 @@ plot_high <- ggplot(filter(wages_high2, id == 39)) +
                  y = mean_hourly_wage),
              size = 0.5,
              alpha = 0.5) +
-  theme(axis.text.x = element_text(angle = 10, size = 6),
-        plot.title = element_text(size = 10)) +
   ylab("mean hourly wage") +
   theme_bw() +
-  ggtitle("D)")
+  ggtitle("D)") +
+  theme(axis.text.x = element_text(angle = 10, size = 6),
+        plot.title = element_text(size = 10))
 
 ## ---- sample-plot
 wages_demog_hs_tsibble <- as_tsibble(x = wages_demog_hs,
@@ -75,9 +75,10 @@ spag <- wages_demog_hs %>%
              group = id)) +
   geom_line(alpha = 0.1) +
   ggtitle("A)") +
-  theme(plot.title = element_text(size = 10)) +
   theme_bw() +
-  ylab("mean hourly wage")
+  ylab("mean hourly wage") +
+  theme(plot.title = element_text(size = 10),
+        axis.text.x = element_text(angle = 10, size = 6))
 
 wages_three_feat <- wages_demog_hs_tsibble %>%
   features(mean_hourly_wage,
@@ -89,14 +90,16 @@ feature <- ggplot(wages_feat_long) +
   geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
   ggtitle("B)") +
   theme_bw() +
-  theme(plot.title = element_text(size = 10))
+  theme(plot.title = element_text(size = 10),
+        axis.text.x = element_text(angle = 10, size = 6),
+        legend.position = "none")
 
 feature_bp <- ggplot(wages_feat_long, aes(y=value, fill = feature, color = feature)) +
   geom_boxplot() +
   theme_bw() +
   ggtitle("C)") +
-  theme(legend.position = "none",
-        plot.title = element_text(size = 10))
+  theme(plot.title = element_text(size = 10),
+        axis.text.x = element_text(angle = 10, size = 6))
 
 spag + feature + feature_bp + plot_high + plot_layout(nrow = 1, guides = "collect") &
   theme(legend.position = "bottom")

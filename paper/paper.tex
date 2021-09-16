@@ -94,32 +94,21 @@
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 
 % Pandoc citation processing
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-% for Pandoc 2.8 to 2.10.1
-\newenvironment{cslreferences}%
-  {}%
-  {\par}
-% For Pandoc 2.11+
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
-  % set entry spacing
-  \ifnum #2 > 0
-  \setlength{\parskip}{#2\baselineskip}
-  \fi
- }%
- {}
-\usepackage{calc} % for calculating minipage widths
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 
 
 \begin{document}
@@ -140,11 +129,11 @@ NSLY79 is a prominent open data source that has been an important support for ed
 \hypertarget{intro}{%
 \section{Introduction}\label{intro}}
 
-``Open data'' is data that is freely accessible, modifiable, and shareable by anyone for any purpose (Open Knowledge Foundation 2021). This type of data can be useful as example data in statistical textbooks and for research purposes. However, open data is often referred to as what we might call ``wild data'' because it requires substantial cleaning and tidying to tame it into textbook shape. Huebner Marianne, Vach, and Cessie (2016) emphasize that making the data cleaning process accountable and transparent is imperative. Documenting the data cleaning is essential for the integrity of downstream statistical analyses and model building (M. Huebner et al. 2020).
+``Open data'' is data that is freely accessible, modifiable, and shareable by anyone for any purpose (Open Knowledge Foundation 2021). This type of data can be useful as example data in statistical textbooks and for research purposes. However, open data is often referred to as what we might call ``wild data'' because it requires substantial cleaning and tidying to tame it into textbook shape. Huebner, Vach, and Cessie (2016) emphasize that making the data cleaning process accountable and transparent is imperative. Documenting the data cleaning is essential for the integrity of downstream statistical analyses and model building (Huebner et al. 2020).
 
 Data cleaning is part of what is called ``initial data analysis (IDA)'' (Chatfield 1985). The other IDA steps are to explore the data properties and check the assumption of modeling to document and report the process for the later formal analysis. Hence, exploratory data analysis, which is defined by Tukey (1977) as a detective work to get the clue from data, either numerically or graphically, before confirmatory data analysis is performed, encompasses IDA. Dasu and Johnson (2003) say that data cleaning and exploration, without naming it as IDA, is a difficult task and consumes 80\% of the data mining task.
 
-Despite its importance, this IDA stage is often undervalued and neglected (Chatfield 1985). There are few research papers that document the data cleaning (Wickham 2014). Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties (M. Huebner et al. 2020).
+Despite its importance, this IDA stage is often undervalued and neglected (Chatfield 1985). There are few research papers that document the data cleaning (Wickham 2014). Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties (Huebner et al. 2020).
 
 This paper aims to demonstrate the steps of IDA, tidying, cleaning, and documenting the process, for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NSLY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century (Pergamit et al. 2001). In addition, The National Longitudinal Survey is considered a survey with high retention rates and carefully designed, making it suitable for a life course research (Pergamit et al. 2001) and (Cooksey 2017). According to Cooksey (2017), thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets (Pergamit et al. 2001).
 
@@ -235,7 +224,7 @@ The downloaded data set came in a csv (NLSY79.csv) and dat (NLSY79.dat) format. 
   NLSY79.R: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set, \texttt{categories\_qnames} (the observations are stored in categorical/interval values) and \texttt{new\_data\_qnames} (the observations are stored in integer form).
 \end{itemize}
 
-According to Wickham (2014), tidy data sets comply with three rules. Firstly, each variable forms a column. Secondly, each observation forms a row. Lastly, each type of observational unit forms a table. Unfortunately, the \texttt{new\_data\_qnames} did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used \texttt{tidyr} (Wickham 2020b), \texttt{dplyr} (Wickham et al. 2020), and \texttt{stringr} (Wickham 2019) to do this job.
+According to Wickham (2014), tidy data sets comply with three rules. Firstly, each variable forms a column. Secondly, each observation forms a row. Lastly, each type of observational unit forms a table. Unfortunately, the \texttt{new\_data\_qnames} did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used \texttt{tidyr} (H. Wickham 2020b), \texttt{dplyr} (H. Wickham, François, et al. 2020), and \texttt{stringr} (H. Wickham 2019) to do this job.
 
 \begin{table}
 
@@ -269,37 +258,37 @@ Age in 1979 are derived from year and month of birth variables in the raw data. 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#tidy the date of birth data}
-\NormalTok{dob\_tidy }\OtherTok{\textless{}{-}}\NormalTok{ new\_data\_qnames }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(CASEID\_1979,}
-                \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"Q1{-}3\_A\textasciitilde{}"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{dob\_year =} \FunctionTok{case\_when}\NormalTok{(}
-    \CommentTok{\# if the years recorded in both sets match, take 79 data}
-    \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
-    \CommentTok{\# if the year in the 81 set is missing, take the 79 data}
-    \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
-    \CommentTok{\# if the sets don\textquotesingle{}t match for dob year, take the 79 data}
-    \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}}\NormalTok{),}
-    \AttributeTok{dob\_month =} \FunctionTok{case\_when}\NormalTok{(}
-      \CommentTok{\# if months recorded in both sets match, take 79 data}
-      \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
-      \CommentTok{\# if month in 81 set is missing, take the 79 data}
-      \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
-      \CommentTok{\# if sets don\textquotesingle{}t match for dob month, take the 79 data}
-      \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}}\NormalTok{),}
-    \CommentTok{\# flag if there is a conflict between dob recorded in 79 and 81}
-    \AttributeTok{dob\_conflict =} \FunctionTok{case\_when}\NormalTok{(}
-\NormalTok{      (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{)}
-      \SpecialCharTok{\textasciitilde{}} \ConstantTok{TRUE}\NormalTok{,}
-\NormalTok{      (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{)}
-      \SpecialCharTok{\textasciitilde{}} \ConstantTok{TRUE}\NormalTok{,}
-\NormalTok{      (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\&}
-\NormalTok{        (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \ConstantTok{FALSE}\NormalTok{,}
-      \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{|} \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \ConstantTok{FALSE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(CASEID\_1979,}
-\NormalTok{                dob\_month,}
-\NormalTok{                dob\_year,}
-\NormalTok{                dob\_conflict)}
+\CommentTok{#tidy the date of birth data}
+\NormalTok{dob_tidy <-}\StringTok{ }\NormalTok{new_data_qnames }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+                \KeywordTok{starts_with}\NormalTok{(}\StringTok{"Q1-3_A~"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dob_year =} \KeywordTok{case_when}\NormalTok{(}
+    \CommentTok{# if the years recorded in both sets match, take 79 data}
+    \StringTok{`}\DataTypeTok{Q1-3_A~Y_1979}\StringTok{`} \OperatorTok{==}\StringTok{ `}\DataTypeTok{Q1-3_A~Y_1981}\StringTok{`} \OperatorTok{~}\StringTok{ `}\DataTypeTok{Q1-3_A~Y_1979}\StringTok{`}\NormalTok{,}
+    \CommentTok{# if the year in the 81 set is missing, take the 79 data}
+    \KeywordTok{is.na}\NormalTok{(}\StringTok{`}\DataTypeTok{Q1-3_A~Y_1981}\StringTok{`}\NormalTok{) }\OperatorTok{~}\StringTok{ `}\DataTypeTok{Q1-3_A~Y_1979}\StringTok{`}\NormalTok{,}
+    \CommentTok{# if the sets don't match for dob year, take the 79 data}
+    \StringTok{`}\DataTypeTok{Q1-3_A~Y_1979}\StringTok{`} \OperatorTok{!=}\StringTok{ `}\DataTypeTok{Q1-3_A~Y_1981}\StringTok{`} \OperatorTok{~}\StringTok{ `}\DataTypeTok{Q1-3_A~Y_1979}\StringTok{`}\NormalTok{),}
+    \DataTypeTok{dob_month =} \KeywordTok{case_when}\NormalTok{(}
+      \CommentTok{# if months recorded in both sets match, take 79 data}
+      \StringTok{`}\DataTypeTok{Q1-3_A~M_1979}\StringTok{`} \OperatorTok{==}\StringTok{ `}\DataTypeTok{Q1-3_A~M_1981}\StringTok{`} \OperatorTok{~}\StringTok{ `}\DataTypeTok{Q1-3_A~M_1979}\StringTok{`}\NormalTok{,}
+      \CommentTok{# if month in 81 set is missing, take the 79 data}
+      \KeywordTok{is.na}\NormalTok{(}\StringTok{`}\DataTypeTok{Q1-3_A~M_1981}\StringTok{`}\NormalTok{) }\OperatorTok{~}\StringTok{ `}\DataTypeTok{Q1-3_A~M_1979}\StringTok{`}\NormalTok{,}
+      \CommentTok{# if sets don't match for dob month, take the 79 data}
+      \StringTok{`}\DataTypeTok{Q1-3_A~M_1979}\StringTok{`} \OperatorTok{!=}\StringTok{ `}\DataTypeTok{Q1-3_A~M_1981}\StringTok{`} \OperatorTok{~}\StringTok{ `}\DataTypeTok{Q1-3_A~M_1979}\StringTok{`}\NormalTok{),}
+    \CommentTok{# flag if there is a conflict between dob recorded in 79 and 81}
+    \DataTypeTok{dob_conflict =} \KeywordTok{case_when}\NormalTok{(}
+\NormalTok{      (}\StringTok{`}\DataTypeTok{Q1-3_A~M_1979}\StringTok{`} \OperatorTok{!=}\StringTok{ `}\DataTypeTok{Q1-3_A~M_1981}\StringTok{`}\NormalTok{) }\OperatorTok{&}\StringTok{ }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(}\StringTok{`}\DataTypeTok{Q1-3_A~M_1981}\StringTok{`}\NormalTok{)}
+      \OperatorTok{~}\StringTok{ }\OtherTok{TRUE}\NormalTok{,}
+\NormalTok{      (}\StringTok{`}\DataTypeTok{Q1-3_A~Y_1979}\StringTok{`} \OperatorTok{!=}\StringTok{ `}\DataTypeTok{Q1-3_A~Y_1981}\StringTok{`}\NormalTok{) }\OperatorTok{&}\StringTok{ }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(}\StringTok{`}\DataTypeTok{Q1-3_A~Y_1981}\StringTok{`}\NormalTok{)}
+      \OperatorTok{~}\StringTok{ }\OtherTok{TRUE}\NormalTok{,}
+\NormalTok{      (}\StringTok{`}\DataTypeTok{Q1-3_A~Y_1979}\StringTok{`} \OperatorTok{==}\StringTok{ `}\DataTypeTok{Q1-3_A~Y_1981}\StringTok{`}\NormalTok{) }\OperatorTok{&}
+\StringTok{        }\NormalTok{(}\StringTok{`}\DataTypeTok{Q1-3_A~M_1979}\StringTok{`} \OperatorTok{==}\StringTok{ `}\DataTypeTok{Q1-3_A~M_1981}\StringTok{`}\NormalTok{) }\OperatorTok{~}\StringTok{ }\OtherTok{FALSE}\NormalTok{,}
+      \KeywordTok{is.na}\NormalTok{(}\StringTok{`}\DataTypeTok{Q1-3_A~M_1981}\StringTok{`}\NormalTok{) }\OperatorTok{|}\StringTok{ }\KeywordTok{is.na}\NormalTok{(}\StringTok{`}\DataTypeTok{Q1-3_A~Y_1981}\StringTok{`}\NormalTok{) }\OperatorTok{~}\StringTok{ }\OtherTok{FALSE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+\NormalTok{                dob_month,}
+\NormalTok{                dob_year,}
+\NormalTok{                dob_conflict)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -320,37 +309,37 @@ The employment data comprises of three variables, i.e., \texttt{total\ hours\ of
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# make a list for years where we used the "QES{-}52A"}
-\NormalTok{year\_A }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1979}\SpecialCharTok{:}\DecValTok{1987}\NormalTok{, }\DecValTok{1993}\NormalTok{)}
-\CommentTok{\#function to get the hour of work}
-\NormalTok{get\_hour }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(year)\{}
-  \ControlFlowTok{if}\NormalTok{(year }\SpecialCharTok{\%in\%}\NormalTok{ year\_A)\{}
-\NormalTok{    temp }\OtherTok{\textless{}{-}}\NormalTok{ new\_data\_qnames }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{      dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(CASEID\_1979,}
-                    \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"QES{-}52A"}\NormalTok{) }\SpecialCharTok{\&}
-                      \FunctionTok{ends\_with}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(year)))\}}
+\CommentTok{# make a list for years where we used the "QES-52A"}
+\NormalTok{year_A <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1979}\OperatorTok{:}\DecValTok{1987}\NormalTok{, }\DecValTok{1993}\NormalTok{)}
+\CommentTok{#function to get the hour of work}
+\NormalTok{get_hour <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(year)\{}
+  \ControlFlowTok{if}\NormalTok{(year }\OperatorTok{%in%}\StringTok{ }\NormalTok{year_A)\{}
+\NormalTok{    temp <-}\StringTok{ }\NormalTok{new_data_qnames }\OperatorTok{%>%}
+\StringTok{      }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+                    \KeywordTok{starts_with}\NormalTok{(}\StringTok{"QES-52A"}\NormalTok{) }\OperatorTok{&}
+\StringTok{                      }\KeywordTok{ends_with}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(year)))\}}
   \ControlFlowTok{else}\NormalTok{\{}
-\NormalTok{    temp }\OtherTok{\textless{}{-}}\NormalTok{ new\_data\_qnames }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{      dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(CASEID\_1979,}
-                    \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"QES{-}52D"}\NormalTok{) }\SpecialCharTok{\&}
-                      \FunctionTok{ends\_with}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(year)))\}}
-\NormalTok{  temp }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{!}\NormalTok{CASEID\_1979,}
-                 \AttributeTok{names\_to =} \StringTok{"job"}\NormalTok{,}
-                 \AttributeTok{values\_to =} \StringTok{"hours\_work"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{separate}\NormalTok{(}\StringTok{"job"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"job"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{sep =} \SpecialCharTok{{-}}\DecValTok{4}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{job =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"job\_"}\NormalTok{, }\FunctionTok{substr}\NormalTok{(job, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{rename}\NormalTok{(}\AttributeTok{id =}\NormalTok{ CASEID\_1979)}
+\NormalTok{    temp <-}\StringTok{ }\NormalTok{new_data_qnames }\OperatorTok{%>%}
+\StringTok{      }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+                    \KeywordTok{starts_with}\NormalTok{(}\StringTok{"QES-52D"}\NormalTok{) }\OperatorTok{&}
+\StringTok{                      }\KeywordTok{ends_with}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(year)))\}}
+\NormalTok{  temp }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{pivot_longer}\NormalTok{(}\OperatorTok{!}\NormalTok{CASEID_}\DecValTok{1979}\NormalTok{,}
+                 \DataTypeTok{names_to =} \StringTok{"job"}\NormalTok{,}
+                 \DataTypeTok{values_to =} \StringTok{"hours_work"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{separate}\NormalTok{(}\StringTok{"job"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"job"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\DataTypeTok{sep =} \DecValTok{-4}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{job =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"job_"}\NormalTok{, }\KeywordTok{substr}\NormalTok{(job, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{))) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{id =}\NormalTok{ CASEID_}\DecValTok{1979}\NormalTok{)}
 \NormalTok{\}}
-\CommentTok{\# list to save the iteration result}
-\NormalTok{hours }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\CommentTok{\# getting the hours of work of all observations}
-\ControlFlowTok{for}\NormalTok{(ayear }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(}\DecValTok{1979}\SpecialCharTok{:}\DecValTok{1994}\NormalTok{, }\DecValTok{1996}\NormalTok{, }\DecValTok{1998}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{2002}\NormalTok{, }\DecValTok{2004}\NormalTok{, }\DecValTok{2006}\NormalTok{, }\DecValTok{2008}\NormalTok{, }\DecValTok{2010}\NormalTok{,}
+\CommentTok{# list to save the iteration result}
+\NormalTok{hours <-}\StringTok{ }\KeywordTok{list}\NormalTok{()}
+\CommentTok{# getting the hours of work of all observations}
+\ControlFlowTok{for}\NormalTok{(ayear }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1979}\OperatorTok{:}\DecValTok{1994}\NormalTok{, }\DecValTok{1996}\NormalTok{, }\DecValTok{1998}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{2002}\NormalTok{, }\DecValTok{2004}\NormalTok{, }\DecValTok{2006}\NormalTok{, }\DecValTok{2008}\NormalTok{, }\DecValTok{2010}\NormalTok{,}
                \DecValTok{2012}\NormalTok{, }\DecValTok{2014}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{2018}\NormalTok{)) \{}
-\NormalTok{  hours[[ayear]] }\OtherTok{\textless{}{-}} \FunctionTok{get\_hour}\NormalTok{(ayear)}
+\NormalTok{  hours[[ayear]] <-}\StringTok{ }\KeywordTok{get_hour}\NormalTok{(ayear)}
 \NormalTok{\}}
-\CommentTok{\# unlist the hours of work}
-\NormalTok{hours\_all }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(}\SpecialCharTok{!!!}\NormalTok{hours)}
+\CommentTok{# unlist the hours of work}
+\NormalTok{hours_all <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(}\OperatorTok{!!!}\NormalTok{hours)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -358,30 +347,30 @@ The same way was also deployed to tidy the rate of wage by year and by ID. The d
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{get\_rate }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(year) \{}
-\NormalTok{  new\_data\_qnames }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(CASEID\_1979,}
-                  \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"HRP"}\NormalTok{) }\SpecialCharTok{\&}
-                    \FunctionTok{ends\_with}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(year))) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{!}\NormalTok{CASEID\_1979, }\AttributeTok{names\_to =} \StringTok{"job"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"rate\_per\_hour"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{separate}\NormalTok{(}\StringTok{"job"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"job"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{sep =} \SpecialCharTok{{-}}\DecValTok{4}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{job =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"job\_0"}\NormalTok{, }\FunctionTok{substr}\NormalTok{(job, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{rename}\NormalTok{(}\AttributeTok{id =}\NormalTok{ CASEID\_1979)}
+\NormalTok{get_rate <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(year) \{}
+\NormalTok{  new_data_qnames }\OperatorTok{%>%}
+\StringTok{    }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(CASEID_}\DecValTok{1979}\NormalTok{,}
+                  \KeywordTok{starts_with}\NormalTok{(}\StringTok{"HRP"}\NormalTok{) }\OperatorTok{&}
+\StringTok{                    }\KeywordTok{ends_with}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(year))) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{pivot_longer}\NormalTok{(}\OperatorTok{!}\NormalTok{CASEID_}\DecValTok{1979}\NormalTok{, }\DataTypeTok{names_to =} \StringTok{"job"}\NormalTok{, }\DataTypeTok{values_to =} \StringTok{"rate_per_hour"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{separate}\NormalTok{(}\StringTok{"job"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"job"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\DataTypeTok{sep =} \DecValTok{-4}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{job =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"job_0"}\NormalTok{, }\KeywordTok{substr}\NormalTok{(job, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{))) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{id =}\NormalTok{ CASEID_}\DecValTok{1979}\NormalTok{)}
 \NormalTok{\}}
-\NormalTok{rates }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\ControlFlowTok{for}\NormalTok{(ayear }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(}\DecValTok{1979}\SpecialCharTok{:}\DecValTok{1994}\NormalTok{, }\DecValTok{1996}\NormalTok{, }\DecValTok{1998}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{2002}\NormalTok{, }\DecValTok{2004}\NormalTok{, }\DecValTok{2006}\NormalTok{, }\DecValTok{2008}\NormalTok{, }\DecValTok{2010}\NormalTok{,}
+\NormalTok{rates <-}\StringTok{ }\KeywordTok{list}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{(ayear }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1979}\OperatorTok{:}\DecValTok{1994}\NormalTok{, }\DecValTok{1996}\NormalTok{, }\DecValTok{1998}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{2002}\NormalTok{, }\DecValTok{2004}\NormalTok{, }\DecValTok{2006}\NormalTok{, }\DecValTok{2008}\NormalTok{, }\DecValTok{2010}\NormalTok{,}
                \DecValTok{2012}\NormalTok{, }\DecValTok{2014}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{2018}\NormalTok{)) \{}
-\NormalTok{  rates[[ayear]] }\OtherTok{\textless{}{-}} \FunctionTok{get\_rate}\NormalTok{(ayear)}
+\NormalTok{  rates[[ayear]] <-}\StringTok{ }\KeywordTok{get_rate}\NormalTok{(ayear)}
 \NormalTok{\}}
-\NormalTok{rates\_all }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(}\SpecialCharTok{!!!}\NormalTok{rates)}
-\CommentTok{\# join hours and rates variable}
-\NormalTok{hours\_wages }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(rates\_all,}
-\NormalTok{                         hours\_all,}
-                         \AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"id"}\NormalTok{, }\StringTok{"year"}\NormalTok{, }\StringTok{"job"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
-  \CommentTok{\# set the 0 value in rate\_per\_hour as NA}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{rate\_per\_hour =} \FunctionTok{ifelse}\NormalTok{(rate\_per\_hour }\SpecialCharTok{==} \DecValTok{0}\NormalTok{, }\ConstantTok{NA}\NormalTok{,}
-\NormalTok{                                rate\_per\_hour),}
-         \AttributeTok{hours\_work =} \FunctionTok{ifelse}\NormalTok{(hours\_work }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{|}\NormalTok{ hours\_work }\SpecialCharTok{\textgreater{}} \DecValTok{84}\NormalTok{, }\ConstantTok{NA}\NormalTok{, hours\_work))}
+\NormalTok{rates_all <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(}\OperatorTok{!!!}\NormalTok{rates)}
+\CommentTok{# join hours and rates variable}
+\NormalTok{hours_wages <-}\StringTok{ }\KeywordTok{left_join}\NormalTok{(rates_all,}
+\NormalTok{                         hours_all,}
+                         \DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"id"}\NormalTok{, }\StringTok{"year"}\NormalTok{, }\StringTok{"job"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# set the 0 value in rate_per_hour as NA}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{rate_per_hour =} \KeywordTok{ifelse}\NormalTok{(rate_per_hour }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{, }\OtherTok{NA}\NormalTok{,}
+\NormalTok{                                rate_per_hour),}
+         \DataTypeTok{hours_work =} \KeywordTok{ifelse}\NormalTok{(hours_work }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{hours_work }\OperatorTok{>}\StringTok{ }\DecValTok{84}\NormalTok{, }\OtherTok{NA}\NormalTok{, hours_work))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -410,7 +399,7 @@ The employment and demographic variables are then joined. We also filtered the d
 \hypertarget{initial-data-analysis}{%
 \subsection{Initial Data Analysis}\label{initial-data-analysis}}
 
-According to Huebner Marianne, Vach, and Cessie (2016), Initial Data Analysis (IDA) is the step of inspecting and screening the data after being collected to ensure that the data is clean, valid, and ready to be deployed in the later formal statistical analysis. Moreover, Chatfield (1985) argues that the two main objectives of IDA are data description, which is to assess the structure and the quality of the data, and model formulation without any formal statistical inference.
+According to Huebner, Vach, and Cessie (2016), Initial Data Analysis (IDA) is the step of inspecting and screening the data after being collected to ensure that the data is clean, valid, and ready to be deployed in the later formal statistical analysis. Moreover, Chatfield (1985) argues that the two main objectives of IDA are data description, which is to assess the structure and the quality of the data, and model formulation without any formal statistical inference.
 
 In this paper, we conduct an IDA or a preliminary data analysis to assess the consistency of the data with the cohort information that the NLSY provides. In addition, we also aim to find the anomaly in the wages values using this approach. We mainly use graphical summaries to do the IDA using \texttt{ggplot2}(Wickham 2016) and \texttt{brolgar} (Tierney, Cook, and Prvan 2020).
 
@@ -462,30 +451,7 @@ Total & 2002 (15.78\%) & 3174 (25.02\%) & 7510 (59.20\%) & 12686 (100.00\%)\\
 \end{tabular}
 \end{table}
 
-The next step is that explore the mean hourly wage data. In this case, we only explore the wages data of up to \(12^{th}\) grade. Table \ref{tab:summarytable} shows that the median of the overall wage of the cohort is only 7.2, while the mean is 11.87. It indicates that the data might contains a lot of extreme values.
-
-\begin{table}
-
-\caption{\label{tab:summarytable}Summary Statistics of Wages of High School Data}
-\centering
-\begin{tabular}[t]{l|r}
-\hline
-Statistics & Value\\
-\hline
-Min. & 0.01000\\
-\hline
-1st Qu. & 4.50000\\
-\hline
-Median & 7.20000\\
-\hline
-Mean & 11.86593\\
-\hline
-3rd Qu. & 11.74000\\
-\hline
-Max. & 33400.00000\\
-\hline
-\end{tabular}
-\end{table}
+The next step is that explore the mean hourly wage data. In this case, we only explore the wages data of up to \(12^{th}\) grade. Here, we use visualisation techniques to do IDA.
 
 \begin{figure}
 
@@ -496,29 +462,19 @@ Max. & 33400.00000\\
 \caption{Getting a glimpse of the data: random sample of 36 individuals, divided into  twelve subplots. Wages are shown against year. There is a lot of variability in wages.}\label{fig:sample-plot}
 \end{figure}
 
-However, we can not be sure only by observing the summary statistics. Hence, we use visualisation techniques to investigate this matter. Figure \ref{fig:feature-plot} conveys a problem in the mean hourly wage values. Figure \ref{fig:feature-plot} A shows that some observations have an exceptionally high figure of wages, even more than US\$10,000 per hour. In Figure \ref{fig:feature-plot} B, we barely see any difference in the minimum, median, and maximum value of the wages since the distribution is heavily skewed to the right.
+We take 36 samples randomly from the data and plot them, as shown in Figure \ref{fig:sample-plot}. It implies that these respondents have a lot of variability in wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples have a different pattern of mean hourly wages. Some have had flat wages for years but had a sudden increase in one particular year, then it gone down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9.
+
+Further, we investigate the summary statistics of wages.
+Figure \ref{fig:feature-plot} conveys a problem in the mean hourly wage values. Figure \ref{fig:feature-plot} A shows that some observations have an exceptionally high figure of wages, even more than US\$10,000 per hour. In Figure \ref{fig:feature-plot} B, we barely see any difference in the minimum, median, and maximum value of the wages since the distribution is heavily skewed to the right. The problem is more clearly conveyed in Figure \ref{fig:feature-plot} C where there is no extreme values in the minimum and median values of wages but the maximum values show some anomalies. In Figure \ref{fig:feature-plot} D, we show the example of anomaly in one observation. This respondent only experienced one point of extremely high wages. Thus, we suspect that these high values are erroneous resulted from a data entry error.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{figures/feature-plot-1} 
+{\centering \includegraphics[width=0.9\linewidth]{figures/feature-plot-1} 
 
 }
 
-\caption{Several plots showing anomalies observed the input data. XX Add a couple more plots that reveal the initial problems in the data. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value. We can see that some IDs had an extremely high of wages and it made the distribution of the three features is extremely skewed.}\label{fig:feature-plot}
+\caption{Several plots showing anomalies observed the input data. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar. We can see some extremely high wages; Plot B shows the distribution of their minimum, median, and maximum value. We can also see that some IDs had an extremely high of wages and it made the distribution of the three features is extremely skewed; Plot C shows the extreme values more clearly; Plot D shows an ID with a suspected erronous wages.}\label{fig:feature-plot}
 \end{figure}
-
-In Figure \ref{fig:high-wages}, we plot some respondents with a high value of mean hourly wages. We filter all of the IDs who earned more than US\$ 500 per hour on average. We find that these respondents only experienced one point of extremely high wages. Thus, we suspect that these high values are erroneous resulted from a data entry error.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.7\linewidth]{figures/high-wages-1} 
-
-}
-
-\caption{6 out of 45 IDs with extremely high mean hourly wage. Most of the IDs only have one point of high wage.}\label{fig:high-wages}
-\end{figure}
-
-Further, we take 36 samples randomly from the data and plot them, as shown in Figure \ref{fig:sample-plot}. It implies that not only that some observations earn extremely high figures of wages, but some also have reasonably fluctuated wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples have a different pattern of mean hourly wages. Some have had flat wages for years but had a sudden increase in one particular year, then it gone down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9.
 
 The anomalies are also found in the total hours of work, where some observations work for 420 hours a week in total. According to Pergamit et al. (2001), one of the flaws of the NLSY79 employment data is that the NLSY79 collects the information of the working hours since the last interview. Thus, it might be challenging for the respondents to track the within-job hours' changes between survey years, especially for the respondents with fluctuated working hours or seasonal jobs. It even has been more challenging since 1994, where the respondents had to recall two years periods. This shortcoming might also contribute to the fluctuation of one's wages data.
 
@@ -527,13 +483,13 @@ The anomalies are also found in the total hours of work, where some observations
 
 As part of the IDA, which is the model formulation, we build a robust linear regression model to treat the extreme values in the data. Robust linear regression yields an estimation robust to the influence of noise or contamination (Koller 2016). It also aims to detect the contamination by weighting each observation based on how ``well-behaved'' they are, known as robustness weight. Observations with lower robustness weight are suggested as an outlier by this method (Koller 2016).
 
-Since we work with longitudinal data, we build the model for each ID instead of the overall data. The robust mixed model could be the best model to be employed in this case. However, this method is too computationally and memory expensive, especially for a large data set, like the NLSY79 data. Thus, the model for each ID is built utilizing the \texttt{nest} and \texttt{map} function from \texttt{tidyr} (Wickham 2020b) and \texttt{purrr} (Henry and Wickham 2020), respectively.
+Since we work with longitudinal data, we build the model for each ID instead of the overall data. The robust mixed model could be the best model to be employed in this case. However, this method is too computationally and memory expensive, especially for a large data set, like the NLSY79 data. Thus, the model for each ID is built utilizing the \texttt{nest} and \texttt{map} function from \texttt{tidyr} (H. Wickham 2020b) and \texttt{purrr} (Henry and Wickham 2020), respectively.
 
 We build the model using the \texttt{rlm} function from \texttt{MASS} package (Venables and Ripley 2002). We set the \texttt{mean\_hourly\_wage} and \texttt{year} as the dependent and predictor, respectively. Furthermore, we use M-Estimation with Huber weighting, where the observation with a slight residual gets a weight of 1, while the larger the residual, the smaller the weight (less than 1) (UCLA: Statistical Consulting Group 2021). However, the challenging part of detecting the anomaly using the robustness weight is determining the weight threshold in which the observations are considered outliers. Moreover, it should be noted that not all the outliers are due to an error. Instead, it might be that one had reasonably increasing or decreasing wages in a particular period.
 
-To minimize the risk of mistakenly identifying an outlier as an ``erroneous outlier,'' we simulate some thresholds and study how they affect the data. We find that 0.12 is the most reasonable value to be the threshold to minimize that drawback's risk because it still captures the sensible spikes in the data. In other words, we keep maintaining the natural variability of the wages while minimizing anomalies because of the error in the data recording. After deciding the threshold, we impute the observations whose weights are less than 0.12 with the models' predicted value. We then flag those observations in a new variable called \texttt{is\_pred}.
+To minimize the risk of mistakenly identifying an outlier as an ``erroneous outlier'', we simulate some thresholds and study how they affect the data. We find that 0.12 is the most reasonable value to be the threshold to minimize that drawback's risk because it still captures the sensible spikes in the data. In other words, we keep maintaining the natural variability of the wages while minimizing anomalies because of the error in the data recording. After deciding the threshold, we impute the observations whose weights are less than 0.12 with the models' predicted value. We then flag those observations in a new variable called \texttt{is\_pred}.
 
-Figure \ref{fig:compare-plot} shows the mean hourly wage before and after the extreme values are replaced. It implies that the fluctuation can still be observed in the data after the treatment. However, the large spikes, which are considered ``erroneous outliers,'' are already eliminated from the data. Hence, the model produces a data set with a more reasonable degree of fluctuation.
+Figure \ref{fig:compare-plot} shows the mean hourly wage before and after the extreme values are replaced. It implies that the fluctuation can still be observed in the data after the treatment. However, the large spikes, which are considered ``erroneous outliers'', are already eliminated from the data. Hence, the model produces a data set with a more reasonable degree of fluctuation.
 
 \begin{figure}
 
@@ -572,7 +528,7 @@ Finally, we save the imputed data and set the appropriate data type for the vari
 This section will provide an example of how data sets could be used to do exploratory data analysis as in textbook data. We are interested in examining how the respondents experience changes in their wages based on their demographic characteristics. Thus, we use \texttt{wages} data instead of the refreshed \texttt{wages\_hs\_do} as it only has male respondents.
 
 The statistics we use in measuring the change in wages experience is the slope of the wages of each respondent.
-Using \texttt{key\_slope} function in \texttt{brolgar} (Tierney, Cook, and Prvan 2020), we perform linear regression with the log of mean hourly wage as the response variable and year as the predictor. Since we do modeling, it is important to look at the number of observations from each respondent. Figure \ref{fig:slope-nobs-plot} shows that the number of observations for each individual varies. Moreover, each number of observations seems to have an impact on the slope. Extreme values in slope are observed in a few observations, while the range of slope is more stable with more observations. Accordingly, we trim the data to only include \(5^{th} - 95^{th}\) percentile.
+Using \texttt{key\_slope} function in \texttt{brolgar} (Tierney, Cook, and Prvan 2020), we perform linear regression with the log of mean hourly wage as the response variable and year as the predictor. Since we do modeling, it is important to look at the number of observations from each respondent. Figure \ref{fig:slope-nobs-plot} shows that the number of observations for each individual varies. Moreover, each number of observations seems to have an impact on the slope. Extreme values in slope are observed in a few observations, while the range of slope is more stable with more observations. Accordingly, we trim the data to only include respondents with at least 10 observations.
 
 \begin{figure}
 
@@ -594,7 +550,7 @@ We then create some visualizations of five respondents with the highest slope an
 \caption{Wages slope over the years based on gender. Most of respondents who experienced high wages slope are males. In contrast, respondents who experienced lower wages slope are mostly females.}\label{fig:slope-gender}
 \end{figure}
 
-According to OECD (n.d.), the gender pay gap is the difference between the median wage of males and females relative to the median wage of males. We find that, as shown in \ref{fig:gap-gender}, over the years, females tend to earn fewer than males. For example, in 2018, females earned about 78 cents for every \$1 earned by males. The widest gender gaps were observed in the 1990s.
+According to OECD (n.d.), the gender pay gap is the difference between the median wage of males and females relative to the median wage of males. We find that, as shown in \ref{fig:gap-gender}, over the years, females tend to earn fewer than males. For example, in 2018, females earned about 78 cents for every \$1 earned by males. The widest gender gaps were observed in the 1990s. However, as more males participated in the survey than females from year to year, these gaps could be affected by imbalance number of observations.
 
 \begin{figure}
 
@@ -616,6 +572,8 @@ According to their highest education completed, both top-5 and bottom-5 slopes a
 \caption{Wages slope over the years based on highest education completed. People who are in top-5 and bottom-5 wages are dominated by people who completed high school.}\label{fig:slope-educ}
 \end{figure}
 
+Further, we perform a linear regression to see the effect of education on wages experience.
+
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
 
@@ -632,7 +590,7 @@ Finally, this paper implies that data providers should design a database that is
 
 We would like to thank Aarathy Babu for the insight and discussion during the writing of this paper.
 
-The entire analysis is conducted using \texttt{R} (R Core Team 2020) in \texttt{rstudio} using these packages: \texttt{tidyverse} (Wickham et al. 2019), \texttt{ggplot2} (Wickham 2016), \texttt{dplyr} (Wickham et al. 2020), \texttt{readr} (Wickham and Hester 2020), \texttt{tidyr} (Wickham 2020b), \texttt{stringr} (Wickham 2019), \texttt{purrr} (Henry and Wickham 2020), \texttt{broom} (Robinson, Hayes, and Couch 2021), \texttt{brolgar} (Tierney, Cook, and Prvan 2020), \texttt{patchwork} (Pedersen 2020), \texttt{kableExtra} (Zhu 2019), \texttt{MASS} (Venables and Ripley 2002), \texttt{janitor} (Firke 2020), \texttt{DiagrammeR} (Iannone 2020), \texttt{rsvg} (Ooms 2020), \texttt{webshot} (Chang 2019), \texttt{mgcv} (Wood 2003), \texttt{tsibble} (Wang, Cook, and Hyndman 2020), and \texttt{modelr} (Wickham 2020a). The paper are generated using \texttt{knitr} (Xie 2014), \texttt{rmarkdown} (Xie, Dervieux, and Riederer 2020), and \texttt{rticles} (Allaire et al. 2021).
+The entire analysis is conducted using \texttt{R} (R Core Team 2020) in \texttt{rstudio} using these packages: \texttt{tidyverse} (H. Wickham, Averick, et al. 2019), \texttt{ggplot2} (Wickham 2016), \texttt{dplyr} (H. Wickham, François, et al. 2020), \texttt{readr} (H. Wickham and Hester 2020), \texttt{tidyr} (H. Wickham 2020b), \texttt{stringr} (H. Wickham 2019), \texttt{purrr} (Henry and Wickham 2020), \texttt{broom} (Robinson, Hayes, and Couch 2021), \texttt{brolgar} (Tierney, Cook, and Prvan 2020), \texttt{patchwork} (Pedersen 2020), \texttt{kableExtra} (Zhu 2019), \texttt{MASS} (Venables and Ripley 2002), \texttt{janitor} (Firke 2020), \texttt{DiagrammeR} (Iannone 2020), \texttt{rsvg} (Ooms 2020), \texttt{webshot} (Chang 2019), \texttt{mgcv} (Wood 2003), \texttt{tsibble} (Wang, Cook, and Hyndman 2020), and \texttt{modelr} (H. Wickham 2020a). The paper are generated using \texttt{knitr} (Xie 2014), \texttt{rmarkdown} (Xie, Dervieux, and Riederer 2020), and \texttt{rticles} (Allaire et al. 2021).
 
 \hypertarget{supplementary-materials}{%
 \section{Supplementary Materials}\label{supplementary-materials}}
@@ -651,21 +609,20 @@ The entire analysis is conducted using \texttt{R} (R Core Team 2020) in \texttt{
 \addcontentsline{toc}{section}{References}
 
 \hypertarget{refs}{}
-\begin{CSLReferences}{1}{0}
 \leavevmode\hypertarget{ref-rticles}{}%
-Allaire, JJ, Yihui Xie, R Foundation, Hadley Wickham, Journal of Statistical Software, Ramnath Vaidyanathan, Association for Computing Machinery, et al. 2021. \emph{Rticles: Article Formats for r Markdown}. \url{https://CRAN.R-project.org/package=rticles}.
+Allaire, JJ, Yihui Xie, R Foundation, Hadley Wickham, Journal of Statistical Software, Ramnath Vaidyanathan, Association for Computing Machinery, et al. 2021. \emph{Rticles: Article Formats for R Markdown}. \url{https://CRAN.R-project.org/package=rticles}.
 
 \leavevmode\hypertarget{ref-webshot}{}%
 Chang, Winston. 2019. \emph{Webshot: Take Screenshots of Web Pages}. \url{https://CRAN.R-project.org/package=webshot}.
 
 \leavevmode\hypertarget{ref-shiny}{}%
-Chang, Winston, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. 2020. \emph{Shiny: Web Application Framework for r}. \url{https://CRAN.R-project.org/package=shiny}.
+Chang, Winston, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. 2020. \emph{Shiny: Web Application Framework for R}. \url{https://CRAN.R-project.org/package=shiny}.
 
 \leavevmode\hypertarget{ref-Chatfield1985TIEo}{}%
-Chatfield, C. 1985. {``The Initial Examination of Data.''} \emph{Journal of the Royal Statistical Society. Series A. General} 148 (3): 214--53.
+Chatfield, C. 1985. ``The Initial Examination of Data.'' \emph{Journal of the Royal Statistical Society. Series A. General} 148 (3): 214--53.
 
 \leavevmode\hypertarget{ref-eliznlsy}{}%
-Cooksey, Elizabeth C. 2017. {``Using the National Longitudinal Surveys of Youth (NLSY) to Conduct Life Course Analyses.''} In \emph{Handbook of Life Course Health Development}, edited by Richard M. Lerner Neal Halfon Christoper B. Forrest, 561--77. Cham: Springer. https://doi.org/\url{https://doi.org/10.1007/978-3-319-47143-3_23}.
+Cooksey, Elizabeth C. 2017. ``Using the National Longitudinal Surveys of Youth (Nlsy) to Conduct Life Course Analyses.'' In \emph{Handbook of Life Course Health Development}, edited by Richard M. Lerner Neal Halfon Christoper B. Forrest, 561--77. Cham: Springer. \url{https://doi.org/https://doi.org/10.1007/978-3-319-47143-3_23}.
 
 \leavevmode\hypertarget{ref-DasuTamraparni2003Edma}{}%
 Dasu, Tamraparni, and Theodore Johnson. 2003. \emph{Exploratory Data Mining and Data Cleaning}. Wiley Series in Probability and Statistics. Hoboken: WILEY.
@@ -677,31 +634,31 @@ Firke, Sam. 2020. \emph{Janitor: Simple Tools for Examining and Cleaning Dirty D
 Henry, Lionel, and Hadley Wickham. 2020. \emph{Purrr: Functional Programming Tools}. \url{https://CRAN.R-project.org/package=purrr}.
 
 \leavevmode\hypertarget{ref-HuebnerMariannePhD2016Asat}{}%
-Huebner, Marianne, Werner Vach, and Saskia le Cessie. 2016. {``A Systematic Approach to Initial Data Analysis Is Good Research Practice.''} \emph{The Journal of Thoracic and Cardiovascular Surgery} 151 (1): 25--27.
+Huebner, Marianne, Werner Vach, and Saskia le Cessie. 2016. ``A Systematic Approach to Initial Data Analysis Is Good Research Practice.'' \emph{The Journal of Thoracic and Cardiovascular Surgery} 151 (1): 25--27.
 
 \leavevmode\hypertarget{ref-HuebnerMarianne2020Haar}{}%
-Huebner, Marianne, Werner Vach, Saskia le Cessie, Carsten Oliver Schmidt, and Lara Lusa. 2020. {``Hidden Analyses: A Review of Reporting Practice and Recommendations for More Transparent Reporting of Initial Data Analyses.''} \emph{BMC Medical Research Methodology} 20 (1): 61--61.
+Huebner, Marianne, Werner Vach, Saskia le Cessie, Carsten Oliver Schmidt, and Lara Lusa. 2020. ``Hidden Analyses: A Review of Reporting Practice and Recommendations for More Transparent Reporting of Initial Data Analyses.'' \emph{BMC Medical Research Methodology} 20 (1): 61--61.
 
 \leavevmode\hypertarget{ref-DiagrammeR}{}%
 Iannone, Richard. 2020. \emph{DiagrammeR: Graph/Network Visualization}. \url{https://CRAN.R-project.org/package=DiagrammeR}.
 
 \leavevmode\hypertarget{ref-KollerManuel2016rARP}{}%
-Koller, Manuel. 2016. {``Robustlmm: An r Package for Robust Estimation of Linear Mixed-Effects Models.''} \emph{Journal of Statistical Software} 75 (6): 1--24.
+Koller, Manuel. 2016. ``Robustlmm: An R Package for Robust Estimation of Linear Mixed-Effects Models.'' \emph{Journal of Statistical Software} 75 (6): 1--24.
 
 \leavevmode\hypertarget{ref-OECD}{}%
-OECD. n.d. {``Gender Wage Gap.''} https://data.oecd.org/earnwage/gender-wage-gap.htm.
+OECD. n.d. ``Gender Wage Gap.'' https://data.oecd.org/earnwage/gender-wage-gap.htm.
 
 \leavevmode\hypertarget{ref-rsvg}{}%
-Ooms, Jeroen. 2020. \emph{Rsvg: Render SVG Images into PDF, PNG, PostScript, or Bitmap Arrays}. \url{https://CRAN.R-project.org/package=rsvg}.
+Ooms, Jeroen. 2020. \emph{Rsvg: Render Svg Images into Pdf, Png, Postscript, or Bitmap Arrays}. \url{https://CRAN.R-project.org/package=rsvg}.
 
 \leavevmode\hypertarget{ref-opendata}{}%
-Open Knowledge Foundation. 2021. {``Open Definition. Defining Open in Open Data, Open Content, and Open Knowledge.''} 2021. \url{http://opendefinition.org/od/2.1/en/}.
+Open Knowledge Foundation. 2021. ``Open Definition. Defining Open in Open Data, Open Content, and Open Knowledge.'' 2021. \url{http://opendefinition.org/od/2.1/en/}.
 
 \leavevmode\hypertarget{ref-patchwork}{}%
 Pedersen, Thomas Lin. 2020. \emph{Patchwork: The Composer of Plots}. \url{https://CRAN.R-project.org/package=patchwork}.
 
 \leavevmode\hypertarget{ref-MichaelRPergamit2001DWTN}{}%
-Pergamit, Michael R., Charles R. Pierret, Donna S. Rothstein, and Jonathan R. Veum. 2001. {``Data Watch: The National Longitudinal Surveys.''} \emph{The Journal of Economic Perspectives} 15 (2): 239--53.
+Pergamit, Michael R., Charles R. Pierret, Donna S. Rothstein, and Jonathan R. Veum. 2001. ``Data Watch: The National Longitudinal Surveys.'' \emph{The Journal of Economic Perspectives} 15 (2): 239--53.
 
 \leavevmode\hypertarget{ref-R}{}%
 R Core Team. 2020. \emph{R: A Language and Environment for Statistical Computing}. Vienna, Austria: R Foundation for Statistical Computing. \url{https://www.R-project.org/}.
@@ -713,28 +670,28 @@ Robinson, David, Alex Hayes, and Simon Couch. 2021. \emph{Broom: Convert Statist
 Singer, Judith D, and John B Willett. 2003. \emph{Applied Longitudinal Data Analysis: Modeling Change and Event Occurrence}. Oxford u.a: Oxford Univ. Pr.
 
 \leavevmode\hypertarget{ref-nlsy79}{}%
-The U.S. Bureau of Labor Statistics. n.d. {``National Longitudinal Survey of Youth 1979.''} Available at \url{https://www.nlsinfo.org/content/cohorts/nlsy79} (2021/25/02).
+The U.S. Bureau of Labor Statistics. n.d. ``National Longitudinal Survey of Youth 1979.'' Available at \url{https://www.nlsinfo.org/content/cohorts/nlsy79} (2021/25/02).
 
 \leavevmode\hypertarget{ref-brolgar}{}%
-Tierney, Nicholas, Di Cook, and Tania Prvan. 2020. \emph{Brolgar: BRowse over Longitudinal Data Graphically and Analytically in r}. \url{https://github.com/njtierney/brolgar}.
+Tierney, Nicholas, Di Cook, and Tania Prvan. 2020. \emph{Brolgar: BRowse over Longitudinal Data Graphically and Analytically in R}. \url{https://github.com/njtierney/brolgar}.
 
 \leavevmode\hypertarget{ref-tukey}{}%
 Tukey, John W. (John Wilder). 1977. \emph{Exploratory Data Analysis}. Addison-Wesley Series in Behavioral Science. Reading, Mass.: Addison-Wesley Pub. Co.
 
 \leavevmode\hypertarget{ref-rlm}{}%
-UCLA: Statistical Consulting Group. 2021. {``Robust Regression \textbar{} r Data Analysis Examples.''} February 2021. \url{https://stats.idre.ucla.edu/r/dae/robust-regression/}.
+UCLA: Statistical Consulting Group. 2021. ``Robust Regression \textbar{} R Data Analysis Examples.'' February 2021. \url{https://stats.idre.ucla.edu/r/dae/robust-regression/}.
 
 \leavevmode\hypertarget{ref-validate}{}%
-van der Loo, Mark P. J., and Edwin de Jonge. 2021. {``Data Validation Infrastructure for {R}.''} \emph{Journal of Statistical Software} 97 (10): 1--31. \url{https://doi.org/10.18637/jss.v097.i10}.
+van der Loo, Mark P. J., and Edwin de Jonge. 2021. ``Data Validation Infrastructure for R.'' \emph{Journal of Statistical Software} 97 (10): 1--31. \url{https://doi.org/10.18637/jss.v097.i10}.
 
 \leavevmode\hypertarget{ref-mass}{}%
-Venables, W. N., and B. D. Ripley. 2002. \emph{Modern Applied Statistics with s}. Fourth. New York: Springer. \url{http://www.stats.ox.ac.uk/pub/MASS4}.
+Venables, W. N., and B. D. Ripley. 2002. \emph{Modern Applied Statistics with S}. Fourth. New York: Springer. \url{http://www.stats.ox.ac.uk/pub/MASS4}.
 
 \leavevmode\hypertarget{ref-tsibble}{}%
-Wang, Earo, Dianne Cook, and Rob J Hyndman. 2020. {``A New Tidy Data Structure to Support Exploration and Modeling of Temporal Data.''} \emph{Journal of Computational and Graphical Statistics} 29 (3): 466--78. \url{https://doi.org/10.1080/10618600.2019.1695624}.
+Wang, Earo, Dianne Cook, and Rob J Hyndman. 2020. ``A New Tidy Data Structure to Support Exploration and Modeling of Temporal Data.'' \emph{Journal of Computational and Graphical Statistics} 29 (3): 466--78. \url{https://doi.org/10.1080/10618600.2019.1695624}.
 
 \leavevmode\hypertarget{ref-WickhamHadley2014TD}{}%
-Wickham, Hadley. 2014. {``Tidy Data.''} \emph{Journal of Statistical Software} 59 (10): 1--23.
+Wickham, Hadley. 2014. ``Tidy Data.'' \emph{Journal of Statistical Software} 59 (10): 1--23.
 
 \leavevmode\hypertarget{ref-ggplot2}{}%
 ---------. 2016. \emph{Ggplot2: Elegant Graphics for Data Analysis}. Springer-Verlag New York. \url{https://ggplot2.tidyverse.org}.
@@ -749,7 +706,7 @@ Wickham, Hadley. 2014. {``Tidy Data.''} \emph{Journal of Statistical Software} 5
 ---------. 2020b. \emph{Tidyr: Tidy Messy Data}. \url{https://CRAN.R-project.org/package=tidyr}.
 
 \leavevmode\hypertarget{ref-tidyverse}{}%
-Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D'Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. {``Welcome to the {tidyverse}.''} \emph{Journal of Open Source Software} 4 (43): 1686. \url{https://doi.org/10.21105/joss.01686}.
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D'Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. ``Welcome to the tidyverse.'' \emph{Journal of Open Source Software} 4 (43): 1686. \url{https://doi.org/10.21105/joss.01686}.
 
 \leavevmode\hypertarget{ref-dplyr}{}%
 Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2020. \emph{Dplyr: A Grammar of Data Manipulation}. \url{https://CRAN.R-project.org/package=dplyr}.
@@ -758,18 +715,16 @@ Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2020. \emph
 Wickham, Hadley, and Jim Hester. 2020. \emph{Readr: Read Rectangular Text Data}. \url{https://CRAN.R-project.org/package=readr}.
 
 \leavevmode\hypertarget{ref-mgcv}{}%
-Wood, S. N. 2003. {``Thin-Plate Regression Splines.''} \emph{Journal of the Royal Statistical Society (B)} 65 (1): 95--114.
+Wood, S. N. 2003. ``Thin-Plate Regression Splines.'' \emph{Journal of the Royal Statistical Society (B)} 65 (1): 95--114.
 
 \leavevmode\hypertarget{ref-knitr}{}%
-Xie, Yihui. 2014. {``Knitr: A Comprehensive Tool for Reproducible Research in {R}.''} In \emph{Implementing Reproducible Computational Research}, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. \url{http://www.crcpress.com/product/isbn/9781466561595}.
+Xie, Yihui. 2014. ``Knitr: A Comprehensive Tool for Reproducible Research in R.'' In \emph{Implementing Reproducible Computational Research}, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. \url{http://www.crcpress.com/product/isbn/9781466561595}.
 
 \leavevmode\hypertarget{ref-rmarkdown}{}%
 Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. \emph{R Markdown Cookbook}. Boca Raton, Florida: Chapman; Hall/CRC. \url{https://bookdown.org/yihui/rmarkdown-cookbook}.
 
 \leavevmode\hypertarget{ref-kableExtra}{}%
-Zhu, Hao. 2019. \emph{kableExtra: Construct Complex Table with 'Kable' and Pipe Syntax}. \url{https://CRAN.R-project.org/package=kableExtra}.
-
-\end{CSLReferences}
+Zhu, Hao. 2019. \emph{KableExtra: Construct Complex Table with 'Kable' and Pipe Syntax}. \url{https://CRAN.R-project.org/package=kableExtra}.
 
 \bibliographystyle{unsrt}
 \bibliography{references.bib}
