@@ -223,17 +223,17 @@ The next step is that explore the mean hourly wage data. In this case, we only e
 ```{r summarytable}
 ```
 
-```{r sample-plot, echo = FALSE, fig.cap="Getting a glimpse of the data: random sample of 36 individuals, divided into  twelve subplots. Wages are shown against year. There is a lot of variability in wages.", fig.height=4, fig.width=5}
+```{r sample-plot, echo = FALSE, fig.cap="A glimpse of the refreshed data. Longitudinal profiles of wages from 1979-2018 are shown for a random sample of 36 individuals, divided into twelve subplots. Most individuals here experienced increasing wages over time, although there is considerable fluctuation from one year to another.", fig.height=4, fig.width=5, out.width="100%"}
 ```
 
 However, we can not be sure only by observing the summary statistics. Hence, we use visualisation techniques to investigate this matter. Figure \ref{fig:feature-plot} conveys a problem in the mean hourly wage values. Figure \ref{fig:feature-plot} A shows that some observations have an exceptionally high figure of wages, even more than US$10,000 per hour. In Figure \ref{fig:feature-plot} B, we barely see any difference in the minimum, median, and maximum value of the wages since the distribution is heavily skewed to the right. 
 
-```{r feature-plot, fig.cap = "Several plots showing anomalies observed the input data. XX Add a couple more plots that reveal the initial problems in the data. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value. We can see that some IDs had an extremely high of wages and it made the distribution of the three features is extremely skewed.", fig.width=6, fig.height=4}
+```{r feature-plot, fig.cap = "Summary plots to check the cleaned data reveal more cleaning is necessary: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). Some values of hourly wages are unbelievable, and some individuals have extemely unusual wages in some years.", fig.width=6, fig.height=2}
 ```
 
 In Figure \ref{fig:high-wages}, we plot some respondents with a high value of mean hourly wages. We filter all of the IDs who earned more than US$ 500 per hour on average. We find that these respondents only experienced one point of extremely high wages. Thus, we suspect that these high values are erroneous resulted from a data entry error. 
 
-```{r high-wages, fig.cap= "6 out of 45 IDs with extremely high mean hourly wage. Most of the IDs only have one point of high wage."}
+```{r high-wages, fig.cap= "6 out of 45 IDs with extremely high mean hourly wage. Most of the IDs only have one point of high wage.", eval=FALSE}
 ```
 
 Further, we take 36 samples randomly from the data and plot them, as shown in Figure \ref{fig:sample-plot}. It implies that not only that some observations earn extremely high figures of wages, but some also have reasonably fluctuated wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples have a different pattern of mean hourly wages. Some have had flat wages for years but had a sudden increase in one particular year, then it gone down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9. 
@@ -263,13 +263,16 @@ Figure \ref{fig:compare-plot} shows the mean hourly wage before and after the ex
 ```
 
 
-```{r compare-plot, fig.cap="Comparison between the original and the treated mean hourly wage. The orange line portray the original value of mean hourly wage, while the turquoise line display the mean hourly wages value after the extreme values imputed with the robust linear model's prediction value. We can see that some extreme spikes has been reduced by the model.", fig.height=5, fig.width=6}
+```{r compare-plot, fig.cap="Comparison between the original and the treated mean hourly wage. The orange line portray the original value of mean hourly wage, while the turquoise line display the mean hourly wages value after the extreme values imputed with the robust linear model's prediction value. We can see that some extreme spikes has been reduced by the model.", fig.height=5, fig.width=6, outwidth="100%"}
 ```
 
 Further, \ref{fig:comppict} A shows that after eliminating the extreme values, the highest value has decreased to be around $350. The spikes are still observed but not as extreme as the original data set. In Figure \ref{fig:comppict} B), we plot the three features of mean hourly wages, namely the minimum, median, and maximum value, transformed to log scale. The plot implies that the skewness is slightly negative. We also see that the three features are overlapped each other. It indicates that some ID's minimum wages are higher than some ID's maximum wages. 
 
 
-```{r comppict, fig.cap = "The distribution of the mean hourly wage after the extreme values are replaced. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value transformed to log10 scale. We can see that some observations still had reasonbaly higher wages than the others. Also, some IDs' have a minimum wages that is higher than others' maximum wages.", fig.width=6, fig.height=4}
+```{r comppict, fig.cap = "The distribution of the mean hourly wage after the extreme values are replaced. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value transformed to log10 scale. We can see that some observations still had reasonbaly higher wages than the others. Also, some IDs' have a minimum wages that is higher than others' maximum wages.", fig.width=6, fig.height=4, eval=FALSE}
+```
+
+```{r fixed-feature-plot, fig.cap = "Re-make of the summary plots of the fully processed data suggest that the data is now in a reasonable state: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). ", fig.width=6, fig.height=2}
 ```
 
 

@@ -43,8 +43,12 @@ ggplot(wages_demog_hs_tsibble,
            group = id)) +
   geom_line(alpha = 0.7) +
   facet_sample() +
+  scale_x_continuous("",
+                     breaks = seq(1980, 2020, 10),
+                     labels = c("80", "90", "00", "10", "20"),
+                     minor_breaks = seq(1980, 2020, 5)) +
   theme(axis.text.x = element_text(angle = 10, size = 6)) +
-  ylab("mean hourly wage") +
+  ylab("Hourly wage ($)") +
   theme_bw()
 
 ## ---- feature-plot
@@ -60,27 +64,38 @@ spag <- wages_demog_hs %>%
              y = mean_hourly_wage,
              group = id)) +
   geom_line(alpha = 0.1) +
-  ggtitle("A)") +
+  scale_x_continuous("",
+                     breaks = seq(1980, 2020, 10),
+                     labels = c("80", "90", "00", "10", "20"),
+                     minor_breaks = seq(1980, 2020, 5)) +
+  ggtitle("A") +
   theme(plot.title = element_text(size = 10)) +
   theme_bw() +
-  ylab("mean hourly wage")
+  ylab("Hourly wage ($)")
 
 wages_three_feat <- wages_demog_hs_tsibble %>%
   features(mean_hourly_wage,
            feat_three_num
   )
 wages_feat_long <- wages_three_feat %>%
-  pivot_longer(c(min, med, max), names_to = "feature", values_to = "value")
+  pivot_longer(c(min, med, max),
+               names_to = "feature", values_to = "value") %>%
+  mutate(feature = factor(feature, levels = c("min", "med", "max")))
+
 feature <- ggplot(wages_feat_long) +
   geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
-  ggtitle("B)") +
+  ggtitle("B") +
   theme_bw() +
   theme(plot.title = element_text(size = 10))
 
-feature_bp <- ggplot(wages_feat_long, aes(y=value, fill = feature, color = feature)) +
+feature_bp <- ggplot(wages_feat_long,
+                     aes(y=value, x = feature,
+                         fill = feature, color = feature)) +
   geom_boxplot() +
   theme_bw() +
-  ggtitle("C)") +
+  #ggtitle("C") +
+  ggtitle("B")  +
+  ylab("Hourly wage ($)") +
   theme(legend.position = "none",
         plot.title = element_text(size = 10))
 
@@ -91,14 +106,22 @@ plot_high <- ggplot(filter(wages_high2, id == 39)) +
                  y = mean_hourly_wage),
              size = 0.5,
              alpha = 0.5) +
+  scale_x_continuous("",
+                     breaks = seq(1980, 2020, 10),
+                     labels = c("80", "90", "00", "10", "20"),
+                     minor_breaks = seq(1980, 2020, 5)) +
   theme(axis.text.x = element_text(angle = 10, size = 6),
         plot.title = element_text(size = 10)) +
-  ylab("mean hourly wage") +
+  ylab("Hourly wage ($)") +
   theme_bw() +
-  ggtitle("D)")
+  ggtitle("C")
+  #ggtitle("D")
 
-spag + feature + feature_bp + plot_high + plot_layout(nrow = 1, guides = "collect") &
-  theme(legend.position = "bottom")
+#spag + feature + feature_bp + plot_high + plot_layout(nrow = 1, guides = "collect") &
+#  theme(legend.position = "bottom")
+spag + feature_bp + plot_high +
+  plot_layout(nrow = 1, guides = "collect") #&
+  #theme(legend.position = "bottom")
 
 ## ---- high-wages
 
@@ -244,6 +267,78 @@ wages <- wages_demog_hs %>%
   as_tsibble(key = id,
              index = year,
              regular = FALSE)
+
+## ---- fixed-feature-plot
+wages_high <- filter(wages_demog_hs, mean_hourly_wage > 500) %>%
+  as_tibble() %>%
+  head(n = 6)
+
+wages_high2 <- wages_demog_hs %>%
+  filter(id %in% wages_high$id)
+
+spag <- wages_demog_hs %>%
+  ggplot(aes(x = year,
+             y = mean_hourly_wage,
+             group = id)) +
+  geom_line(alpha = 0.1) +
+  scale_x_continuous("",
+                     breaks = seq(1980, 2020, 10),
+                     labels = c("80", "90", "00", "10", "20"),
+                     minor_breaks = seq(1980, 2020, 5)) +
+  ggtitle("A") +
+  theme(plot.title = element_text(size = 10)) +
+  theme_bw() +
+  ylab("Hourly wage ($)")
+
+wages_three_feat <- wages_demog_hs_tsibble %>%
+  features(mean_hourly_wage,
+           feat_three_num
+  )
+wages_feat_long <- wages_three_feat %>%
+  pivot_longer(c(min, med, max),
+               names_to = "feature", values_to = "value") %>%
+  mutate(feature = factor(feature, levels = c("min", "med", "max")))
+
+feature <- ggplot(wages_feat_long) +
+  geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
+  ggtitle("B") +
+  theme_bw() +
+  theme(plot.title = element_text(size = 10))
+
+feature_bp <- ggplot(wages_feat_long,
+                     aes(y=value, x = feature,
+                         fill = feature, color = feature)) +
+  geom_boxplot() +
+  theme_bw() +
+  #ggtitle("C") +
+  ggtitle("B")  +
+  ylab("Hourly wage ($)") +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 10))
+
+plot_high <- ggplot(filter(wages_high2, id == 39)) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage)) +
+  geom_point(aes(x = year,
+                 y = mean_hourly_wage),
+             size = 0.5,
+             alpha = 0.5) +
+  scale_x_continuous("",
+                     breaks = seq(1980, 2020, 10),
+                     labels = c("80", "90", "00", "10", "20"),
+                     minor_breaks = seq(1980, 2020, 5)) +
+  theme(axis.text.x = element_text(angle = 10, size = 6),
+        plot.title = element_text(size = 10)) +
+  ylab("Hourly wage ($)") +
+  theme_bw() +
+  ggtitle("C")
+#ggtitle("D")
+
+#spag + feature + feature_bp + plot_high + plot_layout(nrow = 1, guides = "collect") &
+#  theme(legend.position = "bottom")
+spag + feature_bp + plot_high +
+  plot_layout(nrow = 1, guides = "collect") #&
+#theme(legend.position = "bottom")
 
 # Create a data set for demographic variables
 demog_nlsy79 <- full_demographics %>%
