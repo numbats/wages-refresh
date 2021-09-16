@@ -72,8 +72,7 @@ read_chunk(here::here("paper/scripts/eda.R"))
 # Introduction {#intro}
 
 "Open data" is data that is freely accessible, modifiable, and shareable by anyone for any purpose [@opendata]. This type of data can be useful as example data in statistical textbooks and for research purposes. However, open data is often referred to as what we might call "wild data" because it requires substantial cleaning and tidying to tame it into textbook shape. @HuebnerMariannePhD2016Asat emphasize that making the data cleaning process accountable and transparent is imperative. Documenting the data cleaning is essential for the integrity of downstream statistical analyses and model building [@HuebnerMarianne2020Haar]. 
-
-Data cleaning is part of what is called "initial data analysis (IDA)" [@Chatfield1985TIEo]. The other IDA steps are to explore the data properties and check the assumption of modeling to document and report the process for the later formal analysis. Hence, exploratory data analysis, which is defined by @tukey as a detective work to get the clue from data, either numerically or graphically, before confirmatory data analysis is performed, encompasses IDA. @DasuTamraparni2003Edma say that data cleaning and exploration, without naming it as IDA, is a difficult task and consumes 80% of the data mining task. 
+Data cleaning can be considered to be a part of what is called "initial data analysis (IDA)" [@Chatfield1985TIEo]. In IDA one would also explore the data, especially to check if the dta is consistent with assumptions required for modeling. This is also related to exploratory data analysis, which @tukey defines as detective work to learn from data, either numerically or graphically, before confirmatory data analysis is performed, encompasses IDA. @DasuTamraparni2003Edma say that data cleaning and exploration, without naming it as IDA, is a difficult task and consumes 80% of the data mining task. 
 
 Despite its importance, this IDA stage is often undervalued and neglected [@Chatfield1985TIEo]. There are few research papers that document the data cleaning [@WickhamHadley2014TD]. Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties [@HuebnerMarianne2020Haar]. 
 
@@ -114,7 +113,7 @@ The NLSY79 data are stored in a [database](https://www.nlsinfo.org/content/cohor
                   right=5pt,
                   top=5pt,
                   ]
-**Education, Training & Achievement Scores**
+**Education, Training \& Achievement Scores**
 
 - Education -> Summary measures -> All schools -> By year -> Highest grade completed
   - Downloaded all of variables in Highest grade completed.
@@ -126,7 +125,7 @@ The NLSY79 data are stored in a [database](https://www.nlsinfo.org/content/cohor
   - Downloaded all of the variables in Hourly wages
   Both hours worked and hourly wages are recorded by the job, up to five jobs for each id/subject. 
   
-**Household, Geography & Contextual Variables**
+**Household, Geography \& Contextual Variables**
 
 - Context -> Summary measures -> Basic demographics 
   - Downloaded year and month of birth, race, and sex variables.

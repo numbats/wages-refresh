@@ -120,6 +120,7 @@
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
+\usepackage{tcolorbox}
 
 
 \begin{document}
@@ -139,8 +140,7 @@ The National Longitudinal Survey of Youth (NLSY79) is a prominent open data sour
 \section{Introduction}\label{intro}}
 
 ``Open data'' is data that is freely accessible, modifiable, and shareable by anyone for any purpose (Open Knowledge Foundation 2021). This type of data can be useful as example data in statistical textbooks and for research purposes. However, open data is often referred to as what we might call ``wild data'' because it requires substantial cleaning and tidying to tame it into textbook shape. Huebner Marianne, Vach, and Cessie (2016) emphasize that making the data cleaning process accountable and transparent is imperative. Documenting the data cleaning is essential for the integrity of downstream statistical analyses and model building (M. Huebner et al. 2020).
-
-Data cleaning is part of what is called ``initial data analysis (IDA)'' (Chatfield 1985). The other IDA steps are to explore the data properties and check the assumption of modeling to document and report the process for the later formal analysis. Hence, exploratory data analysis, which is defined by Tukey (1977) as a detective work to get the clue from data, either numerically or graphically, before confirmatory data analysis is performed, encompasses IDA. Dasu and Johnson (2003) say that data cleaning and exploration, without naming it as IDA, is a difficult task and consumes 80\% of the data mining task.
+Data cleaning can be considered to be a part of what is called ``initial data analysis (IDA)'' (Chatfield 1985). In IDA one would also explore the data, especially to check if the dta is consistent with assumptions required for modeling. This is also related to exploratory data analysis, which Tukey (1977) defines as detective work to learn from data, either numerically or graphically, before confirmatory data analysis is performed, encompasses IDA. Dasu and Johnson (2003) say that data cleaning and exploration, without naming it as IDA, is a difficult task and consumes 80\% of the data mining task.
 
 Despite its importance, this IDA stage is often undervalued and neglected (Chatfield 1985). There are few research papers that document the data cleaning (Wickham 2014). Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties (M. Huebner et al. 2020).
 
@@ -157,6 +157,8 @@ This paper is structured to have 5 sections. Section \ref{database} describes th
 \subsection{Database}\label{database-1}}
 
 The NLSY79 is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth and born between 1957-1964 (The U.S. Bureau of Labor Statistics, n.d.). The cohort originally included 12,686 respondents ages 14-22 when first interviewed in 1979. It was comprised of Blacks, Hispanics, economically disadvantaged non-Black non-Hispanics, and youth in the military. In 1984 and 1990, two sub-samples were dropped from the interview; the dropped subjects are the 1,079 members of the military sample and 1,643 members of the economically disadvantaged non-Black non-Hispanics, respectively. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
+
+{[}FILL{]} We should include how many variables there are in the data so people get a grasp of the extensive coverage of the variables.
 
 Although the main focus area of the NLSY is labor and employment, the NLSY also covers several other topics, including education; training and achievement; household, geography, and contextual variables; dating, marriage, cohabitation; sexual activity, pregnancy, and fertility; children; income, assets and program participation; health; attitudes and expectations; and crime and substance use.
 
@@ -177,51 +179,31 @@ Since there is no information on high school dropouts in Singer and Willet's boo
 
 The NLSY79 data are stored in a \href{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data}{database} and could be downloaded by variables. Several variables are available for download and could be browsed by index. For the wages data set, we only extracted these variables:
 
-\textbf{Education, Training \& Achievement Scores}
+\begin{tcolorbox}[width=\textwidth,
+                  boxsep=5pt,
+                  left=5pt,
+                  right=5pt,
+                  top=5pt,
+                  ]
+**Education, Training \& Achievement Scores**
 
-\begin{itemize}
-\tightlist
-\item
-  Education -\textgreater{} Summary measures -\textgreater{} All schools -\textgreater{} By year -\textgreater{} Highest grade completed
+- Education -> Summary measures -> All schools -> By year -> Highest grade completed
+  - Downloaded all of variables in Highest grade completed.
+  
+**Employment**
 
-  \begin{itemize}
-  \tightlist
-  \item
-    Downloaded all of variables in Highest grade completed.
-  \end{itemize}
-\end{itemize}
+- Summary measures -> By job -> Hours worked and Hourly wages
+  - Downloaded all of the variables in Hours worked.
+  - Downloaded all of the variables in Hourly wages
+  Both hours worked and hourly wages are recorded by the job, up to five jobs for each id/subject. 
+  
+**Household, Geography \& Contextual Variables**
 
-\textbf{Employment}
+- Context -> Summary measures -> Basic demographics 
+  - Downloaded year and month of birth, race, and sex variables.
+  There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
 
-\begin{itemize}
-\tightlist
-\item
-  Summary measures -\textgreater{} By job -\textgreater{} Hours worked and Hourly wages
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Downloaded all of the variables in Hours worked.
-  \item
-    Downloaded all of the variables in Hourly wages
-    Both hours worked and hourly wages are recorded by the job, up to five jobs for each id/subject.
-  \end{itemize}
-\end{itemize}
-
-\textbf{Household, Geography \& Contextual Variables}
-
-\begin{itemize}
-\tightlist
-\item
-  Context -\textgreater{} Summary measures -\textgreater{} Basic demographics
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Downloaded year and month of birth, race, and sex variables.
-    There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
-  \end{itemize}
-\end{itemize}
+\end{tcolorbox}
 
 The downloaded data set came in a csv (NLSY79.csv) and dat (NLSY79.dat) format. We only used the .dat format. It also came along with these files:
 
