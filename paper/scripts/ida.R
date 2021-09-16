@@ -256,8 +256,26 @@ feature2_bp <- ggplot(wages_feat_long_rlm,
   theme(legend.position = "none",
         plot.title = element_text(size = 10))
 
+plot_high_after <- ggplot(filter(wages_cleaned, id == 39)) +
+  geom_line(aes(x = year,
+                y = wages_rlm)) +
+  geom_point(aes(x = year,
+                 y = wages_rlm),
+             size = 0.5,
+             alpha = 0.5) +
+  annotate("text", x = 2010, y = 1000, label = "id: 39") +
+  scale_x_continuous("",
+                     breaks = seq(1980, 2020, 10),
+                     labels = c("80", "90", "00", "10", "20"),
+                     minor_breaks = seq(1980, 2020, 5)) +
+  theme(axis.text.x = element_text(angle = 10, size = 6),
+        plot.title = element_text(size = 10)) +
+  ylab("Hourly wage ($)") +
+  theme_bw() +
+  ggtitle("C")
 
-spag2 + feature2_bp
+
+spag2 + feature2_bp + plot_high_after
 
 
 ## ---- fixed-feature-plot
