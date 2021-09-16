@@ -120,6 +120,20 @@
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 
 
 \begin{document}
@@ -509,15 +523,6 @@ However, we can not be sure only by observing the summary statistics. Hence, we 
 
 In Figure \ref{fig:high-wages}, we plot some respondents with a high value of mean hourly wages. We filter all of the IDs who earned more than US\$ 500 per hour on average. We find that these respondents only experienced one point of extremely high wages. Thus, we suspect that these high values are erroneous resulted from a data entry error.
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.7\linewidth]{figures/high-wages-1} 
-
-}
-
-\caption{6 out of 45 IDs with extremely high mean hourly wage. Most of the IDs only have one point of high wage.}\label{fig:high-wages}
-\end{figure}
-
 Further, we take 36 samples randomly from the data and plot them, as shown in Figure \ref{fig:sample-plot}. It implies that not only that some observations earn extremely high figures of wages, but some also have reasonably fluctuated wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples have a different pattern of mean hourly wages. Some have had flat wages for years but had a sudden increase in one particular year, then it gone down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9.
 
 The anomalies are also found in the total hours of work, where some observations work for 420 hours a week in total. According to Pergamit et al. (2001), one of the flaws of the NLSY79 employment data is that the NLSY79 collects the information of the working hours since the last interview. Thus, it might be challenging for the respondents to track the within-job hours' changes between survey years, especially for the respondents with fluctuated working hours or seasonal jobs. It even has been more challenging since 1994, where the respondents had to recall two years periods. This shortcoming might also contribute to the fluctuation of one's wages data.
@@ -572,7 +577,7 @@ Finally, we save the imputed data and set the appropriate data type for the vari
 This section will provide an example of how data sets could be used to do exploratory data analysis as in textbook data. We are interested in examining how the respondents experience changes in their wages based on their demographic characteristics. Thus, we use \texttt{wages} data instead of the refreshed \texttt{wages\_hs\_do} as it only has male respondents.
 
 The statistics we use in measuring the change in wages experience is the slope of the wages of each respondent.
-Using \texttt{key\_slope} function in \texttt{brolgar} (Tierney, Cook, and Prvan 2020), we perform linear regression with the log of mean hourly wage as the response variable and year as the predictor. Since we do modeling, it is important to look at the number of observations from each respondent. Figure \ref{fig:slope-nobs-plot} shows that the number of observations for each individual varies. Moreover, each number of observations seems to have an impact on the slope. Extreme values in slope are observed in a few observations, while the range of slope is more stable with more observations. Accordingly, we trim the data to only include \(5^{th} - 95^{th}\) percentile.
+Using \texttt{key\_slope} function in \texttt{brolgar} (Tierney, Cook, and Prvan 2020), we perform linear regression with the log of mean hourly wage as the response variable and year as the predictor. Since we do modeling, it is important to look at the number of observations from each respondent. Figure \ref{fig:slope-nobs-plot} shows that the number of observations for each individual varies. Moreover, each number of observations seems to have an impact on the slope. Extreme values in slope are observed in a few observations, while the range of slope is more stable with more observations. Accordingly, we trim the data to only include respondents with at least 10 observations.
 
 \begin{figure}
 
@@ -594,7 +599,7 @@ We then create some visualizations of five respondents with the highest slope an
 \caption{Wages slope over the years based on gender. Most of respondents who experienced high wages slope are males. In contrast, respondents who experienced lower wages slope are mostly females.}\label{fig:slope-gender}
 \end{figure}
 
-According to OECD (n.d.), the gender pay gap is the difference between the median wage of males and females relative to the median wage of males. We find that, as shown in \ref{fig:gap-gender}, over the years, females tend to earn fewer than males. For example, in 2018, females earned about 78 cents for every \$1 earned by males. The widest gender gaps were observed in the 1990s.
+According to OECD (n.d.), the gender pay gap is the difference between the median wage of males and females relative to the median wage of males. We find that, as shown in \ref{fig:gap-gender}, over the years, females tend to earn fewer than males. For example, in 2018, females earned about 78 cents for every \$1 earned by males. The widest gender gaps were observed in the 1990s. However, as more males participated in the survey than females from year to year, these gaps could be affected by imbalance number of observations.
 
 \begin{figure}
 
@@ -615,6 +620,8 @@ According to their highest education completed, both top-5 and bottom-5 slopes a
 
 \caption{Wages slope over the years based on highest education completed. People who are in top-5 and bottom-5 wages are dominated by people who completed high school.}\label{fig:slope-educ}
 \end{figure}
+
+Further, we perform a linear regression to see the effect of education on wages experience.
 
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}

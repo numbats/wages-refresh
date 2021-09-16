@@ -30,27 +30,6 @@ kable(as.array(summary(wages_demog_hs$mean_hourly_wage)),
       col.names = c("Statistics", "Value")) %>%
   kable_styling()
 
-## ---- high-wages
-wages_high <- filter(wages_demog_hs, mean_hourly_wage > 500) %>%
-  as_tibble() %>%
-  head(n = 6)
-
-wages_high2 <- wages_demog_hs %>%
-  filter(id %in% wages_high$id)
-
-plot_high <- ggplot(filter(wages_high2, id == 39)) +
-  geom_line(aes(x = year,
-                y = mean_hourly_wage)) +
-  geom_point(aes(x = year,
-                 y = mean_hourly_wage),
-             size = 0.5,
-             alpha = 0.5) +
-  theme(axis.text.x = element_text(angle = 10, size = 6),
-        plot.title = element_text(size = 10)) +
-  ylab("mean hourly wage") +
-  theme_bw() +
-  ggtitle("D)")
-
 ## ---- sample-plot
 wages_demog_hs_tsibble <- as_tsibble(x = wages_demog_hs,
                                      key = id,
@@ -69,6 +48,13 @@ ggplot(wages_demog_hs_tsibble,
   theme_bw()
 
 ## ---- feature-plot
+wages_high <- filter(wages_demog_hs, mean_hourly_wage > 500) %>%
+  as_tibble() %>%
+  head(n = 6)
+
+wages_high2 <- wages_demog_hs %>%
+  filter(id %in% wages_high$id)
+
 spag <- wages_demog_hs %>%
   ggplot(aes(x = year,
              y = mean_hourly_wage,
@@ -98,8 +84,25 @@ feature_bp <- ggplot(wages_feat_long, aes(y=value, fill = feature, color = featu
   theme(legend.position = "none",
         plot.title = element_text(size = 10))
 
+plot_high <- ggplot(filter(wages_high2, id == 39)) +
+  geom_line(aes(x = year,
+                y = mean_hourly_wage)) +
+  geom_point(aes(x = year,
+                 y = mean_hourly_wage),
+             size = 0.5,
+             alpha = 0.5) +
+  theme(axis.text.x = element_text(angle = 10, size = 6),
+        plot.title = element_text(size = 10)) +
+  ylab("mean hourly wage") +
+  theme_bw() +
+  ggtitle("D)")
+
 spag + feature + feature_bp + plot_high + plot_layout(nrow = 1, guides = "collect") &
   theme(legend.position = "bottom")
+
+## ---- high-wages
+
+
 
 ## ---- rlm
 # nest the data by id to build a robust linear model

@@ -66,7 +66,7 @@ read_chunk(here::here("paper/scripts/eda.R"))
 
 **Keywords**: Data cleaning; Data tidying; Longitudinal data; NLSY79; Open data; Initial data analysis; Outlier detection; Robust linear regression
 
-```{r, load-pkgs}
+```{r load-pkgs}
 ```
 
 # Introduction {#intro}
@@ -139,7 +139,7 @@ The downloaded data set came in a csv (NLSY79.csv) and dat (NLSY79.dat) format. 
 - NLSY79.NLSY79: Tagset of variables that can be uploaded to the website to recreate the data set.
 - NLSY79.R: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set,  `categories_qnames` (the observations are stored in categorical/interval values) and `new_data_qnames` (the observations are stored in integer form).
 
-```{r, raw-data}
+```{r raw-data}
 ```
 
 According to @WickhamHadley2014TD, tidy data sets comply with three rules. Firstly, each variable forms a column. Secondly, each observation forms a row. Lastly, each type of observational unit forms a table. Unfortunately, the `new_data_qnames` did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr] to do this job.
