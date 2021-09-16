@@ -2,7 +2,7 @@
 title: "The Journey from Wild to Textbook Data: A Case Study from the National Longitudinal Survey of Youth"
 authors:
   - name: Dewi Amaliah
-    thanks: ""
+    thanks: "Test"
     department: Department of Econometrics and Business Statistics
     affiliation: Monash University
     location: Clayton, VIC 3800
