@@ -30,10 +30,12 @@ authors:
     location: ""
     email: ""
 abstract: > 
- NSLY79 is a prominent open data source that has been an important support for educational purposes and multidisciplinary research on longitudinal data. Subsets of this data can be found in numerous textbooks and research articles. However, the steps and decisions taken to get from the original data to these subsets is never clearly articulated. This article describes our journey when trying to re-create a textbook example data set from the original database. Ultimately, the goal is to provide the resources so that refreshing data subsets can be done on a regular basis, especially when updates are made to the database. Thus, this paper demonstrates the process of initial data analysis (IDA) -- tidying, cleaning, and documenting the process -- to make data available for text book examples or research. A brief exploratory analysis of the resulting data is also conducted. Three new data sets, and the code to produce them are provided in an accompanying open source R package, called `yowie`. As a result of this process, some recommendations are also made for the NLSY79 curators for incorporating data quality checks, and providing more convenient samples of the data to potential users. 
+ The National Longitudinal Survey of Youth (NLSY79) is a prominent open data source that has been important for educational purposes and multidisciplinary research on longitudinal data. Subsets of this data can be found in numerous textbooks and research articles. However, the steps and decisions taken to get from the raw data to the textbook data is never clearly articulated. This article describes our journey when trying to re-create a textbook example data set from the original database, with the goal being to refresh the textbook data more regularly. Thus, this paper demonstrates the process -- extracting, tidying, cleaning, and exploring with documentation -- to make refreshed data available for education or research. Three new data sets, and the code to produce them are provided in an accompanying open source R package, called `yowie`. As a result of this process, some recommendations are also made for the NLSY79 curators for incorporating data quality checks, and providing more convenient samples of the data to potential users. 
 bibliography: references.bib
 biblio-style: unsrt
 #preamble: >
+header-includes:
+  - \usepackage{tcolorbox}
 output: 
   #rticles::arxiv_article:
     #keep_tex: false
@@ -64,7 +66,7 @@ read_chunk(here::here("paper/scripts/eda.R"))
 
 **Keywords**: Data cleaning; Data tidying; Longitudinal data; NLSY79; Open data; Initial data analysis; Outlier detection; Robust linear regression
 
-```{r, load-pkgs}
+```{r load-pkgs}
 ```
 
 # Introduction {#intro}
@@ -75,7 +77,7 @@ Data cleaning is part of what is called "initial data analysis (IDA)" [@Chatfiel
 
 Despite its importance, this IDA stage is often undervalued and neglected [@Chatfield1985TIEo]. There are few research papers that document the data cleaning [@WickhamHadley2014TD]. Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties [@HuebnerMarianne2020Haar]. 
 
-This paper aims to demonstrate the steps of IDA,  tidying, cleaning, and documenting the process, for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NSLY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century [@MichaelRPergamit2001DWTN]. In addition, The National Longitudinal Survey is considered a survey with high retention rates and carefully designed, making it suitable for a life course research [@MichaelRPergamit2001DWTN] and [@eliznlsy]. According to @eliznlsy, thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets [@MichaelRPergamit2001DWTN]. 
+This paper aims to demonstrate the steps of IDA,  tidying, cleaning, and documenting the process, for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century [@MichaelRPergamit2001DWTN]. In addition, The National Longitudinal Survey is considered a survey with high retention rates and carefully designed, making it suitable for a life course research [@MichaelRPergamit2001DWTN] and [@eliznlsy]. According to @eliznlsy, thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets [@MichaelRPergamit2001DWTN]. 
 
 @SingerJudithD2003Alda used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling. Our aim is to refresh this textbook data to be more up to date. Here, we investigate the process of getting from the raw NLSY79 to this textbook data set. However, we cannot create the exact same data set as published in their book since we do not have the information of what age threshold they used to determine the high school dropouts.
 
@@ -87,13 +89,15 @@ This paper is structured to have 5 sections. Section \@ref(database) describes t
 
 The NLSY79 is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth and born between 1957-1964 [@nlsy79]. The cohort originally included 12,686 respondents ages 14-22 when first interviewed in 1979. It was comprised of Blacks, Hispanics, economically disadvantaged non-Black non-Hispanics, and youth in the military. In 1984 and 1990, two sub-samples were dropped from the interview; the dropped subjects are the 1,079 members of the military sample and 1,643 members of the economically disadvantaged non-Black non-Hispanics, respectively. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
 
+[FILL] We should include how many variables there are in the data so people get a grasp of the extensive coverage of the variables. 
+
 Although the main focus area of the NLSY is labor and employment, the NLSY also covers several other topics, including education; training and achievement; household, geography, and contextual variables; dating, marriage, cohabitation; sexual activity, pregnancy, and fertility; children; income, assets and program participation; health; attitudes and expectations; and crime and substance use. 
 
 There are two ways to conduct the interview of the NLSY79, which are face-to-face interviews or by telephone. In recent survey years, more than 90 percent of respondents were interviewed by telephone [@eliznlsy].
 
 ## Target Data
 
-As mentioned in Section \@ref(intro), this paper aims to refresh the NLSY79 data as used in Singer and Willet's textbook (@SingerJudithD2003Alda). This data set contains the information of yearly mean hourly wages from the NLSY79 cohort, with education and race as covariates. This data set represents the measurement of male high-school dropouts, aged from 14 to 17 years old when first time measured. Accordingly, to get this data, we have two additional target data, NSLY79 cohort's demographic profiles and wages data of people who completed education up to high school. 
+As mentioned in Section \@ref(intro), this paper aims to refresh the NLSY79 data as used in Singer and Willet's textbook (@SingerJudithD2003Alda). This data set contains the information of yearly mean hourly wages from the NLSY79 cohort, with education and race as covariates. This data set represents the measurement of male high-school dropouts, aged from 14 to 17 years old when first time measured. Accordingly, to get this data, we have two additional target data, NLSY79 cohort's demographic profiles and wages data of people who completed education up to high school. 
 
 Since there is no information on high school dropouts in Singer and Willet's book, we define high school dropouts as respondents who only completed either $9^{th}$, $10^{th}$, $11^{th}$ grade, or who completed $12^{th}$ when their age is at least 19 years old (means that these IDs being dropped out in a certain year, but they returned back to high school to complete it). 
 
@@ -103,6 +107,13 @@ Since there is no information on high school dropouts in Singer and Willet's boo
 
 The NLSY79 data are stored in a [database](https://www.nlsinfo.org/content/cohorts/nlsy79/get-data) and could be downloaded by variables. Several variables are available for download and could be browsed by index. For the wages data set, we only extracted these variables:
 
+
+\begin{tcolorbox}[width=\textwidth,
+                  boxsep=5pt,
+                  left=5pt,
+                  right=5pt,
+                  top=5pt,
+                  ]
 **Education, Training & Achievement Scores**
 
 - Education -> Summary measures -> All schools -> By year -> Highest grade completed
@@ -120,13 +131,15 @@ The NLSY79 data are stored in a [database](https://www.nlsinfo.org/content/cohor
 - Context -> Summary measures -> Basic demographics 
   - Downloaded year and month of birth, race, and sex variables.
   There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
+
+\end{tcolorbox}
       
 The downloaded data set came in a csv (NLSY79.csv) and dat (NLSY79.dat) format. We only used the .dat format. It also came along with these files:
 
 - NLSY79.NLSY79: Tagset of variables that can be uploaded to the website to recreate the data set.
 - NLSY79.R: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set,  `categories_qnames` (the observations are stored in categorical/interval values) and `new_data_qnames` (the observations are stored in integer form).
 
-```{r, raw-data}
+```{r raw-data}
 ```
 
 According to @WickhamHadley2014TD, tidy data sets comply with three rules. Firstly, each variable forms a column. Secondly, each observation forms a row. Lastly, each type of observational unit forms a table. Unfortunately, the `new_data_qnames` did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr] to do this job.

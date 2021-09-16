@@ -1,6 +1,7 @@
 library(tidyverse)
 library(brolgar)
 library(modelr)
+library(lme4)
 
 # read data
 wages <- yowie::wages %>%
@@ -23,8 +24,8 @@ wages_slope <- key_slope(wages, ln_wages ~ year0) %>%
 
 # build linear-mixed model
 wages_fit <- lmer(
-  ln_wages ~ year0*hgc_regroup*gender + (1|id),
-  data = wages
+  ln_wages ~ year0 +  (1|id) + (year0-1|id),
+  data = as_tibble(wages)
 )
 
 wages_fit_aug<- wages %>%
