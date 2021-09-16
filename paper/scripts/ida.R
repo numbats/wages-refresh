@@ -245,7 +245,19 @@ feature2 <- ggplot(wages_feat_long_rlm) +
   xlab("value (log10)") +
   theme_bw()
 
-spag2 + feature2
+feature2_bp <- ggplot(wages_feat_long_rlm,
+                     aes(y=value, x = feature,
+                         fill = feature, color = feature)) +
+  geom_boxplot() +
+  theme_bw() +
+  #ggtitle("C") +
+  ggtitle("B")  +
+  ylab("Hourly wage ($)") +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 10))
+
+
+spag2 + feature2_bp
 
 
 ## ---- fixed-feature-plot
