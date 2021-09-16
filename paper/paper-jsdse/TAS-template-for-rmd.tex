@@ -66,13 +66,12 @@ $endif$
 \if0\blind
 {
   \title{\bf $title$}
-  \author{Author 1\thanks{
-    The authors gratefully acknowledge \textit{please remember to list all relevant funding sources in the unblinded version}}\hspace{.2cm}\\
-    Department of YYY, University of XXX\\
-    and \\
-    Author 2 \\
-    Department of ZZZ, University of WWW}
-  \maketitle
+  \author{
+      $for(authors)$
+      $authors.name$$if(authors.thanks)$\thanks{$authors.thanks$}$endif$\\
+      $authors.department$, $authors.affiliation$, $sep$\\
+      $endfor$}
+        \maketitle
 } \fi
 
 \if1\blind
