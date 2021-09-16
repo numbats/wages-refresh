@@ -106,6 +106,7 @@ plot_high <- ggplot(filter(wages_high2, id == 39)) +
                  y = mean_hourly_wage),
              size = 0.5,
              alpha = 0.5) +
+  annotate("text", x = 2010, y = 1000, label = "id: 39") +
   scale_x_continuous("",
                      breaks = seq(1980, 2020, 10),
                      labels = c("80", "90", "00", "10", "20"),
@@ -323,6 +324,7 @@ plot_high <- ggplot(filter(wages_high2, id == 39)) +
                  y = mean_hourly_wage),
              size = 0.5,
              alpha = 0.5) +
+  annotate("text", x = 2010, y = 1000, label = "id: 39") +
   scale_x_continuous("",
                      breaks = seq(1980, 2020, 10),
                      labels = c("80", "90", "00", "10", "20"),
