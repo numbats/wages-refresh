@@ -120,20 +120,6 @@
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{wrapfig}
-\usepackage{float}
-\usepackage{colortbl}
-\usepackage{pdflscape}
-\usepackage{tabu}
-\usepackage{threeparttable}
-\usepackage{threeparttablex}
-\usepackage[normalem]{ulem}
-\usepackage{makecell}
-\usepackage{xcolor}
 
 
 \begin{document}
@@ -143,11 +129,9 @@
 
 
 \begin{abstract}
-
+The National Longitudinal Survey of Youth (NLSY79) is a prominent open data source that has been important for educational purposes and multidisciplinary research on longitudinal data. Subsets of this data can be found in numerous textbooks and research articles. However, the steps and decisions taken to get from the raw data to the textbook data is never clearly articulated. This article describes our journey when trying to re-create a textbook example data set from the original database, with the goal being to refresh the textbook data more regularly. Thus, this paper demonstrates the process -- extracting, tidying, cleaning, and exploring with documentation -- to make refreshed data available for education or research. Three new data sets, and the code to produce them are provided in an accompanying open source R package, called \texttt{yowie}. As a result of this process, some recommendations are also made for the NLSY79 curators for incorporating data quality checks, and providing more convenient samples of the data to potential users.
 \end{abstract}
 
-
-NSLY79 is a prominent open data source that has been an important support for educational purposes and multidisciplinary research on longitudinal data. Subsets of this data can be found in numerous textbooks and research articles. However, the steps and decisions taken to get from the original data to these subsets is never clearly articulated. This article describes our journey when trying to re-create a textbook example data set from the original database. Ultimately, the goal is to provide the resources so that refreshing data subsets can be done on a regular basis, especially when updates are made to the database. Thus, this paper demonstrates the process of initial data analysis (IDA) -- tidying, cleaning, and documenting the process -- to make data available for text book examples or research. A brief exploratory analysis of the resulting data is also conducted. Three new data sets, and the code to produce them are provided in an accompanying open source R package, called \texttt{yowie}. As a result of this process, some recommendations are also made for the NLSY79 curators for incorporating data quality checks, and providing more convenient samples of the data to potential users.
 
 \textbf{Keywords}: Data cleaning; Data tidying; Longitudinal data; NLSY79; Open data; Initial data analysis; Outlier detection; Robust linear regression
 
@@ -160,7 +144,7 @@ Data cleaning is part of what is called ``initial data analysis (IDA)'' (Chatfie
 
 Despite its importance, this IDA stage is often undervalued and neglected (Chatfield 1985). There are few research papers that document the data cleaning (Wickham 2014). Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties (M. Huebner et al. 2020).
 
-This paper aims to demonstrate the steps of IDA, tidying, cleaning, and documenting the process, for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NSLY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century (Pergamit et al. 2001). In addition, The National Longitudinal Survey is considered a survey with high retention rates and carefully designed, making it suitable for a life course research (Pergamit et al. 2001) and (Cooksey 2017). According to Cooksey (2017), thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets (Pergamit et al. 2001).
+This paper aims to demonstrate the steps of IDA, tidying, cleaning, and documenting the process, for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century (Pergamit et al. 2001). In addition, The National Longitudinal Survey is considered a survey with high retention rates and carefully designed, making it suitable for a life course research (Pergamit et al. 2001) and (Cooksey 2017). According to Cooksey (2017), thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets (Pergamit et al. 2001).
 
 Singer and Willett (2003) used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling. Our aim is to refresh this textbook data to be more up to date. Here, we investigate the process of getting from the raw NLSY79 to this textbook data set. However, we cannot create the exact same data set as published in their book since we do not have the information of what age threshold they used to determine the high school dropouts.
 
@@ -181,7 +165,7 @@ There are two ways to conduct the interview of the NLSY79, which are face-to-fac
 \hypertarget{target-data}{%
 \subsection{Target Data}\label{target-data}}
 
-As mentioned in Section \ref{intro}, this paper aims to refresh the NLSY79 data as used in Singer and Willet's textbook (Singer and Willett (2003)). This data set contains the information of yearly mean hourly wages from the NLSY79 cohort, with education and race as covariates. This data set represents the measurement of male high-school dropouts, aged from 14 to 17 years old when first time measured. Accordingly, to get this data, we have two additional target data, NSLY79 cohort's demographic profiles and wages data of people who completed education up to high school.
+As mentioned in Section \ref{intro}, this paper aims to refresh the NLSY79 data as used in Singer and Willet's textbook (Singer and Willett (2003)). This data set contains the information of yearly mean hourly wages from the NLSY79 cohort, with education and race as covariates. This data set represents the measurement of male high-school dropouts, aged from 14 to 17 years old when first time measured. Accordingly, to get this data, we have two additional target data, NLSY79 cohort's demographic profiles and wages data of people who completed education up to high school.
 
 Since there is no information on high school dropouts in Singer and Willet's book, we define high school dropouts as respondents who only completed either \(9^{th}\), \(10^{th}\), \(11^{th}\) grade, or who completed \(12^{th}\) when their age is at least 19 years old (means that these IDs being dropped out in a certain year, but they returned back to high school to complete it).
 
