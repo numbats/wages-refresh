@@ -96,6 +96,20 @@
 % Pandoc citation processing
 
 \usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 
 
 \begin{document}
@@ -160,19 +174,19 @@ The NLSY79 data are stored in a \href{https://www.nlsinfo.org/content/cohorts/nl
                   right=5pt,
                   top=5pt,
                   ]
-**Education, Training \& Achievement Scores**
+Education, Training and Achievement Scores
 
 - Education -> Summary measures -> All schools -> By year -> Highest grade completed
   - Downloaded all of variables in Highest grade completed.
   
-**Employment**
+Employment
 
 - Summary measures -> By job -> Hours worked and Hourly wages
   - Downloaded all of the variables in Hours worked.
   - Downloaded all of the variables in Hourly wages
   Both hours worked and hourly wages are recorded by the job, up to five jobs for each id/subject. 
   
-**Household, Geography \& Contextual Variables**
+Household, Geography and Contextual Variables
 
 - Context -> Summary measures -> Basic demographics 
   - Downloaded year and month of birth, race, and sex variables.
@@ -421,11 +435,11 @@ The next step is that explore the mean hourly wage data. In this case, we only e
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{figures/sample-plot-1} 
+{\centering \includegraphics[width=1\linewidth]{figures/sample-plot-1} 
 
 }
 
-\caption{Getting a glimpse of the data: random sample of 36 individuals, divided into  twelve subplots. Wages are shown against year. There is a lot of variability in wages.}\label{fig:sample-plot}
+\caption{A glimpse of the refreshed data. Longitudinal profiles of wages from 1979-2018 are shown for a random sample of 36 individuals, divided into twelve subplots. Most individuals here experienced increasing wages over time, although there is considerable fluctuation from one year to another.}\label{fig:sample-plot}
 \end{figure}
 
 We take 36 samples randomly from the data and plot them, as shown in Figure \ref{fig:sample-plot}. It implies that these respondents have a lot of variability in wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples have a different pattern of mean hourly wages. Some have had flat wages for years but had a sudden increase in one particular year, then it gone down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9.
@@ -436,11 +450,11 @@ Figure \ref{fig:feature-plot} conveys a problem in the mean hourly wage values. 
 <<<<<<< HEAD
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{figures/feature-plot-1} 
+{\centering \includegraphics[width=432px]{figures/feature-plot-1} 
 
 }
 
-\caption{Several plots showing anomalies observed the input data. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar. We can see some extremely high wages; Plot B shows the distribution of their minimum, median, and maximum value. We can also see that some IDs had an extremely high of wages and it made the distribution of the three features is extremely skewed; Plot C shows the extreme values more clearly; Plot D shows an ID with a suspected erronous wages.}\label{fig:feature-plot}
+\caption{Summary plots to check the cleaned data reveal more cleaning is necessary: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). Some values of hourly wages are unbelievable, and some individuals have extemely unusual wages in some years.}\label{fig:feature-plot}
 \end{figure}
 =======
 Further, we take 36 samples randomly from the data and plot them, as shown in Figure \ref{fig:sample-plot}. It implies that not only that some observations earn extremely high figures of wages, but some also have reasonably fluctuated wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples have a different pattern of mean hourly wages. Some have had flat wages for years but had a sudden increase in one particular year, then it gone down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9.
@@ -463,7 +477,7 @@ Figure \ref{fig:compare-plot} shows the mean hourly wage before and after the ex
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{figures/compare-plot-1} 
+{\centering \includegraphics[width=432px]{figures/compare-plot-1} 
 
 }
 
@@ -474,18 +488,18 @@ Further, \ref{fig:comppict} A shows that after eliminating the extreme values, t
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{figures/comppict-1} 
+{\centering \includegraphics[width=432px]{figures/fixed-feature-plot-1} 
 
 }
 
-\caption{The distribution of the mean hourly wage after the extreme values are replaced. Plot A portrays the pattern of mean hourly wage of high school cohort from 1979 to 2018 of each ID in US Dollar; Plot B shows the distribution of their minimum, median, and maximum value transformed to log10 scale. We can see that some observations still had reasonbaly higher wages than the others. Also, some IDs' have a minimum wages that is higher than others' maximum wages.}\label{fig:comppict}
+\caption{Re-make of the summary plots of the fully processed data suggest that the data is now in a reasonable state: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). }\label{fig:fixed-feature-plot}
 \end{figure}
 
 Finally, we save the imputed data and set the appropriate data type for the variables. As our target data is the mean hourly wage of the high-school dropouts, we then subset the high-school graduate data set to have only the male-high school dropout data. We then make these three data sets and their processing documentation publicly available through an R data container package called \texttt{yowie}. The complete flow from the raw data to these data set is displayed in Figure \ref{fig:flow-chart}.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{figures/flow-chart-1} 
+{\centering \includegraphics[width=468px]{figures/flow-chart-1} 
 
 }
 
@@ -502,7 +516,7 @@ Using \texttt{key\_slope} function in \texttt{brolgar} (Tierney, Cook, and Prvan
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{figures/slope-nobs-plot-1} 
+{\centering \includegraphics[width=468px]{figures/slope-nobs-plot-1} 
 
 }
 
@@ -513,7 +527,7 @@ We then create some visualizations of five respondents with the highest slope an
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{figures/slope-gender-1} 
+{\centering \includegraphics[width=468px]{figures/slope-gender-1} 
 
 }
 
@@ -535,7 +549,7 @@ According to their highest education completed, both top-5 and bottom-5 slopes a
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{figures/slope-educ-1} 
+{\centering \includegraphics[width=468px]{figures/slope-educ-1} 
 
 }
 
