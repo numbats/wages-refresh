@@ -31,8 +31,6 @@ authors:
 bibliography: ../references.bib
 biblio-style: unsrt
 #preamble: >
-header-includes:
-  - \usepackage{tcolorbox}
 output: 
   bookdown::pdf_document2:
     template: TAS-template-for-rmd.tex

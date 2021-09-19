@@ -4,6 +4,7 @@
 \usepackage{enumerate}
 \usepackage{natbib}
 \usepackage{tcolorbox}
+\usepackage{fontawesome}
 \usepackage{url} % not crucial - just used below for the URL
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -145,11 +146,11 @@ The National Longitudinal Survey of Youth (NLSY79) is a prominent open data sour
 \section{Introduction}\label{intro}}
 
 ``Open data'' is data that is freely accessible, modifiable, and shareable by anyone for any purpose (Open Knowledge Foundation 2021). This type of data can be useful as example data in statistical textbooks and for research purposes. However, open data is often referred to as what we might call ``wild data'' because it requires substantial cleaning and tidying to tame it into textbook shape. Huebner Marianne, Vach, and Cessie (2016) emphasize that making the data cleaning process accountable and transparent is imperative. Documenting the data cleaning is essential for the integrity of downstream statistical analyses and model building (M. Huebner et al. 2020).
-Data cleaning can be considered to be a part of what is called ``initial data analysis (IDA)'' (Chatfield 1985). In IDA one would also explore the data, especially to check if the dta is consistent with assumptions required for modeling. This is also related to exploratory data analysis, which Tukey (1977) defines as detective work to learn from data, either numerically or graphically, before confirmatory data analysis is performed, encompasses IDA. Dasu and Johnson (2003) say that data cleaning and exploration, without naming it as IDA, is a difficult task and consumes 80\% of the data mining task.
+Data cleaning can be considered to be a part of what is called ``initial data analysis (IDA)'' (Chatfield 1985). In IDA one would also explore the data, especially to check if the data is consistent with assumptions required for modeling. This is also related to exploratory data analysis, which Tukey (1977) defines as detective work to learn from data, either numerically or graphically, before confirmatory data analysis is performed, which encompasses IDA. Dasu and Johnson (2003) say that data cleaning and exploration, without naming it as IDA, is a difficult task and consumes 80\% of the data mining task.
 
 Despite its importance, this IDA stage is often undervalued and neglected (Chatfield 1985). There are few research papers that document the data cleaning (Wickham 2014). Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties (M. Huebner et al. 2020).
 
-This paper aims to demonstrate the steps of IDA, tidying, cleaning, and documenting the process, for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century (Pergamit et al. 2001). In addition, The National Longitudinal Survey is considered a survey with high retention rates and carefully designed, making it suitable for a life course research (Pergamit et al. 2001) and (Cooksey 2017). According to Cooksey (2017), thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets (Pergamit et al. 2001).
+This paper aims to demonstrate the steps of IDA, tidying, cleaning, and documenting the process, for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century (Pergamit et al. 2001). In addition, The NLSY is considered a survey with high retention rates and carefully designed, making it suitable for a life course research (Pergamit et al. 2001; Cooksey 2017). According to Cooksey (2017), thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets (Pergamit et al. 2001).
 
 Singer and Willett (2003) used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling. Our aim is to refresh this textbook data to be more up to date. Here, we investigate the process of getting from the raw NLSY79 to this textbook data set. However, we cannot create the exact same data set as published in their book since we do not have the information of what age threshold they used to determine the high school dropouts.
 
@@ -161,7 +162,7 @@ This paper is structured to have 5 sections. Section \ref{database} describes th
 \hypertarget{database-1}{%
 \subsection{Database}\label{database-1}}
 
-The NLSY79 is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth and born between 1957-1964 (The U.S. Bureau of Labor Statistics, n.d.). The cohort originally included 12,686 respondents ages 14-22 when first interviewed in 1979. It was comprised of Blacks, Hispanics, economically disadvantaged non-Black non-Hispanics, and youth in the military. In 1984 and 1990, two sub-samples were dropped from the interview; the dropped subjects are the 1,079 members of the military sample and 1,643 members of the economically disadvantaged non-Black non-Hispanics, respectively. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
+The NLSY79 is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth and born between 1957-1964 (The U.S. Bureau of Labor Statistics, n.d.). The cohort originally included 12,686 respondents aged 14-22 when first interviewed in 1979. It was comprised of Blacks, Hispanics, economically disadvantaged non-Black non-Hispanics, and youth in the military. In 1984 and 1990, two sub-samples were dropped from the interview; the dropped subjects are the 1,079 members of the military sample and 1,643 members of the economically disadvantaged non-Black non-Hispanics, respectively. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
 
 {[}FILL{]} We should include how many variables there are in the data so people get a grasp of the extensive coverage of the variables.
 
@@ -179,29 +180,31 @@ Since there is no information on high school dropouts in Singer and Willet's boo
 \hypertarget{cleaning}{%
 \section{Data Cleaning}\label{cleaning}}
 
-In this section, we outline the steps taken to the download the raw data from the database provided at {[}CITE: \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data}{]}. Specifically, we only extract a subset of the variables in the database as shown in \ref{box:data}.
+In this section, we outline the steps taken to the download the raw data from the database provided at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} (The U.S. Bureau of Labor Statistics, n.d.). Specifically, we only extract a subset of the variables in the database as shown in \ref{box:data}.
 
 \hypertarget{getting-and-tidying-the-data}{%
 \subsection{Getting and Tidying the Data}\label{getting-and-tidying-the-data}}
 
 The NLSY79 data are stored in a \href{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data}{database} and could be downloaded by variables. Several variables are available for download and could be browsed by index. For the wages data set, we only extracted these variables:
 
-\begin{tcolorbox}[label="box:data", title="Getting data"]
+\begin{tcolorbox}[label="box:data", title=Getting the data]
+
+\faDatabase National Longitudinal Survey of Youth 1979
 
 \begin{itemize}
 \item[$\triangleright$] Education, Training and Achievement Scores
 \begin{itemize}
 \item[$\triangleright$] Education $\triangleright$ Summary measures $\triangleright$ All schools $\triangleright$ By year $\triangleright$ Highest grade completed
 \begin{itemize}
-\item Downloaded all of variables in Highest grade completed.
+\item[\faCloudDownload] Downloaded all of variables in Highest grade completed.
 \end{itemize}
 \end{itemize}
 \item[$\triangleright$] Employment
 \begin{itemize}
 \item[$\triangleright$] Summary measures $\triangleright$ By job $\triangleright$ Hours worked and Hourly wages
 \begin{itemize}
-\item Downloaded all of the variables in Hours worked.
-\item Downloaded all of the variables in Hourly wages
+\item[\faCloudDownload] Downloaded all of the variables in Hours worked.
+\item[\faCloudDownload] Downloaded all of the variables in Hourly wages
   Both hours worked and hourly wages are recorded by the job, up to five jobs for each id/subject. 
 \end{itemize}
 \end{itemize}
@@ -209,7 +212,7 @@ The NLSY79 data are stored in a \href{https://www.nlsinfo.org/content/cohorts/nl
 \begin{itemize}
 \item[$\triangleright$] Context $\triangleright$ Summary measures $\triangleright$ Basic demographics 
 \begin{itemize}
-\item Downloaded year and month of birth, race, and sex variables. There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
+\item[\faCloudDownload] Downloaded year and month of birth, race, and sex variables. There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
 \end{itemize}
 \end{itemize}
 \end{itemize}
