@@ -131,17 +131,15 @@
 
 \bigskip
 \begin{abstract}
-
+The National Longitudinal Survey of Youth (NLSY79) is a prominent open data source that has been important for educational purposes and multidisciplinary research on longitudinal data. Subsets of this data can be found in numerous textbooks and research articles. However, the steps and decisions taken to get from the raw data to the textbook data is never clearly articulated. This article describes our journey when trying to re-create a textbook example data set from the original database, with the goal being to refresh the textbook data more regularly. Thus, this paper demonstrates the process -- extracting, tidying, cleaning, and exploring with documentation -- to make refreshed data available for education or research. Three new data sets, and the code to produce them are provided in an accompanying open source R package, called \texttt{yowie}. As a result of this process, some recommendations are also made for the NLSY79 curators for incorporating data quality checks, and providing more convenient samples of the data to potential users.
 \end{abstract}
 
 \noindent%
-{\it Keywords:}  3 to 6 keywords, that do not appear in the title
+{\it Keywords:}  Data cleaning; Data tidying; Longitudinal data; NLSY79; Open data; Initial data analysis; Outlier detection; Robust linear regression
 \vfill
 
 \newpage
 \spacingset{1.45} % DON'T change the spacing!
-
-\textbf{Keywords}: Data cleaning; Data tidying; Longitudinal data; NLSY79; Open data; Initial data analysis; Outlier detection; Robust linear regression
 
 \hypertarget{intro}{%
 \section{Introduction}\label{intro}}
@@ -181,34 +179,60 @@ Since there is no information on high school dropouts in Singer and Willet's boo
 \hypertarget{cleaning}{%
 \section{Data Cleaning}\label{cleaning}}
 
+In this section, we outline the steps taken to the download the raw data from the database provided at {[}CITE{]}. Specifically, we only extract a subset of the variables in the data base.
+
 \hypertarget{getting-and-tidying-the-data}{%
 \subsection{Getting and Tidying the Data}\label{getting-and-tidying-the-data}}
 
 The NLSY79 data are stored in a \href{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data}{database} and could be downloaded by variables. Several variables are available for download and could be browsed by index. For the wages data set, we only extracted these variables:
 
-\begin{tcolorbox}[width=\textwidth,
-                  boxsep=5pt,
-                  left=5pt,
-                  right=5pt,
-                  top=5pt,
-                  ]
+\begin{tcolorbox}[label="box:data"]
+
 Education, Training and Achievement Scores
 
-- Education -> Summary measures -> All schools -> By year -> Highest grade completed
-  - Downloaded all of variables in Highest grade completed.
-  
+\begin{itemize}
+\tightlist
+\item
+  Education -\textgreater{} Summary measures -\textgreater{} All schools -\textgreater{} By year -\textgreater{} Highest grade completed
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Downloaded all of variables in Highest grade completed.
+  \end{itemize}
+\end{itemize}
+
 Employment
 
-- Summary measures -> By job -> Hours worked and Hourly wages
-  - Downloaded all of the variables in Hours worked.
-  - Downloaded all of the variables in Hourly wages
-  Both hours worked and hourly wages are recorded by the job, up to five jobs for each id/subject. 
-  
+\begin{itemize}
+\tightlist
+\item
+  Summary measures -\textgreater{} By job -\textgreater{} Hours worked and Hourly wages
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Downloaded all of the variables in Hours worked.
+  \item
+    Downloaded all of the variables in Hourly wages
+    Both hours worked and hourly wages are recorded by the job, up to five jobs for each id/subject.
+  \end{itemize}
+\end{itemize}
+
 Household, Geography and Contextual Variables
 
-- Context -> Summary measures -> Basic demographics 
-  - Downloaded year and month of birth, race, and sex variables.
-  There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
+\begin{itemize}
+\tightlist
+\item
+  Context -\textgreater{} Summary measures -\textgreater{} Basic demographics
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Downloaded year and month of birth, race, and sex variables.
+    There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
+  \end{itemize}
+\end{itemize}
 
 \end{tcolorbox}
 
@@ -449,7 +473,7 @@ Total & 2002 (15.78\%) & 3174 (25.02\%) & 7510 (59.20\%) & 12686 (100.00\%)\\
 \end{tabular}
 \end{table}
 
-The next step is that explore the mean hourly wage data. In this case, we only explore the wages data of up to \(12^{th}\) grade. Table \ref{tab:summarytable} shows that the median of the overall wage of the cohort is only 7.2, while the mean is 11.87. It indicates that the data might contains a lot of extreme values.
+The next step is that explore the mean hourly wage data. In this case, we only explore the wages data of up to \(12^{th}\) grade. Here, we use visualisation techniques to do IDA.
 
 \begin{table}
 
@@ -483,7 +507,7 @@ Max. & 33400.00000\\
 \caption{A glimpse of the refreshed data. Longitudinal profiles of wages from 1979-2018 are shown for a random sample of 36 individuals, divided into twelve subplots. Most individuals here experienced increasing wages over time, although there is considerable fluctuation from one year to another.}\label{fig:sample-plot}
 \end{figure}
 
-However, we can not be sure only by observing the summary statistics. Hence, we use visualisation techniques to investigate this matter. Figure \ref{fig:feature-plot} conveys a problem in the mean hourly wage values. Figure \ref{fig:feature-plot} A shows that some observations have an exceptionally high figure of wages, even more than US\$10,000 per hour. In Figure \ref{fig:feature-plot} B, we barely see any difference in the minimum, median, and maximum value of the wages since the distribution is heavily skewed to the right.
+We take 36 samples randomly from the data and plot them, as shown in Figure \ref{fig:sample-plot}. It implies that these respondents have a lot of variability in wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples have a different pattern of mean hourly wages. Some have had flat wages for years but had a sudden increase in one particular year, then it gone down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9.
 
 \begin{figure}
 
@@ -493,10 +517,6 @@ However, we can not be sure only by observing the summary statistics. Hence, we 
 
 \caption{Summary plots to check the cleaned data reveal more cleaning is necessary: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual (id=39) with an unusual wage relative to their years of data (C). Some values of hourly wages are unbelievable, and some individuals have extemely unusual wages in some years.}\label{fig:feature-plot}
 \end{figure}
-
-In Figure \ref{fig:high-wages}, we plot some respondents with a high value of mean hourly wages. We filter all of the IDs who earned more than US\$ 500 per hour on average. We find that these respondents only experienced one point of extremely high wages. Thus, we suspect that these high values are erroneous resulted from a data entry error.
-
-Further, we take 36 samples randomly from the data and plot them, as shown in Figure \ref{fig:sample-plot}. It implies that not only that some observations earn extremely high figures of wages, but some also have reasonably fluctuated wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples have a different pattern of mean hourly wages. Some have had flat wages for years but had a sudden increase in one particular year, then it gone down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9.
 
 The anomalies are also found in the total hours of work, where some observations work for 420 hours a week in total. According to Pergamit et al. (2001), one of the flaws of the NLSY79 employment data is that the NLSY79 collects the information of the working hours since the last interview. Thus, it might be challenging for the respondents to track the within-job hours' changes between survey years, especially for the respondents with fluctuated working hours or seasonal jobs. It even has been more challenging since 1994, where the respondents had to recall two years periods. This shortcoming might also contribute to the fluctuation of one's wages data.
 

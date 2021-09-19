@@ -36,6 +36,7 @@ biblio-style: unsrt
 #preamble: >
 header-includes:
   - \usepackage{tcolorbox}
+  - \newtcolorbox{tbox}{width=\textwidth,boxsep=5pt}
 output: 
   #rticles::arxiv_article:
     #keep_tex: false
@@ -43,6 +44,7 @@ output:
     base_format: rticles::arxiv_article
 date: "24/02/2021"
 always_allow_html: true
+keywords: "Data cleaning; Data tidying; Longitudinal data; NLSY79; Open data; Initial data analysis; Outlier detection; Robust linear regression"
 ---
 
 ```{r setup, echo = FALSE, cache = FALSE, include = FALSE}
@@ -62,9 +64,6 @@ read_chunk(here::here("paper/scripts/eda.R"))
 ```
 
 
-
-
-**Keywords**: Data cleaning; Data tidying; Longitudinal data; NLSY79; Open data; Initial data analysis; Outlier detection; Robust linear regression
 
 ```{r load-pkgs}
 ```
@@ -102,17 +101,16 @@ Since there is no information on high school dropouts in Singer and Willet's boo
 
 # Data Cleaning {#cleaning}
 
+In this section, we outline the steps taken to the download the raw data from the database provided at [CITE]. Specifically, we only extract a subset of the variables in the data base. 
+
 ## Getting and Tidying the Data
 
 The NLSY79 data are stored in a [database](https://www.nlsinfo.org/content/cohorts/nlsy79/get-data) and could be downloaded by variables. Several variables are available for download and could be browsed by index. For the wages data set, we only extracted these variables:
 
 
-\begin{tcolorbox}[width=\textwidth,
-                  boxsep=5pt,
-                  left=5pt,
-                  right=5pt,
-                  top=5pt,
-                  ]
+
+::: {.tcolorbox data-latex="[label=\"box:data\"]" }
+
 Education, Training and Achievement Scores
 
 - Education -> Summary measures -> All schools -> By year -> Highest grade completed
@@ -131,7 +129,7 @@ Household, Geography and Contextual Variables
   - Downloaded year and month of birth, race, and sex variables.
   There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
 
-\end{tcolorbox}
+:::
       
 The downloaded data set came in a csv (NLSY79.csv) and dat (NLSY79.dat) format. We only used the .dat format. It also came along with these files:
 

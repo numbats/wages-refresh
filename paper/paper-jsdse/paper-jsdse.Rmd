@@ -1,5 +1,4 @@
 ---
-title: "The Journey from Wild to Textbook Data: A Case Study from the National Longitudinal Survey of Youth"
 authors:
   - name: Dewi Amaliah
     thanks: "Test"
@@ -32,6 +31,8 @@ authors:
 bibliography: ../references.bib
 biblio-style: unsrt
 #preamble: >
+header-includes:
+  - \usepackage{tcolorbox}
 output: 
   bookdown::pdf_document2:
     template: TAS-template-for-rmd.tex
@@ -40,6 +41,18 @@ date: "`r Sys.Date()`"
 always_allow_html: true
 ---
 
+
+```{r, include = FALSE}
+paper <- here::here("paper/paper.Rmd")
+meta <- rmarkdown::yaml_front_matter(paper)
+```
+
+---
+title: "`r meta$title`"
+abstract: >
+  `r meta$abstract`
+keywords: `r meta$keywords`
+---
 
 
 
