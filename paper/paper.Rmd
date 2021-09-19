@@ -36,7 +36,7 @@ biblio-style: unsrt
 #preamble: >
 header-includes:
   - \usepackage{tcolorbox}
-  - \newtcolorbox{tbox}{width=\textwidth,boxsep=5pt}
+  - \usepackage{enumitem}
 output: 
   #rticles::arxiv_article:
     #keep_tex: false
@@ -101,7 +101,7 @@ Since there is no information on high school dropouts in Singer and Willet's boo
 
 # Data Cleaning {#cleaning}
 
-In this section, we outline the steps taken to the download the raw data from the database provided at [CITE]. Specifically, we only extract a subset of the variables in the data base. 
+In this section, we outline the steps taken to the download the raw data from the database provided at [CITE: https://www.nlsinfo.org/content/cohorts/nlsy79/get-data]. Specifically, we only extract a subset of the variables in the database as shown in \ref{box:data}. 
 
 ## Getting and Tidying the Data
 
@@ -109,25 +109,34 @@ The NLSY79 data are stored in a [database](https://www.nlsinfo.org/content/cohor
 
 
 
-::: {.tcolorbox data-latex="[label=\"box:data\"]" }
+::: {.tcolorbox data-latex="[label=\"box:data\", title=\"Getting data\"]" }
 
-Education, Training and Achievement Scores
-
-- Education -> Summary measures -> All schools -> By year -> Highest grade completed
-  - Downloaded all of variables in Highest grade completed.
-  
-Employment
-
-- Summary measures -> By job -> Hours worked and Hourly wages
-  - Downloaded all of the variables in Hours worked.
-  - Downloaded all of the variables in Hourly wages
+\begin{itemize}
+\item[$\triangleright$] Education, Training and Achievement Scores
+\begin{itemize}
+\item[$\triangleright$] Education $\triangleright$ Summary measures $\triangleright$ All schools $\triangleright$ By year $\triangleright$ Highest grade completed
+\begin{itemize}
+\item Downloaded all of variables in Highest grade completed.
+\end{itemize}
+\end{itemize}
+\item[$\triangleright$] Employment
+\begin{itemize}
+\item[$\triangleright$] Summary measures $\triangleright$ By job $\triangleright$ Hours worked and Hourly wages
+\begin{itemize}
+\item Downloaded all of the variables in Hours worked.
+\item Downloaded all of the variables in Hourly wages
   Both hours worked and hourly wages are recorded by the job, up to five jobs for each id/subject. 
-  
-Household, Geography and Contextual Variables
+\end{itemize}
+\end{itemize}
+\item[$\triangleright$] Household, Geography and Contextual Variables
+\begin{itemize}
+\item[$\triangleright$] Context $\triangleright$ Summary measures $\triangleright$ Basic demographics 
+\begin{itemize}
+\item Downloaded year and month of birth, race, and sex variables. There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
+\end{itemize}
+\end{itemize}
+\end{itemize}
 
-- Context -> Summary measures -> Basic demographics 
-  - Downloaded year and month of birth, race, and sex variables.
-  There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
 
 :::
       
