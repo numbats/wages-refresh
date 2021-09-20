@@ -43,13 +43,14 @@ ggplot(wages_before_tsibble,
            group = id)) +
   geom_line(alpha = 0.7) +
   facet_sample() +
-  scale_x_continuous("",
+  scale_x_continuous("Year",
                      breaks = seq(1980, 2020, 10),
                      labels = c("80", "90", "00", "10", "20"),
                      minor_breaks = seq(1980, 2020, 5)) +
+  theme_bw() +
   theme(axis.text.x = element_text(angle = 10, size = 6)) +
-  ylab("Hourly wage ($)") +
-  theme_bw()
+  ylab("Hourly wage ($)")
+
 
 ## ---- feature-plot
 wages_high <- filter(wages_before, mean_hourly_wage > 500) %>%
@@ -64,14 +65,14 @@ spag <- wages_before %>%
              y = mean_hourly_wage,
              group = id)) +
   geom_line(alpha = 0.1) +
-  scale_x_continuous("",
+  scale_x_continuous("Year",
                      breaks = seq(1980, 2020, 10),
                      labels = c("80", "90", "00", "10", "20"),
                      minor_breaks = seq(1980, 2020, 5)) +
   ggtitle("A") +
-  theme(plot.title = element_text(size = 10)) +
   theme_bw() +
-  ylab("Hourly wage ($)")
+  ylab("Hourly wage ($)") +
+  theme(plot.title = element_text(size = 10))
 
 wages_three_feat <- wages_before_tsibble %>%
   features(mean_hourly_wage,
@@ -98,6 +99,7 @@ feature_bp <- ggplot(wages_feat_long,
   #ggtitle("C") +
   ggtitle("B")  +
   ylab("Hourly wage ($)") +
+  xlab("Feature") +
   theme(legend.position = "none",
         plot.title = element_text(size = 10))
 
@@ -109,15 +111,15 @@ plot_high <- ggplot(filter(wages_high2, id == 39)) +
              size = 0.5,
              alpha = 0.5) +
   annotate("text", x = 2010, y = 1000, label = "id: 39") +
-  scale_x_continuous("",
+  scale_x_continuous("Year",
                      breaks = seq(1980, 2020, 10),
                      labels = c("80", "90", "00", "10", "20"),
                      minor_breaks = seq(1980, 2020, 5)) +
-  theme(axis.text.x = element_text(angle = 10, size = 6),
-        plot.title = element_text(size = 10)) +
   ylab("Hourly wage ($)") +
   theme_bw() +
-  ggtitle("C")
+  ggtitle("C") +
+  theme(axis.text.x = element_text(angle = 10, size = 6),
+        plot.title = element_text(size = 10))
   #ggtitle("D")
 
 #spag + feature + feature_bp + plot_high + plot_layout(nrow = 1, guides = "collect") &
@@ -125,10 +127,6 @@ plot_high <- ggplot(filter(wages_high2, id == 39)) +
 spag + feature_bp + plot_high +
   plot_layout(nrow = 1, guides = "collect") #&
   #theme(legend.position = "bottom")
-
-## ---- high-wages
-
-
 
 ## ---- rlm
 # nest the data by id to build a robust linear model
@@ -215,7 +213,11 @@ ggplot(wages_compare) +
   facet_wrap(~id, scales = "free_y") +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 10, size = 5),
-        legend.position = "bottom")
+        legend.position = "bottom") +
+  guides(linetype = FALSE) +
+  xlab("Year") +
+  ylab("Hourly wage ($)") +
+  scale_color_hue(labels = c("Before", "After"))
 
 ## ---- fixed-feature-plot
 spag2 <- wages_cleaned %>%
@@ -223,9 +225,15 @@ spag2 <- wages_cleaned %>%
              y = wages_rlm,
              group = id)) +
   geom_line(alpha = 0.1) +
+  scale_x_continuous("Year",
+                     breaks = seq(1980, 2020, 10),
+                     labels = c("80", "90", "00", "10", "20"),
+                     minor_breaks = seq(1980, 2020, 5)) +
+  theme_bw() +
   ggtitle("A)") +
   theme(plot.title = element_text(size = 10)) +
-  theme_bw()
+  ylab("Hourly wage ($)")
+
 
 wages_hs2020_rlm <- as_tsibble(x = wages_cleaned,
                                key = id,
@@ -241,9 +249,10 @@ wages_feat_long_rlm <- wages_three_feat_rlm %>%
 feature2 <- ggplot(wages_feat_long_rlm) +
   geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
   ggtitle("B)") +
+  theme_bw() +
   theme(plot.title = element_text(size = 10)) +
-  xlab("value (log10)") +
-  theme_bw()
+  xlab("value (log10)")
+
 
 feature2_bp <- ggplot(wages_feat_long_rlm,
                      aes(y=value, x = feature,
@@ -253,6 +262,7 @@ feature2_bp <- ggplot(wages_feat_long_rlm,
   #ggtitle("C") +
   ggtitle("B")  +
   ylab("Hourly wage ($)") +
+  xlab("Feature") +
   theme(legend.position = "none",
         plot.title = element_text(size = 10))
 
@@ -263,15 +273,15 @@ plot_high_after <- ggplot(filter(wages_cleaned, id == 39)) +
                  y = wages_rlm),
              size = 0.5,
              alpha = 0.5) +
-  annotate("text", x = 2010, y = 1000, label = "id: 39") +
-  scale_x_continuous("",
+  annotate("text", x = 1985, y = 26, label = "id: 39") +
+  scale_x_continuous("Year",
                      breaks = seq(1980, 2020, 10),
                      labels = c("80", "90", "00", "10", "20"),
                      minor_breaks = seq(1980, 2020, 5)) +
+  theme_bw() +
   theme(axis.text.x = element_text(angle = 10, size = 6),
         plot.title = element_text(size = 10)) +
   ylab("Hourly wage ($)") +
-  theme_bw() +
   ggtitle("C")
 
 

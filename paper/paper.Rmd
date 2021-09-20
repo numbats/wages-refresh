@@ -288,6 +288,9 @@ Finally, we save the imputed data and set the appropriate data type for the vari
 ```{r nrow}
 ```
 
+
+## Recap 
+
 ```{r flow-chart, fig.cap="The stages of data filtering from the raw data to get three datasets contained yowie, n means the number of ID, while n\\_obs means the number of observations.", out.width="93%"}
 ```
 
