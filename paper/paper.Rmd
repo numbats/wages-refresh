@@ -101,16 +101,16 @@ Since there is no information on high school dropouts in Singer and Willet's boo
 
 # Data Cleaning {#cleaning}
 
-In this section, we outline the steps taken to the download the raw data from the database provided at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} [@nlsy79]. Specifically, we only extract a subset of the variables in the database as shown in \ref{box:data}. 
+In this section, we outline the steps taken to the download the raw data from the database provided at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} [@nlsy79]. Specifically, we only extract a subset of the variables in the database as described in Section~\ref{sec:getdata}. 
 
-## Getting and Tidying the Data
+## Getting and Tidying the Data {#getdata}
 
 The NLSY79 data are stored in a [database](https://www.nlsinfo.org/content/cohorts/nlsy79/get-data) and could be downloaded by variables. Several variables are available for download and could be browsed by index. For the wages data set, we only extracted these variables:
 
 
 
 ::: {.tcolorbox data-latex="[label=\"box:data\", title=Getting the data]" }
-\faDatabase National Longitudinal Survey of Youth 1979
+\faDatabase\ National Longitudinal Survey of Youth 1979
 
 \begin{itemize}
 \item[$\triangleright$] Education, Training and Achievement Scores
