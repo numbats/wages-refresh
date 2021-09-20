@@ -16,6 +16,7 @@ library(lme4)
 library(modelr)
 library(forcats)
 library(yowie)
+library(knitr)
 
 
 ## ---- raw-data
