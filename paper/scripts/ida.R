@@ -217,7 +217,7 @@ ggplot(wages_compare) +
   theme(axis.text.x = element_text(angle = 10, size = 5),
         legend.position = "bottom")
 
-## ---- comppict
+## ---- fixed-feature-plot
 spag2 <- wages_cleaned %>%
   ggplot(aes(x = year,
              y = wages_rlm,
@@ -276,81 +276,6 @@ plot_high_after <- ggplot(filter(wages_cleaned, id == 39)) +
 
 
 spag2 + feature2_bp + plot_high_after
-
-
-## ---- fixed-feature-plot
-wages_high <- filter(wages_before, mean_hourly_wage > 500) %>%
-  as_tibble() %>%
-  head(n = 6)
-
-wages_high2 <- wages_before %>%
-  filter(id %in% wages_high$id)
-
-spag <- wages_before %>%
-  ggplot(aes(x = year,
-             y = mean_hourly_wage,
-             group = id)) +
-  geom_line(alpha = 0.1) +
-  scale_x_continuous("",
-                     breaks = seq(1980, 2020, 10),
-                     labels = c("80", "90", "00", "10", "20"),
-                     minor_breaks = seq(1980, 2020, 5)) +
-  ggtitle("A") +
-  theme(plot.title = element_text(size = 10)) +
-  theme_bw() +
-  ylab("Hourly wage ($)")
-
-wages_three_feat <- wages_before_tsibble %>%
-  features(mean_hourly_wage,
-           feat_three_num
-  )
-wages_feat_long <- wages_three_feat %>%
-  pivot_longer(c(min, med, max),
-               names_to = "feature", values_to = "value") %>%
-  mutate(feature = factor(feature, levels = c("min", "med", "max")))
-
-feature <- ggplot(wages_feat_long) +
-  geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
-  ggtitle("B") +
-  theme_bw() +
-  theme(plot.title = element_text(size = 10))
-
-feature_bp <- ggplot(wages_feat_long,
-                     aes(y=value, x = feature,
-                         fill = feature, color = feature)) +
-  geom_boxplot() +
-  theme_bw() +
-  #ggtitle("C") +
-  ggtitle("B")  +
-  ylab("Hourly wage ($)") +
-  theme(legend.position = "none",
-        plot.title = element_text(size = 10))
-
-plot_high <- ggplot(filter(wages_high2, id == 39)) +
-  geom_line(aes(x = year,
-                y = mean_hourly_wage)) +
-  geom_point(aes(x = year,
-                 y = mean_hourly_wage),
-             size = 0.5,
-             alpha = 0.5) +
-  annotate("text", x = 2010, y = 1000, label = "id: 39") +
-  scale_x_continuous("",
-                     breaks = seq(1980, 2020, 10),
-                     labels = c("80", "90", "00", "10", "20"),
-                     minor_breaks = seq(1980, 2020, 5)) +
-  theme(axis.text.x = element_text(angle = 10, size = 6),
-        plot.title = element_text(size = 10)) +
-  ylab("Hourly wage ($)") +
-  theme_bw() +
-  ggtitle("C")
-#ggtitle("D")
-
-#spag + feature + feature_bp + plot_high + plot_layout(nrow = 1, guides = "collect") &
-#  theme(legend.position = "bottom")
-spag + feature_bp + plot_high +
-  plot_layout(nrow = 1, guides = "collect") #&
-#theme(legend.position = "bottom")
-
 
 ## ---- save-data
 # select out the old value of mean hourly wage and change it with the wages_rlm value
