@@ -49,13 +49,13 @@ sw_wages + do_ref
 sw_id <- as_tibble(sw) %>%
   group_by(id) %>%
   count() %>%
-  dplyr::select(id)
+  select(id)
 
 do_id <- as_tibble(do) %>%
   group_by(id) %>%
   mutate(id = as.numeric(id)) %>%
   count() %>%
-  dplyr::select(id)
+  select(id)
 
 # check common id in data set
 sw_do <- inner_join(sw_id, do_id, by = "id")
