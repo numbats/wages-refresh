@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.15)  21 SEP 2021 09:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.15)  21 SEP 2021 11:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -605,56 +605,57 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fontawesome/fontawesomesymbols-ge
 neric.tex)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fontawesome/fontawesomesymbols-pd
-ftex.tex)) (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/longtable.sty
+ftex.tex)) (/usr/local/texlive/2019/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/tools/array.sty
+Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
+\col@sep=\dimen264
+\ar@mcellbox=\box62
+\extrarowheight=\dimen265
+\NC@list=\toks34
+\extratabsurround=\skip71
+\backup@length=\skip72
+\ar@cellbox=\box63
+)
+\everycr=\toks35
+\minrowclearance=\skip73
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip71
-\LTright=\skip72
-\LTpre=\skip73
-\LTpost=\skip74
+\LTleft=\skip74
+\LTright=\skip75
+\LTpre=\skip76
+\LTpost=\skip77
 \LTchunksize=\count287
-\LTcapwidth=\dimen264
-\LT@head=\box62
-\LT@firsthead=\box63
-\LT@foot=\box64
-\LT@lastfoot=\box65
+\LTcapwidth=\dimen266
+\LT@head=\box64
+\LT@firsthead=\box65
+\LT@foot=\box66
+\LT@lastfoot=\box67
 \LT@cols=\count288
 \LT@rows=\count289
 \c@LT@tables=\count290
 \c@LT@chunks=\count291
-\LT@p@ftn=\toks34
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/array.sty
-Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
-\col@sep=\dimen265
-\ar@mcellbox=\box66
-\extrarowheight=\dimen266
-\NC@list=\toks35
-\extratabsurround=\skip75
-\backup@length=\skip76
-\ar@cellbox=\box67
+\LT@p@ftn=\toks36
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
-\multirow@colwidth=\skip77
+\multirow@colwidth=\skip78
 \multirow@cntb=\count292
-\multirow@dima=\skip78
+\multirow@dima=\skip79
 \bigstrutjot=\dimen267
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen268
 \WF@size=\dimen269
 \c@WF@wrappedlines=\count293
 \WF@box=\box68
-\WF@everypar=\toks36
+\WF@everypar=\toks37
 Package: wrapfig 2003/01/31  v 3.6
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count294
-\float@exts=\toks37
+\float@exts=\toks38
 \float@box=\box69
-\@float@everytoks=\toks38
+\@float@everytoks=\toks39
 \@floatcapt=\box70
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/colortbl/colortbl.sty
-Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
-\everycr=\toks39
-\minrowclearance=\skip79
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/lscape.sty
@@ -720,24 +721,24 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 ) (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 14
-1.
+2.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -808,7 +809,7 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box80
-Package hyperref Info: Link coloring OFF on input line 141.
+Package hyperref Info: Link coloring OFF on input line 142.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/usr/local/texlive/2019/texmf-dist/tex/latex/refcount/refcount.sty
@@ -820,21 +821,21 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count304
 )
-LaTeX Info: Redefining \ref on input line 141.
-LaTeX Info: Redefining \pageref on input line 141.
-LaTeX Info: Redefining \nameref on input line 141.
+LaTeX Info: Redefining \ref on input line 142.
+LaTeX Info: Redefining \pageref on input line 142.
+LaTeX Info: Redefining \nameref on input line 142.
 (./paper.out) (./paper.out)
 \@outlinefile=\write7
 \openout7 = `paper.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 141.
+LaTeX Info: Redefining \microtypecontext on input line 142.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 141.
+LaTeX Info: Redefining \showhyphens on input line 142.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -869,39 +870,39 @@ Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10'.
 (microtype)             Ignoring protrusion settings for this character.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-43.
+44.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-43.
+44.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-143.
+144.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-143.
+144.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 143.
+(Font)              <10> on input line 144.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 143.
+(Font)              <7> on input line 144.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 143.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 143
+(Font)              <5> on input line 144.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 144
 .
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 143
+LaTeX Font Info:    Trying to load font information for U+msb on input line 144
 .
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -909,7 +910,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-43.
+44.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -919,40 +920,42 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 
 LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
-(Font)              using `T1/lmr/bx/n' instead on input line 147.
+(Font)              using `T1/lmr/bx/n' instead on input line 148.
 
 [1
 
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
-LaTeX Warning: Reference `eda' on page 2 undefined on input line 167.
+LaTeX Warning: Reference `eda' on page 2 undefined on input line 168.
 
 [2]
-
-LaTeX Warning: Reference `sec:getdata' on page 3 undefined on input line 193.
-
 LaTeX Font Info:    Trying to load font information for U+fontawesomethree on i
-nput line 202.
+nput line 203.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fontawesome/ufontawesomethree.fd
 File: ufontawesomethree.fd 2016/05/22 Font definitions for U/fontawesomethree.
 )
 LaTeX Font Info:    Trying to load font information for U+fontawesometwo on inp
-ut line 209.
+ut line 210.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fontawesome/ufontawesometwo.fd
 File: ufontawesometwo.fd 2016/05/22 Font definitions for U/fontawesometwo.
 )
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
-37.
+38.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [3]
-Overfull \hbox (7.4769pt too wide) in paragraph at lines 248--265
- [][] 
- []
 
+LaTeX Warning: Reference `tab:untidy-data' on page 4 undefined on input line 24
+7.
 
-Underfull \hbox (badness 2772) in paragraph at lines 270--271
+<figures/untidy-data-1.pdf, id=112, 464.73625pt x 294.09875pt>
+File: figures/untidy-data-1.pdf Graphic file (type pdf)
+<use figures/untidy-data-1.pdf>
+Package pdftex.def Info: figures/untidy-data-1.pdf  used on input line 251.
+(pdftex.def)             Requested size: 469.75671pt x 297.2842pt.
+
+Underfull \hbox (badness 2772) in paragraph at lines 261--262
 \T1/lmtt/m/n/10 Age in 1979\T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 gender\T1/lmr
 /m/n/10 (+20) , \T1/lmtt/m/n/10 race\T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 high
 est grade completed\T1/lmr/m/n/10 (+20) , and the \T1/lmtt/m/n/10 year when the
@@ -960,10 +963,10 @@ est grade completed\T1/lmr/m/n/10 (+20) , and the \T1/lmtt/m/n/10 year when the
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 274.
+Package xcolor Warning: Incompatible color definition on input line 265.
 
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-282.
+273.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -978,166 +981,158 @@ Package microtype Info: Character `texttrademark ' is missing
 (microtype)             in font `TS1/lmtt/m/it/10'.
 (microtype)             Ignoring protrusion settings for this character.
 
-Package xcolor Warning: Incompatible color definition on input line 308.
+Package xcolor Warning: Incompatible color definition on input line 299.
 
 
-Package xcolor Warning: Incompatible color definition on input line 308.
+Package xcolor Warning: Incompatible color definition on input line 299.
 
 
-Package xcolor Warning: Incompatible color definition on input line 308.
+Package xcolor Warning: Incompatible color definition on input line 299.
 
-[4pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
-as been already used, duplicate ignored
+[4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
+has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.308 \end{Shaded}
-                  ]
+l.299 \end{Shaded}
+                   <./figures/untidy-data-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 308.
-
-
-Package xcolor Warning: Incompatible color definition on input line 308.
+Package xcolor Warning: Incompatible color definition on input line 299.
 
 
-Package xcolor Warning: Incompatible color definition on input line 325.
+Package xcolor Warning: Incompatible color definition on input line 299.
+
+
+Package xcolor Warning: Incompatible color definition on input line 316.
 
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 330.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 321.
 
-Package xcolor Warning: Incompatible color definition on input line 359.
-
-
-Package xcolor Warning: Incompatible color definition on input line 359.
+Package xcolor Warning: Incompatible color definition on input line 350.
 
 
-Underfull \vbox (badness 1824) detected at line 359
- []
+Package xcolor Warning: Incompatible color definition on input line 350.
 
 
-Package xcolor Warning: Incompatible color definition on input line 359.
-
-
-Underfull \vbox (badness 1502) has occurred while \output is active []
+Package xcolor Warning: Incompatible color definition on input line 350.
 
 [5]
 
-Package xcolor Warning: Incompatible color definition on input line 359.
+Package xcolor Warning: Incompatible color definition on input line 350.
 
 
-Package xcolor Warning: Incompatible color definition on input line 359.
+Package xcolor Warning: Incompatible color definition on input line 350.
 
 
-Package xcolor Warning: Incompatible color definition on input line 363.
+Package xcolor Warning: Incompatible color definition on input line 354.
 
 
-Package xcolor Warning: Incompatible color definition on input line 390.
+Package xcolor Warning: Incompatible color definition on input line 381.
 
 
-Package xcolor Warning: Incompatible color definition on input line 390.
+Package xcolor Warning: Incompatible color definition on input line 381.
 
 [6]
-<figures/sample-plot-1.pdf, id=134, 355.3275pt x 277.035pt>
-File: figures/sample-plot-1.pdf Graphic file (type pdf)
-<use figures/sample-plot-1.pdf>
-Package pdftex.def Info: figures/sample-plot-1.pdf  used on input line 496.
-(pdftex.def)             Requested size: 469.75499pt x 366.26222pt.
-[7pdfTeX warning (ext4): destination with the same identifier (name{table.2}) h
+Underfull \vbox (badness 1067) has occurred while \output is active []
+
+[7pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
 as been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.504 
+l.483 \end{table}
+                 ]
+<figures/sample-plot-1.pdf, id=151, 355.3275pt x 277.035pt>
+File: figures/sample-plot-1.pdf Graphic file (type pdf)
+<use figures/sample-plot-1.pdf>
+Package pdftex.def Info: figures/sample-plot-1.pdf  used on input line 487.
+(pdftex.def)             Requested size: 469.75499pt x 366.26222pt.
+<figures/feature-plot-1.pdf, id=153, 416.55624pt x 121.45375pt>
+File: figures/feature-plot-1.pdf Graphic file (type pdf)
+<use figures/feature-plot-1.pdf>
+Package pdftex.def Info: figures/feature-plot-1.pdf  used on input line 498.
+(pdftex.def)             Requested size: 433.62158pt x 126.4349pt.
+[8pdfTeX warning (ext4): destination with the same identifier (name{table.2}) h
+as been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.517 
       pdfTeX warning (ext4): destination with the same identifier (name{table.3
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.504 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.4
-}) has been already used, duplicate ignored
+l.517 
+      ] [9pdfTeX warning (ext4): destination with the same identifier (name{fig
+ure.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.504 
-      ]
-<figures/feature-plot-1.pdf, id=145, 416.55624pt x 121.45375pt>
-File: figures/feature-plot-1.pdf Graphic file (type pdf)
-<use figures/feature-plot-1.pdf>
-Package pdftex.def Info: figures/feature-plot-1.pdf  used on input line 507.
-(pdftex.def)             Requested size: 433.62158pt x 126.4349pt.
-[8pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
-has been already used, duplicate ignored
+l.517 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.522 
-       <./figures/sample-plot-1.pdf>]
-<figures/compare-plot-1.pdf, id=164, 427.5975pt x 343.2825pt>
+l.517 
+       <./figures/sample-plot-1.pdf> <./figures/feature-plot-1.pdf>]
+<figures/compare-plot-1.pdf, id=190, 427.5975pt x 343.2825pt>
 File: figures/compare-plot-1.pdf Graphic file (type pdf)
 <use figures/compare-plot-1.pdf>
-Package pdftex.def Info: figures/compare-plot-1.pdf  used on input line 531.
+Package pdftex.def Info: figures/compare-plot-1.pdf  used on input line 522.
 (pdftex.def)             Requested size: 433.62158pt x 348.11636pt.
 
-LaTeX Warning: Reference `fixed-feature-plot' on page 9 undefined on input line
- 538.
+LaTeX Warning: Reference `fixed-feature-plot' on page 10 undefined on input lin
+e 529.
 
-<figures/fixed-feature-plot-1.pdf, id=166, 416.55624pt x 121.45375pt>
+<figures/fixed-feature-plot-1.pdf, id=192, 416.55624pt x 121.45375pt>
 File: figures/fixed-feature-plot-1.pdf Graphic file (type pdf)
 <use figures/fixed-feature-plot-1.pdf>
 Package pdftex.def Info: figures/fixed-feature-plot-1.pdf  used on input line 5
-42.
+33.
 (pdftex.def)             Requested size: 433.62158pt x 126.4349pt.
 </Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart.png,
- id=168, 1606.0pt x 2236.355pt>
+ id=194, 1606.0pt x 2236.355pt>
 File: /Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart
 .png Graphic file (type png)
 <use /Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart.
 png>
 Package pdftex.def Info: /Users/etan0038/Dropbox/repo/summer-wages-refresh/pape
-r/figures/flowchart.png  used on input line 556.
+r/figures/flowchart.png  used on input line 547.
 (pdftex.def)             Requested size: 436.8687pt x 608.3283pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 2653) has occurred while \output is active []
 
-[9pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.570 
-       <./figures/feature-plot-1.pdf>] [10pdfTeX warning (ext4): destination wi
-th the same identifier (name{figure.3}) has been already used, duplicate ignore
-d
+[10pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
+ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.570 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.
-4}) has been already used, duplicate ignored
+l.552 \end{figure}
+                   <./figures/compare-plot-1.pdf>] [11pdfTeX warning (ext4): de
+stination with the same identifier (name{figure.5}) has been already used, dupl
+icate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.570 
-       <./figures/compare-plot-1.pdf> <./figures/fixed-feature-plot-1.pdf>] [11
-pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
-s been already used, duplicate ignored
+l.576 ...aterials}\label{supplementary-materials}}
+                                                   <./figures/fixed-feature-plo
+t-1.pdf>] [12pdfTeX warning (ext4): destination with the same identifier (name{
+figure.6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.570 
-       </Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowcha
-rt.png>] [12]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[13]
+l.576 ...aterials}\label{supplementary-materials}}
+                                                   </Users/etan0038/Dropbox/rep
+o/summer-wages-refresh/paper/figures/flowchart.png>] [13]
 No file paper.bbl.
 [14]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 722.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 722.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 713.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 713.
 (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 722.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 722.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 713.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 713.
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 5D0A7851DD1D2C87C51D7423A5EB4B3A;980.
 
@@ -1146,13 +1141,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 722.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 713.
  ) 
 Here is how much of TeX's memory you used:
- 22162 strings out of 480488
- 407528 string characters out of 5899970
- 790442 words of memory out of 5000000
- 37468 multiletter control sequences out of 15000+600000
+ 22169 strings out of 480488
+ 407739 string characters out of 5899970
+ 792455 words of memory out of 5000000
+ 37474 multiletter control sequences out of 15000+600000
  583191 words of font info for 116 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  59i,12n,75p,1092b,489s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1173,10 +1168,10 @@ exmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2019/texmf-dist/
 fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type
 1/public/lm/lmtt10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/l
 m/lmtti10.pfb>
-Output written on paper.pdf (14 pages, 951675 bytes).
+Output written on paper.pdf (14 pages, 1001561 bytes).
 PDF statistics:
- 399 PDF objects out of 1000 (max. 8388607)
- 353 compressed objects within 4 object streams
+ 408 PDF objects out of 1000 (max. 8388607)
+ 358 compressed objects within 4 object streams
  95 named destinations out of 1000 (max. 500000)
- 17062 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 17067 words of extra memory for PDF output out of 17280 (max. 10000000)
 

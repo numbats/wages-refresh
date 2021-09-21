@@ -17,25 +17,17 @@ library(modelr)
 library(forcats)
 library(yowie)
 library(knitr)
-
+select <- dplyr::select
 
 ## ---- raw-data
 source(here::here("data-raw/NLSY79/NLSY79.R"))
 
 ## ---- untidy-data
-untidy_demo <- new_data_qnames %>%
-  as_tibble() %>%
-  # in 2018, the variable's name is Q3-4_2018, instead of HGC_2018
-  rename(HGC_2018 = `Q3-4_2018`) %>%
-  dplyr::select(CASEID_1979,
-                starts_with("HRP") &
-                  ends_with(c("1979", "1980", "1981", "1982", "1983"))) %>%
-  dplyr::select(1:7) %>%
-  head()
-
-kable(untidy_demo,
-      caption = "The Untidy Form of the NLSY79 Raw Data") %>%
-  kable_styling()
+new_data_qnames %>%
+  select(CASEID_1979,
+         starts_with("HRP") &
+           ends_with(c("1979", "1980", "1981", "1982", "1983"))) %>%
+  visdat::vis_miss()
 
 ## ---- dob-tidy
 #tidy the date of birth data

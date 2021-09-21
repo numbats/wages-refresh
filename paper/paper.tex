@@ -122,6 +122,7 @@
 
 \usepackage{tcolorbox}
 \usepackage{fontawesome}
+\usepackage{color, colortbl}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -190,7 +191,7 @@ Since there is no information on high school dropouts in Singer and Willet's boo
 \hypertarget{cleaning}{%
 \section{Data Cleaning}\label{cleaning}}
 
-In this section, we outline the steps taken to the download the raw data from the database provided at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} (The U.S. Bureau of Labor Statistics, n.d.). Specifically, we only extract a subset of the variables in the database as described in Section\textasciitilde{}\ref{sec:getdata}.
+In this section, we outline the steps taken to the download the raw data from the database provided at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} (The U.S. Bureau of Labor Statistics, n.d.). Specifically, we only extract a subset of the variables in the database as described in Section\textasciitilde{}\ref{getdata}.
 
 \hypertarget{getdata}{%
 \subsection{Getting and Tidying the Data}\label{getdata}}
@@ -229,40 +230,30 @@ The NLSY79 data are stored in a \href{https://www.nlsinfo.org/content/cohorts/nl
 
 \end{tcolorbox}
 
-The downloaded data set came in a csv (NLSY79.csv) and dat (NLSY79.dat) format. We only used the .dat format. It also came along with these files:
+The downloaded data set came with the following set of files:
 
 \begin{itemize}
 \tightlist
 \item
-  NLSY79.NLSY79: Tagset of variables that can be uploaded to the website to recreate the data set.
+  \texttt{NLSY79.csv}: csv format
 \item
-  NLSY79.R: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set, \texttt{categories\_qnames} (the observations are stored in categorical/interval values) and \texttt{new\_data\_qnames} (the observations are stored in integer form).
+  \texttt{NLSY79.dat}: dat format
+\item
+  \texttt{NLSY79.NLSY79}: Tagset of variables that can be uploaded to the website to recreate the data set.
+\item
+  \texttt{NLSY79.R}: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set, \texttt{categories\_qnames} (the observations are stored in categorical/interval values) and \texttt{new\_data\_qnames} (the observations are stored in integer form).
 \end{itemize}
 
 According to Wickham (2014), tidy data sets comply with three rules. Firstly, each variable forms a column. Secondly, each observation forms a row. Lastly, each type of observational unit forms a table. Unfortunately, the \texttt{new\_data\_qnames} did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used \texttt{tidyr} (Wickham 2020b), \texttt{dplyr} (Wickham et al. 2020), and \texttt{stringr} (Wickham 2019) to do this job.
 
-\begin{table}
+\begin{figure}
 
-\caption{\label{tab:untidy-data}The Untidy Form of the NLSY79 Raw Data}
-\centering
-\begin{tabular}[t]{r|r|r|r|r|r|r}
-\hline
-CASEID\_1979 & HRP1\_1979 & HRP2\_1979 & HRP3\_1979 & HRP4\_1979 & HRP5\_1979 & HRP1\_1980\\
-\hline
-1 & 328 & NA & NA & NA & NA & NA\\
-\hline
-2 & 385 & NA & NA & NA & NA & 457\\
-\hline
-3 & 365 & NA & 275 & NA & NA & 397\\
-\hline
-4 & NA & NA & NA & NA & NA & NA\\
-\hline
-5 & 310 & 375 & NA & NA & NA & 333\\
-\hline
-6 & NA & NA & NA & 250 & NA & 275\\
-\hline
-\end{tabular}
-\end{table}
+{\centering \includegraphics[width=468px]{figures/untidy-data-1} 
+
+}
+
+\caption{The missing value structure of the NLSY79 raw data.}\label{fig:untidy-data}
+\end{figure}
 
 \hypertarget{tidying-demographic-variables}{%
 \subsubsection{Tidying demographic variables}\label{tidying-demographic-variables}}
