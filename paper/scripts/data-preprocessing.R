@@ -104,7 +104,7 @@ highest_year <- demog_education %>%
                          hgc_i == 1 ~ "1ST GRADE",
                          hgc_i == 2 ~ "2ND GRADE",
                          hgc_i == 3 ~ "3RD GRADE",
-                         hgc_i >= 4 & hgc_i <= 12, paste0(hgc_i,"TH GRADE"),
+                         hgc_i >= 4 & hgc_i <= 12 ~ paste0(hgc_i,"TH GRADE"),
                          hgc_i == 13 ~ "1ST YEAR COL",
                          hgc_i == 14 ~ "2ND YEAR COL",
                          hgc_i == 15 ~ "3RD YEAR COL",
