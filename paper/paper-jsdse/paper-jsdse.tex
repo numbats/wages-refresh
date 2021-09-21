@@ -150,9 +150,9 @@ Data cleaning can be considered to be a part of what is called ``initial data an
 
 Despite its importance, this IDA stage is often undervalued and neglected (Chatfield 1985). There are few research papers that document the data cleaning (Wickham 2014). Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties (M. Huebner et al. 2020).
 
-This paper aims to demonstrate the steps of IDA, tidying, cleaning, and documenting the process, for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century (Pergamit et al. 2001). In addition, The NLSY is considered a survey with high retention rates and carefully designed, making it suitable for a life course research (Pergamit et al. 2001; Cooksey 2017). According to Cooksey (2017), thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets (Pergamit et al. 2001).
+This paper demonstrates the steps of IDA -- tidying, cleaning, and documenting the process -- for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century (Pergamit et al. 2001). In addition, The NLSY is considered a survey with high retention rates and carefully designed, making it suitable for a life course research (Pergamit et al. 2001; Cooksey 2017). According to Cooksey (2017), thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets (Pergamit et al. 2001).
 
-Singer and Willett (2003) used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling. Our aim is to refresh this textbook data to be more up to date. Here, we investigate the process of getting from the raw NLSY79 to this textbook data set. However, we cannot create the exact same data set as published in their book since we do not have the information of what age threshold they used to determine the high school dropouts.
+Singer and Willett (2003) used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling. Our aim is to refresh this textbook data with data from . Here, we investigate the process of getting from the raw NLSY79 to this textbook data set. However, we cannot create the exact same data set as published in their book since we do not have the information of what age threshold they used to determine the high school dropouts.
 
 This paper is structured to have 5 sections. Section \ref{database} describes the original data source. Section \ref{cleaning} presents the steps of cleaning the data, including getting and tidying the data from the NLSY79 and initial data analysis to find and treat the anomalies in the data. We also gave examples of exploratory data analysis using the clean data in Section \ref{eda}. Finally, Section \ref{summary} summarises the paper.
 
@@ -180,7 +180,7 @@ Since there is no information on high school dropouts in Singer and Willet's boo
 \hypertarget{cleaning}{%
 \section{Data Cleaning}\label{cleaning}}
 
-In this section, we outline the steps taken to the download the raw data from the database provided at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} (The U.S. Bureau of Labor Statistics, n.d.). Specifically, we only extract a subset of the variables in the database as described in Section\textasciitilde{}\ref{sec:getdata}.
+In this section, we outline the steps taken to the download the raw data from the database provided at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} (The U.S. Bureau of Labor Statistics, n.d.). Specifically, we only extract a subset of the variables in the database as described in Section\textasciitilde{}\ref{getdata}.
 
 \hypertarget{getdata}{%
 \subsection{Getting and Tidying the Data}\label{getdata}}
@@ -219,40 +219,30 @@ The NLSY79 data are stored in a \href{https://www.nlsinfo.org/content/cohorts/nl
 
 \end{tcolorbox}
 
-The downloaded data set came in a csv (NLSY79.csv) and dat (NLSY79.dat) format. We only used the .dat format. It also came along with these files:
+The downloaded data set came with the following set of files:
 
 \begin{itemize}
 \tightlist
 \item
-  NLSY79.NLSY79: Tagset of variables that can be uploaded to the website to recreate the data set.
+  \texttt{NLSY79.csv}: csv format
 \item
-  NLSY79.R: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set, \texttt{categories\_qnames} (the observations are stored in categorical/interval values) and \texttt{new\_data\_qnames} (the observations are stored in integer form).
+  \texttt{NLSY79.dat}: dat format
+\item
+  \texttt{NLSY79.NLSY79}: Tagset of variables that can be uploaded to the website to recreate the data set.
+\item
+  \texttt{NLSY79.R}: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set, \texttt{categories\_qnames} (the observations are stored in categorical/interval values) and \texttt{new\_data\_qnames} (the observations are stored in integer form).
 \end{itemize}
 
 According to Wickham (2014), tidy data sets comply with three rules. Firstly, each variable forms a column. Secondly, each observation forms a row. Lastly, each type of observational unit forms a table. Unfortunately, the \texttt{new\_data\_qnames} did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used \texttt{tidyr} (Wickham 2020b), \texttt{dplyr} (Wickham et al. 2020), and \texttt{stringr} (Wickham 2019) to do this job.
 
-\begin{table}
+\begin{figure}
 
-\caption{\label{tab:untidy-data}The Untidy Form of the NLSY79 Raw Data}
-\centering
-\begin{tabular}[t]{r|r|r|r|r|r|r}
-\hline
-CASEID\_1979 & HRP1\_1979 & HRP2\_1979 & HRP3\_1979 & HRP4\_1979 & HRP5\_1979 & HRP1\_1980\\
-\hline
-1 & 328 & NA & NA & NA & NA & NA\\
-\hline
-2 & 385 & NA & NA & NA & NA & 457\\
-\hline
-3 & 365 & NA & 275 & NA & NA & 397\\
-\hline
-4 & NA & NA & NA & NA & NA & NA\\
-\hline
-5 & 310 & 375 & NA & NA & NA & 333\\
-\hline
-6 & NA & NA & NA & 250 & NA & 275\\
-\hline
-\end{tabular}
-\end{table}
+{\centering \includegraphics[width=468px]{figures/untidy-data-1} 
+
+}
+
+\caption{The missing value structure of the NLSY79 raw data.}\label{fig:untidy-data}
+\end{figure}
 
 \hypertarget{tidying-demographic-variables}{%
 \subsubsection{Tidying demographic variables}\label{tidying-demographic-variables}}
@@ -265,35 +255,35 @@ Age in 1979 are derived from year and month of birth variables in the raw data. 
 \begin{Highlighting}[]
 \CommentTok{\#tidy the date of birth data}
 \NormalTok{dob\_tidy }\OtherTok{\textless{}{-}}\NormalTok{ new\_data\_qnames }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(CASEID\_1979,}
+  \FunctionTok{select}\NormalTok{(CASEID\_1979,}
                 \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"Q1{-}3\_A\textasciitilde{}"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{dob\_year =} \FunctionTok{case\_when}\NormalTok{(}
-    \CommentTok{\# if the years recorded in both sets match, take 79 data}
-    \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
-    \CommentTok{\# if the year in the 81 set is missing, take the 79 data}
-    \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
-    \CommentTok{\# if the sets don\textquotesingle{}t match for dob year, take the 79 data}
-    \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}}\NormalTok{),}
-    \AttributeTok{dob\_month =} \FunctionTok{case\_when}\NormalTok{(}
-      \CommentTok{\# if months recorded in both sets match, take 79 data}
-      \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
-      \CommentTok{\# if month in 81 set is missing, take the 79 data}
-      \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
-      \CommentTok{\# if sets don\textquotesingle{}t match for dob month, take the 79 data}
-      \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}}\NormalTok{),}
-    \CommentTok{\# flag if there is a conflict between dob recorded in 79 and 81}
-    \AttributeTok{dob\_conflict =} \FunctionTok{case\_when}\NormalTok{(}
-\NormalTok{      (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{)}
-      \SpecialCharTok{\textasciitilde{}} \ConstantTok{TRUE}\NormalTok{,}
-\NormalTok{      (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{)}
-      \SpecialCharTok{\textasciitilde{}} \ConstantTok{TRUE}\NormalTok{,}
-\NormalTok{      (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\&}
-\NormalTok{        (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \ConstantTok{FALSE}\NormalTok{,}
-      \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{|} \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \ConstantTok{FALSE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(CASEID\_1979,}
-\NormalTok{                dob\_month,}
-\NormalTok{                dob\_year,}
-\NormalTok{                dob\_conflict)}
+                      \CommentTok{\# if the years recorded in both sets match, take 79 data}
+                      \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
+                      \CommentTok{\# if the year in the 81 set is missing, take the 79 data}
+                      \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
+                      \CommentTok{\# if the sets don\textquotesingle{}t match for dob year, take the 79 data}
+                      \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}}\NormalTok{),}
+         \AttributeTok{dob\_month =} \FunctionTok{case\_when}\NormalTok{(}
+                      \CommentTok{\# if months recorded in both sets match, take 79 data}
+                      \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
+                      \CommentTok{\# if month in 81 set is missing, take the 79 data}
+                      \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}}\NormalTok{,}
+                      \CommentTok{\# if sets don\textquotesingle{}t match for dob month, take the 79 data}
+                      \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}}\NormalTok{),}
+         \CommentTok{\# flag if there is a conflict between dob recorded in 79 and 81}
+         \AttributeTok{dob\_conflict =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{                      (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{)}
+                      \SpecialCharTok{\textasciitilde{}} \ConstantTok{TRUE}\NormalTok{,}
+\NormalTok{                      (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{!=} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{)}
+                      \SpecialCharTok{\textasciitilde{}} \ConstantTok{TRUE}\NormalTok{,}
+\NormalTok{                      (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\&}
+\NormalTok{                        (}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1979}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \ConstantTok{FALSE}\NormalTok{,}
+                      \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}M\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{|} \FunctionTok{is.na}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Q1{-}3\_A\textasciitilde{}Y\_1981}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \ConstantTok{FALSE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(CASEID\_1979,}
+\NormalTok{         dob\_month,}
+\NormalTok{         dob\_year,}
+\NormalTok{         dob\_conflict)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -320,12 +310,12 @@ The employment data comprises of three variables, i.e., \texttt{total\ hours\ of
 \NormalTok{get\_hour }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(year)\{}
   \ControlFlowTok{if}\NormalTok{(year }\SpecialCharTok{\%in\%}\NormalTok{ year\_A)\{}
 \NormalTok{    temp }\OtherTok{\textless{}{-}}\NormalTok{ new\_data\_qnames }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{      dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(CASEID\_1979,}
+      \FunctionTok{select}\NormalTok{(CASEID\_1979,}
                     \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"QES{-}52A"}\NormalTok{) }\SpecialCharTok{\&}
                       \FunctionTok{ends\_with}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(year)))\}}
   \ControlFlowTok{else}\NormalTok{\{}
 \NormalTok{    temp }\OtherTok{\textless{}{-}}\NormalTok{ new\_data\_qnames }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{      dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(CASEID\_1979,}
+      \FunctionTok{select}\NormalTok{(CASEID\_1979,}
                     \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"QES{-}52D"}\NormalTok{) }\SpecialCharTok{\&}
                       \FunctionTok{ends\_with}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(year)))\}}
 \NormalTok{  temp }\SpecialCharTok{\%\textgreater{}\%}
@@ -336,15 +326,10 @@ The employment data comprises of three variables, i.e., \texttt{total\ hours\ of
     \FunctionTok{mutate}\NormalTok{(}\AttributeTok{job =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"job\_"}\NormalTok{, }\FunctionTok{substr}\NormalTok{(job, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{rename}\NormalTok{(}\AttributeTok{id =}\NormalTok{ CASEID\_1979)}
 \NormalTok{\}}
-\CommentTok{\# list to save the iteration result}
-\NormalTok{hours }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+
 \CommentTok{\# getting the hours of work of all observations}
-\ControlFlowTok{for}\NormalTok{(ayear }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(}\DecValTok{1979}\SpecialCharTok{:}\DecValTok{1994}\NormalTok{, }\DecValTok{1996}\NormalTok{, }\DecValTok{1998}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{2002}\NormalTok{, }\DecValTok{2004}\NormalTok{, }\DecValTok{2006}\NormalTok{, }\DecValTok{2008}\NormalTok{, }\DecValTok{2010}\NormalTok{,}
-               \DecValTok{2012}\NormalTok{, }\DecValTok{2014}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{2018}\NormalTok{)) \{}
-\NormalTok{  hours[[ayear]] }\OtherTok{\textless{}{-}} \FunctionTok{get\_hour}\NormalTok{(ayear)}
-\NormalTok{\}}
-\CommentTok{\# unlist the hours of work}
-\NormalTok{hours\_all }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(}\SpecialCharTok{!!!}\NormalTok{hours)}
+\NormalTok{years }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1979}\SpecialCharTok{:}\DecValTok{1994}\NormalTok{, }\FunctionTok{seq}\NormalTok{(}\DecValTok{1996}\NormalTok{, }\DecValTok{2018}\NormalTok{, }\AttributeTok{by =} \DecValTok{2}\NormalTok{))}
+\NormalTok{hours\_all }\OtherTok{\textless{}{-}} \FunctionTok{map\_dfr}\NormalTok{(years, get\_hour)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -354,7 +339,7 @@ The same way was also deployed to tidy the rate of wage by year and by ID. The d
 \begin{Highlighting}[]
 \NormalTok{get\_rate }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(year) \{}
 \NormalTok{  new\_data\_qnames }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(CASEID\_1979,}
+    \FunctionTok{select}\NormalTok{(CASEID\_1979,}
                   \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"HRP"}\NormalTok{) }\SpecialCharTok{\&}
                     \FunctionTok{ends\_with}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(year))) }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{!}\NormalTok{CASEID\_1979, }\AttributeTok{names\_to =} \StringTok{"job"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"rate\_per\_hour"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
@@ -362,12 +347,7 @@ The same way was also deployed to tidy the rate of wage by year and by ID. The d
     \FunctionTok{mutate}\NormalTok{(}\AttributeTok{job =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"job\_0"}\NormalTok{, }\FunctionTok{substr}\NormalTok{(job, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{rename}\NormalTok{(}\AttributeTok{id =}\NormalTok{ CASEID\_1979)}
 \NormalTok{\}}
-\NormalTok{rates }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\ControlFlowTok{for}\NormalTok{(ayear }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(}\DecValTok{1979}\SpecialCharTok{:}\DecValTok{1994}\NormalTok{, }\DecValTok{1996}\NormalTok{, }\DecValTok{1998}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{2002}\NormalTok{, }\DecValTok{2004}\NormalTok{, }\DecValTok{2006}\NormalTok{, }\DecValTok{2008}\NormalTok{, }\DecValTok{2010}\NormalTok{,}
-               \DecValTok{2012}\NormalTok{, }\DecValTok{2014}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{2018}\NormalTok{)) \{}
-\NormalTok{  rates[[ayear]] }\OtherTok{\textless{}{-}} \FunctionTok{get\_rate}\NormalTok{(ayear)}
-\NormalTok{\}}
-\NormalTok{rates\_all }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(}\SpecialCharTok{!!!}\NormalTok{rates)}
+\NormalTok{rates\_all }\OtherTok{\textless{}{-}} \FunctionTok{map\_dfr}\NormalTok{(years, get\_rate)}
 \CommentTok{\# join hours and rates variable}
 \NormalTok{hours\_wages }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(rates\_all,}
 \NormalTok{                         hours\_all,}
@@ -414,26 +394,19 @@ As stated previously, the respondents' ages ranged from 12 to 22 when first inte
 
 \caption{\label{tab:age-table}Age Distribution of the NLSY79 samples}
 \centering
-\begin{tabular}[t]{r|r}
-\hline
+\begin{tabular}[t]{rr}
+\toprule
 Age & Number of Sample\\
-\hline
+\midrule
 15 & 1265\\
-\hline
 16 & 1550\\
-\hline
 17 & 1600\\
-\hline
 18 & 1530\\
-\hline
 19 & 1662\\
-\hline
 20 & 1722\\
-\hline
 21 & 1677\\
-\hline
 22 & 1680\\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -441,18 +414,16 @@ Age & Number of Sample\\
 
 \caption{\label{tab:gender-race-table}Gender and Race Distribution of the NLSY79 Samples}
 \centering
-\begin{tabular}[t]{l|l|l|l|l}
-\hline
-\multicolumn{1}{c|}{ } & \multicolumn{3}{c|}{Race} & \multicolumn{1}{c}{ } \\
-\cline{2-4}
+\begin{tabular}[t]{lllll}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Race} & \multicolumn{1}{c}{ } \\
+\cmidrule(l{3pt}r{3pt}){2-4}
 Gender & Hispanic & Black & Non-Black, Non-Hispanic & Total\\
-\hline
+\midrule
 Male & 1000 (15.62\%) & 1613 (25.19\%) & 3790 (59.19\%) & 6403 (100.00\%)\\
-\hline
 Female & 1002 (15.95\%) & 1561 (24.84\%) & 3720 (59.21\%) & 6283 (100.00\%)\\
-\hline
 Total & 2002 (15.78\%) & 3174 (25.02\%) & 7510 (59.20\%) & 12686 (100.00\%)\\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -462,22 +433,17 @@ The next step is that explore the mean hourly wage data. In this case, we only e
 
 \caption{\label{tab:summarytable}Summary Statistics of Wages of High School Data}
 \centering
-\begin{tabular}[t]{l|r}
-\hline
+\begin{tabular}[t]{lr}
+\toprule
 Statistics & Value\\
-\hline
+\midrule
 Min. & 0.01000\\
-\hline
 1st Qu. & 4.50000\\
-\hline
 Median & 7.20000\\
-\hline
 Mean & 11.86593\\
-\hline
 3rd Qu. & 11.74000\\
-\hline
 Max. & 33400.00000\\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -533,17 +499,22 @@ Further, \ref{fig:fixed-feature-plot} A shows that after eliminating the extreme
 
 }
 
-\caption{Re-make of the summary plots of the fully processed data suggest that the data is now in a reasonable state: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). }\label{fig:fixed-feature-plot}
+\caption{Re-make of the summary plots of the fully processed data suggest that it is now in a reasonable state: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). }\label{fig:fixed-feature-plot}
 \end{figure}
 
-Finally, we save the imputed data and set the appropriate data type for the variables. As our target data is the mean hourly wage of the high-school dropouts, we then subset the high-school graduate data set to have only the male-high school dropout data. We then make these three data sets and their processing documentation publicly available through an R data container package called \texttt{yowie}. The complete flow from the raw data to these data set is displayed in Figure \ref{fig:flow-chart}.
+Finally, we save the imputed data and set the appropriate data type for the variables.
 
 \hypertarget{recap}{%
 \subsection{Recap}\label{recap}}
 
+In this section, we have demonstrate a workflow from getting the data from the NSLY79 database until a ready-analysed data. Referring to Loo (2018), this section shows part of statistical value chain, which is data cleaning from raw, input, and valid data. The raw demographic and employment data from the database are not in a tidy format. Hence, we perform data wrangling to get the input data. We inspect the input data to find eligible observations to the target data. One of the target data is wages data of respondents who completed up to 12th grade and participated at least in 5 rounds of survey. This needs us to join the extracted demographic and employment data.
+
+Further, using IDA, we inspect on the existence of anomalies/extreme values in the data using the weight from robust linear model. We then replace these extreme values using their predicted value.
+From this stage forward, we assume that we already have valid data. We also subset the data to get the wages of high school dropouts. We then make these three data sets and the cleaning workflow documentation publicly available through an R data container package called \texttt{yowie}. A visualisation of these process is displayed in Figure \ref{fig:flow-chart}.
+
 \begin{figure}
 
-{\centering \includegraphics[width=0.93\linewidth]{/Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart} 
+{\centering \includegraphics[width=0.93\linewidth]{/Users/cookd/numbats/summer-wages-refresh/paper/figures/flowchart} 
 
 }
 
@@ -624,6 +595,9 @@ Iannone, Richard. 2020. \emph{DiagrammeR: Graph/Network Visualization}. \url{htt
 
 \leavevmode\hypertarget{ref-KollerManuel2016rARP}{}%
 Koller, Manuel. 2016. {``Robustlmm: An r Package for Robust Estimation of Linear Mixed-Effects Models.''} \emph{Journal of Statistical Software} 75 (6): 1--24.
+
+\leavevmode\hypertarget{ref-LooMarkvander2018Sdcw}{}%
+Loo, Mark van der. 2018. \emph{Statistical Data Cleaning with Applications in r}.
 
 \leavevmode\hypertarget{ref-rsvg}{}%
 Ooms, Jeroen. 2020. \emph{Rsvg: Render SVG Images into PDF, PNG, PostScript, or Bitmap Arrays}. \url{https://CRAN.R-project.org/package=rsvg}.

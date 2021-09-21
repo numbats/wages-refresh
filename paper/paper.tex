@@ -103,7 +103,7 @@
   {}%
   {\par}
 % For Pandoc 2.11+
-\newenvironment{CSLReferences}[3] % #1 hanging-ident, #2 entry spacing
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
  {% don't indent paragraphs
   \setlength{\parindent}{0pt}
   % turn on hanging indent if param 1 is 1
@@ -117,7 +117,7 @@
 \usepackage{calc} % for calculating minipage widths
 \newcommand{\CSLBlock}[1]{#1\hfill\break}
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \usepackage{tcolorbox}
@@ -161,9 +161,9 @@ Data cleaning can be considered to be a part of what is called ``initial data an
 
 Despite its importance, this IDA stage is often undervalued and neglected (Chatfield 1985). There are few research papers that document the data cleaning (Wickham 2014). Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties (M. Huebner et al. 2020).
 
-This paper aims to demonstrate the steps of IDA, tidying, cleaning, and documenting the process, for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century (Pergamit et al. 2001). In addition, The NLSY is considered a survey with high retention rates and carefully designed, making it suitable for a life course research (Pergamit et al. 2001; Cooksey 2017). According to Cooksey (2017), thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets (Pergamit et al. 2001).
+This paper demonstrates the steps of IDA -- tidying, cleaning, and documenting the process -- for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century (Pergamit et al. 2001). In addition, The NLSY is considered a survey with high retention rates and carefully designed, making it suitable for a life course research (Pergamit et al. 2001; Cooksey 2017). According to Cooksey (2017), thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets (Pergamit et al. 2001).
 
-Singer and Willett (2003) used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling. Our aim is to refresh this textbook data to be more up to date. Here, we investigate the process of getting from the raw NLSY79 to this textbook data set. However, we cannot create the exact same data set as published in their book since we do not have the information of what age threshold they used to determine the high school dropouts.
+Singer and Willett (2003) used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling. Our aim is to refresh this textbook data with data from . Here, we investigate the process of getting from the raw NLSY79 to this textbook data set. However, we cannot create the exact same data set as published in their book since we do not have the information of what age threshold they used to determine the high school dropouts.
 
 This paper is structured to have 5 sections. Section \ref{database} describes the original data source. Section \ref{cleaning} presents the steps of cleaning the data, including getting and tidying the data from the NLSY79 and initial data analysis to find and treat the anomalies in the data. We also gave examples of exploratory data analysis using the clean data in Section \ref{eda}. Finally, Section \ref{summary} summarises the paper.
 
@@ -510,17 +510,22 @@ Further, \ref{fig:fixed-feature-plot} A shows that after eliminating the extreme
 
 }
 
-\caption{Re-make of the summary plots of the fully processed data suggest that the data is now in a reasonable state: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). }\label{fig:fixed-feature-plot}
+\caption{Re-make of the summary plots of the fully processed data suggest that it is now in a reasonable state: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). }\label{fig:fixed-feature-plot}
 \end{figure}
 
-Finally, we save the imputed data and set the appropriate data type for the variables. As our target data is the mean hourly wage of the high-school dropouts, we then subset the high-school graduate data set to have only the male-high school dropout data. We then make these three data sets and their processing documentation publicly available through an R data container package called \texttt{yowie}. The complete flow from the raw data to these data set is displayed in Figure \ref{fig:flow-chart}.
+Finally, we save the imputed data and set the appropriate data type for the variables.
 
 \hypertarget{recap}{%
 \subsection{Recap}\label{recap}}
 
+In this section, we have demonstrate a workflow from getting the data from the NSLY79 database until a ready-analysed data. Referring to Loo (2018), this section shows part of statistical value chain, which is data cleaning from raw, input, and valid data. The raw demographic and employment data from the database are not in a tidy format. Hence, we perform data wrangling to get the input data. We inspect the input data to find eligible observations to the target data. One of the target data is wages data of respondents who completed up to 12th grade and participated at least in 5 rounds of survey. This needs us to join the extracted demographic and employment data.
+
+Further, using IDA, we inspect on the existence of anomalies/extreme values in the data using the weight from robust linear model. We then replace these extreme values using their predicted value.
+From this stage forward, we assume that we already have valid data. We also subset the data to get the wages of high school dropouts. We then make these three data sets and the cleaning workflow documentation publicly available through an R data container package called \texttt{yowie}. A visualisation of these process is displayed in Figure \ref{fig:flow-chart}.
+
 \begin{figure}
 
-{\centering \includegraphics[width=0.93\linewidth]{/Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart} 
+{\centering \includegraphics[width=0.93\linewidth]{/Users/cookd/numbats/summer-wages-refresh/paper/figures/flowchart} 
 
 }
 
@@ -601,6 +606,9 @@ Iannone, Richard. 2020. \emph{DiagrammeR: Graph/Network Visualization}. \url{htt
 
 \leavevmode\hypertarget{ref-KollerManuel2016rARP}{}%
 Koller, Manuel. 2016. {``Robustlmm: An r Package for Robust Estimation of Linear Mixed-Effects Models.''} \emph{Journal of Statistical Software} 75 (6): 1--24.
+
+\leavevmode\hypertarget{ref-LooMarkvander2018Sdcw}{}%
+Loo, Mark van der. 2018. \emph{Statistical Data Cleaning with Applications in r}.
 
 \leavevmode\hypertarget{ref-rsvg}{}%
 Ooms, Jeroen. 2020. \emph{Rsvg: Render SVG Images into PDF, PNG, PostScript, or Bitmap Arrays}. \url{https://CRAN.R-project.org/package=rsvg}.
