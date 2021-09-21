@@ -5,7 +5,9 @@ age_table <- full_demographics %>%
 
 kable(age_table,
       caption = "Age Distribution of the NLSY79 samples",
-      col.names = c("Age", "Number of Sample")) %>%
+      col.names = c("Age", "Number of Sample"),
+      booktabs = TRUE,
+      linesep = "") %>%
   kable_styling()
 
 ## ---- gender-race-table
@@ -15,19 +17,22 @@ gender_race_table <- full_demographics %>%
   adorn_percentages("row") %>%
   adorn_pct_formatting(digits = 2) %>%
   adorn_ns(position = "front") %>%
-  mutate(gender = ifelse(gender == "MALE", "Male",
-                         ifelse(gender == "FEMALE", "Female", "Total")))
+  mutate(gender = str_to_title(gender))
 
 kable(gender_race_table,
       caption = "Gender and Race Distribution of the NLSY79 Samples",
-      col.names = c("Gender", "Hispanic", "Black", "Non-Black, Non-Hispanic", "Total")) %>%
+      col.names = c("Gender", "Hispanic", "Black", "Non-Black, Non-Hispanic", "Total"),
+      bookdtabs = TRUE,
+      linesep = "") %>%
   kable_styling() %>%
   add_header_above(c(" " = 1, "Race" = 3, " " = 1))
 
 ## ---- summarytable
 kable(as.array(summary(wages_before$mean_hourly_wage)),
       caption = "Summary Statistics of Wages of High School Data",
-      col.names = c("Statistics", "Value")) %>%
+      col.names = c("Statistics", "Value"),
+      booktabs = TRUE,
+      linesep = "") %>%
   kable_styling()
 
 ## ---- sample-plot
@@ -131,7 +136,7 @@ spag + feature_bp + plot_high +
 ## ---- rlm
 # nest the data by id to build a robust linear model
 by_id <- wages_before %>%
-  dplyr::select(id, year, mean_hourly_wage) %>%
+  select(id, year, mean_hourly_wage) %>%
   group_by(id) %>%
   nest()
 
@@ -153,11 +158,11 @@ id_w <- id_rlm %>%
                    x$w
                  })) %>%
   unnest(w) %>%
-  dplyr::select(w)
+  select(w)
 
 # bind the property of each observation with their weight
 id_aug_w <- cbind(id_aug, id_w) %>%
-  dplyr::select(`id...1`,
+  select(`id...1`,
                 year,
                 mean_hourly_wage,
                 .fitted,
@@ -177,7 +182,7 @@ wages_rlm_dat <- id_aug_w %>%
                             mean_hourly_wage)) %>%
   mutate(is_pred = ifelse(w < 0.12 & .fitted >= 0, TRUE,
                           FALSE)) %>%
-  dplyr::select(id, year, wages_rlm, is_pred)
+  select(id, year, wages_rlm, is_pred)
 
 # join back the `wages_rlm_dat` to `wages_demog_hs`
 
@@ -194,7 +199,7 @@ sample_id <- sample(unique(wages_cleaned$id), 20)
 sample <- subset(wages_cleaned, id %in% sample_id)
 
 wages_compare <- sample %>%
-  dplyr::select(id, year, mean_hourly_wage, wages_rlm) %>%
+  select(id, year, mean_hourly_wage, wages_rlm) %>%
   rename(mean_hourly_wage_rlm = wages_rlm) %>%
   pivot_longer(c(-id, -year), names_to = "type", values_to = "wages")
 
@@ -290,12 +295,12 @@ spag2 + feature2_bp + plot_high_after
 ## ---- save-data
 # select out the old value of mean hourly wage and change it with the wages_rlm value
 wages_clean <- wages_cleaned %>%
-  dplyr::select(-mean_hourly_wage) %>%
+  select(-mean_hourly_wage) %>%
   rename(mean_hourly_wage = wages_rlm)
 
 # rename and select the wages in tidy
 wages <- wages_clean %>%
-  dplyr::select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc,
+  select(id, year, mean_hourly_wage, age_1979, gender, race, hgc, hgc_i, yr_hgc,
                 number_of_jobs, total_hours, is_wm, is_pred) %>%
   mutate(id = as.factor(id),
          hgc = as.factor(hgc),
@@ -312,13 +317,13 @@ wages <- wages_clean %>%
 
 # Create a data set for demographic variables
 demog_nlsy79 <- full_demographics %>%
-  dplyr::select(id,
-                age_1979,
-                gender,
-                race,
-                hgc,
-                hgc_i,
-                yr_hgc) %>%
+  select(id,
+         age_1979,
+         gender,
+         race,
+         hgc,
+         hgc_i,
+         yr_hgc) %>%
   mutate(id = as.factor(id),
          age_1979 = as.integer(age_1979),
          hgc = as.factor(hgc),
@@ -335,35 +340,35 @@ wages_hs_do <- wages %>%
               age_hgc >= 19)) %>%
   filter(age_1979 <= 17,
          gender == "MALE") %>%
-  dplyr::select(-dob,
+  select(-dob,
                 -age_hgc) %>%
   as_tsibble(key = id,
              index = year,
              regular = FALSE)
 
 ### ---- nrow
-a = nrow(categories_qnames)
-b = nrow(full_demographics)
-d = eligible_wages %>%
+a <- nrow(categories_qnames)
+b <- nrow(full_demographics)
+d <- eligible_wages %>%
   group_by(id) %>%
   count(id) %>%
   nrow()
-n_hgc = wages %>%
+n_hgc <- wages %>%
   as_tibble() %>%
   group_by(id) %>%
   count(id) %>%
   nrow()
-n_obs_hgc = nrow(wages)
-n_obs_hgc_pred = filter(wages, is_pred == TRUE) %>%
+n_obs_hgc <- nrow(wages)
+n_obs_hgc_pred <- filter(wages, is_pred == TRUE) %>%
   nrow()
 
-n_do = wages_hs_do %>%
+n_do <- wages_hs_do %>%
   as_tibble() %>%
   group_by(id) %>%
   count(id) %>%
   nrow()
-n_obs_do = nrow(wages_hs_do)
-n_obs_do_pred = filter(wages_hs_do, is_pred == TRUE) %>%
+n_obs_do <- nrow(wages_hs_do)
+n_obs_do_pred <- filter(wages_hs_do, is_pred == TRUE) %>%
   nrow()
 
 ### ---- flow-chart
