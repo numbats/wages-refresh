@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.13)  21 SEP 2021 17:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.13)  21 SEP 2021 17:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -535,7 +535,8 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count289
 \l__pdf_internal_box=\box63
-) (./paper-jsdse.aux)
+)
+No file paper-jsdse.aux.
 \openout1 = `paper-jsdse.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 95.
@@ -602,9 +603,25 @@ Non-PDF special ignored!
 
 {/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
 
+LaTeX Warning: Reference `database' on page 3 undefined on input line 157.
+
+
+LaTeX Warning: Reference `cleaning' on page 3 undefined on input line 157.
+
+
 LaTeX Warning: Reference `eda' on page 3 undefined on input line 157.
 
-[3] [4]
+
+LaTeX Warning: Reference `summary' on page 3 undefined on input line 157.
+
+[3]
+
+LaTeX Warning: Reference `intro' on page 4 undefined on input line 176.
+
+
+LaTeX Warning: Reference `getdata' on page 4 undefined on input line 183.
+
+[4]
 LaTeX Font Info:    Trying to load font information for U+fontawesomethree on i
 nput line 192.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/fontawesome/ufontawesomethree.fd
@@ -615,7 +632,11 @@ ut line 199.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/fontawesome/ufontawesometwo.fd
 File: ufontawesometwo.fd 2016/05/22 Font definitions for U/fontawesometwo.
 ) [5]
-<figures/untidy-data-1.pdf, id=63, 464.73625pt x 294.09875pt>
+
+LaTeX Warning: Reference `tab:untidy-data' on page 6 undefined on input line 23
+6.
+
+<figures/untidy-data-1.pdf, id=56, 464.73625pt x 294.09875pt>
 File: figures/untidy-data-1.pdf Graphic file (type pdf)
 <use figures/untidy-data-1.pdf>
 Package pdftex.def Info: figures/untidy-data-1.pdf  used on input line 240.
@@ -663,15 +684,24 @@ File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 336.
-[10] [11] [12]
+[10] [11]
+
+LaTeX Warning: Reference `tab:age-table' on page 12 undefined on input line 391
+.
+
+
+LaTeX Warning: Reference `tab:gender-race-table' on page 12 undefined on input 
+line 391.
+
+[12]
 ! Undefined control sequence.
 l.398 \toprule
                
 Here is how much of TeX's memory you used:
- 18523 strings out of 480608
- 338458 string characters out of 5903630
- 595545 words of memory out of 5000000
- 34028 multiletter control sequences out of 15000+600000
+ 18500 strings out of 480608
+ 338047 string characters out of 5903630
+ 592783 words of memory out of 5000000
+ 34009 multiletter control sequences out of 15000+600000
  542725 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  59i,11n,75p,1093b,494s stack positions out of 5000i,500n,10000p,200000b,80000s
