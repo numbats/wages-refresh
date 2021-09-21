@@ -22,7 +22,7 @@ gender_race_table <- full_demographics %>%
 kable(gender_race_table,
       caption = "Gender and Race Distribution of the NLSY79 Samples",
       col.names = c("Gender", "Hispanic", "Black", "Non-Black, Non-Hispanic", "Total"),
-      bookdtabs = TRUE,
+      booktabs = TRUE,
       linesep = "") %>%
   kable_styling() %>%
   add_header_above(c(" " = 1, "Race" = 3, " " = 1))

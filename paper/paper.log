@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.15)  21 SEP 2021 11:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.15)  21 SEP 2021 12:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1008,131 +1008,139 @@ Package xcolor Warning: Incompatible color definition on input line 316.
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 321.
 
-Package xcolor Warning: Incompatible color definition on input line 350.
+Package xcolor Warning: Incompatible color definition on input line 345.
 
 
-Package xcolor Warning: Incompatible color definition on input line 350.
+Package xcolor Warning: Incompatible color definition on input line 345.
 
 
-Package xcolor Warning: Incompatible color definition on input line 350.
+Package xcolor Warning: Incompatible color definition on input line 345.
 
 [5]
 
-Package xcolor Warning: Incompatible color definition on input line 350.
+Package xcolor Warning: Incompatible color definition on input line 345.
 
 
-Package xcolor Warning: Incompatible color definition on input line 350.
+Package xcolor Warning: Incompatible color definition on input line 345.
 
 
-Package xcolor Warning: Incompatible color definition on input line 354.
+Package xcolor Warning: Incompatible color definition on input line 349.
 
 
-Package xcolor Warning: Incompatible color definition on input line 381.
+Package xcolor Warning: Incompatible color definition on input line 371.
 
 
-Package xcolor Warning: Incompatible color definition on input line 381.
+Package xcolor Warning: Incompatible color definition on input line 371.
 
-[6]
-Underfull \vbox (badness 1067) has occurred while \output is active []
-
-[7pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
-as been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.483 \end{table}
-                 ]
-<figures/sample-plot-1.pdf, id=151, 355.3275pt x 277.035pt>
-File: figures/sample-plot-1.pdf Graphic file (type pdf)
-<use figures/sample-plot-1.pdf>
-Package pdftex.def Info: figures/sample-plot-1.pdf  used on input line 487.
-(pdftex.def)             Requested size: 469.75499pt x 366.26222pt.
-<figures/feature-plot-1.pdf, id=153, 416.55624pt x 121.45375pt>
-File: figures/feature-plot-1.pdf Graphic file (type pdf)
-<use figures/feature-plot-1.pdf>
-Package pdftex.def Info: figures/feature-plot-1.pdf  used on input line 498.
-(pdftex.def)             Requested size: 433.62158pt x 126.4349pt.
-[8pdfTeX warning (ext4): destination with the same identifier (name{table.2}) h
-as been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.517 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.3
+[6] [7pdfTeX warning (ext4): destination with the same identifier (name{table.1
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.517 
-      ] [9pdfTeX warning (ext4): destination with the same identifier (name{fig
-ure.2}) has been already used, duplicate ignored
+l.459 \end{table}
+                 pdfTeX warning (ext4): destination with the same identifier (n
+ame{table.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.517 
+l.459 \end{table}
+                 ]
+<figures/sample-plot-1.pdf, id=151, 355.3275pt x 277.035pt>
+File: figures/sample-plot-1.pdf Graphic file (type pdf)
+<use figures/sample-plot-1.pdf>
+Package pdftex.def Info: figures/sample-plot-1.pdf  used on input line 463.
+(pdftex.def)             Requested size: 469.75499pt x 366.26222pt.
+<figures/feature-plot-1.pdf, id=153, 416.55624pt x 121.45375pt>
+File: figures/feature-plot-1.pdf Graphic file (type pdf)
+<use figures/feature-plot-1.pdf>
+Package pdftex.def Info: figures/feature-plot-1.pdf  used on input line 474.
+(pdftex.def)             Requested size: 433.62158pt x 126.4349pt.
+
+Underfull \vbox (badness 6559) has occurred while \output is active []
+
+[8pdfTeX warning (ext4): destination with the same identifier (name{table.3}) h
+as been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.482 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
-3}) has been already used, duplicate ignored
+2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.517 
-       <./figures/sample-plot-1.pdf> <./figures/feature-plot-1.pdf>]
-<figures/compare-plot-1.pdf, id=190, 427.5975pt x 343.2825pt>
+l.482 
+       <./figures/sample-plot-1.pdf>]
+<figures/compare-plot-1.pdf, id=172, 427.5975pt x 343.2825pt>
 File: figures/compare-plot-1.pdf Graphic file (type pdf)
 <use figures/compare-plot-1.pdf>
-Package pdftex.def Info: figures/compare-plot-1.pdf  used on input line 522.
+Package pdftex.def Info: figures/compare-plot-1.pdf  used on input line 498.
 (pdftex.def)             Requested size: 433.62158pt x 348.11636pt.
 
-LaTeX Warning: Reference `fixed-feature-plot' on page 10 undefined on input lin
-e 529.
+LaTeX Warning: Reference `fixed-feature-plot' on page 9 undefined on input line
+ 505.
 
-<figures/fixed-feature-plot-1.pdf, id=192, 416.55624pt x 121.45375pt>
+
+Underfull \vbox (badness 3482) has occurred while \output is active []
+
+[9pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.506 
+       <./figures/feature-plot-1.pdf>]
+<figures/fixed-feature-plot-1.pdf, id=193, 416.55624pt x 121.45375pt>
 File: figures/fixed-feature-plot-1.pdf Graphic file (type pdf)
 <use figures/fixed-feature-plot-1.pdf>
 Package pdftex.def Info: figures/fixed-feature-plot-1.pdf  used on input line 5
-33.
+09.
 (pdftex.def)             Requested size: 433.62158pt x 126.4349pt.
 </Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart.png,
- id=194, 1606.0pt x 2236.355pt>
+ id=195, 1606.0pt x 2236.355pt>
 File: /Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart
 .png Graphic file (type png)
 <use /Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart.
 png>
 Package pdftex.def Info: /Users/etan0038/Dropbox/repo/summer-wages-refresh/pape
-r/figures/flowchart.png  used on input line 547.
+r/figures/flowchart.png  used on input line 523.
 (pdftex.def)             Requested size: 436.8687pt x 608.3283pt.
-
-Underfull \vbox (badness 2653) has occurred while \output is active []
-
 [10pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.552 \end{figure}
-                   <./figures/compare-plot-1.pdf>] [11pdfTeX warning (ext4): de
-stination with the same identifier (name{figure.5}) has been already used, dupl
-icate ignored
+l.537 
+       <./figures/compare-plot-1.pdf>]
+Underfull \vbox (badness 1314) has occurred while \output is active []
+
+[11pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
+ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.576 ...aterials}\label{supplementary-materials}}
-                                                   <./figures/fixed-feature-plo
-t-1.pdf>] [12pdfTeX warning (ext4): destination with the same identifier (name{
-figure.6}) has been already used, duplicate ignored
+l.560   \textbf
+               {shiny app}: An web interactive \texttt{shiny} app to run a s...
+ <./figures/fixed-feature-plot-1.pdf>] [12pdfTeX warning (ext4): destination wi
+th the same identifier (name{figure.6}) has been already used, duplicate ignore
+d
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.576 ...aterials}\label{supplementary-materials}}
-                                                   </Users/etan0038/Dropbox/rep
-o/summer-wages-refresh/paper/figures/flowchart.png>] [13]
+l.560   \textbf
+               {shiny app}: An web interactive \texttt{shiny} app to run a s...
+ </Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart.png
+>]
+Underfull \vbox (badness 5771) has occurred while \output is active []
+
+[13]
 No file paper.bbl.
 [14]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 713.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 713.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 689.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 689.
 (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 713.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 713.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 689.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 689.
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 5D0A7851DD1D2C87C51D7423A5EB4B3A;980.
 
@@ -1141,12 +1149,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 713.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 689.
  ) 
 Here is how much of TeX's memory you used:
  22169 strings out of 480488
  407739 string characters out of 5899970
- 792455 words of memory out of 5000000
+ 791455 words of memory out of 5000000
  37474 multiletter control sequences out of 15000+600000
  583191 words of font info for 116 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1168,7 +1176,7 @@ exmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2019/texmf-dist/
 fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type
 1/public/lm/lmtt10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/l
 m/lmtti10.pfb>
-Output written on paper.pdf (14 pages, 1001561 bytes).
+Output written on paper.pdf (14 pages, 1000602 bytes).
 PDF statistics:
  408 PDF objects out of 1000 (max. 8388607)
  358 compressed objects within 4 object streams
