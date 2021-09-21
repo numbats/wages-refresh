@@ -17,7 +17,7 @@ library(modelr)
 library(forcats)
 library(yowie)
 library(knitr)
-select <- select
+select <- dplyr::select
 
 ## ---- raw-data
 source(here::here("data-raw/NLSY79/NLSY79.R"))
