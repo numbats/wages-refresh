@@ -83,7 +83,7 @@ This paper demonstrates the steps of IDA, and documents the process, for a promi
 
 Our process of cleaning builds heavily on the tidyverse approach [@tidyverse]. The data is first organised into "tidy data" [@WickhamHadley2014TD] and then further wrangled using the data pipeline and split-apply-combine approach [@plyr]. The resulting data is provided in a new R package called `yowie` which includes the code so that the process is reproducible, and could be used to further refresh the data as new records are made available in the NLSY79 database. 
 
-This paper is structured in the following way. Section \@ref(database) describes the NLSY79 data source. Section \@ref(cleaning) presents the steps of cleaning the data, including getting and tidying the data from the NLSY79 and IDA to find and repair anomalies. Our final subset is compared the old textbook subset in Section \@ref(comare). Finally, Section \@ref(summary) summarizes the contribution and makes recommendations for the NLSY79 data curators. 
+This paper is structured in the following way. Section \@ref(database) describes the NLSY79 data source. Section \@ref(cleaning) presents the steps of cleaning the data, including getting and tidying the data from the NLSY79 and IDA to find and repair anomalies. Our final subset is compared the old textbook subset in Section \@ref(compare). Finally, Section \@ref(summary) summarizes the contribution and makes recommendations for the NLSY79 data curators. 
 
 # The NLSY79 {#database}
 
@@ -306,7 +306,7 @@ From this stage forward, we assume that we already have valid data. We also subs
 ```
 
 
-# Exploratory Data Analysis 
+# Comparison with the Textbook Data {#compare}
 
 
 # Summary {#summary}
