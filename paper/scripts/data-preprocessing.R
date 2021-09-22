@@ -26,7 +26,7 @@ source(here::here("data-raw/NLSY79/NLSY79.R"))
 new_data_qnames %>%
   select(CASEID_1979,
          starts_with("HRP") &
-           ends_with(c("1979", "1980", "1981", "1982", "1983"))) %>%
+           ends_with(c("1979", "1980"))) %>%
   visdat::vis_miss()
 
 ## ---- dob-tidy
