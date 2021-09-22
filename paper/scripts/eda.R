@@ -23,18 +23,17 @@ sw_wages <- sw %>%
 # in this case, we approximate it with year-1979
 
 do <- yowie::wages_hs_do %>%
-  mutate(exp = year-1979,
-         lnwage = log(wage))
+  mutate(lnwage = log(wage))
 
 do_ref <- do %>%
-  ggplot(aes(x = exp,
+  ggplot(aes(x = year,
              y = lnwage)) +
   geom_line(aes(group = id), alpha = 0.1) +
   geom_smooth(se = FALSE) +
   ggtitle("B") +
   theme_bw() +
   ylab("ln(Hourly wage) ($)") +
-  xlab("Experience (years)") +
+  xlab("Year") +
   theme(plot.title = element_text(size = 10)) +
   ylim(-4, 6)
 
@@ -80,14 +79,14 @@ sw_wages_agree <- sw_agree %>%
 
 
 do_ref_agree <- do_agree %>%
-  ggplot(aes(x = exp,
+  ggplot(aes(x = year,
              y = lnwage)) +
   geom_line(aes(group = id), alpha = 0.1) +
   geom_smooth(se = FALSE) +
   ggtitle("B") +
   theme_bw() +
   ylab("ln(Hourly wage) ($)") +
-  xlab("Experience (years)") +
+  xlab("Year") +
   theme(plot.title = element_text(size = 10)) +
   ylim(-3, 5)
 
@@ -102,7 +101,7 @@ sw_wages_agree + do_ref_agree
 # filter the xp in refreshed data in order to get the same experience with Singer-Willet data,
 # which is 13 years of experience
 do_agree_cutxp <- do_agree %>%
-  filter(exp <= 13)
+  filter(year < 1995)
 
 # compare summary stat
 
@@ -114,33 +113,20 @@ summary(do_agree_cutxp$lnwage)
 
 # plotting
 
-sw_wages_agree_exp <- sw_agree_xpedit %>%
-  ggplot(aes(x = xp,
-             y = ln_wages)) +
-  geom_line(aes(group = id),alpha = 0.1) +
-  geom_smooth(se = FALSE) +
-  ggtitle("A") +
-  theme_bw() +
-  ylab("ln(Hourly wage) ($)") +
-  xlab("Experience (years)") +
-  theme(plot.title = element_text(size = 10)) +
-  ylim(-1, 4.5)
-
-
 do_ref_agree_cutxp <- do_agree_cutxp %>%
-  ggplot(aes(x = exp,
+  ggplot(aes(x = year,
              y = lnwage)) +
   geom_line(aes(group = id), alpha = 0.1) +
   geom_smooth(se = FALSE) +
   ggtitle("B") +
   theme_bw() +
   ylab("ln(Hourly wage) ($)") +
-  xlab("Experience (years)") +
+  xlab("Year") +
   theme(plot.title = element_text(size = 10)) +
   ylim(-1, 4.5)
 
 
-sw_wages_agree_exp + do_ref_agree_cutxp
+sw_wages_agree + do_ref_agree_cutxp
 
 ## ---- compare-id
 

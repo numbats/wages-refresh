@@ -72,16 +72,18 @@ read_chunk(here::here("paper/scripts/eda.R"))
 
 # Introduction {#intro}
 
-"Open data" is data that is freely accessible, modifiable, and shareable by anyone for any purpose [@opendata]. This type of data can be useful as example data in statistical textbooks and for research purposes. However, open data is often referred to as what we might call "wild data" because it requires substantial cleaning and tidying to tame it into textbook shape. @HuebnerMariannePhD2016Asat emphasize that making the data cleaning process accountable and transparent is imperative. Documenting the data cleaning is essential for the integrity of downstream statistical analyses and model building [@HuebnerMarianne2020Haar]. 
-Data cleaning can be considered to be a part of what is called "initial data analysis (IDA)" [@Chatfield1985TIEo]. In IDA one would also explore the data, especially to check if the data is consistent with assumptions required for modeling. This is also related to exploratory data analysis, which @tukey defines as detective work to learn from data, either numerically or graphically, before confirmatory data analysis is performed, which encompasses IDA. @DasuTamraparni2003Edma say that data cleaning and exploration, without naming it as IDA, is a difficult task and consumes 80% of the data mining task. 
+"Open data" is data that is freely accessible, modifiable, and shareable by anyone for any purpose [@opendata]. This type of data can be useful as example data in statistical textbooks and for research purposes. However, open data is often referred to as what we might call "wild data" because it requires substantial cleaning and tidying to tame it into textbook shape. @HuebnerMariannePhD2016Asat emphasize that making the data cleaning process accountable and transparent is imperative and essential for the integrity of downstream statistical analyses and model building [@HuebnerMarianne2020Haar]. 
+Data cleaning can be considered to be a part of what is called "initial data analysis (IDA)" [@Chatfield1985TIEo]. In IDA one would also explore the data, especially to check if the data is consistent with assumptions required for modeling. This is also related to exploratory data analysis (EDA), coined by @tukey with a focus on learning from data. EDA can be considered to encompass IDA. @DasuTamraparni2003Edma say that data cleaning and exploration, without naming it as IDA, is a difficult task and consumes 80% of the data mining task. 
 
-Despite its importance, this IDA stage is often undervalued and neglected [@Chatfield1985TIEo]. There are few research papers that document the data cleaning [@WickhamHadley2014TD]. Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties [@HuebnerMarianne2020Haar]. 
+Despite it's importance, this IDA stage is often undervalued and neglected [@Chatfield1985TIEo]. There are few research papers that document the data cleaning [@WickhamHadley2014TD]. Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties [@HuebnerMarianne2020Haar]. 
 
-This paper aims to demonstrate the steps of IDA, tidying, cleaning, and documenting the process, for a prominent open data source, National Longitudinal Survey of Youth (NLSY) 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century [@MichaelRPergamit2001DWTN]. In addition, The NLSY is considered a survey with high retention rates and carefully designed, making it suitable for a life course research [@MichaelRPergamit2001DWTN; @eliznlsy]. According to @eliznlsy, thousand of articles, and hundreds of book chapters and monographs has incorporated the NLSY data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the NLSY79 data sets [@MichaelRPergamit2001DWTN]. 
+This paper demonstrates the steps of IDA, and documents the process, for a prominent open data source, National Longitudinal Survey of Youth 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century [@MichaelRPergamit2001DWTN]. In addition, this is considered a carefully designed longitudinal survey with high retention rates, making it suitable for life course research [@MichaelRPergamit2001DWTN; @eliznlsy]. According to @eliznlsy, thousands of articles, and hundreds of book chapters and monographs have utilized this data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the survey data [@MichaelRPergamit2001DWTN]. 
 
-@SingerJudithD2003Alda used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling. Our aim is to refresh this textbook data to be more up to date. Here, we investigate the process of getting from the raw NLSY79 to this textbook data set. However, we cannot create the exact same data set as published in their book since we do not have the information of what age threshold they used to determine the high school dropouts.
+@SingerJudithD2003Alda used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling. Our aim is to refresh this textbook data with data from 1994 through to the latest data reported in 2018. Here, we investigate the process of getting from the raw NLSY79 data to a textbook data set as similar as possible to that provided by @SingerJudithD2003Alda. <!--However, we cannot create the exact same data set as published in their book since we do not have the information of what age threshold they used to determine the high school dropouts.-->
 
-This paper is structured to have 5 sections. Section \@ref(database) describes the original data source. Section \@ref(cleaning) presents the steps of cleaning the data, including getting and tidying the data from the NLSY79 and initial data analysis to find and treat the anomalies in the data. We also gave examples of exploratory data analysis using the clean data in Section \@ref(eda). Finally, Section \@ref(summary) summarises the paper. 
+Our process of cleaning builds heavily on the tidyverse approach [@tidyverse]. The data is first organised into "tidy data" [@WickhamHadley2014TD] and then further wrangled using the data pipeline and split-apply-combine approach [@plyr]. The resulting data is provided in a new R package called `yowie` which includes the code so that the process is reproducible, and could be used to further refresh the data as new records are made available in the NLSY79 database. 
+
+This paper is structured in the following way. Section \@ref(database) describes the NLSY79 data source. Section \@ref(cleaning) presents the steps of cleaning the data, including getting and tidying the data from the NLSY79 and IDA to find and repair anomalies. Our final subset is compared the old textbook subset in Section \@ref(compare). Finally, Section \@ref(summary) summarizes the contribution and makes recommendations for the NLSY79 data curators. 
 
 # The NLSY79 {#database}
 
@@ -280,11 +282,11 @@ Figure \ref{fig:compare-plot} shows the mean hourly wage before and after the ex
 Further, \ref{fig:fixed-feature-plot} A shows that after eliminating the extreme values, the highest value has decreased to be around $350. The spikes are still observed but not as extreme as the original data set. In Figure \ref{fixed-feature-plot} B, we plot the three features of mean hourly wages, namely the minimum, median, and maximum value, transformed to log scale. The plot implies that the skewness is slightly negative. We also see that the three features are overlapped each other. It indicates that some ID's minimum wages are higher than some ID's maximum wages. 
 
 
-```{r fixed-feature-plot, fig.cap = "Re-make of the summary plots of the fully processed data suggest that the data is now in a reasonable state: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). ", fig.width=6, fig.height=2}
+```{r fixed-feature-plot, fig.cap = "Re-make of the summary plots of the fully processed data suggest that it is now in a reasonable state: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). ", fig.width=6, fig.height=2}
 ```
 
 
-Finally, we save the imputed data and set the appropriate data type for the variables. As our target data is the mean hourly wage of the high-school dropouts, we then subset the high-school graduate data set to have only the male-high school dropout data. We then make these three data sets and their processing documentation publicly available through an R data container package called `yowie`. The complete flow from the raw data to these data set is displayed in Figure \ref{fig:flow-chart}.
+Finally, we save the imputed data and set the appropriate data type for the variables.
 
 ```{r save-data}
 ```
@@ -295,13 +297,16 @@ Finally, we save the imputed data and set the appropriate data type for the vari
 
 ## Recap 
 
+In this section, we have demonstrate a workflow from getting the data from the NSLY79 database until a ready-analysed data. Referring to @LooMarkvander2018Sdcw, this section shows  part of statistical value chain, which is data cleaning from raw, input, and valid data. The raw demographic and employment data from the database are not in a tidy format. Hence, we perform data wrangling to get the input data. We inspect the input data to find eligible observations to the target data. One of the target data is wages data of respondents who completed up to 12th grade and participated at least in 5 rounds of survey. This needs us to join the extracted demographic and employment data. 
+
+Further, using IDA, we inspect on the existence of anomalies/extreme values in the data using the weight from robust linear model. We then replace these extreme values using their predicted value. 
+From this stage forward, we assume that we already have valid data. We also subset the data to get the wages of high school dropouts. We then make these three data sets and the cleaning workflow documentation publicly available through an R data container package called `yowie`. A visualisation of these process is displayed in  Figure \ref{fig:flow-chart}.
+
 ```{r flow-chart, fig.cap="The stages of data filtering from the raw data to get three datasets contained yowie, n means the number of ID, while n\\_obs means the number of observations.", out.width="93%"}
 ```
 
 
-# Exploratory Data Analysis 
-
-
+# Comparison with the Textbook Data {#compare}
 
 
 # Summary {#summary}
