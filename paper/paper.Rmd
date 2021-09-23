@@ -108,13 +108,10 @@ In this section, we outline the steps taken to the download the raw data from th
 
 ## Getting and Tidying the Data {#getdata}
 
-The NLSY79 data are stored in a [database](https://www.nlsinfo.org/content/cohorts/nlsy79/get-data) and could be downloaded by variables. Several variables are available for download and could be browsed by index. For the wages data set, we only extracted these variables:
-
-
+The NLSY79 data contains a large scope of variables but we limit the scope of the data to demographic profiles and wages data. To extract the relevant component of the data, we went to the NLSY79 database website at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} and navigated as described below.
 
 ::: {.tcolorbox data-latex="[label=\"box:data\", title=Getting the data]" }
-\faDatabase\ National Longitudinal Survey of Youth 1979
-
+\faDatabase\ National Longitudinal Survey of Youth 1979 
 \begin{itemize}
 \item[$\triangleright$] Education, Training and Achievement Scores
 \begin{itemize}
@@ -146,7 +143,7 @@ The NLSY79 data are stored in a [database](https://www.nlsinfo.org/content/cohor
       
 The downloaded data set came with the following set of files:
 
-- `NLSY79.csv`: csv format
+- `NLSY79.csv`: csv format 
 - `NLSY79.dat`: dat format
 - `NLSY79.NLSY79`: Tagset of variables that can be uploaded to the website to recreate the data set.
 - `NLSY79.R`: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set,  `categories_qnames` (the observations are stored in categorical/interval values) and `new_data_qnames` (the observations are stored in integer form).
@@ -154,7 +151,9 @@ The downloaded data set came with the following set of files:
 ```{r raw-data}
 ```
 
-According to @WickhamHadley2014TD, tidy data sets comply with three rules. Firstly, each variable forms a column. Secondly, each observation forms a row. Lastly, each type of observational unit forms a table. Unfortunately, the `new_data_qnames` did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr] to do this job.
+According to @WickhamHadley2014TD, tidy data sets comply with three rules: (i) each variable forms a column, (ii) each observation forms a row, and (iii) each type of observational unit forms a table. The input data, `new_data_qnames`, is organised such that each row corresponds to an individual. As respondents can have multiple jobs at specific years, the column names, such as `HRP1_1980`, such as contain the information about the job number and the year. The input data consequently has a large number of columns (686 to be specific). 
+
+[REMOVE] Unfortunately, the `new_data_qnames` did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr] to do this job.
 
 ```{r untidy-data, fig.cap="The missing value structure of the NLSY79 raw data."}
 ```
