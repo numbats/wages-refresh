@@ -27,8 +27,9 @@ options(width=70)
 new_data_qnames %>%
   select(CASEID_1979,
          starts_with("HRP") &
-           ends_with(c("1979", "1980"))) %>%
-  glimpse()
+           ends_with(c("1979", "1980")),
+         everything()) %>%
+  str(list.len = 10)
   #visdat::vis_miss()
 
 ## ---- dob-tidy

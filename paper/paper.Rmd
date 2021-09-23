@@ -160,12 +160,15 @@ The downloaded data set came with the following set of files:
 ```{r raw-data}
 ```
 
-According to @WickhamHadley2014TD, tidy data sets comply with three rules: (i) each variable forms a column, (ii) each observation forms a row, and (iii) each type of observational unit forms a table. The input data, `new_data_qnames`, is organised such that each row corresponds to an individual. As respondents can have multiple jobs at specific years, the column names, such as `HRP1_1980`, such as contain the information about the job number and the year. The input data consequently has a large number of columns (686 to be specific). 
-
-[REMOVE] Unfortunately, the `new_data_qnames` did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr] to do this job.
+The raw data, `new_data_qnames`, is organised such that each row corresponds to an individual. As respondents can have multiple jobs at specific years, the column names, such as `HRP1_1979`, `HRP2_1979`, `HRP1_1980` and `HRP2_1980`, contain the information about the job number up to 5 (`HRP1` = job 1, `HRP2` = job 2) and the year. The raw data consequently has a large number of columns (686 to be specific). The values in the cell under the variables that begin with `HRP` correspond to the hourly wage in dollars. A glimpse of this data output is shown below.
 
 ```{r untidy-data, fig.cap="The structure of the NLSY79 raw data on wages for up to five jobs in any year."}
 ```
+
+According to @WickhamHadley2014TD, tidy data sets comply with three rules: (i) each variable forms a column, (ii) each observation forms a row, and (iii) each type of observational unit forms a table. The raw data does not comply the rules of the tidy data, thus we wrangle the data in form required by making use of the `tidyverse` suite of packages [@tidyverse], which include the main set of packages needed, namely `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr]. The tidy data form, where we have a variable that indicates the individual ID, year, job number, wage in dollars and demographic variables, is important for downstream analysis, such as visualisation and modelling that will be performed later. 
+
+
+[REMOVE] Unfortunately, the `new_data_qnames` did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr] to do this job.
 
 ### Tidying demographic variables
 
