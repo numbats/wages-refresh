@@ -82,7 +82,7 @@ theme_set(theme_bw(base_size = 18) +
 # Introduction {#intro}
 
 "Open data" is data that is freely accessible, modifiable, and shareable by anyone for any purpose [@opendata]. This type of data can be useful as example data in statistical textbooks and for research purposes. However, open data is often referred to as what we might call "wild data" because it requires substantial cleaning and tidying to tame it into textbook shape. @HuebnerMariannePhD2016Asat emphasize that making the data cleaning process accountable and transparent is imperative and essential for the integrity of downstream statistical analyses and model building [@HuebnerMarianne2020Haar]. 
-Data cleaning can be considered to be a part of what is called "initial data analysis (IDA)" [@Chatfield1985TIEo]. In IDA one would also explore the data, especially to check if the data is consistent with assumptions required for modeling. This is also related to exploratory data analysis (EDA), coined by @tukey with a focus on learning from data. EDA can be considered to encompass IDA. @DasuTamraparni2003Edma say that data cleaning and exploration, without naming it as IDA, is a difficult task and consumes 80% of the data mining task. 
+Data cleaning can be considered to be a part of what is called "initial data analysis" (IDA) [@Chatfield1985TIEo]. In IDA one would also explore the data, especially to check if the data is consistent with assumptions required for modeling. This is also related to exploratory data analysis (EDA), coined by @tukey with a focus on learning from data. EDA can be considered to encompass IDA. @DasuTamraparni2003Edma say that data cleaning and exploration, without naming it as IDA, is a difficult task and consumes 80% of the data mining task. 
 
 Despite it's importance, this IDA stage is often undervalued and neglected [@Chatfield1985TIEo]. There are few research papers that document the data cleaning [@WickhamHadley2014TD]. Furthermore, the decisions made in this stage often go unreported in the sense that IDA is often performed in an unplanned and unstructured way and is only shared among restricted parties [@HuebnerMarianne2020Haar]. 
 
@@ -98,7 +98,7 @@ This paper is structured in the following way. Section \@ref(database) describes
 
 ## Database
 
-The NLSY79 is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth and born between 1957-1964 [@nlsy79]. The cohort originally included 12,686 respondents aged 14-22 when first interviewed in 1979. It was comprised of Blacks, Hispanics, economically disadvantaged non-Black non-Hispanics, and youth in the military. In 1984 and 1990, two sub-samples were dropped from the interview; the dropped subjects are the 1,079 members of the military sample and 1,643 members of the economically disadvantaged non-Black non-Hispanics, respectively. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are now available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
+The NLSY79 is a longitudinal survey held by the U.S Bureau of Labor Statistics that follows the lives of a sample of American youth born between 1957-1964 [@nlsy79]. The cohort originally included 12,686 respondents aged 14-22 when first interviewed in 1979. It comprised of Blacks, Hispanics, economically disadvantaged non-Black non-Hispanics, and youth in the military. In 1984 and 1990, two sub-samples were dropped from the interview; the dropped subjects are the 1,079 members of the military sample and 1,643 members of the economically disadvantaged non-Black non-Hispanics, respectively. Hence, 9,964 respondents remain in the eligible samples. The surveys were conducted annually from 1979 to 1994 and biennially thereafter. Data are currently available from Round 1 (1979 survey year) to Round 28 (2018 survey year).
 
 Although the main focus area of the NLSY is labor and employment, the NLSY also covers several other topics, including education; training and achievement; household, geography, and contextual variables; dating, marriage, cohabitation; sexual activity, pregnancy, and fertility; children; income, assets and program participation; health; attitudes and expectations; and crime and substance use. 
 
@@ -113,11 +113,11 @@ in @SingerJudithD2003Alda, we define high school dropouts as respondents who onl
 
 # Data cleaning {#cleaning}
 
-In this section, we outline the steps taken to the download the raw data from the database provided at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} [@nlsy79]. Specifically, we only extract a subset of the variables in the database as described in Section~\ref{getdata}. 
+@LooMarkvander2018Sdcw describe the notion of a "statistical value chain" where the production stages of data cleaning process are earmarked as raw data (data from the data source), input data (data organised with correct type and identified variables) and valid data (data that faithfully represent the variables).  In this section, we outline the steps to download the raw data (Section \@ref(getdata)) and then tidying the raw data into input data, specifically for wages data (Section \@ref(tidywages)), demographic variables (Section \@ref(tidydemog)) and the employment variables (Section \@ref(tidyemp)), so that the resulting input data can be used downstream for validating the data as described in Section \@ref(ida).
 
-## Getting and tidying the data {#getdata}
+## Getting the data {#getdata}
 
-The NLSY79 data contains a large scope of variables but we limit the scope of the data to demographic profiles and wages data. To extract the relevant component of the data, we went to the NLSY79 database website at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} and navigated as described below.
+The NLSY79 data contains a large scope of variables but for our aim, the scope required is limisted to demographic profiles and wages data. More specifically, we went to the NLSY79 database website at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} and navigated as described below.
 
 ::: {.tcolorbox data-latex="[label=\"box:data\", title=Getting the data]" }
 \faDatabase\ National Longitudinal Survey of Youth 1979 
@@ -133,8 +133,8 @@ The NLSY79 data contains a large scope of variables but we limit the scope of th
 \begin{itemize}
 \item[$\triangleright$] Summary measures $\triangleright$ By job $\triangleright$ Hours worked and Hourly wages
 \begin{itemize}
-\item[\faCloudDownload] Downloaded all of the variables in Hours worked.
-\item[\faCloudDownload] Downloaded all of the variables in Hourly wages
+\item[\faCloudDownload] We downloaded all of the variables in Hours worked.
+\item[\faCloudDownload] We downloaded all of the variables in Hourly wages
   Both hours worked and hourly wages are recorded by the job, up to five jobs for each id/subject. 
 \end{itemize}
 \end{itemize}
@@ -152,13 +152,15 @@ The NLSY79 data contains a large scope of variables but we limit the scope of th
       
 The downloaded data set came with the following set of files:
 
-- `NLSY79.csv`: csv format 
-- `NLSY79.dat`: dat format
+- `NLSY79.csv`: csv format of the data
+- `NLSY79.dat`: dat format of the data
 - `NLSY79.NLSY79`: Tagset of variables that can be uploaded to the website to recreate the data set.
 - `NLSY79.R`: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set,  `categories_qnames` (the observations are stored in categorical/interval values) and `new_data_qnames` (the observations are stored in integer form).
 
 ```{r raw-data}
 ```
+
+### Tidying the wages data {#tidywages}
 
 The raw data, `new_data_qnames`, is organised such that each row corresponds to an individual. As respondents can have multiple jobs at specific years, the column names, such as `HRP1_1979`, `HRP2_1979`, `HRP1_1980` and `HRP2_1980`, contain the information about the job number up to 5 (`HRP1` = job 1, `HRP2` = job 2) and the year. The raw data consequently has a large number of columns (686 to be specific). The values in the cell under the variables that begin with `HRP` correspond to the hourly wage in dollars. A glimpse of this data output is shown below.
 
@@ -170,7 +172,7 @@ According to @WickhamHadley2014TD, tidy data sets comply with three rules: (i) e
 
 [REMOVE] Unfortunately, the `new_data_qnames` did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr] to do this job.
 
-### Tidying demographic variables
+### Tidying demographic variables {#tidydemog}
 
 `Age in 1979`, `gender`, `race`, `highest grade completed`, and the `year when the highest grade completed` are the variables that we want to use in the cleaned data set. 
 
@@ -200,7 +202,7 @@ Finally, we get all of the demographic profiles of the NLSY79 cohort. We then sa
 ```
 
 
-### Tidying employment variables
+### Tidying employment variables {#tidyemp}
 
 The employment data comprises of three variables, i.e., `total hours of work per week`, `number of jobs that an individual has`, and `mean hourly wage`. 
 
@@ -227,11 +229,11 @@ The employment and demographic variables are then joined. We also filtered the d
 ```
 
 
-## Initial data analysis
+## Initial data analysis {#ida}
 
-According to @HuebnerMariannePhD2016Asat, Initial Data Analysis (IDA) is the step of inspecting and screening the data after being collected to ensure that the data is clean, valid, and ready to be deployed in the later formal statistical analysis. Moreover, @Chatfield1985TIEo argues that the two main objectives of IDA are data description, which is to assess the structure and the quality of the data, and model formulation without any formal statistical inference. 
+According to @HuebnerMariannePhD2016Asat, initial data analysis (IDA) is the step of inspecting and screening the data after being collected to ensure that the data is clean, valid, and ready to be deployed in the later formal statistical analysis. Moreover, @Chatfield1985TIEo argues that the two main objectives of IDA are data description, which is to assess the structure and the quality of the data, and model formulation without any formal statistical inference. 
 
-In this paper, we conduct an IDA or a preliminary data analysis to assess the consistency of the data with the cohort information that the NLSY provides. In addition, we also aim to find the anomaly in the wages values using this approach. We mainly use graphical summaries to do the IDA using `ggplot2`[@ggplot2] and `brolgar` [@brolgar]. 
+In this paper, we conduct an IDA or a preliminary data analysis to assess the consistency of the data with the cohort information that the NLSY provides. In addition, we also aim to find the anomaly in the wages values using this approach. We mainly use graphical summaries to do the IDA using `ggplot2` [@ggplot2] and `brolgar` [@brolgar]. 
 
 As stated previously, the respondents' ages ranged from 12 to 22 when first interviewed in 1979. Hence, we validate whether all of the respondents were in this range. Additionally, the [NLSY](https://www.nlsinfo.org/content/cohorts/nlsy79/intro-to-the-sample/nlsy79-sample-introduction) also provides the number of the survey cohort by their gender (6,403 males and 6,283 females) and race (7,510 Non-Black/Non-Hispanic; 3,174 Black; 2,002 Hispanic). To validate this, we used the `demog_nlsy79`, i.e., the data with the survey years 1979 sample. Table \ref{tab:age-table} and Table \ref{tab:gender-race-table} suggest that the demographic data we had is consistent with the sample information in the database.
 
