@@ -37,14 +37,13 @@ do_ref <- do %>%
   theme(plot.title = element_text(size = 10)) +
   ylim(-4, 6)
 
-sw_wages + do_ref
+# sw_wages + do_ref
 
 # the two plots are not comparable
 # since the id who are in Singer-Willet and the id in do-refreshed might be different
 
 
 ## --- compare-sw-do
-
 sw_id <- as_tibble(sw) %>%
   group_by(id) %>%
   count() %>%
@@ -91,13 +90,11 @@ do_ref_agree <- do_agree %>%
   ylim(-3, 5)
 
 
-sw_wages_agree + do_ref_agree
+#sw_wages_agree + do_ref_agree
 # even though it already has the same id, it still has different period measured
 # hence the following using the same period apprx.
 
 ## ---- compare-period
-
-
 # filter the xp in refreshed data in order to get the same experience with Singer-Willet data,
 # which is 13 years of experience
 do_agree_cutxp <- do_agree %>%
