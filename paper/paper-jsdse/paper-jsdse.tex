@@ -5,6 +5,7 @@
 \usepackage{natbib}
 \usepackage{tcolorbox}
 \usepackage{fontawesome}
+\usepackage{booktabs}
 \usepackage{url} % not crucial - just used below for the URL
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -194,9 +195,9 @@ The downloaded data set came with the following set of files:
   \texttt{NLSY79.R}: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set, \texttt{categories\_qnames} (the observations are stored in categorical/interval values) and \texttt{new\_data\_qnames} (the observations are stored in integer form).
 \end{itemize}
 
-According to Wickham (2014), tidy data sets comply with three rules: (i) each variable forms a column, (ii) each observation forms a row, and (iii) each type of observational unit forms a table. The input data, \texttt{new\_data\_qnames}, is organised such that each row corresponds to an individual. As respondents can have multiple jobs at specific years, the column names, such as \texttt{HRP1\_1980}, such as contain the information about the job number and the year. The input data consequently has a large number of columns ()
+According to Wickham (2014), tidy data sets comply with three rules: (i) each variable forms a column, (ii) each observation forms a row, and (iii) each type of observational unit forms a table. The input data, \texttt{new\_data\_qnames}, is organised such that each row corresponds to an individual. As respondents can have multiple jobs at specific years, the column names, such as \texttt{HRP1\_1980}, such as contain the information about the job number and the year. The input data consequently has a large number of columns (686 to be specific).
 
-Unfortunately, the \texttt{new\_data\_qnames} did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used \texttt{tidyr} (Wickham 2020b), \texttt{dplyr} (Wickham et al. 2020), and \texttt{stringr} (Wickham 2019) to do this job.
+{[}REMOVE{]} Unfortunately, the \texttt{new\_data\_qnames} did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used \texttt{tidyr} (Wickham 2020b), \texttt{dplyr} (Wickham et al. 2020), and \texttt{stringr} (Wickham 2019) to do this job.
 
 \begin{figure}
 
@@ -396,6 +397,28 @@ From this stage forward, we assume that we already have valid data. We also subs
 \hypertarget{compare}{%
 \section{Comparison with the Textbook Data}\label{compare}}
 
+As mentioned previously, the aim of this paper is to refresh the high school dropouts wages used in textbook (Singer and Willett 2003) as similar as possible. Hence, in this section, we will compare how close the \texttt{wages\_hs\_do}, henceforth refreshed data, to the textbook data. It is also worth noting that the textbook data is reused from Murnane, Willett, and Boudett (1999)'s paper. Hence, it is not directly extracted from the NLSY79 database. Singer and Willett (2003) do not state the time frame covered by the data. However, from Murnane, Willett, and Boudett (1999)'s paper, we find that the textbook data cover the survey period from 1979-1994. Hence, for comparison purposes, we filter the refreshed data only until 1994.
+
+In the absence of highs chool dropouts criteria in the textbook data, we create a clearer criteria of high school dropouts as mentioned in Section @ref(\#target). Consequently, we do not have the same ID of high-school dropouts as in the textbook data. The textbook data has 888 IDs included, while the refreshed data has 1184 IDs. Furthermore, there are only 94 IDs included both in the textbook and the refreshed data. After observing Murnane, Willett, and Boudett (1999)'s paper, it is mentioned that the data is randomly drawn from the low income subsample of the NLSY. This is probably the reason why, even using some criteria, we cannot match the dropouts in the textbook and the refreshed data.
+
+Further, the temporal variable used in the textbook data is experience, instead of year. The only explanation we found regarding this variable is that it is derived from the years of IDs' experience since their first job. Singer and Willett (2003) stated that this variable reflects the specific moment in each ID labor force history associated with each wage observation.
+Since it is not clearly articulated, we decide to keep the temporal variable in the refreshed data as year. Accordingly, in this comparison, we only compare the same ID but not the same temporal variable.
+
+Regarding the wages, the textbook data express the wages as inflation adjusted with 1990 dollars as constant (Singer and Willett 2003). However, it is not stated how exactly the wages are adjusted. Note that in the refreshed data we publish in \texttt{yowie}, we do not adjust the data with inflation because the time frame covered ranged from 1979-2018. Hence, we allow flexibility to the data user to adjust, not adjust, or adjust it with different base years. For comparison purposes, we adjust the wages with the average Consumer Price Index For All Urban Consumers (CPI-U) we got from (\textbf{fed?}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=468px]{figures/plotting-sw-do-1} 
+
+}
+
+\caption{Textbook data (A) and Refreshed data (B). The textbook data and refreshed data is not exactly the same because it has different temporal variables.}\label{fig:plotting-sw-do}
+\end{figure}
+
+Figure \ref{fig:plotting-sw-do} shows the comparison between the textbook and the refreshed data. Even though it has different temporal variables and possibly different CPI indicators used in inflation adjustment, we can still capture some of the patterns in the refreshed data.
+
+From this comparison, we learn that we cannot make an apple to apple comparison and produce the exact same data as the textbook due to the absence of clearly articulated data extraction and derivation process. Hence, the takeaway is that it is imperative to disclose how the data derived from the initial source to make data analysis reproducible. This is why in this paper, we show the practice of reproducible and responsible data cleaning workflow to make sure the longitudinal data from a continuous survey can be refreshed.
+
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
 
@@ -470,6 +493,9 @@ Koller, Manuel. 2016. {``Robustlmm: An r Package for Robust Estimation of Linear
 
 \leavevmode\hypertarget{ref-LooMarkvander2018Sdcw}{}%
 Loo, Mark van der. 2018. \emph{Statistical Data Cleaning with Applications in r}.
+
+\leavevmode\hypertarget{ref-MurnaneRichardJ1999DMDB}{}%
+Murnane, Richard J, John B Willett, and Kathryn Parker Boudett. 1999. {``Do Male Dropouts Benefit from Obtaining a GED, Postsecondary Education, and Training?''} \emph{Evaluation Review} 23 (5): 475--503.
 
 \leavevmode\hypertarget{ref-rsvg}{}%
 Ooms, Jeroen. 2020. \emph{Rsvg: Render SVG Images into PDF, PNG, PostScript, or Bitmap Arrays}. \url{https://CRAN.R-project.org/package=rsvg}.
