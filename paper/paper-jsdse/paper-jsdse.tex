@@ -132,7 +132,7 @@ Although the main focus area of the NLSY is labor and employment, the NLSY also 
 There are two ways to conduct the interview of the NLSY79, which are face-to-face interviews or by telephone. In recent survey years, more than 90 percent of respondents were interviewed by telephone (Cooksey 2017).
 
 \hypertarget{target}{%
-\subsection{Target Data}\label{target}}
+\subsection{Target data}\label{target}}
 
 This paper aims, as mentioned in Section \ref{intro}, to refresh the NLSY79 data used in Singer and Willett (2003). This data set contains the information of yearly mean hourly wages from the NLSY79 subcohort, with education and race as covariates. The subcohort correspond to male high-school dropouts that participated in the study from 14 to 17 years old. Accordingly, to refresh this data, we make use of NLSY79 cohort's demographic profiles and wages data of people who completed education up to high school.
 
@@ -140,12 +140,12 @@ Since no specific criteria on high school dropouts was defined
 in Singer and Willett (2003), we define high school dropouts as respondents who only completed either 9th to 11th grade, or who completed 12th when their age is at least 19 years old (meaning that the individual may have dropped out of high school but returned at a later time to complete high school education).
 
 \hypertarget{cleaning}{%
-\section{Data Cleaning}\label{cleaning}}
+\section{Data cleaning}\label{cleaning}}
 
 In this section, we outline the steps taken to the download the raw data from the database provided at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} (The U.S. Bureau of Labor Statistics, n.d.). Specifically, we only extract a subset of the variables in the database as described in Section\textasciitilde{}\ref{getdata}.
 
 \hypertarget{getdata}{%
-\subsection{Getting and Tidying the Data}\label{getdata}}
+\subsection{Getting and tidying the data}\label{getdata}}
 
 The NLSY79 data contains a large scope of variables but we limit the scope of the data to demographic profiles and wages data. To extract the relevant component of the data, we went to the NLSY79 database website at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} and navigated as described below.
 
@@ -262,7 +262,7 @@ Further, we calculated the mean hourly wage for each ID in each year using a wei
 The employment and demographic variables are then joined. We also filtered the data to only have the cohort who completed the education up to 12th grade and participated at least five rounds in the survey and save it to an object called \texttt{wages}.
 
 \hypertarget{initial-data-analysis}{%
-\subsection{Initial Data Analysis}\label{initial-data-analysis}}
+\subsection{Initial data analysis}\label{initial-data-analysis}}
 
 According to Huebner Marianne, Vach, and Cessie (2016), Initial Data Analysis (IDA) is the step of inspecting and screening the data after being collected to ensure that the data is clean, valid, and ready to be deployed in the later formal statistical analysis. Moreover, Chatfield (1985) argues that the two main objectives of IDA are data description, which is to assess the structure and the quality of the data, and model formulation without any formal statistical inference.
 
@@ -428,7 +428,7 @@ The entire analysis is conducted using \texttt{R} (R Core Team 2020) in \texttt{
 \item
   \textbf{R Package \texttt{yowie}}:\texttt{yowie} is a data container R package that contains 3 datasets, namely the high school mean hourly wage data, high school dropouts mean hourly wage data, and demographic data of the NLSY79 cohort. This package could be accessed \href{https://github.com/numbats/yowie}{here}.
 \item
-  \textbf{shiny app}: An web interactive \texttt{shiny} app to run a simulation to customize the weight threshold. This app could be accessed \href{https://github.com/numbats/summer-wages-refresh/tree/main/app}{here}.
+  \textbf{shiny app}: An web interactive \texttt{shiny} app to run a simulation to customize the weight threshold. This app could be accessed \href{https://github.com/numbats/wages-refresh/tree/main/app}{here}.
 \end{itemize}
 
 \hypertarget{references}{%
