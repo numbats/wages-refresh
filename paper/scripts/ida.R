@@ -222,7 +222,9 @@ ggplot(wages_compare) +
   guides(linetype = FALSE) +
   xlab("Year") +
   ylab("Hourly wage ($)") +
-  scale_color_hue(labels = c("Before", "After"))
+  scale_colour_brewer("", palette = "Dark2", direction = -1,
+                      labels = c("Before", "After"))
+#  scale_color_hue(labels = c("Before", "After"))
 
 ## ---- fixed-feature-plot
 spag2 <- wages_cleaned %>%

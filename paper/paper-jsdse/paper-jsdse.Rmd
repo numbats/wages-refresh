@@ -1,32 +1,32 @@
 ---
 authors:
   - name: Dewi Amaliah
-    thanks: "Test"
-    department: Department of Econometrics and Business Statistics
+    thanks: "Corresponding author, dlamaleeah@gmail.com"
+    department: Dept of Econometrics and Business Statistics
     affiliation: Monash University
     location: Clayton, VIC 3800
-    email: dama0007@student.monash.edu
+    email: dlamaleeah@gmail.com
   - name: Dianne Cook
-    department: Department of Econometrics and Business Statistics
+    department: Dept of Econometrics and Business Statistics
     affiliation: Monash University
     location: Clayton, VIC 3800
     email: dicook@monash.edu
   - name: Emi Tanaka
-    department: Department of Econometrics and Business Statistics
+    department: Dept of Econometrics and Business Statistics
     affiliation: Monash University
     location: Clayton, VIC 3800
     email: emi.tanaka@monash.edu
   - name: Kate Hyde
     thanks: ""
-    department: Department of Econometrics and Business Statistics
+    department: Dept of Econometrics and Business Statistics
     affiliation: Monash University
     location: Clayton, VIC 3800
     email: ""
   - name: Nicholas Tierney
     thanks: ""
-    department: ""
-    affiliation: ""
-    location: ""
+    department: Telethon Kids Institute
+    affiliation: Perth, WA
+    location: "Perth, WA"
     email: ""
 bibliography: ../references.bib
 biblio-style: unsrt

@@ -67,16 +67,16 @@
 {
   \title{\bf The Journey from Wild to Textbook Data: A Case Study from the National Longitudinal Survey of Youth}
   \author{
-            Dewi Amaliah\thanks{Test}\\
-      Department of Econometrics and Business Statistics, Monash University, \\
+            Dewi Amaliah\thanks{Corresponding author, \href{mailto:dlamaleeah@gmail.com}{\nolinkurl{dlamaleeah@gmail.com}}}\\
+      Dept of Econometrics and Business Statistics, Monash University, \\
             Dianne Cook\\
-      Department of Econometrics and Business Statistics, Monash University, \\
+      Dept of Econometrics and Business Statistics, Monash University, \\
             Emi Tanaka\\
-      Department of Econometrics and Business Statistics, Monash University, \\
+      Dept of Econometrics and Business Statistics, Monash University, \\
             Kate Hyde\\
-      Department of Econometrics and Business Statistics, Monash University, \\
+      Dept of Econometrics and Business Statistics, Monash University, \\
             Nicholas Tierney\\
-      , , }
+      Telethon Kids Institute, Perth, WA, }
         \maketitle
 } \fi
 
@@ -199,14 +199,21 @@ According to Wickham (2014), tidy data sets comply with three rules: (i) each va
 
 {[}REMOVE{]} Unfortunately, the \texttt{new\_data\_qnames} did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used \texttt{tidyr} (Wickham 2020b), \texttt{dplyr} (Wickham et al. 2020), and \texttt{stringr} (Wickham 2019) to do this job.
 
-\begin{figure}
-
-{\centering \includegraphics[width=468px]{figures/untidy-data-1} 
-
-}
-
-\caption{The missing value structure of the NLSY79 raw data.}\label{fig:untidy-data}
-\end{figure}
+\begin{verbatim}
+#> Rows: 12,686
+#> Columns: 11
+#> $ CASEID_1979 <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1~
+#> $ HRP1_1979   <int> 328, 385, 365, NA, 310, NA, NA, NA, 214, NA, 337~
+#> $ HRP2_1979   <int> NA, NA, NA, NA, 375, NA, NA, NA, NA, NA, 300, NA~
+#> $ HRP3_1979   <int> NA, NA, 275, NA, NA, NA, NA, NA, NA, NA, NA, NA,~
+#> $ HRP4_1979   <int> NA, NA, NA, NA, NA, 250, NA, NA, NA, NA, NA, NA,~
+#> $ HRP5_1979   <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
+#> $ HRP1_1980   <int> NA, 457, 397, NA, 333, 275, 300, 394, 200, 318, ~
+#> $ HRP2_1980   <int> NA, NA, 367, NA, NA, NA, NA, NA, NA, NA, NA, NA,~
+#> $ HRP3_1980   <int> NA, NA, 380, NA, NA, NA, 290, NA, NA, NA, NA, NA~
+#> $ HRP4_1980   <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
+#> $ HRP5_1980   <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
+\end{verbatim}
 
 \hypertarget{tidying-demographic-variables}{%
 \subsubsection{Tidying demographic variables}\label{tidying-demographic-variables}}
@@ -302,24 +309,6 @@ Total & 2002 (15.78\%) & 3174 (25.02\%) & 7510 (59.20\%) & 12686 (100.00\%)\\
 
 The next step is that explore the mean hourly wage data. In this case, we only explore the wages data of up to \(12^{th}\) grade. Here, we use visualisation techniques to do IDA.
 
-\begin{table}
-
-\caption{\label{tab:summarytable}Summary Statistics of Wages of High School Data}
-\centering
-\begin{tabular}[t]{lr}
-\toprule
-Statistics & Value\\
-\midrule
-Min. & 0.01000\\
-1st Qu. & 4.50000\\
-Median & 7.20000\\
-Mean & 11.86593\\
-3rd Qu. & 11.74000\\
-Max. & 33400.00000\\
-\bottomrule
-\end{tabular}
-\end{table}
-
 \begin{figure}
 
 {\centering \includegraphics[width=1\linewidth]{figures/sample-plot-1} 
@@ -387,7 +376,7 @@ From this stage forward, we assume that we already have valid data. We also subs
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.93\linewidth]{/Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart} 
+{\centering \includegraphics[width=0.93\linewidth]{/Users/cookd/numbats/summer-wages-refresh/paper/figures/flowchart} 
 
 }
 
@@ -395,29 +384,22 @@ From this stage forward, we assume that we already have valid data. We also subs
 \end{figure}
 
 \hypertarget{compare}{%
-\section{Comparison with the Textbook Data}\label{compare}}
+\section{Comparison of refreshed with the original data}\label{compare}}
 
-As mentioned previously, the aim of this paper is to refresh the high school dropouts wages used in textbook (Singer and Willett 2003) as similar as possible. Hence, in this section, we will compare how close the \texttt{wages\_hs\_do}, henceforth refreshed data, to the textbook data. It is also worth noting that the textbook data is reused from Murnane, Willett, and Boudett (1999)'s paper. Hence, it is not directly extracted from the NLSY79 database. Singer and Willett (2003) do not state the time frame covered by the data. However, from Murnane, Willett, and Boudett (1999)'s paper, we find that the textbook data cover the survey period from 1979-1994. Hence, for comparison purposes, we filter the refreshed data only until 1994.
-
-In the absence of highs chool dropouts criteria in the textbook data, we create a clearer criteria of high school dropouts as mentioned in Section @ref(\#target). Consequently, we do not have the same ID of high-school dropouts as in the textbook data. The textbook data has 888 IDs included, while the refreshed data has 1184 IDs. Furthermore, there are only 94 IDs included both in the textbook and the refreshed data. After observing Murnane, Willett, and Boudett (1999)'s paper, it is mentioned that the data is randomly drawn from the low income subsample of the NLSY. This is probably the reason why, even using some criteria, we cannot match the dropouts in the textbook and the refreshed data.
-
-Further, the temporal variable used in the textbook data is experience, instead of year. The only explanation we found regarding this variable is that it is derived from the years of IDs' experience since their first job. Singer and Willett (2003) stated that this variable reflects the specific moment in each ID labor force history associated with each wage observation.
-Since it is not clearly articulated, we decide to keep the temporal variable in the refreshed data as year. Accordingly, in this comparison, we only compare the same ID but not the same temporal variable.
-
-Regarding the wages, the textbook data express the wages as inflation adjusted with 1990 dollars as constant (Singer and Willett 2003). However, it is not stated how exactly the wages are adjusted. Note that in the refreshed data we publish in \texttt{yowie}, we do not adjust the data with inflation because the time frame covered ranged from 1979-2018. Hence, we allow flexibility to the data user to adjust, not adjust, or adjust it with different base years. For comparison purposes, we adjust the wages with the average Consumer Price Index For All Urban Consumers (CPI-U) we got from (\textbf{fed?}).
+Now is the time to see how close we have come to the original textbook data. The original set contains wages of high school dropouts wages (Singer and Willett 2003) from 1979 through to 1994. The refreshed data set for comparison is also wages on high school drop outs, over 1979 to 2018. The original set is available in the R package \texttt{brolgar} and the refreshed data is available in the R package \texttt{yowie}.
 
 \begin{figure}
 
-{\centering \includegraphics[width=468px]{figures/plotting-sw-do-1} 
+{\centering \includegraphics[width=1\linewidth]{figures/plotting-sw-do-1} 
 
 }
 
-\caption{Textbook data (A) and Refreshed data (B). The textbook data and refreshed data is not exactly the same because it has different temporal variables.}\label{fig:plotting-sw-do}
+\caption{Comparison of original textbook example (A) with refreshed data (B). The original data was inflation-adjusted to 1990 prices and the individual's time of collection was converted to a length of experience in the workforce, which make it difficult to precisely compare the two sets.}\label{fig:plotting-sw-do}
 \end{figure}
 
-Figure \ref{fig:plotting-sw-do} shows the comparison between the textbook and the refreshed data. Even though it has different temporal variables and possibly different CPI indicators used in inflation adjustment, we can still capture some of the patterns in the refreshed data.
+There are two aspects of the original data that make a direct comparison difficult. The time variable provided is ``experience in the workforce.'' It is not clear how this is calculated. One would expect that there is a record of the day the individual first started a job, and this is used to adjust the year of collection. We have not been able to find this information in the database. Secondly, wages were inflation-adjusted to 1990 prices, which is not done for the refreshed data.
 
-From this comparison, we learn that we cannot make an apple to apple comparison and produce the exact same data as the textbook due to the absence of clearly articulated data extraction and derivation process. Hence, the takeaway is that it is imperative to disclose how the data derived from the initial source to make data analysis reproducible. This is why in this paper, we show the practice of reproducible and responsible data cleaning workflow to make sure the longitudinal data from a continuous survey can be refreshed.
+Figure \ref{fig:plotting-sw-do} shows the longitudinal profiles of the two sets. (A direct ID matching is not possible.) There are 888 individuals in the original and 1,188 individuals in the refreshed data. This suggests some individuals were removed in the original data. Overall, the profiles show some similarity.
 
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
@@ -493,9 +475,6 @@ Koller, Manuel. 2016. {``Robustlmm: An r Package for Robust Estimation of Linear
 
 \leavevmode\hypertarget{ref-LooMarkvander2018Sdcw}{}%
 Loo, Mark van der. 2018. \emph{Statistical Data Cleaning with Applications in r}.
-
-\leavevmode\hypertarget{ref-MurnaneRichardJ1999DMDB}{}%
-Murnane, Richard J, John B Willett, and Kathryn Parker Boudett. 1999. {``Do Male Dropouts Benefit from Obtaining a GED, Postsecondary Education, and Training?''} \emph{Evaluation Review} 23 (5): 475--503.
 
 \leavevmode\hypertarget{ref-rsvg}{}%
 Ooms, Jeroen. 2020. \emph{Rsvg: Render SVG Images into PDF, PNG, PostScript, or Bitmap Arrays}. \url{https://CRAN.R-project.org/package=rsvg}.

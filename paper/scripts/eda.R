@@ -6,13 +6,13 @@ sw_wages <- sw %>%
   ggplot(aes(x = xp,
              y = ln_wages)) +
   geom_line(aes(group = id),alpha = 0.1) +
-  geom_smooth(se = FALSE) +
-  ggtitle("A") +
+  geom_smooth(se = FALSE, colour = "pink") +
+  ggtitle("A original") +
   theme_bw() +
-  ylab("ln(Hourly wage) ($)") +
-  xlab("Experience (years)") +
+  ylab("Hourly wage ($, natural log)") +
+  xlab("Experience in years") +
   theme(plot.title = element_text(size = 10)) +
-  ylim(-4, 6)
+  ylim(0, 5)
 
 ## ---- do_refreshed
 
@@ -32,13 +32,13 @@ do_ref <- do %>%
   ggplot(aes(x = year,
              y = lnwage)) +
   geom_line(aes(group = id), alpha = 0.1) +
-  geom_smooth(se = FALSE) +
-  ggtitle("B") +
+  geom_smooth(se = FALSE, colour = "pink") +
+  ggtitle("B refreshed data") +
   theme_bw() +
-  ylab("ln(Hourly wage) ($)") +
-  xlab("Year") +
+  ylab("Hourly wage ($, natural log)") +
+  xlab("Year of data collection") +
   theme(plot.title = element_text(size = 10)) +
-  ylim(-4, 6)
+  ylim(0, 5)
 
 # sw_wages + do_ref
 
@@ -64,6 +64,27 @@ sw_do <- inner_join(sw_id, do_id, by = "id")
 # only have 94 id that agree upon each other
 sw_agree <- filter(sw, id %in% sw_do$id)
 do_agree <- filter(do, id %in% sw_do$id)
+
+sw_do_sample <- sample(sw_do$id, 12)
+
+sw_agree_sample <- sw_agree %>%
+  filter(id %in% sw_do_sample) %>%
+  select(id, xp, ln_wages) %>%
+  as_tibble()
+do_agree_sample <- do_agree %>%
+  mutate(id = as.integer(as.character(id))) %>%
+  filter(id %in% sw_do_sample) %>%
+  select(id, year, lnwage) %>%
+  as_tibble()
+
+agree_ref <- ggplot() +
+  geom_line(data=do_agree_sample,
+            aes(x = year-1979,
+                y = lnwage), colour = "black") +
+  geom_line(data=sw_agree_sample,
+            aes(x = xp,
+                y = ln_wages), colour = "grey70") +
+  facet_wrap(~id)
 
 ## ---- plotting-sw-do
 
@@ -92,8 +113,8 @@ do_ref_agree <- do_agree %>%
   theme(plot.title = element_text(size = 10)) +
   ylim(-3, 5)
 
-sw_wages_agree + do_ref_agree
-
+# sw_wages_agree + do_ref_agree
+sw_wages + do_ref
 
 # Takeaways:
 
