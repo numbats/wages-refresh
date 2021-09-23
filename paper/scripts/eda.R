@@ -22,8 +22,11 @@ sw_wages <- sw %>%
 # but there is no variable explicitly mention about experience.
 # in this case, we approximate it with year-1979
 
+# filter do data up to 1994 since the textbook data only covers that period.
+
 do <- yowie::wages_hs_do %>%
-  mutate(lnwage = log(wage))
+  mutate(lnwage = log(wage)) %>%
+  filter(year < 1995)
 
 do_ref <- do %>%
   ggplot(aes(x = year,
@@ -62,7 +65,7 @@ sw_do <- inner_join(sw_id, do_id, by = "id")
 sw_agree <- filter(sw, id %in% sw_do$id)
 do_agree <- filter(do, id %in% sw_do$id)
 
-# plotting
+## ---- plotting-sw-do
 
 sw_wages_agree <- sw_agree %>%
   ggplot(aes(x = xp,
@@ -89,43 +92,7 @@ do_ref_agree <- do_agree %>%
   theme(plot.title = element_text(size = 10)) +
   ylim(-3, 5)
 
-
-#sw_wages_agree + do_ref_agree
-# even though it already has the same id, it still has different period measured
-# hence the following using the same period apprx.
-
-## ---- compare-period
-# filter the xp in refreshed data in order to get the same experience with Singer-Willet data,
-# which is 13 years of experience
-do_agree_cutxp <- do_agree %>%
-  filter(year < 1995)
-
-# compare summary stat
-
-#summary of singer-willet wages
-summary(sw_agree$ln_wages)
-
-#summary of refreshed-do wages
-summary(do_agree_cutxp$lnwage)
-
-# plotting
-
-do_ref_agree_cutxp <- do_agree_cutxp %>%
-  ggplot(aes(x = year,
-             y = lnwage)) +
-  geom_line(aes(group = id), alpha = 0.1) +
-  geom_smooth(se = FALSE) +
-  ggtitle("B") +
-  theme_bw() +
-  ylab("ln(Hourly wage) ($)") +
-  xlab("Year") +
-  theme(plot.title = element_text(size = 10)) +
-  ylim(-1, 4.5)
-
-
-sw_wages_agree + do_ref_agree_cutxp
-
-## ---- compare-id
+sw_wages_agree + do_ref_agree
 
 
 # Takeaways:
