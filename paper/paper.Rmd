@@ -307,6 +307,33 @@ From this stage forward, we assume that we already have valid data. We also subs
 
 # Comparison with the Textbook Data {#compare}
 
+```{r sw_wages}
+```
+
+```{r do_refreshed}
+```
+
+```{r compare-sw-do}
+```
+
+As mentioned previously, the aim of this paper is to refresh the high school dropouts wages used in textbook [@SingerJudithD2003Alda] as similar as possible. Hence, in this section, we will compare how close the `wages_hs_do`, henceforth refreshed data, to the textbook data. It is also worth noting that the textbook data is reused from @MurnaneRichardJ1999DMDB’s paper. Hence, it is not directly extracted from the NLSY79 database.  @SingerJudithD2003Alda do not state the time frame covered by the data. However, from @MurnaneRichardJ1999DMDB’s paper, we find that the textbook data cover the survey period from 1979-1994. Hence, for comparison purposes, we filter the refreshed data only until 1994. 
+
+In the absence of highs chool dropouts criteria in the textbook data, we create a clearer criteria of high school dropouts as mentioned in Section \@ref(#target). Consequently, we do not have the same ID of high-school dropouts as in the textbook data. The textbook data has `r nrow(sw_id)` IDs included, while the refreshed data has `r nrow(do_id)` IDs. Furthermore, there are only `r nrow(sw_do)` IDs included both in the textbook and the refreshed data. After observing @MurnaneRichardJ1999DMDB’s paper, it is mentioned that the data is randomly drawn from the low income subsample of the NLSY. This is probably the reason why, even using some criteria, we cannot match the dropouts in the textbook and the refreshed data.
+
+Further, the temporal variable used in the textbook data is experience, instead of year. The only explanation we found regarding this variable is that it is derived from the years of IDs’ experience since their first job. @SingerJudithD2003Alda stated that this variable reflects the specific moment in each ID labor force history associated with each wage observation. 
+Since it is not clearly articulated, we decide to keep the temporal variable in the refreshed data as year. Accordingly, in this comparison, we only compare the same ID but not the same temporal variable. 
+
+Regarding the wages, the textbook data express the wages as inflation adjusted with 1990 dollars as constant [@SingerJudithD2003Alda]. However, it is not stated how exactly the wages are adjusted. Note that in the refreshed data we publish in `yowie`, we do not adjust the data with inflation because the time frame covered ranged from 1979-2018. Hence, we allow flexibility to the data user to adjust, not adjust,  or adjust it with different base years. For comparison purposes, we adjust the wages with the average Consumer Price Index For All Urban Consumers (CPI-U) we got from @fed. 
+
+
+```{r plotting-sw-do, fig.cap= "Textbook data (A) and Refreshed data (B). The textbook data and refreshed data is not exactly the same because it has different temporal variables."}
+```
+
+
+Figure \ref{fig:plotting-sw-do} shows the comparison between the textbook and the refreshed data. Even though it has different temporal variables and possibly different CPI indicators used in inflation adjustment, we can still capture some of the patterns in the refreshed data.
+
+From this comparison, we learn that we cannot make an apple to apple comparison and produce the exact same data as the textbook due to the absence of clearly articulated data extraction and derivation process. Hence, the takeaway is that it is imperative to disclose how the data derived from the initial source to make data analysis reproducible. This is why in this paper, we show the practice of reproducible and responsible data cleaning workflow to make sure the longitudinal data from a continuous survey can be refreshed.
+
 
 # Summary {#summary}
 
