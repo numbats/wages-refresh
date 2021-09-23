@@ -95,7 +95,7 @@ Although the main focus area of the NLSY is labor and employment, the NLSY also 
 
 There are two ways to conduct the interview of the NLSY79, which are face-to-face interviews or by telephone. In recent survey years, more than 90 percent of respondents were interviewed by telephone [@eliznlsy].
 
-## Target Data
+## Target Data {#target}
 
 This paper aims, as mentioned in Section \@ref(intro), to refresh the NLSY79 data used in @SingerJudithD2003Alda. This data set contains the information of yearly mean hourly wages from the NLSY79 subcohort, with education and race as covariates. The subcohort correspond to male high-school dropouts that participated in the study from 14 to 17 years old. Accordingly, to refresh this data, we make use of NLSY79 cohort's demographic profiles and wages data of people who completed education up to high school. 
 
