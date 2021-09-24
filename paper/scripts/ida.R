@@ -3,34 +3,46 @@ age_table <- full_demographics %>%
   group_by(age_1979) %>%
   count(age_1979)
 
-kable(age_table,
-      caption = "Age Distribution of the NLSY79 samples",
-      col.names = c("Age", "Number of Sample"),
+age_table %>%
+  mutate(n = scales::comma(n)) %>%
+  kable(
+      caption = "The frequency table of the age at the start of the survey (?CHECK) in the full NSLY79 data",
+      col.names = c("Age", "Number of individuals"),
       booktabs = TRUE,
-      linesep = "") %>%
+      linesep = "",
+      align = "r") %>%
   kable_styling()
 
 ## ---- gender-race-table
+#' @param x a tabyl with frequency table in "core" attribute
+freq_formatting <- function(x) {
+  attr(x, "core") %>%
+    adorn_totals(c("row", "col")) %>%
+    mutate(across(where(is.numeric), ~scales::comma(.x, 1)))
+}
+
 gender_race_table <- full_demographics %>%
   tabyl(gender, race) %>%
   adorn_totals(c("row", "col")) %>%
   adorn_percentages("row") %>%
   adorn_pct_formatting(digits = 2) %>%
-  adorn_ns(position = "front") %>%
+  adorn_ns(., position = "front", ns = freq_formatting(.)) %>%
   mutate(gender = str_to_title(gender))
 
 kable(gender_race_table,
-      caption = "Gender and Race Distribution of the NLSY79 Samples",
+      caption = "The contingency table for gender and race for the full NLSY79 data.",
       col.names = c("Gender", "Hispanic", "Black", "Non-Black, Non-Hispanic", "Total"),
       booktabs = TRUE,
-      linesep = "") %>%
-  kable_styling() %>%
+      linesep = "",
+      align = "lrrrr") %>%
+  kable_classic() %>%
+  row_spec(2, hline_after = TRUE) %>%
   add_header_above(c(" " = 1, "Race" = 3, " " = 1))
 
 ## ---- summarytable
 kable(as.array(summary(wages_before$mean_hourly_wage)),
-      caption = "Summary Statistics of Wages of High School Data",
-      col.names = c("Statistics", "Value"),
+      caption = "Summary statistics of the hourly wages from the high school dropout subcohort of NLSY79 data",
+      col.names = c("Statistics", "Hourly wage ($)"),
       booktabs = TRUE,
       linesep = "") %>%
   kable_styling()
