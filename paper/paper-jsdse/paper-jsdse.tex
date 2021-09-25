@@ -113,7 +113,7 @@ Despite it's importance, this IDA stage is often undervalued and neglected (Chat
 
 This paper demonstrates the steps of IDA, and documents the process, for a prominent open data source, National Longitudinal Survey of Youth 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century (Pergamit et al. 2001). In addition, this is considered a carefully designed longitudinal survey with high retention rates, making it suitable for life course research (Pergamit et al. 2001; Cooksey 2017). According to Cooksey (2017), thousands of articles, and hundreds of book chapters and monographs have utilized this data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the survey data (Pergamit et al. 2001).
 
-Singer and Willett (2003) used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling of wages on workforce experience, with covariates education and race. Our aim is to refresh this textbook data with data from 1994 through to the latest data reported in 2018. Here, we investigate the process of getting from the raw NLSY79 data to a textbook data set as similar as possible to that provided by Singer and Willett (2003). We should also note that race is a variable in the original data set, and for the purposes of studying racism, not race(T. 1998), it also provided with the refreshed data.
+Singer and Willett (2003) used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling of wages on workforce experience, with covariates education and race. Our aim is to refresh this textbook data with data from 1994 through to the latest data reported in 2018. Here, we investigate the process of getting from the raw NLSY79 data to a textbook data set as similar as possible to that provided by Singer and Willett (2003). We should also note that race is a variable in the original data set, and for compatibility it is also provided with the refreshed data, for the purposes of studying racism, not race (Fullilove 1998),
 
 Our process of cleaning builds heavily on the tidyverse approach (Wickham et al. 2019). The data is first organised into ``tidy data'' (Wickham 2014) and then further wrangled using the data pipeline and split-apply-combine approach (Wickham 2011). The resulting data is provided in a new R package called \texttt{yowie} which includes the code so that the process is reproducible, and could be used to further refresh the data as new records are made available in the NLSY79 database.
 
@@ -463,6 +463,9 @@ Dasu, Tamraparni, and Theodore Johnson. 2003. \emph{Exploratory Data Mining and 
 \leavevmode\hypertarget{ref-janitor}{}%
 Firke, Sam. 2020. \emph{Janitor: Simple Tools for Examining and Cleaning Dirty Data}. \url{https://CRAN.R-project.org/package=janitor}.
 
+\leavevmode\hypertarget{ref-racismnotrace}{}%
+Fullilove, M. T. 1998. {``Comment: Abandoning "Race" as a Variable in Public Health Research--an Idea Whose Time Has Come.''} \emph{American Journal of Public Health} 88 (9): 1297--98.
+
 \leavevmode\hypertarget{ref-purrr}{}%
 Henry, Lionel, and Hadley Wickham. 2020. \emph{Purrr: Functional Programming Tools}. \url{https://CRAN.R-project.org/package=purrr}.
 
@@ -501,9 +504,6 @@ Robinson, David, Alex Hayes, and Simon Couch. 2021. \emph{Broom: Convert Statist
 
 \leavevmode\hypertarget{ref-SingerJudithD2003Alda}{}%
 Singer, Judith D, and John B Willett. 2003. \emph{Applied Longitudinal Data Analysis: Modeling Change and Event Occurrence}. Oxford u.a: Oxford Univ. Pr.
-
-\leavevmode\hypertarget{ref-racismnotrace}{}%
-T., Fullilove M. 1998. {``Comment: Abandoning "Race" as a Variable in Public Health Research--an Idea Whose Time Has Come.''} \emph{American Journal of Public Health} 88 (9): 1297--98.
 
 \leavevmode\hypertarget{ref-nlsy79}{}%
 The U.S. Bureau of Labor Statistics. n.d. {``National Longitudinal Survey of Youth 1979.''} Available at \url{https://www.nlsinfo.org/content/cohorts/nlsy79} (2021/25/02).
