@@ -249,13 +249,13 @@ The next step is that explore the mean hourly wage data. In this case, we only e
 ```{r summarytable, eval=FALSE}
 ```
 
-```{r sample-plot, echo = FALSE, fig.cap="A glimpse of the refreshed data. Longitudinal profiles of wages from 1979-2018 are shown for a random sample of 36 individuals, divided into twelve subplots. Most individuals here experienced increasing wages over time, although there is considerable fluctuation from one year to another.", fig.height=4, fig.width=5, out.width="100%"}
+```{r sample-plot, echo = FALSE, fig.cap="Longitudinal profiles of wages for a random sample of 20 individuals in the refreshed data. Most, but not all, individuals here experienced increasing wages over time, and several have experienced considerable fluctuation in wages. Some individuals are only measured for a short period.", fig.height=8, fig.width=10, out.width="100%"}
 ```
 
 We take 36 samples randomly from the data and plot them, as shown in Figure \ref{fig:sample-plot}. It implies that these respondents have a lot of variability in wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples have a different pattern of mean hourly wages. Some have had flat wages for years but had a sudden increase in one particular year, then it gone down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9. 
 
 
-```{r feature-plot, fig.cap = "Summary plots to check the cleaned data reveal more cleaning is necessary: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual (id=39) with an unusual wage relative to their years of data (C). Some values of hourly wages are unbelievable, and some individuals have extemely unusual wages in some years.", fig.width=6, fig.height=2}
+```{r feature-plot, fig.cap = "Summary plots to check the cleaned data reveal more cleaning is necessary: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual (id=39) with an unusual wage relative to their years of data (C). Some values of hourly wages are unbelievable, and some individuals have extemely unusual wages in some years.", fig.width=10, fig.height=4, out.width="100%"}
 ```
 
 ```{r high-wages}
@@ -289,13 +289,13 @@ Figure \ref{fig:compare-plot} shows the mean hourly wage before and after the ex
 ```
 
 
-```{r compare-plot, fig.cap="Comparison between the original and the treated mean hourly wage. The orange line portray the original value of mean hourly wage, while the turquoise line display the mean hourly wages value after the extreme values imputed with the robust linear model's prediction value. We can see that some extreme spikes has been reduced by the model.", fig.height=5, fig.width=6, outwidth="100%"}
+```{r compare-plot, fig.cap="Comparison between the original (black dots) and the corrected (solid grey) mean hourly wage for a sample of individuals. A robust linear model prediction was used to correct mean hourly wages value. We can see that some extreme spikes, corresponding to implausible wages, have been repleaced with values more similar to wages in neighboring years, but otherwise the profiles are not changed.", fig.height=8, fig.width=10, out.width="100%"}
 ```
 
 Further, \ref{fig:fixed-feature-plot} A shows that after eliminating the extreme values, the highest value has decreased to be around $350. The spikes are still observed but not as extreme as the original data set. In Figure \ref{fig:fixed-feature-plot} B, we plot the three features of mean hourly wages, namely the minimum, median, and maximum value. We still can see some extreme values in maximum wages, but consider it as a natural variability of the data. In \ref{fig:fixed-feature-plot} C, we can see that after imputing the extreme value in ID=39, we can see how the the wages change over the years more clearly. 
 
 
-```{r fixed-feature-plot, fig.cap = "Re-make of the summary plots of the fully processed data suggest that it is now in a reasonable state: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). ", fig.width=6, fig.height=2}
+```{r fixed-feature-plot, fig.cap = "Re-make of the summary plots of the fully processed data suggest that it is now in a reasonable state: longitudinal profiles of wages for all individuals 1979-2018 (A), boxplots of minimum, median, and maximum wages of each individual (B), and one individual with an unusual wage relative to their years of data (C). ", fig.width=10, fig.height=4, out.width="100%"}
 ```
 
 
@@ -315,7 +315,7 @@ In this section, we have demonstrate a workflow from getting the data from the N
 Further, using IDA, we inspect on the existence of anomalies/extreme values in the data using the weight from robust linear model. We then replace these extreme values using their predicted value. 
 From this stage forward, we assume that we already have valid data. We also subset the data to get the wages of high school dropouts. We then make these three data sets and the cleaning workflow documentation publicly available through an R data container package called `yowie`. A visualisation of these process is displayed in  Figure \ref{fig:flow-chart}.
 
-```{r flow-chart, fig.cap="The stages of data cleaning from the raw data to get three datasets contained yowie. n individuals means the number of respondents included in each stage, while n observations means the number of rows in the data. The color represented the stage of data cleaning in statistical value chain (van der Loo \\& de Jonge, 2018). Pink, blue, and green represents the raw, input, and valid data, respectively.", out.width="93%"}
+```{r flow-chart, fig.cap="The stages of data cleaning from the raw data to get three datasets contained yowie. n individuals means the number of respondents included in each stage, while n observations means the number of rows in the data. The color represented the stage of data cleaning in statistical value chain (van der Loo \\& de Jonge, 2018). Pink, blue, and green represents the raw, input, and valid data, respectively.", out.width="85%"}
 ```
 
 
