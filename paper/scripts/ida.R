@@ -271,7 +271,8 @@ wages_three_feat_rlm <- wages_hs2020_rlm %>%
            feat_three_num
   )
 wages_feat_long_rlm <- wages_three_feat_rlm %>%
-  pivot_longer(c(min, med, max), names_to = "feature", values_to = "value")
+  pivot_longer(c(min, med, max), names_to = "feature", values_to = "value") %>%
+  mutate(feature = factor(feature, levels = c("min", "med", "max")))
 
 feature2 <- ggplot(wages_feat_long_rlm) +
   geom_density(aes(x = value, colour = feature, fill = feature), alpha = 0.3) +
