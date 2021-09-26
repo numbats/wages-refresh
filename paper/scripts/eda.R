@@ -152,7 +152,7 @@ do_ref_agree <- do_agree %>%
 # sw_wages + do_ref
 sw_wages_mod + do_ref_mod
 
-# Summaries
+# ---- summaries
 sw2 <- sw %>%
   as_tibble() %>%
   mutate(hgc = ifelse(high_grade < 9, "8TH", "12TH")) %>%

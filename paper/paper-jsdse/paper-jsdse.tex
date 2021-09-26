@@ -408,40 +408,6 @@ Now is the time to see how close we have come to the original textbook data. The
 \caption{Comparison of original textbook example (A) with refreshed data (B). The original data was inflation-adjusted to 1990 prices and the individual's time of collection was converted to a length of experience in the workforce, which make it difficult to precisely compare the two sets.}\label{fig:plotting-sw-do}
 \end{figure}
 
-\begin{verbatim}
-#> # A tibble: 3 x 2
-#>   race         n
-#>   <fct>    <int>
-#> 1 black      246
-#> 2 hispanic   204
-#> 3 white      438
-\end{verbatim}
-
-\begin{verbatim}
-#> # A tibble: 2 x 2
-#>   hgc       n
-#>   <chr> <int>
-#> 1 12TH    522
-#> 2 8TH     366
-\end{verbatim}
-
-\begin{verbatim}
-#> # A tibble: 3 x 2
-#>   race                        n
-#>   <fct>                   <int>
-#> 1 HISPANIC                  219
-#> 2 BLACK                     346
-#> 3 NON-BLACK, NON-HISPANIC   623
-\end{verbatim}
-
-\begin{verbatim}
-#> # A tibble: 2 x 2
-#>   hgc12          n
-#>   <chr>      <int>
-#> 1 12TH         967
-#> 2 BELOW 12TH   221
-\end{verbatim}
-
 There are two aspects of the original data that make a direct comparison difficult. The time variable provided is ``experience in the workforce.'' It is not clear how this is calculated. One would expect that there is a record of the day the individual first started a job, and this is used to adjust the year of collection. We have not been able to find this information in the database. Secondly, wages were inflation-adjusted to 1990 prices, which is not done for the refreshed data.
 
 Figure \ref{fig:plotting-sw-do} shows a comparison of the two sets. (A direct ID matching is not possible.) There are 888 individuals in the original and 1,188 individuals in the refreshed data. This suggests some individuals were removed in the original data.
@@ -450,13 +416,29 @@ In addition, in the original set the racial break down was 246 black, 204 hispan
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
 
-This paper has performed stages to make open data suitable for textbook data or make it ready for research. In the first stage, we showed the steps performed to get the data from the NLSY79 database. Since the data format is untidy, we showed how the data had been tidied. After that, we conducted an initial data analysis to investigate and screen the quality of the data. We found and fixed the anomalous observations in the data set using the robust linear regression model with its predicted values. We also performed an example of exploratory data analysis using the cleaned data set.
+This paper has described the stages to take a particular open data set and make it a textbook data set, ready for the classroom or research. In the first stage, we showed the steps performed to get the data from the NLSY79 database. The data format needed converting to tidy format, and this was described. After that, an initial data analysis was conducted to investigate and screen the quality of the data. We found and fixed the anomalous observations in wages using a robust linear regression model. Finally a comparison is made between the original and refreshed data sets.
 
-This paper has also demonstrated data cleaning documentation by providing all of the codes in performing data tidying and initial data analysis. Thus, this paper provided an opportunity to continuously refresh the textbook data whenever the updated data is published in the NLSY79 database. It could be done by following the documentation of the code that is provided in this paper.
+The data cleaning process is documented and the code has been made available. These provide the opportunity to again refresh the textbook data as updated data is published in the NLSY79 database.
+Determining the appropriate robustness weight to threshold the anomalous observations is documented, and a \texttt{shiny} (Chang et al. 2020) app is provided to assist.
+The current subset is made available in a new R package, called yowie.
 
-Moreover, the documentation also includes how we generated the robustness weight and how we decided the threshold of anomalous observations. It is also documented along with the flag of whether an observation is an imputed value or not. Accordingly, if somebody wishes to make another decision, it can be done by making a small change in the code provided. Further, this paper is also supplemented by a \texttt{shiny} (Chang et al. 2020) app as a simulation tool to customize the weight threshold.
+Various difficulties were encountered in trying to refresh the data, which include:
 
-Finally, this paper implies that data providers should design a database that is able to produce tidy data sets. A data provider should also check for data anomalies before the data publishing or at least provides a set of rules or threshold values. For example, in this case, is the threshold of reasonable wages. This will greatly support the data users to validate and set the same understanding of which data are considered outliers. Moreover, providing validation rules would facilitate any established data validation tool, such as \texttt{validate} (van der Loo and de Jonge 2021) package. In this case, we cannot use this handy validation package due to the absence of validation rules.
+\begin{itemize}
+\tightlist
+\item
+  determining which records should be downloaded from the database.
+\item
+  there are many errors in the data, e.g.~hourly wages greater than \$30,000 per hour, and there was no information on how these were handled in the original data.
+\item
+  there is no explicit variable in the database recording high school dropout, which means we needed to compare date of 12th grade with the individual's age.
+\item
+  calculating experience in the workforce, would require knowing the time of first job within the first year the individual was recorded.
+\end{itemize}
+
+Ultimately, the refreshed data is reasonably similar to the original, but unsatisfactorily far from it. The last step required would be to inflation-adjust wages, but this is better to do with each wave of new data added, so that it is relative to the last date in the data.
+
+Finally, for the data providers we recommend that a validation system with clear rules is added on data entry, and that alternative output formats, such as a tidy format would help users make better use of the resource. The problem with many of the wages records is that there are implausible values, or confusion on how to record wages for multiple jobs. These values could be validated with simple checks at data entry. Providing an open data resource also is accompanied with the responsibility that the data, especially data that is as valuable as this, is reliable. Users need to be able to trust the data.
 
 \hypertarget{acknowledgements}{%
 \section{Acknowledgements}\label{acknowledgements}}
@@ -557,9 +539,6 @@ Tukey, John W. (John Wilder). 1977. \emph{Exploratory Data Analysis}. Addison-We
 
 \leavevmode\hypertarget{ref-rlm}{}%
 UCLA: Statistical Consulting Group. 2021. {``Robust Regression \textbar{} r Data Analysis Examples.''} February 2021. \url{https://stats.idre.ucla.edu/r/dae/robust-regression/}.
-
-\leavevmode\hypertarget{ref-validate}{}%
-van der Loo, Mark P. J., and Edwin de Jonge. 2021. {``Data Validation Infrastructure for {R}.''} \emph{Journal of Statistical Software} 97 (10): 1--31. \url{https://doi.org/10.18637/jss.v097.i10}.
 
 \leavevmode\hypertarget{ref-mass}{}%
 Venables, W. N., and B. D. Ripley. 2002. \emph{Modern Applied Statistics with s}. Fourth. New York: Springer. \url{http://www.stats.ox.ac.uk/pub/MASS4}.
