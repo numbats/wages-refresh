@@ -64,6 +64,9 @@ read_chunk(here::here("paper/scripts/ida.R"))
 read_chunk(here::here("paper/scripts/eda.R"))
 ```
 
+```{r load-pkgs}
+```
+
 ```{r theme}
 theme_set(theme_bw(base_size = 18) +
             theme(plot.background = element_rect(fill = 'transparent', colour = NA), axis.line.y = element_line(color = "black", linetype = "solid"),
@@ -75,9 +78,6 @@ theme_set(theme_bw(base_size = 18) +
                   ) )
 ```
 
-
-```{r load-pkgs}
-```
 
 # Introduction {#intro}
 
@@ -306,7 +306,7 @@ Figure \ref{fig:compare-plot} shows the mean hourly wage before and after the ex
 ```
 
 
-```{r compare-plot, fig.cap="Comparison between the original (black dots) and the corrected (solid grey) mean hourly wage for a sample of individuals. A robust linear model prediction was used to correct mean hourly wages value. We can see that some extreme spikes, corresponding to implausible wages, have been replaced with values more similar to wages in neighboring years, but otherwise the profiles are not changed. Some spikes might remain when wage vaues are plausible.", fig.height=8, fig.width=10, out.width="100%"}
+```{r compare-plot, fig.cap="Comparison between the original (black dots) and the corrected (solid grey) mean hourly wage for a sample of individuals. A robust linear model prediction was used to correct mean hourly wages value. We can see that some extreme spikes, corresponding to implausible wages, have been replaced with values more similar to wages in neighboring years, but otherwise the profiles are not changed. Some spikes might remain when wage vaues are plausible.", fig.height=8, fig.width=10, out.width="90%"}
 ```
 
 Further, \ref{fig:fixed-feature-plot} A shows that after eliminating the extreme values, the highest value has decreased to be around $350. The spikes are still observed but not as extreme as the original data set. In Figure \ref{fig:fixed-feature-plot} B, we plot the three features of mean hourly wages, namely the minimum, median, and maximum value. We still can see some extreme values in maximum wages, but consider it as a natural variability of the data. In \ref{fig:fixed-feature-plot} C, we can see that after imputing the extreme value in ID=39, we can see how the the wages change over the years more clearly. 

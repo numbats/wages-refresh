@@ -17,6 +17,7 @@ library(modelr)
 library(forcats)
 library(yowie)
 library(knitr)
+library(ggthemes)
 select <- dplyr::select
 
 ## ---- raw-data

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.13)  26 SEP 2021 14:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.13)  26 SEP 2021 15:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -690,24 +690,24 @@ File: figures/sample-plot-1.pdf Graphic file (type pdf)
 <use figures/sample-plot-1.pdf>
 Package pdftex.def Info: figures/sample-plot-1.pdf  used on input line 328.
 (pdftex.def)             Requested size: 462.26999pt x 365.16296pt.
-<figures/feature-plot-1.pdf, id=102, 705.63625pt x 265.99374pt>
+<figures/feature-plot-1.pdf, id=102, 698.61pt x 258.9675pt>
 File: figures/feature-plot-1.pdf Graphic file (type pdf)
 <use figures/feature-plot-1.pdf>
 Package pdftex.def Info: figures/feature-plot-1.pdf  used on input line 339.
-(pdftex.def)             Requested size: 462.26999pt x 174.25761pt.
+(pdftex.def)             Requested size: 462.26999pt x 171.36163pt.
 [11] [12 <./figures/sample-plot-1.pdf>] [13 <./figures/feature-plot-1.pdf>]
 <figures/compare-plot-1.pdf, id=146, 716.6775pt x 557.08125pt>
 File: figures/compare-plot-1.pdf Graphic file (type pdf)
 <use figures/compare-plot-1.pdf>
 Package pdftex.def Info: figures/compare-plot-1.pdf  used on input line 363.
-(pdftex.def)             Requested size: 462.26999pt x 359.3359pt.
+(pdftex.def)             Requested size: 416.04016pt x 323.39636pt.
 [14] [15 <./figures/compare-plot-1.pdf>]
-<figures/fixed-feature-plot-1.pdf, id=167, 705.63625pt x 265.99374pt>
+<figures/fixed-feature-plot-1.pdf, id=167, 698.61pt x 258.9675pt>
 File: figures/fixed-feature-plot-1.pdf Graphic file (type pdf)
 <use figures/fixed-feature-plot-1.pdf>
 Package pdftex.def Info: figures/fixed-feature-plot-1.pdf  used on input line 3
 74.
-(pdftex.def)             Requested size: 462.26999pt x 174.25761pt.
+(pdftex.def)             Requested size: 462.26999pt x 171.36163pt.
 [16 <./figures/fixed-feature-plot-1.pdf>]
 </Users/cookd/numbats/summer-wages-refresh/paper/figures/flowchart.png, id=187,
  1606.0pt x 2176.13pt>
@@ -720,11 +720,11 @@ s/flowchart.png  used on input line 393.
 
 LaTeX Warning: Float too large for page by 7.41624pt on input line 398.
 
-<figures/plotting-sw-do-1.pdf, id=189, 633.36626pt x 341.275pt>
+<figures/plotting-sw-do-1.pdf, id=189, 626.34pt x 325.215pt>
 File: figures/plotting-sw-do-1.pdf Graphic file (type pdf)
 <use figures/plotting-sw-do-1.pdf>
 Package pdftex.def Info: figures/plotting-sw-do-1.pdf  used on input line 407.
-(pdftex.def)             Requested size: 462.26999pt x 249.087pt.
+(pdftex.def)             Requested size: 462.26999pt x 240.03006pt.
 [17] [18 </Users/cookd/numbats/summer-wages-refresh/paper/figures/flowchart.png
 >] [19 <./figures/plotting-sw-do-1.pdf>] [20]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
@@ -775,10 +775,10 @@ fb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pf
 b></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb>
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></
 usr/local/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on paper-jsdse.pdf (24 pages, 1037954 bytes).
+Output written on paper-jsdse.pdf (24 pages, 954478 bytes).
 PDF statistics:
- 465 PDF objects out of 1000 (max. 8388607)
- 403 compressed objects within 5 object streams
+ 461 PDF objects out of 1000 (max. 8388607)
+ 400 compressed objects within 4 object streams
  109 named destinations out of 1000 (max. 500000)
  179 words of extra memory for PDF output out of 10000 (max. 10000000)
 

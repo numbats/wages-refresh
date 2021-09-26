@@ -5,14 +5,34 @@ sw <- brolgar::wages
 sw_wages <- sw %>%
   ggplot(aes(x = xp,
              y = ln_wages)) +
-  geom_line(aes(group = id),alpha = 0.1) +
+  geom_line(aes(group = id), alpha = 0.1) +
   geom_smooth(se = FALSE, colour = "pink") +
   ggtitle("A original") +
   theme_bw() +
   ylab("Hourly wage ($, natural log)") +
   xlab("Experience in years") +
-  theme(plot.title = element_text(size = 10)) +
+  #theme(plot.title = element_text(size = 10)) +
   ylim(0, 5)
+
+sw_wages_mod <- sw %>%
+  as_tibble() %>%
+  mutate(hgc = ifelse(high_grade < 9, "8TH", "12TH")) %>%
+  mutate(race = case_when(black == 1 ~ "black",
+                          hispanic == 1 ~ "hispanic",
+                          TRUE ~ "white")) %>%
+  mutate(race = factor(race)) %>%
+  ggplot(aes(x = xp,
+             y = ln_wages,
+             linetype = hgc)) +
+  geom_smooth(method = "lm", se = FALSE,
+              colour = "black") +
+  ggtitle("A original") +
+  scale_linetype("") +
+  theme_bw() +
+  ylab("Hourly wage ($, natural log)") +
+  xlab("Experience in years") +
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal")
 
 ## ---- do_refreshed
 
@@ -25,8 +45,8 @@ sw_wages <- sw %>%
 # filter do data up to 1994 since the textbook data only covers that period.
 
 do <- yowie::wages_hs_do %>%
-  mutate(lnwage = log(wage)) %>%
-  filter(year < 1995)
+  mutate(lnwage = log(wage)) #%>%
+  #filter(year < 1995)
 
 do_ref <- do %>%
   ggplot(aes(x = year,
@@ -39,6 +59,21 @@ do_ref <- do %>%
   xlab("Year of data collection") +
   theme(plot.title = element_text(size = 10)) +
   ylim(0, 5)
+
+do_ref_mod <- do %>%
+  mutate(hgc12 = ifelse(hgc_i < 12, "BELOW 12TH", "12TH")) %>%
+  ggplot(aes(x = year,
+             y = lnwage,
+             linetype = hgc12)) +
+  geom_smooth(method = "lm", se = FALSE,
+              colour = "black") +
+  ggtitle("B refreshed data") +
+  scale_linetype("") +
+  theme_bw() +
+  ylab("Hourly wage ($, natural log)") +
+  xlab("Year of data collection") +
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal")
 
 # sw_wages + do_ref
 
@@ -114,7 +149,8 @@ do_ref_agree <- do_agree %>%
   ylim(-3, 5)
 
 # sw_wages_agree + do_ref_agree
-sw_wages + do_ref
+# sw_wages + do_ref
+sw_wages_mod + do_ref_mod
 
 # Takeaways:
 
