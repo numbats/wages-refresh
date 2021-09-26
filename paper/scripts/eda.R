@@ -152,6 +152,25 @@ do_ref_agree <- do_agree %>%
 # sw_wages + do_ref
 sw_wages_mod + do_ref_mod
 
+# Summaries
+sw2 <- sw %>%
+  as_tibble() %>%
+  mutate(hgc = ifelse(high_grade < 9, "8TH", "12TH")) %>%
+  mutate(race = case_when(black == 1 ~ "black",
+                          hispanic == 1 ~ "hispanic",
+                          TRUE ~ "white")) %>%
+  mutate(race = factor(race))
+sw2 %>% select(id, race) %>% distinct() %>% count(race)
+sw2 %>% select(id, hgc) %>% distinct() %>% count(hgc)
+
+do2 <- do %>%
+  as_tibble() %>%
+  mutate(hgc12 = ifelse(hgc_i < 12, "BELOW 12TH", "12TH"))
+do2 %>% select(id, race) %>% distinct() %>% count(race)
+do2 %>% select(id, hgc12) %>% distinct() %>% count(hgc12)
+
+
+
 # Takeaways:
 
 # we don't know how exactly the criteria of drop out,
