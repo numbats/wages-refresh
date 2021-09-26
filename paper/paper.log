@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.15)  24 SEP 2021 16:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.15)  26 SEP 2021 10:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -913,131 +913,137 @@ nput line 164.
 File: ufontawesomethree.fd 2016/05/22 Font definitions for U/fontawesomethree.
 )
 LaTeX Font Info:    Trying to load font information for U+fontawesometwo on inp
-ut line 171.
+ut line 166.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fontawesome/ufontawesometwo.fd
 File: ufontawesometwo.fd 2016/05/22 Font definitions for U/fontawesometwo.
 )
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-99.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[3]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
+13.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [3]
+) [4]
 
-LaTeX Warning: Reference `tab:untidy-data' on page 4 undefined on input line 23
-0.
+LaTeX Warning: Reference `tab:untidy-data' on page 5 undefined on input line 24
+4.
 
 
-Underfull \hbox (badness 2772) in paragraph at lines 235--236
+Underfull \hbox (badness 2772) in paragraph at lines 249--250
 \T1/lmtt/m/n/10 Age in 1979\T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 gender\T1/lmr
 /m/n/10 (+20) , \T1/lmtt/m/n/10 race\T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 high
 est grade completed\T1/lmr/m/n/10 (+20) , and the \T1/lmtt/m/n/10 year when the
  highest grade
  []
 
-[4] [5]
-<figures/sample-plot-1.pdf, id=133, 355.3275pt x 277.035pt>
+[5]
+<figures/sample-plot-1.pdf, id=133, 716.6775pt x 566.115pt>
 File: figures/sample-plot-1.pdf Graphic file (type pdf)
 <use figures/sample-plot-1.pdf>
-Package pdftex.def Info: figures/sample-plot-1.pdf  used on input line 329.
-(pdftex.def)             Requested size: 469.75499pt x 366.26222pt.
-<figures/feature-plot-1.pdf, id=135, 416.55624pt x 121.45375pt>
+Package pdftex.def Info: figures/sample-plot-1.pdf  used on input line 343.
+(pdftex.def)             Requested size: 469.75499pt x 371.0715pt.
+<figures/feature-plot-1.pdf, id=135, 705.63625pt x 265.99374pt>
 File: figures/feature-plot-1.pdf Graphic file (type pdf)
 <use figures/feature-plot-1.pdf>
-Package pdftex.def Info: figures/feature-plot-1.pdf  used on input line 340.
-(pdftex.def)             Requested size: 433.62158pt x 126.4349pt.
-[6pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
+Package pdftex.def Info: figures/feature-plot-1.pdf  used on input line 354.
+(pdftex.def)             Requested size: 469.75499pt x 177.07843pt.
+[6]
+<figures/compare-plot-1.pdf, id=147, 716.6775pt x 557.08125pt>
+File: figures/compare-plot-1.pdf Graphic file (type pdf)
+<use figures/compare-plot-1.pdf>
+Package pdftex.def Info: figures/compare-plot-1.pdf  used on input line 378.
+(pdftex.def)             Requested size: 469.75499pt x 365.15016pt.
+[7pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
 as been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.353 
+l.386 
       pdfTeX warning (ext4): destination with the same identifier (name{table.2
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.353 
-      ] [7pdfTeX warning (ext4): destination with the same identifier (name{fig
-ure.1}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.353 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.
-2}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.353 
-       <./figures/sample-plot-1.pdf> <./figures/feature-plot-1.pdf>]
-<figures/compare-plot-1.pdf, id=176, 433.62pt x 361.35pt>
-File: figures/compare-plot-1.pdf Graphic file (type pdf)
-<use figures/compare-plot-1.pdf>
-Package pdftex.def Info: figures/compare-plot-1.pdf  used on input line 364.
-(pdftex.def)             Requested size: 433.62158pt x 361.37117pt.
-<figures/fixed-feature-plot-1.pdf, id=180, 416.55624pt x 121.45375pt>
+l.386 
+      ]
+<figures/fixed-feature-plot-1.pdf, id=159, 705.63625pt x 265.99374pt>
 File: figures/fixed-feature-plot-1.pdf Graphic file (type pdf)
 <use figures/fixed-feature-plot-1.pdf>
 Package pdftex.def Info: figures/fixed-feature-plot-1.pdf  used on input line 3
-75.
-(pdftex.def)             Requested size: 433.62158pt x 126.4349pt.
+89.
+(pdftex.def)             Requested size: 469.75499pt x 177.07843pt.
+[8pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.405 
+       <./figures/sample-plot-1.pdf>]
 </Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart.png,
- id=182, 1606.0pt x 2176.13pt>
+ id=177, 1606.0pt x 2176.13pt>
 File: /Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart
 .png Graphic file (type png)
 <use /Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart.
 png>
 Package pdftex.def Info: /Users/etan0038/Dropbox/repo/summer-wages-refresh/pape
-r/figures/flowchart.png  used on input line 394.
-(pdftex.def)             Requested size: 436.8687pt x 591.94603pt.
-<figures/plotting-sw-do-1.pdf, id=184, 650.43pt x 361.35pt>
+r/figures/flowchart.png  used on input line 408.
+(pdftex.def)             Requested size: 399.2946pt x 541.04272pt.
+<figures/plotting-sw-do-1.pdf, id=179, 650.43pt x 361.35pt>
 File: figures/plotting-sw-do-1.pdf Graphic file (type pdf)
 <use figures/plotting-sw-do-1.pdf>
-Package pdftex.def Info: figures/plotting-sw-do-1.pdf  used on input line 408.
+Package pdftex.def Info: figures/plotting-sw-do-1.pdf  used on input line 422.
 (pdftex.def)             Requested size: 469.75499pt x 260.98232pt.
-[8] [9pdfTeX warning (ext4): destination with the same identifier (name{figure.
-3}) has been already used, duplicate ignored
+[9pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
+has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.416 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.
-4}) has been already used, duplicate ignored
+l.441 
+       <./figures/feature-plot-1.pdf>] [10pdfTeX warning (ext4): destination wi
+th the same identifier (name{figure.3}) has been already used, duplicate ignore
+d
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.416 
-       <./figures/compare-plot-1.pdf> <./figures/fixed-feature-plot-1.pdf>] [10
-pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
-s been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.416 
-       </Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowcha
-rt.png>]
-Underfull \vbox (badness 5091) has occurred while \output is active []
-
-[11pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
+l.450 
+       <./figures/compare-plot-1.pdf>]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 458.
+[11pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.429 
-       <./figures/plotting-sw-do-1.pdf>]
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 444.
-[12]
+l.487 \leavevmode
+                 \hypertarget{ref-janitor}{}% <./figures/fixed-feature-plot-1.p
+df>] [12pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.5}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.487 \leavevmode
+                 \hypertarget{ref-janitor}{}% </Users/etan0038/Dropbox/repo/sum
+mer-wages-refresh/paper/figures/flowchart.png>]
+Underfull \vbox (badness 1859) has occurred while \output is active []
+
+[13pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.523 \leavevmode
+                 \hypertarget{ref-R}{}% <./figures/plotting-sw-do-1.pdf>]
+No file paper.bbl.
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[13]
-No file paper.bbl.
-[14]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 581.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 581.
+[14] [15]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 598.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 598.
 (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 581.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 581.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 598.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 598.
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 4F89D4FF5E52F28F73AE5989905BB435;1071.
 
@@ -1046,13 +1052,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 581.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 598.
  ) 
 Here is how much of TeX's memory you used:
- 21657 strings out of 480488
- 399622 string characters out of 5899970
- 779910 words of memory out of 5000000
- 36977 multiletter control sequences out of 15000+600000
+ 21661 strings out of 480488
+ 399698 string characters out of 5899970
+ 785017 words of memory out of 5000000
+ 36979 multiletter control sequences out of 15000+600000
  582260 words of font info for 113 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  59i,12n,75p,1092b,490s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1072,10 +1078,10 @@ live/2019/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2019/t
 exmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2019/texmf-dist/
 fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type
 1/public/lm/lmtt10.pfb>
-Output written on paper.pdf (14 pages, 1026598 bytes).
+Output written on paper.pdf (15 pages, 1092861 bytes).
 PDF statistics:
- 413 PDF objects out of 1000 (max. 8388607)
- 367 compressed objects within 4 object streams
- 98 named destinations out of 1000 (max. 500000)
+ 416 PDF objects out of 1000 (max. 8388607)
+ 368 compressed objects within 4 object streams
+ 100 named destinations out of 1000 (max. 500000)
  15539 words of extra memory for PDF output out of 17280 (max. 10000000)
 

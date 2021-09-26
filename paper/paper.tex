@@ -123,7 +123,7 @@ Despite it's importance, this IDA stage is often undervalued and neglected (Chat
 
 This paper demonstrates the steps of IDA, and documents the process, for a prominent open data source, National Longitudinal Survey of Youth 1979, henceforth referred to NLSY79. This data has been playing an important role in research in various disciplines, including but are not limited to economics, sociology, education, public policy, and public health for more than a quarter of the century (Pergamit et al. 2001). In addition, this is considered a carefully designed longitudinal survey with high retention rates, making it suitable for life course research (Pergamit et al. 2001; Cooksey 2017). According to Cooksey (2017), thousands of articles, and hundreds of book chapters and monographs have utilized this data. Moreover, the NLSY79 is considered the most widely used and most important cohort in the survey data (Pergamit et al. 2001).
 
-Singer and Willett (2003) used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling. Our aim is to refresh this textbook data with data from 1994 through to the latest data reported in 2018. Here, we investigate the process of getting from the raw NLSY79 data to a textbook data set as similar as possible to that provided by Singer and Willett (2003).
+Singer and Willett (2003) used the wages and other variables of high school dropouts from the NLSY79 data as an example data set to illustrate longitudinal data modeling of wages on workforce experience, with covariates education and race. Our aim is to refresh this textbook data with data from 1994 through to the latest data reported in 2018. Here, we investigate the process of getting from the raw NLSY79 data to a textbook data set as similar as possible to that provided by Singer and Willett (2003). We should also note that race is a variable in the original data set, and for compatibility it is also provided with the refreshed data, for the purposes of studying racism, not race (Fullilove 1998),
 
 Our process of cleaning builds heavily on the tidyverse approach (Wickham et al. 2019). The data is first organised into ``tidy data'' (Wickham 2014) and then further wrangled using the data pipeline and split-apply-combine approach (Wickham 2011). The resulting data is provided in a new R package called \texttt{yowie} which includes the code so that the process is reproducible, and could be used to further refresh the data as new records are made available in the NLSY79 database.
 
@@ -157,52 +157,66 @@ Loo and Jonge (2018) describe the notion of a ``statistical value chain'' where 
 \hypertarget{getdata}{%
 \subsection{Getting the data}\label{getdata}}
 
-The NLSY79 data contains a large scope of variables but for our aim, the scope required is limisted to demographic profiles and wages data. More specifically, we went to the NLSY79 database website at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} and navigated as described below.
+The NLSY79 data contains a large scope of variables but for our aim, the scope required is limisted to demographic profiles and wages data. More specifically, we went to the NLSY79 database website at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data}, clicked on the direct link to NSLY79 data and navigated as described below.
 
-\begin{tcolorbox}[label="box:data", title=Getting the data]
+\begin{tcolorbox}[label="box:data", title=Navigating the data source to download the raw data]
 
-\faDatabase~National Longitudinal Survey of Youth 1979
+\faDatabase~NLSY79 (\url{https://www.nlsinfo.org/investigator/pages/search?s=NLSY79})\\
+\vspace{1mm}
+\faCheck~The CASEID will be always be selected.\\
+\vspace{1mm}
+\faCheck~The 3 recommended demographic variable (sample ID, race and sex) were selected.\\
+\vspace{1mm}
+For the remaining variables, we went to the ``Variable Search'' tab and select variables as follows
 
 \begin{itemize}
 \item[$\triangleright$] Education, Training and Achievement Scores
 \begin{itemize}
 \item[$\triangleright$] Education $\triangleright$ Summary measures $\triangleright$ All schools $\triangleright$ By year $\triangleright$ Highest grade completed
 \begin{itemize}
-\item[\faCloudDownload] Downloaded all of variables in Highest grade completed.
+\item[\faCheck] All 80 variables in Highest grade completed were selected.
 \end{itemize}
 \end{itemize}
 \item[$\triangleright$] Employment
 \begin{itemize}
-\item[$\triangleright$] Summary measures $\triangleright$ By job $\triangleright$ Hours worked and Hourly wages
+\item[$\triangleright$] Summary measures $\triangleright$ By job
 \begin{itemize}
-\item[\faCloudDownload] We downloaded all of the variables in Hours worked.
-\item[\faCloudDownload] We downloaded all of the variables in Hourly wages
-  Both hours worked and hourly wages are recorded by the job, up to five jobs for each id/subject. 
+\item[$\triangleright$] Hours worked  
+\begin{itemize}
+\item[\faCheck] All 442 primary variables in Hours worked were selected.
+\end{itemize}
+\item[$\triangleright$] Hourly wages
+\begin{itemize}
+\item[\faCheck] All 156 variables in Hourly wages were selected.
+\end{itemize}
 \end{itemize}
 \end{itemize}
 \item[$\triangleright$] Household, Geography and Contextual Variables
 \begin{itemize}
-\item[$\triangleright$] Context $\triangleright$ Summary measures $\triangleright$ Basic demographics 
+\item[$\triangleright$] Context $\triangleright$ Summary measures $\triangleright$ Basic demographics $\triangleright$ Date of birth
 \begin{itemize}
-\item[\faCloudDownload] Downloaded year and month of birth, race, and sex variables. There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
+\item[\faCheck] All 4 variables in Date of birth were selected. 
 \end{itemize}
 \end{itemize}
+\end{itemize}
+\begin{itemize}
+\item[\faCloudDownload] To download all 686 variables selected, we then navigate to the tab "Save / Download" then select the tab "Advanced Download". We select the R Source code, Codebook of selected variables, Short Description File and Comma-delimited datafile of selected variables with Reference Number as column headers. We name the filename "NLSY79" and press the download button.
 \end{itemize}
 
 \end{tcolorbox}
 
-The downloaded data set came with the following set of files:
+The downloaded data set came as a zip file when extracted contains the following set of files:
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{NLSY79.csv}: csv format of the data
+  \texttt{NLSY79.csv}: csv format of the response data.
 \item
-  \texttt{NLSY79.dat}: dat format of the data
+  \texttt{NLSY79.dat}: dat format of the response data.
 \item
   \texttt{NLSY79.NLSY79}: Tagset of variables that can be uploaded to the website to recreate the data set.
 \item
-  \texttt{NLSY79.R}: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set, \texttt{categories\_qnames} (the observations are stored in categorical/interval values) and \texttt{new\_data\_qnames} (the observations are stored in integer form).
+  \texttt{NLSY79.R}: R script for reading the data into R and converting the variables' names and label into something more sensible. We utilize this code to do an initial data tidying which produces two data set, \texttt{categories\_qnames} (where the observations are stored in categorical/interval values) and \texttt{new\_data\_qnames} (the observations are stored in integer form).
 \end{itemize}
 
 \hypertarget{tidywages}{%
@@ -330,14 +344,14 @@ The next step is that explore the mean hourly wage data. In this case, we only e
 
 }
 
-\caption{A glimpse of the refreshed data. Longitudinal profiles of wages from 1979-2018 are shown for a random sample of 36 individuals, divided into twelve subplots. Most individuals here experienced increasing wages over time, although there is considerable fluctuation from one year to another.}\label{fig:sample-plot}
+\caption{Longitudinal profiles of wages for a random sample of 20 individuals in the refreshed data. Most, but not all, individuals here experienced increasing wages over time, and several have experienced considerable fluctuation in wages. Some individuals are only measured for a short period.}\label{fig:sample-plot}
 \end{figure}
 
 We take 36 samples randomly from the data and plot them, as shown in Figure \ref{fig:sample-plot}. It implies that these respondents have a lot of variability in wages, for example, the IDs in panel numbers 5, 7, and 11. The plot also implies that the samples have a different pattern of mean hourly wages. Some have had flat wages for years but had a sudden increase in one particular year, then it gone down again, while the others experienced an upsurge in their wage, for instance, the IDs in panel 9.
 
 \begin{figure}
 
-{\centering \includegraphics[width=432px]{figures/feature-plot-1} 
+{\centering \includegraphics[width=1\linewidth]{figures/feature-plot-1} 
 
 }
 
@@ -361,18 +375,18 @@ Figure \ref{fig:compare-plot} shows the mean hourly wage before and after the ex
 
 \begin{figure}
 
-{\centering \includegraphics[width=432px]{figures/compare-plot-1} 
+{\centering \includegraphics[width=1\linewidth]{figures/compare-plot-1} 
 
 }
 
-\caption{Comparison between the original and the treated mean hourly wage. The orange line portray the original value of mean hourly wage, while the turquoise line display the mean hourly wages value after the extreme values imputed with the robust linear model's prediction value. We can see that some extreme spikes has been reduced by the model.}\label{fig:compare-plot}
+\caption{Comparison between the original (black dots) and the corrected (solid grey) mean hourly wage for a sample of individuals. A robust linear model prediction was used to correct mean hourly wages value. We can see that some extreme spikes, corresponding to implausible wages, have been replaced with values more similar to wages in neighboring years, but otherwise the profiles are not changed. Some spikes might remain when wage vaues are plausible.}\label{fig:compare-plot}
 \end{figure}
 
 Further, \ref{fig:fixed-feature-plot} A shows that after eliminating the extreme values, the highest value has decreased to be around \$350. The spikes are still observed but not as extreme as the original data set. In Figure \ref{fig:fixed-feature-plot} B, we plot the three features of mean hourly wages, namely the minimum, median, and maximum value. We still can see some extreme values in maximum wages, but consider it as a natural variability of the data. In \ref{fig:fixed-feature-plot} C, we can see that after imputing the extreme value in ID=39, we can see how the the wages change over the years more clearly.
 
 \begin{figure}
 
-{\centering \includegraphics[width=432px]{figures/fixed-feature-plot-1} 
+{\centering \includegraphics[width=1\linewidth]{figures/fixed-feature-plot-1} 
 
 }
 
@@ -391,7 +405,7 @@ From this stage forward, we assume that we already have valid data. We also subs
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.93\linewidth]{/Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart} 
+{\centering \includegraphics[width=0.85\linewidth]{/Users/etan0038/Dropbox/repo/summer-wages-refresh/paper/figures/flowchart} 
 
 }
 
@@ -472,6 +486,9 @@ Dasu, Tamraparni, and Theodore Johnson. 2003. \emph{Exploratory Data Mining and 
 
 \leavevmode\hypertarget{ref-janitor}{}%
 Firke, Sam. 2020. \emph{Janitor: Simple Tools for Examining and Cleaning Dirty Data}. \url{https://CRAN.R-project.org/package=janitor}.
+
+\leavevmode\hypertarget{ref-racismnotrace}{}%
+Fullilove, M. T. 1998. {``Comment: Abandoning "Race" as a Variable in Public Health Research--an Idea Whose Time Has Come.''} \emph{American Journal of Public Health} 88 (9): 1297--98.
 
 \leavevmode\hypertarget{ref-purrr}{}%
 Henry, Lionel, and Hadley Wickham. 2020. \emph{Purrr: Functional Programming Tools}. \url{https://CRAN.R-project.org/package=purrr}.
