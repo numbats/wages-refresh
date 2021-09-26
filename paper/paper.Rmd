@@ -106,10 +106,10 @@ There are two ways to conduct the interview of the NLSY79, which are face-to-fac
 
 ## Target data {#target}
 
-This paper aims, as mentioned in Section \@ref(intro), to refresh the NLSY79 data used in @SingerJudithD2003Alda. This data set contains the information of yearly mean hourly wages from the NLSY79 subcohort, with education and race as covariates. The subcohort correspond to male high-school dropouts that participated in the study from 14 to 17 years old. Accordingly, to refresh this data, we make use of NLSY79 cohort's demographic profiles and wages data of people who completed education up to high school. 
+The NLSY79 data used in @SingerJudithD2003Alda. contains the longitudinal measurements on yearly mean hourly wages with years of workforce experience, and demographic variables education and race, from 1979 through to 1994. In addition, the cohort is restricted to male high-school dropouts who first participated in the study at age 14-17 years. Thus the target data set is to collect the same variables for the extended time frame of 1994 through to 2018, the most recent year reported. . 
 
-Since no specific criteria on high school dropouts was defined
-in @SingerJudithD2003Alda, we define high school dropouts as respondents who only completed either 9th to 11th grade, or who completed 12th when their age is at least 19 years old (meaning that the individual may have dropped out of high school but returned at a later time to complete high school education). 
+<!-- Since no specific criteria on high school dropouts was defined
+in @SingerJudithD2003Alda, we define high school dropouts as respondents who only completed either 9th to 11th grade, or who completed 12th when their age is at least 19 years old (meaning that the individual may have dropped out of high school but returned at a later time to complete high school education). XXX This should probably go further down in the flow. -->
 
 # Data cleaning {#cleaning}
 
@@ -165,7 +165,7 @@ For the remaining variables, we went to the "Variable Search" tab and select var
 :::
 
       
-The downloaded data set came as a zip file when extracted contains the following set of files:
+The downloaded data set comes as a zip file, containing the following set of files:
 
 - `NLSY79.csv`: csv format of the response data.
 - `NLSY79.dat`: dat format of the response data.
@@ -182,10 +182,12 @@ The raw data, `new_data_qnames`, is organised such that each row corresponds to 
 ```{r untidy-data, fig.cap="The structure of the NLSY79 raw data on wages for up to five jobs in any year."}
 ```
 
-According to @WickhamHadley2014TD, tidy data sets comply with three rules: (i) each variable forms a column, (ii) each observation forms a row, and (iii) each type of observational unit forms a table. The raw data does not comply the rules of the tidy data, thus we wrangle the data in form required by making use of the `tidyverse` suite of packages [@tidyverse], which include the main set of packages needed, namely `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr]. The tidy data form, where we have a variable that indicates the individual ID, year, job number, wage in dollars and demographic variables, is important for downstream analysis, such as visualisation and modelling that will be performed later. 
+According to @WickhamHadley2014TD, tidy data sets comply with three rules: (i) each variable forms a column, (ii) each observation forms a row, and (iii) each type of observational unit forms a table. The raw data does not comply these rules, thus we re-arrange and wrangle the data into tidy data form, columns corresponding to individual ID, year, job number, wage in dollars and the demographic variables. This is done using the `tidyverse` suite of packages [@tidyverse], `tidyr` [@tidyr] to pivot the data into long form, `dplyr` [@dplyr], and `stringr` [@stringr] for creating new variables, and levels of factors by text wrangling. The long form of the data makes it possible to do these data transformations efficiently, and it is an intermediate step towards the final target data. 
+
+<!-- required by making use of the `tidyverse` suite of packages [@tidyverse], which include the main set of packages needed, namely `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr]. The tidy data form, where we have a variable that indicates the individual ID, year, job number, wage in dollars and demographic variables, is important for downstream analysis, such as visualisation and modelling that will be performed later. 
 
 
-[REMOVE] Unfortunately, the `new_data_qnames` did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr] to do this job.
+[REMOVE] Unfortunately, the `new_data_qnames` did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used `tidyr` [@tidyr], `dplyr` [@dplyr], and `stringr` [@stringr] to do this job.-->
 
 ### Tidying demographic variables {#tidydemog}
 

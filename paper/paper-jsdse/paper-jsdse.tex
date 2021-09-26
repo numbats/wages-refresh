@@ -134,10 +134,7 @@ There are two ways to conduct the interview of the NLSY79, which are face-to-fac
 \hypertarget{target}{%
 \subsection{Target data}\label{target}}
 
-This paper aims, as mentioned in Section \ref{intro}, to refresh the NLSY79 data used in Singer and Willett (2003). This data set contains the information of yearly mean hourly wages from the NLSY79 subcohort, with education and race as covariates. The subcohort correspond to male high-school dropouts that participated in the study from 14 to 17 years old. Accordingly, to refresh this data, we make use of NLSY79 cohort's demographic profiles and wages data of people who completed education up to high school.
-
-Since no specific criteria on high school dropouts was defined
-in Singer and Willett (2003), we define high school dropouts as respondents who only completed either 9th to 11th grade, or who completed 12th when their age is at least 19 years old (meaning that the individual may have dropped out of high school but returned at a later time to complete high school education).
+The NLSY79 data used in Singer and Willett (2003). contains the longitudinal measurements on yearly mean hourly wages with years of workforce experience, and demographic variables education and race, from 1979 through to 1994. In addition, the cohort is restricted to male high-school dropouts who first participated in the study at age 14-17 years. Thus the target data set is to collect the same variables for the extended time frame of 1994 through to 2018, the most recent year reported. .
 
 \hypertarget{cleaning}{%
 \section{Data cleaning}\label{cleaning}}
@@ -147,52 +144,66 @@ Loo and Jonge (2018) describe the notion of a ``statistical value chain'' where 
 \hypertarget{getdata}{%
 \subsection{Getting the data}\label{getdata}}
 
-The NLSY79 data contains a large scope of variables but for our aim, the scope required is limisted to demographic profiles and wages data. More specifically, we went to the NLSY79 database website at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data} and navigated as described below.
+The NLSY79 data contains a large scope of variables but for our aim, the scope required is limisted to demographic profiles and wages data. More specifically, we went to the NLSY79 database website at \url{https://www.nlsinfo.org/content/cohorts/nlsy79/get-data}, clicked on the direct link to NSLY79 data and navigated as described below.
 
-\begin{tcolorbox}[label="box:data", title=Getting the data]
+\begin{tcolorbox}[label="box:data", title=Navigating the data source to download the raw data]
 
-\faDatabase~National Longitudinal Survey of Youth 1979
+\faDatabase~NLSY79 (\url{https://www.nlsinfo.org/investigator/pages/search?s=NLSY79})\\
+\vspace{1mm}
+\faCheck~The CASEID will be always be selected.\\
+\vspace{1mm}
+\faCheck~The 3 recommended demographic variable (sample ID, race and sex) were selected.\\
+\vspace{1mm}
+For the remaining variables, we went to the ``Variable Search'' tab and select variables as follows
 
 \begin{itemize}
 \item[$\triangleright$] Education, Training and Achievement Scores
 \begin{itemize}
 \item[$\triangleright$] Education $\triangleright$ Summary measures $\triangleright$ All schools $\triangleright$ By year $\triangleright$ Highest grade completed
 \begin{itemize}
-\item[\faCloudDownload] Downloaded all of variables in Highest grade completed.
+\item[\faCheck] All 80 variables in Highest grade completed were selected.
 \end{itemize}
 \end{itemize}
 \item[$\triangleright$] Employment
 \begin{itemize}
-\item[$\triangleright$] Summary measures $\triangleright$ By job $\triangleright$ Hours worked and Hourly wages
+\item[$\triangleright$] Summary measures $\triangleright$ By job
 \begin{itemize}
-\item[\faCloudDownload] We downloaded all of the variables in Hours worked.
-\item[\faCloudDownload] We downloaded all of the variables in Hourly wages
-  Both hours worked and hourly wages are recorded by the job, up to five jobs for each id/subject. 
+\item[$\triangleright$] Hours worked  
+\begin{itemize}
+\item[\faCheck] All 442 primary variables in Hours worked were selected.
+\end{itemize}
+\item[$\triangleright$] Hourly wages
+\begin{itemize}
+\item[\faCheck] All 156 variables in Hourly wages were selected.
+\end{itemize}
 \end{itemize}
 \end{itemize}
 \item[$\triangleright$] Household, Geography and Contextual Variables
 \begin{itemize}
-\item[$\triangleright$] Context $\triangleright$ Summary measures $\triangleright$ Basic demographics 
+\item[$\triangleright$] Context $\triangleright$ Summary measures $\triangleright$ Basic demographics $\triangleright$ Date of birth
 \begin{itemize}
-\item[\faCloudDownload] Downloaded year and month of birth, race, and sex variables. There are two versions of the year and month of birth, i.e., 1979 and 1981 data. We downloaded these two versions.
+\item[\faCheck] All 4 variables in Date of birth were selected. 
 \end{itemize}
 \end{itemize}
+\end{itemize}
+\begin{itemize}
+\item[\faCloudDownload] To download all 686 variables selected, we then navigate to the tab "Save / Download" then select the tab "Advanced Download". We select the R Source code, Codebook of selected variables, Short Description File and Comma-delimited datafile of selected variables with Reference Number as column headers. We name the filename "NLSY79" and press the download button.
 \end{itemize}
 
 \end{tcolorbox}
 
-The downloaded data set came with the following set of files:
+The downloaded data set comes as a zip file, containing the following set of files:
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{NLSY79.csv}: csv format of the data
+  \texttt{NLSY79.csv}: csv format of the response data.
 \item
-  \texttt{NLSY79.dat}: dat format of the data
+  \texttt{NLSY79.dat}: dat format of the response data.
 \item
   \texttt{NLSY79.NLSY79}: Tagset of variables that can be uploaded to the website to recreate the data set.
 \item
-  \texttt{NLSY79.R}: R script provided automatically by the database for reading the data into R and converting the variables' names and label into something more sensible. We utilized this code to do an initial data tidying. It produced two data set, \texttt{categories\_qnames} (the observations are stored in categorical/interval values) and \texttt{new\_data\_qnames} (the observations are stored in integer form).
+  \texttt{NLSY79.R}: R script for reading the data into R and converting the variables' names and label into something more sensible. We utilize this code to do an initial data tidying which produces two data set, \texttt{categories\_qnames} (where the observations are stored in categorical/interval values) and \texttt{new\_data\_qnames} (the observations are stored in integer form).
 \end{itemize}
 
 \hypertarget{tidywages}{%
@@ -215,9 +226,7 @@ The raw data, \texttt{new\_data\_qnames}, is organised such that each row corres
 #>   [list output truncated]
 \end{verbatim}
 
-According to Wickham (2014), tidy data sets comply with three rules: (i) each variable forms a column, (ii) each observation forms a row, and (iii) each type of observational unit forms a table. The raw data does not comply the rules of the tidy data, thus we wrangle the data in form required by making use of the \texttt{tidyverse} suite of packages (Wickham et al. 2019), which include the main set of packages needed, namely \texttt{tidyr} (Wickham 2020b), \texttt{dplyr} (Wickham et al. 2020), and \texttt{stringr} (Wickham 2019). The tidy data form, where we have a variable that indicates the individual ID, year, job number, wage in dollars and demographic variables, is important for downstream analysis, such as visualisation and modelling that will be performed later.
-
-{[}REMOVE{]} Unfortunately, the \texttt{new\_data\_qnames} did not meet these requirements in the way that data for each year and job for the same respondent is stored as one variable. Hence, the data contains a huge number of columns (686 columns). The example of the untidy data set is displayed in Table \ref{tab:untidy-data}. The table intended to display the hourly rate of each respondent by job (HRP1 to HRP5) and by year (1979 and 1980). The table implies that the column headers are values of the year and job, not variable names. Consequently, the data should be tidied and wrangled first to extract the demographic and employment variables we want to put in the final data set. We mainly used \texttt{tidyr} (Wickham 2020b), \texttt{dplyr} (Wickham et al. 2020), and \texttt{stringr} (Wickham 2019) to do this job.
+According to Wickham (2014), tidy data sets comply with three rules: (i) each variable forms a column, (ii) each observation forms a row, and (iii) each type of observational unit forms a table. The raw data does not comply these rules, thus we re-arrange and wrangle the data into tidy data form, columns corresponding to individual ID, year, job number, wage in dollars and the demographic variables. This is done using the \texttt{tidyverse} suite of packages (Wickham et al. 2019), \texttt{tidyr} (Wickham 2020b) to pivot the data into long form, \texttt{dplyr} (Wickham et al. 2020), and \texttt{stringr} (Wickham 2019) for creating new variables, and levels of factors by text wrangling. The long form of the data makes it possible to do these data transformations efficiently, and it is an intermediate step towards the final target data.
 
 \hypertarget{tidydemog}{%
 \subsubsection{Tidying demographic variables}\label{tidydemog}}
