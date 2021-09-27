@@ -334,7 +334,7 @@ Figure \ref{fig:flow-chart} summarizes the steps taken to go from raw to input t
 Further, using IDA, we inspect on the existence of anomalies/extreme values in the data using the weight from robust linear model. We then replace these extreme values using their predicted value. 
 From this stage forward, we assume that we already have valid data. We also subset the data to get the wages of high school dropouts. We then make these three data sets and the cleaning workflow documentation publicly available through an R data container package called `yowie`. A visualisation of these process is displayed in  Figure \ref{fig:flow-chart}.-->
 
-```{r flow-chart, fig.cap="The stages of data cleaning from the raw data to get three datasets contained yowie. # of individuals means the number of respondents included in each stage, while # of observations means the number of rows in the data. The color represented the stage of data cleaning in statistical value chain (van der Loo \\& de Jonge, 2018). Pink, blue, and green represents the raw, input, and valid data, respectively.", out.width="85%"}
+```{r flow-chart, fig.cap="The stages of data cleaning from the raw data to get three datasets contained yowie. \\# of individuals means the number of respondents included in each stage, while \\# of observations means the number of rows in the data. The color represented the stage of data cleaning in statistical value chain (van der Loo \\& de Jonge, 2018). Pink, blue, and green represents the raw, input, and valid data, respectively.", out.width="85%"}
 ```
 
 
