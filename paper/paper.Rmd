@@ -390,7 +390,7 @@ The current subset is made available in a new R package, called yowie.
 Various difficulties were encountered in trying to refresh the data, which include: 
 
 - determining which records should be downloaded from the database.
-- there are many errors in the data, e.g. hourly wages greater than $30,000 per hour, and there was no information on how these were handled in the original data.
+- there are many errors in the data, e.g. hourly wages greater than $30,000 per hour. Further for original data, wages greater than 75 dollars were set to be missing. However, in recent context, this value might be too low to be set as the maximum threshold. 
 - there is no explicit variable in the database recording high school dropout, which means we needed to compare date of 12th grade with the individual's age.
 - calculating experience in the workforce, would require knowing the time of first job within the first year the individual was recorded. 
 
@@ -411,11 +411,11 @@ The entire analysis is conducted using `R` [@R] in `rstudio` using these package
 # Supplementary Materials 
 
 
-- **Codes** : R script to reproduce data tidying and cleaning are available in this [Github Repository](https://github.com/numbats/yowie/blob/master/data-raw/data_preprocessing.R).
+- **Codes** : R script to reproduce data tidying and cleaning are available in this [page](https://numbats.github.io/yowie/articles/process-data.html).
 
 - **R Package `yowie`**:`yowie` is a data container R package that contains 3 datasets, namely the high school mean hourly wage data, high school dropouts mean hourly wage data, and demographic data of the NLSY79 cohort. This package could be accessed [here](https://github.com/numbats/yowie).
 
-- **shiny app**: An web interactive `shiny` app to run a simulation to customize the weight threshold. This app could be accessed [here](https://github.com/numbats/wages-refresh/tree/main/app).
+- **shiny app**: An web interactive `shiny` app to customize the weight threshold. This app could be accessed [here](https://github.com/numbats/wages-refresh/tree/main/app).
 
 
 
