@@ -140,7 +140,7 @@ Row {data-height=650}
 ### Individual plots
 
 ```{r}
-actionButton("resample", "Sample individuals to display")
+actionButton("resample", "Click here to sample individuals to display")
 ```
 
 
